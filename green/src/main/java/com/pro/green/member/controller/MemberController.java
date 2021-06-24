@@ -12,7 +12,7 @@ import com.pro.green.member.vo.MemberVO;
 
 public interface MemberController {
 	public ModelAndView addMember(@ModelAttribute("info") MemberVO memberVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
-
+	public int idChk(@RequestParam("id") String user_id) throws Exception;
 }
 
 

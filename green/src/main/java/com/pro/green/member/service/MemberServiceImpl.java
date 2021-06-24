@@ -19,10 +19,16 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 
-
+	// 회원가입
 	@Override
 	public int addMember(MemberVO member) throws DataAccessException {
 		return memberDAO.insertMember(member);
+	}
+	
+	//아이디체크
+	@Override
+	public int idChk(String user_id) throws DataAccessException {
+		return memberDAO.idChk(user_id);
 	}
 
 

@@ -13,21 +13,28 @@
         <result property="email1" column="email1" />
         <result property="email2" column="email2" />
         <result property="zipCode" column="zipCode" />
-        <result property="address1" column="address1" />
-        <result property="address2" column="address2" />
-        <result property="address3" column="address3" />
-        <result property="address4" column="address4" />
+        <result property="addr1" column="addr1" />
+        <result property="addr2" column="addr2" />
+        <result property="addr3" column="addr3" />
         <result property="grade" column="grade" />
         <result property="mileage" column="mileage" />
         <result property="masterYN" column="masterYN" />
         <result property="joinDate" column="joinDate" />
 	</resultMap> 
 	
+	<!-- 회원가입 -->
 	<insert id="insertMember"  parameterType="memberVO">
 		<![CDATA[
-		 insert into member(id,pw,name,birth,phone,zipCode,address1,address2,address3,email1,email2)
-		 values(#{id}, #{pw}, #{name}, #{birth}, #{phone}, #{zipCode}, #{address1}, #{address2}, #{address3}, #{email1}, #{email2})
+		 insert into member(id,pw,name,birth,phone,zipCode,addr1,addr2,addr3,email1,email2)
+		 values(#{id}, #{pw}, #{name}, #{birth}, #{phone}, #{zipCode}, #{addr1}, #{addr2}, #{addr3}, #{email1}, #{email2})
 		]]>      
+	</insert>
+	
+	<!-- 아이디 중복 체크  -->
+	<insert id="idChk" parameterType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM member WHERE id=#{id};
+		]]>   
 	</insert>
 	
 </mapper>

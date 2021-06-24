@@ -1,209 +1,219 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored="false"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-request.setCharacterEncoding("UTF-8");
-%>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+	<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+		<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+			<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+				<% request.setCharacterEncoding("UTF-8"); %>
+					<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<!-- 메인 -->
-<main class="mainH">
-	<div class="container">
-		<!-- 페이지 타이틀 부분 -->
-		<div class="d-flex justify-content-between mt-5">
-			<div class="bd-highlight">
-				<h4>일반 회원가입</h4>
-			</div>
-			<div class="bd-highlight">
-				<nav aria-label="breadcrumb">
-					<ol class="breadcrumb p-0 bg bg-transparent">
-						<li class="breadcrumb-item"><a href="${contextPath }/main.do">홈</a></li>
-						<li class="breadcrumb-item"><a href="${contextPath }/join.do">회원가입</a></li>
-						<li class="breadcrumb-item active" aria-current="page">일반 회원가입</li>
-					</ol>
-				</nav>
-			</div>
-		</div>
-		<div class="bd-highlight">
-		<p style="text-align: right;">
-		<img src="${contextPath }/resources/img/require.png">
-        	<span class="">필수입력사항</span>
-        </div>
-		<div class="row border-bottom py-2"></div>
-		<div class="row mb-4">
-			<div class="col-12">
-				<form action="${contextPath}/member/addMember.do" method="POST">
-					<div class="row border-bottom py-2">
-						<div class="col p-0">
-							<div class="d-flex bd-highlight">
-								<label for="inputId" class="bd-highlight col-form-label pl-2"
-									style="width: 140px;"><img src="${contextPath }/resources/img/require.png">아이디</label>
-								<div class="flex-grow bd-highlight pr-2">
-									<input type="text" class="form-control" id="inputId" name="id">
+					<!-- 메인 -->
+					<main class="mainH">
+						<div class="container">
+							<!-- 페이지 타이틀 부분 -->
+							<div class="d-flex justify-content-between mt-5">
+								<div class="bd-highlight">
+									<h4>일반 회원가입</h4>
 								</div>
-								<button class="btn btn-success btn-sm" onclick="id_checkform()">중복 확인</button>
-								&nbsp;&nbsp;
-								<span id="idMsg"></span> (영문 소문자/숫자, 4~16자)
-							</div>
-						</div>
-					</div>
-					<div class="row border-bottom py-2">
-						<div class="col p-0">
-							<div class="d-flex bd-highlight">
-								<label for="inputPassword"
-									class="bd-highlight col-form-label pl-2" style="width: 140px;"><img src="${contextPath }/resources/img/require.png">비밀번호</label>
-								<div class="flex-grow bd-highlight pr-2">
-									<input type="password" class="form-control" id="Password" name="pw">
-								</div>
-								<span id="pwMsg"></span> (영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)
-							</div>
-						</div>
-					</div>
-					<div class="row border-bottom py-2">
-						<div class="col p-0">
-							<div class="d-flex bd-highlight">
-								<label for="inputPassword"
-									class="bd-highlight col-form-label pl-2" style="width: 140px;"><img src="${contextPath }/resources/img/require.png">비밀번호 확인</label>
-								<div class="flex-grow bd-highlight pr-2">
-									<input type="password" class="form-control" id="Password">
+								<div class="bd-highlight">
+									<nav aria-label="breadcrumb">
+										<ol class="breadcrumb p-0 bg bg-transparent">
+											<li class="breadcrumb-item"><a href="${contextPath }/main.do">홈</a></li>
+											<li class="breadcrumb-item"><a href="${contextPath }/join.do">회원가입</a></li>
+											<li class="breadcrumb-item active" aria-current="page">일반 회원가입</li>
+										</ol>
+									</nav>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div class="row border-bottom py-2">
-						<div class="col p-0">
-							<div class="d-flex bd-highlight">
-								<label for="inputName" class="bd-highlight col-form-label pl-2"
-									style="width: 140px;"><img src="${contextPath }/resources/img/require.png">이름</label>
-								<div class="flex-grow bd-highlight pr-2">
-									<input type="text" class="form-control" id="inputName" name="name">
-								</div>
+							<div class="bd-highlight">
+								<p style="text-align: right;">
+									<img src="${contextPath }/resources/img/require.png">
+									<span class="">필수입력사항</span>
 							</div>
-						</div>
-					</div>
-					<div class="row border-bottom py-2">
-						<div class="col p-0">
-							<div class="d-flex bd-highlight">
-								<label for="inputBirth" class="bd-highlight col-form-label pl-2"
-									style="width: 140px;">생년월일</label>
-								<div class="flex-grow bd-highlight pr-2">
-									<input type="text" class="form-control" id="inputBirth" name="birth">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row border-bottom py-2">
-						<div class="col p-0">
-							<div class="d-flex bd-highlight">
-								<label for="inputUser" class="bd-highlight col-form-label pl-2"
-									style="width: 140px;"><img src="${contextPath }/resources/img/require.png">주소</label>
-								<div class="flex-grow-1 bd-highlight flex-column pr-2">
-									<div class="bd-highlight mb-2">
-										<div class="d-flex flex-row bd-highlight">
-											<div class="bd-highlight">
-												<input type="text" class="form-control"
-													id="sample6_postcode" placeholder="우편번호" name="zipCode" readonly>
-											</div>
-											<div class="bd-highlight ml-2">
-
-												<button type="button" onclick="sample6_execDaumPostcode()"
-													class="btn btn-secondary btn-sm" style="font-size: .8rem">
-													우편번호 찾기</button>
+							<div class="row border-bottom py-2"></div>
+							<div class="row mb-4">
+								<div class="col-12">
+									<form action="${contextPath}/member/addMember.do" name="joinForm" method="POST">
+										<div class="row border-bottom py-2">
+											<div class="col p-0">
+												<div class="d-flex bd-highlight">
+													<label for="inputId" class="bd-highlight col-form-label pl-2"
+														style="width: 140px;"><img
+															src="${contextPath }/resources/img/require.png">아이디</label>
+													<div class="flex-grow bd-highlight pr-2">
+														<input type="text" class="form-control" id="inputId" name="id">
+													</div>
+													<button class="btn btn-success btn-sm" style="height: 38px;"
+														onclick="fn_idChk()">중복 확인</button>
+													<p class="pl-2 my-2" style="font-size: .8rem;">(영문 소문자/숫자, 4~16자)</p>
+												</div>
 											</div>
 										</div>
-									</div>
-									<div class="bd-highlight mb-2">
-										<div class="d-flex flex-row bd-highlight">
-											<div class="bd-highlight">
-												<input type="text" class="form-control" id="sample6_address"
-													placeholder="주소" style="width: 300px;" name="address1" readonly>
+										<div class="row border-bottom py-2">
+											<div class="col p-0">
+												<div class="d-flex bd-highlight">
+													<label for="Password" class="bd-highlight col-form-label pl-2"
+														style="width: 140px;"><img
+															src="${contextPath }/resources/img/require.png">비밀번호</label>
+													<div class="flex-grow bd-highlight pr-2">
+														<input type="password" class="form-control" id="Password"
+															name="pw">
+													</div>
+													<p class="my-2" style="font-size: .8rem;">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</p>
+												</div>
 											</div>
 										</div>
-									</div>
-
-									<div class="bd-highlight mb-2">
-										<div class="d-flex bd-highlight">
-											<div class="d-flex flex-row">
-												<input type="text" class="form-control"
-													id="sample6_detailAddress" placeholder="상세주소" name="address2">
-												<div class="p-2"></div>
-												<input type="text" class="form-control"
-													id="sample6_extraAddress" placeholder="참고항목"  name="address3" readonly>
+										<div class="row border-bottom py-2">
+											<div class="col p-0">
+												<div class="d-flex bd-highlight">
+													<label for="re_password" class="bd-highlight col-form-label pl-2"
+														style="width: 140px;"><img
+															src="${contextPath }/resources/img/require.png">비밀번호
+														확인</label>
+													<div class="flex-grow bd-highlight pr-2">
+														<input type="password" class="form-control" id="re_password" name="re_pw">
+													</div>
+												</div>
 											</div>
 										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row border-bottom py-2">
-						<div class="col p-0">
-							<div class="d-flex bd-highlight">
-								<label for="inputNumber" class="bd-highlight col-form-label pl-2"
-									style="width: 140px;"><img src="${contextPath }/resources/img/require.png">휴대전화</label>
-								<div class="flex-grow bd-highlight pr-2">
-									<input type="text" class="form-control" id="inputNumber" name="phone">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row border-bottom py-2">
-						<div class="col p-0">
-							<div class="d-flex bd-highlight">
-								<label for="inputEmail" class="bd-highlight col-form-label pl-2"
-									style="width: 140px;">이메일</label>
-								<div class="flex-grow-1 bd-highlight flex-column pr-2">
-									<div class="flex-grow-1 bd-highlight pr-2">
-										<div class="d-flex flex-row">
-											<input type="text" class="form-control" id="inputEmail1"
-												style="width: 150px;" name="email1">
-											<div class="p-2">@</div>
-											<select id="inputEmail2" class="form-control"
-												style="width: 140px;" name="email2">
-												<option value="none" selected>선택</option>
-												<option value="naver.com">naver.com</option>
-												<option value="hanmail.net">hanmail.net</option>
-												<option value="nate.com">nate.com</option>
-												<option value="gmail.com">gmail.com</option>
-											</select>
+										<div class="row border-bottom py-2">
+											<div class="col p-0">
+												<div class="d-flex bd-highlight">
+													<label for="inputName" class="bd-highlight col-form-label pl-2"
+														style="width: 140px;"><img
+															src="${contextPath }/resources/img/require.png">이름</label>
+													<div class="flex-grow bd-highlight pr-2">
+														<input type="text" class="form-control" id="inputName"
+															name="name">
+													</div>
+												</div>
+											</div>
 										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+										<div class="row border-bottom py-2">
+											<div class="col p-0">
+												<div class="d-flex bd-highlight">
+													<label for="inputBirth" class="bd-highlight col-form-label pl-2"
+														style="width: 140px;">생년월일</label>
+													<div class="flex-grow bd-highlight pr-2">
+														<input type="text" class="form-control" id="inputBirth"
+															name="birth">
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row border-bottom py-2">
+											<div class="col p-0">
+												<div class="d-flex bd-highlight">
+													<label for="inputUser" class="bd-highlight col-form-label pl-2"
+														style="width: 140px;"><img
+															src="${contextPath }/resources/img/require.png">주소</label>
+													<div class="flex-grow-1 bd-highlight flex-column">
+														<div class="bd-highlight mb-2">
+															<div class="d-flex flex-row bd-highlight">
+																<div class="bd-highlight">
+																	<input type="text" class="form-control"
+																		id="sample6_postcode" placeholder="우편번호"
+																		name="zipCode" readonly>
+																</div>
+																<div class="bd-highlight ml-2">
 
-					<!-- 약관 동의 리스트 -->
-					<div class="col mt-4 mb-1 p-0">
-						<h6 class="font-weight-bold">약관 동의</h6>
-					</div>
-					<div class="row">
-						<div class="d-flex flex-fill flex-column mt-3 mb-2 border rounded">
-							<div class="bd-highlight p-2 pl-3 bg-light border-bottom">
-								<div class="form-check">
-									<input type='checkbox'
-       										name='selectall' 
-       										value='selectall'
-       										onclick='selectAll(this)'/> 
-       										<b>모두 동의</b> <label
-										class="form-check-label pl-2" for="cb_all">
-										이용약관 및 개인 정보 수집 및 이용에 모두 동의합니다. </label>
-								</div>
-							</div>
-							<div class="p-2 bd-highlight d-flex flex-row py-3"
-								style="font-size: .8rem;">
-								<div class="bd-highlight font-weight-bold mr-2"
-									style="width: 106px;">
-									[필수]<br>이용약관 동의
-								</div>
-								<div class="bd-highlight flex-grow-1 flex-column">
-									<div class="bd-highlight">
-										<div class="flex-grow bd-highlight" style="width: 100%;">
-											<textarea class="form-control text-black-50"
-												id="exampleFormControlTextarea1" rows="3"
-												style="font-size: .8rem;" disabled>제1조(목적)
+																	<button type="button"
+																		onclick="sample6_execDaumPostcode()"
+																		class="btn btn-secondary"
+																		style="font-size:.8rem; height:38px;">
+																		우편번호 찾기</button>
+																</div>
+															</div>
+														</div>
+														<div class="bd-highlight mb-2">
+															<div class="d-flex flex-row bd-highlight">
+																<div class="bd-highlight">
+																	<input type="text" class="form-control"
+																		id="sample6_address" placeholder="주소"
+																		style="width: 316px;" name="addr1" readonly>
+																</div>
+															</div>
+														</div>
+
+														<div class="bd-highlight mb-2">
+															<div class="d-flex bd-highlight">
+																<div class="d-flex flex-row">
+																	<input type="text" class="form-control"
+																		style="width: 316px;" id="sample6_detailAddress"
+																		placeholder="상세주소" name="addr2">
+																	<input type="text" class="form-control"
+																		style="display: none;" id="sample6_extraAddress"
+																		placeholder="참고항목" name="addr3" readonly>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row border-bottom py-2">
+											<div class="col p-0">
+												<div class="d-flex bd-highlight">
+													<label for="inputNumber" class="bd-highlight col-form-label pl-2"
+														style="width: 140px;"><img
+															src="${contextPath }/resources/img/require.png">휴대전화</label>
+													<div class="flex-grow bd-highlight pr-2">
+														<input type="text" class="form-control" id="inputNumber"
+															name="phone">
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row border-bottom py-2">
+											<div class="col p-0">
+												<div class="d-flex bd-highlight">
+													<label for="inputEmail" class="bd-highlight col-form-label pl-2"
+														style="width: 140px;">이메일</label>
+													<div class="flex-grow-1 bd-highlight flex-column pr-2">
+														<div class="flex-grow-1 bd-highlight pr-2">
+															<div class="d-flex flex-row">
+																<input type="text" class="form-control" id="inputEmail1"
+																	style="width: 150px;" name="email1">
+																<div class="p-2">@</div>
+																<select id="inputEmail2" class="form-control"
+																	style="width: 140px;" name="email2">
+																	<option value="none" selected>선택</option>
+																	<option value="naver.com">naver.com</option>
+																	<option value="hanmail.net">hanmail.net</option>
+																	<option value="nate.com">nate.com</option>
+																	<option value="gmail.com">gmail.com</option>
+																</select>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<!-- 약관 동의 리스트 -->
+										<div class="row mt-4 mb-1 p-0">
+											<h6 class="col font-weight-bold">약관 동의</h6>
+										</div>
+										<div class="row">
+											<div class="d-flex flex-fill flex-column mb-2 border rounded">
+												<div class="bd-highlight p-2 pl-3 bg-light border-bottom">
+													<div class="form-check" style="padding: 0;">
+														<input type='checkbox' name='selectall' value='selectall'
+															onclick='selectAll(this)' />
+														<b>모두 동의</b> <label class="form-check-label pl-2" for="cb_all">
+															이용약관 및 개인 정보 수집 및 이용에 모두 동의합니다. </label>
+													</div>
+												</div>
+												<div class="p-2 bd-highlight d-flex flex-row py-3"
+													style="font-size: .8rem;">
+													<div class="bd-highlight font-weight-bold mr-2"
+														style="width: 106px;">
+														[필수]<br>이용약관 동의
+													</div>
+													<div class="bd-highlight flex-grow-1 flex-column">
+														<div class="bd-highlight">
+															<div class="flex-grow bd-highlight" style="width: 100%;">
+																<textarea class="form-control text-black-50"
+																	id="exampleFormControlTextarea1" rows="3"
+																	style="font-size: .8rem;" disabled>제1조(목적)
 이 약관은 OO 회사(전자상거래 사업자)가 운영하는 OO 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리?의무 및 책임사항을 규정함을 목적으로 합니다.
 ※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다.」
 
@@ -366,33 +376,31 @@ request.setCharacterEncoding("UTF-8");
 
 부 칙(시행일) 이 약관은 년 월 일부터 시행합니다. 부 칙(시행일) 이 약관은 년 월 일부터 시행합니다.
                                             </textarea>
-										</div>
-									</div>
-									<div class="p-2 bd-highlight">
-										<div class="form-check">
-											<input type='checkbox' 
-       												name='terms' 
-       												value='terms1' 
-       												onclick='checkSelectAll()'/> <label
-												class="form-check-label pl-2" for="defaultCheck1">
-												이용 약관에 동의 하십니까? </label>
-										</div>
-									</div>
-								</div>
-							</div>
+															</div>
+														</div>
+														<div class="p-2 bd-highlight">
+															<div class="form-check" style="padding: 0;">
+																<input type='checkbox' name='terms' value='terms1'
+																	onclick='checkSelectAll()' /> <label
+																	class="form-check-label pl-2" for="defaultCheck1">
+																	이용 약관에 동의 하십니까? </label>
+															</div>
+														</div>
+													</div>
+												</div>
 
-							<div class="p-2 bd-highlight d-flex flex-row pm-3"
-								style="font-size: .8rem;">
-								<div class="bd-highlight font-weight-bold mr-2"
-									style="width: 106px;">
-									[필수]<br>개인정보 수집<br> 및 이용 동의
-								</div>
-								<div class="bd-highlight flex-grow-1 flex-column">
-									<div class="bd-highlight">
-										<div class="flex-grow bd-highlight" style="width: 100%;">
-											<textarea class="form-control text-black-50"
-												id="exampleFormControlTextarea1" rows="3"
-												style="font-size: .8rem;" disabled>** 본 양식은 쇼핑몰 운영에 도움을 드리고자 샘플로 제공되는 서식으로 쇼핑몰 운영형태에 따른 수정이 필요합니다. 쇼핑몰에 적용하시기 전, 쇼핑몰 운영 사항 등을 확인하시고 적절한 내용을 반영하여 사용하시기 바랍니다. **
+												<div class="p-2 bd-highlight d-flex flex-row pm-3"
+													style="font-size: .8rem;">
+													<div class="bd-highlight font-weight-bold mr-2"
+														style="width: 106px;">
+														[필수]<br>개인정보 수집<br> 및 이용 동의
+													</div>
+													<div class="bd-highlight flex-grow-1 flex-column">
+														<div class="bd-highlight">
+															<div class="flex-grow bd-highlight" style="width: 100%;">
+																<textarea class="form-control text-black-50"
+																	id="exampleFormControlTextarea1" rows="3"
+																	style="font-size: .8rem;" disabled>** 본 양식은 쇼핑몰 운영에 도움을 드리고자 샘플로 제공되는 서식으로 쇼핑몰 운영형태에 따른 수정이 필요합니다. 쇼핑몰에 적용하시기 전, 쇼핑몰 운영 사항 등을 확인하시고 적절한 내용을 반영하여 사용하시기 바랍니다. **
 
 1. 개인정보 수집목적 및 이용목적
 
@@ -442,29 +450,27 @@ o 로그 기록
 
 ※ 동의를 거부할 수 있으나 거부시 회원 가입이 불가능합니다.
                                             </textarea>
+															</div>
+														</div>
+														<div class="p-2 bd-highlight">
+															<div class="form-check" style="padding: 0;">
+																<input type='checkbox' name='terms' value='terms2'
+																	onclick='checkSelectAll()' /> <label
+																	class="form-check-label pl-2" for="defaultCheck2">
+																	개인정보 수집 및 이용에 동의 하십니까? </label>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
-									</div>
-									<div class="p-2 bd-highlight">
-										<div class="form-check">
-											<input type='checkbox' 
-       												name='terms' 
-       												value='terms2' 
-       												onclick='checkSelectAll()'/> <label
-												class="form-check-label pl-2" for="defaultCheck2">
-												개인정보 수집 및 이용에 동의 하십니까? </label>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- Button trigger modal -->
-					<div class="text-center">
-						<button type="button" class="btn btn-outline-success"
-							data-toggle="modal" data-target="#join_membership_2">완료</button>
+										<!-- Button trigger modal -->
+										<div class="text-center">
+											<button type="submit" class="btn btn-outline-success"
+												data-target="#join_membership_2" onclick="checkLogin()">완료</button>
 
-						<!-- Modal -->
-						<div class="modal fade" id="join_membership_2" tabindex="-1"
+											<!-- Modal -->
+											<!-- <div class="modal fade" id="join_membership_2" tabindex="-1"
 							role="dialog" aria-labelledby="exampleModalCenterTitle"
 							aria-hidden="true">
 							<div class="modal-dialog modal-dialog-centered" role="document">
@@ -481,157 +487,145 @@ o 로그 기록
 										확인을 누르면 회원가입이 완료됩니다.<br> 수정하시려면 취소를 눌러주세요.
 									</div>
 									<div class="modal-footer">
-										<input type="submit" class="btn btn-outline-success" value="확인" onclick="complet_checkform()">
+										<input type="submit" class="btn btn-outline-success" value="확인">
 										<button type="button" class="btn btn-outline-success"
 											data-dismiss="modal">취소</button>
 									</div>
 								</div>
 							</div>
+						</div> -->
+										</div>
+									</form>
+								</div>
+							</div>
 						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</main>
+					</main>
 
-<!-- 전체 동의  -->
-<script>
-function checkSelectAll()  {
-	  // 전체 체크박스
-	  const checkboxes 
-	    = document.querySelectorAll('input[name="terms"]');
-	  // 선택된 체크박스
-	  const checked 
-	    = document.querySelectorAll('input[name="terms"]:checked');
-	  // select all 체크박스
-	  const selectAll 
-	    = document.querySelector('input[name="selectall"]');
-	  
-	  if(checkboxes.length === checked.length)  {
-	    selectAll.checked = true;
-	  }else {
-	    selectAll.checked = false;
-	  }
+					<script>
+						//전체 동의 
+						function checkSelectAll() {
+							// 전체 체크박스
+							const checkboxes
+								= document.querySelectorAll('input[name="terms"]');
+							// 선택된 체크박스
+							const checked
+								= document.querySelectorAll('input[name="terms"]:checked');
+							// select all 체크박스
+							const selectAll
+								= document.querySelector('input[name="selectall"]');
 
-	}
+							if (checkboxes.length === checked.length) {
+								selectAll.checked = true;
+							} else {
+								selectAll.checked = false;
+							}
 
-	function selectAll(selectAll)  {
-	  const checkboxes 
-	     = document.getElementsByName('terms');
-	  
-	  checkboxes.forEach((checkbox) => {
-	    checkbox.checked = selectAll.checked
-	  })
-	}
-</script>
-
-<!-- 유효성 검사 -->
-<script type="text/javascript">
-	function checkLogin() {
-		var form = document.loginForm;
-		if (form.id.value == "") {
-			alert("아이디를 입력해주세요!");
-			form.id.focus();
-			return false;
-		}
-		if (form.password.value == "") {
-			alert("비밀번호를 입력해주세요!");
-			form.password.focus();
-			return false;
-		}
-		if (form.re_password.value == "") {
-			alert("비밀번호 확인을 입력해주세요!");
-			form.re_password.focus();
-			return false;
-		}
-		if (form.name.value == "") {
-			alert("이름을 입력해주세요!");
-			form.name.focus();
-			return false;
-		}
-		if (form.phone.value == "") {
-			alert("휴대전화를 입력해주세요!");
-			form.phone.focus();
-			return false;
-		}
-		else if (form.email.value == "") {
-			alert("이메일을 입력해주세요!");
-			form.email.focus();
-			return false;
-		}
-		form.submit();
-	}
-</script>
-
-<!-- 중복 확인 -->
-<script type="text/javascript">
-function id_checkform() {
-alert("~는 사용 가능합니다.");
-}
-</script>
-
-<!-- 우편번호 API -->
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-	function sample6_execDaumPostcode() {
-		new daum.Postcode(
-				{
-					oncomplete : function(data) {
-						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-						// 각 주소의 노출 규칙에 따라 주소를 조합한다.
-						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-						var addr = ''; // 주소 변수
-						var extraAddr = ''; // 참고항목 변수
-
-						//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-						if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-							addr = data.roadAddress;
-						} else { // 사용자가 지번 주소를 선택했을 경우(J)
-							addr = data.jibunAddress;
 						}
 
-						// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-						if (data.userSelectedType === 'R') {
-							// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-							// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-							if (data.bname !== ''
-									&& /[동|로|가]$/g.test(data.bname)) {
-								extraAddr += data.bname;
-							}
-							// 건물명이 있고, 공동주택일 경우 추가한다.
-							if (data.buildingName !== ''
-									&& data.apartment === 'Y') {
-								extraAddr += (extraAddr !== '' ? ', '
-										+ data.buildingName : data.buildingName);
-							}
-							// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-							if (extraAddr !== '') {
-								extraAddr = ' (' + extraAddr + ')';
-							}
-							// 조합된 참고항목을 해당 필드에 넣는다.
-							document.getElementById("sample6_extraAddress").value = extraAddr;
+						function selectAll(selectAll) {
+							const checkboxes
+								= document.getElementsByName('terms');
 
-						} else {
-							document.getElementById("sample6_extraAddress").value = '';
+							checkboxes.forEach((checkbox) => {
+								checkbox.checked = selectAll.checked
+							})
 						}
 
-						// 우편번호와 주소 정보를 해당 필드에 넣는다.
-						document.getElementById('sample6_postcode').value = data.zonecode;
-						document.getElementById("sample6_address").value = addr;
-						// 커서를 상세주소 필드로 이동한다.
-						document.getElementById("sample6_detailAddress")
-								.focus();
-					}
-				}).open();
-	}
-</script>
+						//유효성 검사
+						function checkLogin() {
+							var form = document.joinForm;
+							if (form.id.value == "") {
+								alert("아이디를 입력해주세요!");
+								form.id.focus();
+								return false;
+							}
+							if (form.pw.value == "") {
+								alert("비밀번호를 입력해주세요!");
+								form.pw.focus();
+								return false;
+							}
+							if (form.re_pw.value == "") {
+								alert("비밀번호 확인을 입력해주세요!");
+								form.re_pw.focus();
+								return false;
+							}
+							if (form.pw.value != form.re_pw.value) {
+								alert("비밀번호를 확인해주세요!");
+								form.pw.focus();
+								return false;
+							}
+							if (form.name.value == "") {
+								alert("이름을 입력해주세요!");
+								form.name.focus();
+								return false;
+							}
+							if (form.phone.value == "") {
+								alert("휴대전화를 입력해주세요!");
+								form.phone.focus();
+								return false;
+							}
+							else if (form.email.value == "") {
+								alert("이메일을 입력해주세요!");
+								form.email.focus();
+								return false;
+							}
+							form.submit();
+						}
+					</script>
 
-<!-- 회원가입 완료 -->
-<script type="text/javascript">
-function complet_checkform() {
-alert("회원 가입이 완료되었습니다! 감사합니다. 좋은 하루 보내십시오 :)");
-}
-</script>
+					<!-- 우편번호 API -->
+					<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+					<script>
+						function sample6_execDaumPostcode() {
+							new daum.Postcode(
+								{
+									oncomplete: function (data) {
+										// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+										// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+										// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+										var addr = ''; // 주소 변수
+										var extraAddr = ''; // 참고항목 변수
+
+										//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+										if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+											addr = data.roadAddress;
+										} else { // 사용자가 지번 주소를 선택했을 경우(J)
+											addr = data.jibunAddress;
+										}
+
+										// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+										if (data.userSelectedType === 'R') {
+											// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+											// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+											if (data.bname !== ''
+												&& /[동|로|가]$/g.test(data.bname)) {
+												extraAddr += data.bname;
+											}
+											// 건물명이 있고, 공동주택일 경우 추가한다.
+											if (data.buildingName !== ''
+												&& data.apartment === 'Y') {
+												extraAddr += (extraAddr !== '' ? ', '
+													+ data.buildingName : data.buildingName);
+											}
+											// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+											if (extraAddr !== '') {
+												extraAddr = ' (' + extraAddr + ')';
+											}
+											// 조합된 참고항목을 해당 필드에 넣는다.
+											document.getElementById("sample6_extraAddress").value = extraAddr;
+
+										} else {
+											document.getElementById("sample6_extraAddress").value = '';
+										}
+
+										// 우편번호와 주소 정보를 해당 필드에 넣는다.
+										document.getElementById('sample6_postcode').value = data.zonecode;
+										document.getElementById("sample6_address").value = addr;
+										// 커서를 상세주소 필드로 이동한다.
+										document.getElementById("sample6_detailAddress")
+											.focus();
+									}
+								}).open();
+						}
+					</script>

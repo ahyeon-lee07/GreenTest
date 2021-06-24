@@ -39,6 +39,15 @@ public class MemberControllerImpl   implements MemberController {
 //		return mav;
 //	}
 	
+	//아이디체크
+	@Override
+	@RequestMapping(value="/user/idChk" ,method = RequestMethod.GET)
+	public int idChk(@RequestParam("id") String user_id) throws Exception {
+		int result = memberService.idChk(user_id);
+		return result;
+	}
+	
+	//회원 가입
 	@Override
 	@RequestMapping(value="/member/addMember.do" ,method = RequestMethod.POST)
 	public ModelAndView addMember(@ModelAttribute("member") MemberVO member,
@@ -50,6 +59,8 @@ public class MemberControllerImpl   implements MemberController {
 		ModelAndView mav = new ModelAndView("redirect:/main.do");
 		return mav;
 	}
+	
+
 	
 
 	private String getViewName(HttpServletRequest request) throws Exception {
