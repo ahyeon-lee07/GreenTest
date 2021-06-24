@@ -23,12 +23,11 @@
 									</nav>
 								</div>
 							</div>
-							<div class="bd-highlight">
-								<p style="text-align: right;">
+							<div class="bd-highlight" style="text-align: right;">
 									<img src="${contextPath }/resources/img/require.png">
 									<span class="">필수입력사항</span>
 							</div>
-							<div class="row border-bottom py-2"></div>
+							<div class="row border-bottom pm-2"></div>
 							<div class="row mb-4">
 								<div class="col-12">
 									<form action="${contextPath}/member/addMember.do" name="joinForm" method="POST">
@@ -41,7 +40,7 @@
 													<div class="flex-grow bd-highlight pr-2">
 														<input type="text" class="form-control" id="inputId" name="id">
 													</div>
-													<button class="btn btn-success btn-sm" style="height: 38px;"
+													<button class="btn btn-secondary btn-sm" style="height: 38px;"
 														onclick="fn_idChk()">중복 확인</button>
 													<p class="pl-2 my-2" style="font-size: .8rem;">(영문 소문자/숫자, 4~16자)</p>
 												</div>
@@ -94,7 +93,7 @@
 														style="width: 140px;">생년월일</label>
 													<div class="flex-grow bd-highlight pr-2">
 														<input type="text" class="form-control" id="inputBirth"
-															name="birth">
+															name="birth" maxlength='8' placeholder="'-' 없이 입력해주세요.">
 													</div>
 												</div>
 											</div>
@@ -157,7 +156,7 @@
 															src="${contextPath }/resources/img/require.png">휴대전화</label>
 													<div class="flex-grow bd-highlight pr-2">
 														<input type="text" class="form-control" id="inputNumber"
-															name="phone">
+															name="phone" maxlength='11' placeholder="'-' 없이 입력해주세요.">
 													</div>
 												</div>
 											</div>
@@ -466,7 +465,7 @@ o 로그 기록
 										</div>
 										<!-- Button trigger modal -->
 										<div class="text-center">
-											<button type="submit" class="btn btn-outline-success"
+											<button type="submit" class="btn btn-success"
 												data-target="#join_membership_2" onclick="checkLogin()">완료</button>
 
 											<!-- Modal -->
