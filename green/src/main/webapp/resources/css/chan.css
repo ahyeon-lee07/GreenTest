@@ -1,0 +1,19 @@
+
+
+/* Ãß°¡ */
+.page_title {
+    font-weight: bold;
+    color: #444;
+}
+.page_subtitle {
+    font-size: .9rem;
+}
+a:hover {
+    text-decoration: none;
+}
+
+.placeholderText::after {
+    content: "";
+    position: absolute;
+    color: red;
+}

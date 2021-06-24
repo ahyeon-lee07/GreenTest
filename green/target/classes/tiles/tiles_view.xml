@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="main" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
+	<!-- 메인  -->
+	<definition name="main" extends="baseLayout">
+		<put-attribute name="title" value="그린케이스" />
+		<put-attribute name="main" value="/WEB-INF/views/main.jsp" />
+	</definition>
+	
+	<!-- 회사소개  -->
+	<definition name="company" extends="baseLayout">
+		<put-attribute name="title" value="회사소개" />
+		<put-attribute name="main" value="/WEB-INF/views/footerMenu/company.jsp" />
+	</definition>
+	
+	<!-- 이용약관  -->
+	<definition name="agreement" extends="baseLayout">
+		<put-attribute name="title" value="이용약관" />
+		<put-attribute name="main" value="/WEB-INF/views/footerMenu/agreement.jsp" />
+	</definition>
+	
+	<!-- 개인정보취급방침  -->
+	<definition name="privacyPolicy" extends="baseLayout">
+		<put-attribute name="title" value="개인정보취급방침" />
+		<put-attribute name="main" value="/WEB-INF/views/footerMenu/privacy.jsp" />
+	</definition>
+	
+	<!-- 로그인  -->
+	<definition name="login" extends="baseLayout">
+		<put-attribute name="title" value="로그인" />
+		<put-attribute name="main" value="/WEB-INF/views/login/login.jsp" />
+	</definition>
+	
+	<!-- 기존회원 로그인  -->
+	<definition name="member" extends="baseLayout">
+		<put-attribute name="title" value="기존회원로그인" />
+		<put-attribute name="main" value="/WEB-INF/views/login/memLogin.jsp" />
+	</definition>
+	
+	<!-- 비회원 로그인  -->
+	<definition name="noMember" extends="baseLayout">
+		<put-attribute name="title" value="비회원로그인" />
+		<put-attribute name="main" value="/WEB-INF/views/login/nonmem.jsp" />
+	</definition>
+	
+	<!-- 아이디 찾기  -->
+	<definition name="find_id" extends="baseLayout">
+		<put-attribute name="title" value="아이디찾기" />
+		<put-attribute name="main" value="/WEB-INF/views/login/findId.jsp" />
+	</definition>
+	
+	<!-- 비밀번호 찾기  -->
+	<definition name="find_pw" extends="baseLayout">
+		<put-attribute name="title" value="비밀번호찾기" />
+		<put-attribute name="main" value="/WEB-INF/views/login/findPwd.jsp" />
+	</definition>
+	
+	<!-- 회원가입  -->
+	<definition name="join" extends="baseLayout">
+		<put-attribute name="title" value="회원가입" />
+		<put-attribute name="main" value="/WEB-INF/views/join/join.jsp" />
+	</definition>
+	
+	<!-- 일반 회원가입  -->
+	<definition name="normalJoin" extends="baseLayout">
+		<put-attribute name="title" value="일반회원가입" />
+		<put-attribute name="main" value="/WEB-INF/views/join/generalJoin.jsp" />
+	</definition>
+	
+	<!-- sns계정으로 회원가입  -->
+	<definition name="snsJoin" extends="baseLayout">
+		<put-attribute name="title" value="sns계정으로 회원가입" />
+		<put-attribute name="main" value="/WEB-INF/views/join/snsJoin.jsp" />
+	</definition>
+	
+	<!-- 장바구니  -->
+	<definition name="cart" extends="baseLayout">
+		<put-attribute name="title" value="장바구니" />
+		<put-attribute name="main" value="/WEB-INF/views/cart/cart.jsp" />
+	</definition>
+	
+	<!-- 주문서 작성  -->
+	<definition name="orderList" extends="baseLayout">
+		<put-attribute name="title" value="주문서작성" />
+		<put-attribute name="main" value="/WEB-INF/views/cart/orderSheet.jsp" />
+	</definition>
+	
+	<!-- 하드 케이스 -->
+	<definition name="HardCase" extends="baseLayout">
+		<put-attribute name="title" value="하드 케이스" />
+		<put-attribute name="main" value="/WEB-INF/views/product/hard.jsp" />
+	</definition>
+	
+	<!-- 하드 케이스 상세페이지 -->
+	<definition name="HardCaseDetail" extends="baseLayout">
+		<put-attribute name="title" value="하드 케이스 상품 상세페이지" />
+		<put-attribute name="main" value="/WEB-INF/views/product/hardDetail.jsp" />
+	</definition>
+	
+	<!-- 젤 케이스 -->
+	<definition name="GelCase" extends="baseLayout">
+		<put-attribute name="title" value="젤 케이스" />
+		<put-attribute name="main" value="/WEB-INF/views/product/gel.jsp" />
+	</definition>
+	
+	<!-- 젤 케이스 상세페이지 -->
+	<definition name="GelCaseDetail" extends="baseLayout">
+		<put-attribute name="title" value="젤 케이스 상품 상세페이지" />
+		<put-attribute name="main" value="/WEB-INF/views/product/gelDetail.jsp" />
+	</definition>
+	
+	<!-- 카드 케이스 -->
+	<definition name="CardCase" extends="baseLayout">
+		<put-attribute name="title" value="카드 케이스" />
+		<put-attribute name="main" value="/WEB-INF/views/product/card.jsp" />
+	</definition>
+	
+	<!-- 카드 케이스 상세페이지 -->
+	<definition name="CardCaseDetail" extends="baseLayout">
+		<put-attribute name="title" value="카드 케이스 상품 상세페이지" />
+		<put-attribute name="main" value="/WEB-INF/views/product/cardDetail.jsp" />
+	</definition>
+	
+	<!-- 에어팟 케이스 -->
+	<definition name="AirpodCase" extends="baseLayout">
+		<put-attribute name="title" value="에어팟 케이스" />
+		<put-attribute name="main" value="/WEB-INF/views/product/airpod.jsp" />
+	</definition>
+	
+	<!-- 에어팟 케이스 상세페이지 -->
+	<definition name="AirpodCaseDetail" extends="baseLayout">
+		<put-attribute name="title" value="에어팟 케이스 상품 상세페이지" />
+		<put-attribute name="main" value="/WEB-INF/views/product/airpodDetail.jsp" />
+	</definition>
+	
+	<!-- 버즈 케이스 -->
+	<definition name="BudsCase" extends="baseLayout">
+		<put-attribute name="title" value="버즈 케이스" />
+		<put-attribute name="main" value="/WEB-INF/views/product/buds.jsp" />
+	</definition>
+	
+	<!-- 버즈 케이스 상세페이지 -->
+	<definition name="BudsCaseDetail" extends="baseLayout">
+		<put-attribute name="title" value="버즈 케이스 상품 상세페이지" />
+		<put-attribute name="main" value="/WEB-INF/views/product/budsDetail.jsp" />
+	</definition>
+	
+	<!-- 액세서리 -->
+	<definition name="Accessory" extends="baseLayout">
+		<put-attribute name="title" value="액세서리" />
+		<put-attribute name="main" value="/WEB-INF/views/product/accessory.jsp" />
+	</definition>
+	
+	<!-- 키링 -->
+	<definition name="KeyRing" extends="baseLayout">
+		<put-attribute name="title" value="키링" />
+		<put-attribute name="main" value="/WEB-INF/views/product/keyRing.jsp" />
+	</definition>
+	
+	<!-- 키링 상세페이지 -->
+	<definition name="KeyRingDetail" extends="baseLayout">
+		<put-attribute name="title" value="키링 상품 상세페이지" />
+		<put-attribute name="main" value="/WEB-INF/views/product/keyRingDetail.jsp" />
+	</definition>
+	
+	<!-- 스마트톡 -->
+	<definition name="SmartTok" extends="baseLayout">
+		<put-attribute name="title" value="스마트톡" />
+		<put-attribute name="main" value="/WEB-INF/views/product/smartTok.jsp" />
+	</definition>
+	
+	<!-- 스마트톡 상세페이지 -->
+	<definition name="SmartTokDetail" extends="baseLayout">
+		<put-attribute name="title" value="스마트톡 상품 상세페이지" />
+		<put-attribute name="main" value="/WEB-INF/views/product/smartTokDetail.jsp" />
+	</definition>
+	
+	<!-- 마이페이지 -->
+	<definition name="myPage" extends="baseLayout">
+		<put-attribute name="title" value="마이페이지" />
+		<put-attribute name="main" value="/WEB-INF/views/myPage/myPage.jsp" />
+	</definition>
+	
+	<!-- 회원정보수정/탈퇴 -->
+	<definition name="memberEdit" extends="baseLayout">
+		<put-attribute name="title" value="회원정보수정/탈퇴" />
+		<put-attribute name="main" value="/WEB-INF/views/myPage/memberCorrection.jsp" />
+	</definition>
+	
+	<!-- 구매내역조회 -->
+	<definition name="purchaseList" extends="baseLayout">
+		<put-attribute name="title" value="구매내역조회" />
+		<put-attribute name="main" value="/WEB-INF/views/myPage/purchaseHistory.jsp" />
+	</definition>
+	
+	<!-- 관심상품내역 조회 -->
+	<definition name="wist_list" extends="baseLayout">
+		<put-attribute name="title" value="관심상품내역 조회" />
+		<put-attribute name="main" value="/WEB-INF/views/myPage/interestedProduct.jsp" />
+	</definition>
+	
+	<!-- Q&A -->
+	<definition name="product" extends="baseLayout">
+		<put-attribute name="title" value="QA" />
+		<put-attribute name="main" value="/WEB-INF/views/community/QnA/question.jsp" />
+	</definition>
+	
+	<!-- Q&A 상세 -->
+	<definition name="product_in" extends="baseLayout">
+		<put-attribute name="title" value="QA" />
+		<put-attribute name="main" value="/WEB-INF/views/community/QnA/questionPage.jsp" />
+	</definition>
+	
+	<!-- Q&A 글쓰기 -->
+	<definition name="product_write" extends="baseLayout">
+		<put-attribute name="title" value="QA 글쓰기" />
+		<put-attribute name="main" value="/WEB-INF/views/community/QnA/writeQuestion.jsp" />
+	</definition>
+	
+	<!-- Q&A 수정/삭제 -->
+	<definition name="product_M_D" extends="baseLayout">
+		<put-attribute name="title" value="QA 수정삭제" />
+		<put-attribute name="main" value="/WEB-INF/views/community/QnA/questionM_D.jsp" />
+	</definition>
+	
+	<!-- Q&A 댓글 -->
+	<definition name="product_reWrite" extends="baseLayout">
+		<put-attribute name="title" value="QA 댓글" />
+		<put-attribute name="main" value="/WEB-INF/views/community/QnA/questionComment.jsp" />
+	</definition>
+	
+	<!-- 공지사항 -->
+	<definition name="notice" extends="baseLayout">
+		<put-attribute name="title" value="공지사항" />
+		<put-attribute name="main" value="/WEB-INF/views/community/notice/notice.jsp" />
+	</definition>
+	
+	<!-- 공지사항 상세 -->
+	<definition name="notice_in" extends="baseLayout">
+		<put-attribute name="title" value="공지사항 상세" />
+		<put-attribute name="main" value="/WEB-INF/views/community/notice/noticePage.jsp" />
+	</definition>
+	
+	<!-- 이벤트게시판 -->
+	<definition name="event" extends="baseLayout">
+		<put-attribute name="title" value="이벤트게시판" />
+		<put-attribute name="main" value="/WEB-INF/views/community/event/event.jsp" />
+	</definition>
+	
+	<!-- 이벤트게시판 상세 -->
+	<definition name="event_in" extends="baseLayout">
+		<put-attribute name="title" value="이벤트게시판 상세" />
+		<put-attribute name="main" value="/WEB-INF/views/community/event/eventPage.jsp" />
+	</definition>
+	
+	<!-- 리뷰 -->
+	<definition name="review" extends="baseLayout">
+		<put-attribute name="title" value="리뷰" />
+		<put-attribute name="main" value="/WEB-INF/views/community/review/review.jsp" />
+	</definition>
+	
+	<!-- 리뷰 상세 -->
+	<definition name="review_in" extends="baseLayout">
+		<put-attribute name="title" value="리뷰 상세" />
+		<put-attribute name="main" value="/WEB-INF/views/community/review/reviewPage.jsp" />
+	</definition>
+
+</tiles-definitions>
