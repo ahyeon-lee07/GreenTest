@@ -21,7 +21,6 @@ request.setCharacterEncoding("UTF-8");
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
 
-
 <!-- 그린 스타일 -->
 <link rel="stylesheet" href="resources/css/greenStyle.css">
 
@@ -76,7 +75,7 @@ request.setCharacterEncoding("UTF-8");
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[하드] 하드 케이스 1</h6>
 										<!-- Product price-->
 										$20.00
 									</div>
@@ -84,9 +83,11 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
-										<a class="btn btn-sm btn-outline-secondary"
-											href="${contextPath}/orderList.do" role="button">바로구매</a> <a
-											href="#" class="btn btn-sm btn-outline-secondary">관심상품</a>
+										<a class="btn btn-sm btn-outline-success"
+											href="${contextPath}/orderList.do" role="button">바로구매</a> 
+										<a
+											href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">
+										관심상품</a>
 									</div>
 								</div>
 							</div>
@@ -104,18 +105,19 @@ request.setCharacterEncoding("UTF-8");
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[하드] 하드 케이스 2</h6>
 										<!-- Product price-->
-										<span class="text-muted text-decoration-line-through">$20.00</span>
 										$18.00
 									</div>
 								</div>
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
-										<a class="btn btn-sm btn-outline-secondary"
-											href="${contextPath}/buyPage.do" role="button">바로구매</a> <a
-											href="#" class="btn btn-sm btn-outline-secondary">관심상품</a>
+										<a class="btn btn-sm btn-outline-success"
+											href="${contextPath}/orderList.do" role="button">바로구매</a> 
+										<a
+											href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">
+										관심상품</a>
 									</div>
 								</div>
 							</div>
@@ -133,18 +135,19 @@ request.setCharacterEncoding("UTF-8");
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[하드] 하드 케이스 3</h6>
 										<!-- Product price-->
-										
-										$18.00
+										$20.00
 									</div>
 								</div>
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
-										<a class="btn btn-sm btn-outline-secondary"
-											href="${contextPath}/buyPage.do" role="button">바로구매</a> <a
-											href="#" class="btn btn-sm btn-outline-secondary">관심상품</a>
+										<a class="btn btn-sm btn-outline-success"
+											href="${contextPath}/orderList.do" role="button">바로구매</a> 
+										<a
+											href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">
+										관심상품</a>
 									</div>
 								</div>
 							</div>
@@ -162,18 +165,19 @@ request.setCharacterEncoding("UTF-8");
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[하드] 하드 케이스 4</h6>
 										<!-- Product price-->
-										<span class="text-muted text-decoration-line-through">$20.00</span>
 										$18.00
 									</div>
 								</div>
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
-										<a class="btn btn-sm btn-outline-secondary"
-											href="${contextPath}/buyPage.do" role="button">바로구매</a> <a
-											href="#" class="btn btn-sm btn-outline-secondary">관심상품</a>
+										<a class="btn btn-sm btn-outline-success"
+											href="${contextPath}/orderList.do" role="button">바로구매</a>
+										<a
+											href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">
+										관심상품</a>
 									</div>
 								</div>
 							</div>
@@ -191,7 +195,7 @@ request.setCharacterEncoding("UTF-8");
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[하드] 하드 케이스 5</h6>
 										<!-- Product reviews-->
 										<div
 											class="d-flex justify-content-center small text-warning mb-2">
@@ -202,16 +206,16 @@ request.setCharacterEncoding("UTF-8");
 											<div class="bi-star-fill"></div>
 										</div>
 										<!-- Product price-->
-										
-										$18.00
+										$20.00
 									</div>
 								</div>
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
-										<a href="${contextPath}/buyPage.do"
-											class="btn btn-sm btn-outline-secondary">바로구매</a> <a href="#"
-											class="btn btn-sm btn-outline-secondary">관심상품</a>
+										<a href="${contextPath}/orderList.do"
+											class="btn btn-sm btn-outline-success">바로구매</a> 
+										<a href="${contextPath}/wist_list.do"
+											class="btn btn-sm btn-outline-success">관심상품</a>
 									</div>
 								</div>
 							</div>
@@ -229,7 +233,7 @@ request.setCharacterEncoding("UTF-8");
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[하드] 하드 케이스 6</h6>
 										<!-- Product reviews-->
 										<div
 											class="d-flex justify-content-center small text-warning mb-2">
@@ -246,9 +250,10 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
-										<a href="${contextPath}/buyPage.do"
-											class="btn btn-sm btn-outline-secondary">바로구매</a> <a href="#"
-											class="btn btn-sm btn-outline-secondary">관심상품</a>
+										<a href="${contextPath}/orderList.do"
+											class="btn btn-sm btn-outline-success">바로구매</a> 
+										<a href="${contextPath}/wist_list.do"
+											class="btn btn-sm btn-outline-success">관심상품</a>
 									</div>
 								</div>
 							</div>
@@ -266,7 +271,7 @@ request.setCharacterEncoding("UTF-8");
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[하드] 하드 케이스 7</h6>
 										<!-- Product reviews-->
 										<div
 											class="d-flex justify-content-center small text-warning mb-2">
@@ -277,15 +282,16 @@ request.setCharacterEncoding("UTF-8");
 											<div class="bi-star-fill"></div>
 										</div>
 										<!-- Product price-->
-										$18.00
+										$20.00
 									</div>
 								</div>
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
-										<a href="${contextPath}/buyPage.do"
-											class="btn btn-sm btn-outline-secondary">바로구매</a> <a href="#"
-											class="btn btn-sm btn-outline-secondary">관심상품</a>
+										<a href="${contextPath}/orderList.do"
+											class="btn btn-sm btn-outline-success">바로구매</a> 
+										<a href="${contextPath}/wist_list.do"
+											class="btn btn-sm btn-outline-success">관심상품</a>
 									</div>
 								</div>
 							</div>
@@ -303,7 +309,7 @@ request.setCharacterEncoding("UTF-8");
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[하드] 하드 케이스 8</h6>
 										<!-- Product reviews-->
 										<div
 											class="d-flex justify-content-center small text-warning mb-2">
@@ -320,9 +326,10 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
-										<a href="${contextPath}/buyPage.do"
-											class="btn btn-sm btn-outline-secondary">바로구매</a> <a href="#"
-											class="btn btn-sm btn-outline-secondary">관심상품</a>
+										<a href="${contextPath}/orderList.do"
+											class="btn btn-sm btn-outline-success">바로구매</a> 
+										<a href="${contextPath}/wist_list.do"
+											class="btn btn-sm btn-outline-success">관심상품</a>
 									</div>
 								</div>
 							</div>
