@@ -1,6 +1,7 @@
 package com.pro.green.member.controller;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,6 +40,18 @@ public class MemberControllerImpl   implements MemberController {
 //		mav.setViewName(viewName);
 //		return mav;
 //	}
+	
+	// 회원가입
+	@RequestMapping(value = "/join.do", method = RequestMethod.GET)
+	public String join(Locale locale, Model model) {
+		return "join";
+	}
+
+	// 일반 회원가입
+	@RequestMapping(value = "/normalJoin.do", method = RequestMethod.GET)
+	public String normalJoin(Locale locale, Model model) {
+		return "normalJoin";
+	}
 	
 	//아이디체크
 	@Override

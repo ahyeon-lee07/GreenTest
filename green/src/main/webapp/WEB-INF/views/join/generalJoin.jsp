@@ -30,7 +30,7 @@
 							<div class="row border-bottom pm-2"></div>
 							<div class="row mb-4">
 								<div class="col-12">
-									<form action="${contextPath}/member/addMember.do" name="joinForm" method="POST">
+									<form action="${contextPath}/member/addMember.do" name="joinForm" method="POST" onsubmit="return checkLogin()">
 										<div class="row border-bottom py-2">
 											<div class="col p-0">
 												<div class="d-flex bd-highlight">
@@ -174,7 +174,7 @@
 																<div class="p-2">@</div>
 																<select id="inputEmail2" class="form-control"
 																	style="width: 140px;" name="email2">
-																	<option value="none" selected>선택</option>
+																	<option value="" selected>선택</option>
 																	<option value="naver.com">naver.com</option>
 																	<option value="hanmail.net">hanmail.net</option>
 																	<option value="nate.com">nate.com</option>
@@ -379,7 +379,7 @@
 														</div>
 														<div class="p-2 bd-highlight">
 															<div class="form-check" style="padding: 0;">
-																<input type='checkbox' name='terms' value='terms1'
+																<input id="chk1" type='checkbox' name='terms' value='terms1'
 																	onclick='checkSelectAll()' /> <label
 																	class="form-check-label pl-2" for="defaultCheck1">
 																	이용 약관에 동의 하십니까? </label>
@@ -453,7 +453,7 @@ o 로그 기록
 														</div>
 														<div class="p-2 bd-highlight">
 															<div class="form-check" style="padding: 0;">
-																<input type='checkbox' name='terms' value='terms2'
+																<input id="chk2" type='checkbox' name='terms' value='terms2'
 																	onclick='checkSelectAll()' /> <label
 																	class="form-check-label pl-2" for="defaultCheck2">
 																	개인정보 수집 및 이용에 동의 하십니까? </label>
@@ -466,7 +466,7 @@ o 로그 기록
 										<!-- Button trigger modal -->
 										<div class="text-center">
 											<button type="submit" class="btn btn-success"
-												data-target="#join_membership_2" onclick="checkLogin()">완료</button>
+												data-target="#join_membership_2">완료</button>
 
 											<!-- Modal -->
 											<!-- <div class="modal fade" id="join_membership_2" tabindex="-1"
@@ -533,42 +533,76 @@ o 로그 기록
 						//유효성 검사
 						function checkLogin() {
 							var form = document.joinForm;
+							//영문 소문자/숫자, 4~16자
+							var idExp = document.getElementById('inputId').value.search(/^[a-zA-Z0-9]{4,16}$/);
+							//영문,숫자,특수문자 혼합하여 10자리~16자리 이내.(비밀번호 표준)
+							var pwExp = document.getElementById('Password').value;
+							var num = pwExp.search(/[0-9]/g);
+							var eng = pwExp.search(/[a-z]/ig);
+							var spe = pwExp.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+							//영문 한글 공백 허용
+							var nameExp = document.getElementById('inputName').value.search(/^[ㄱ-ㅎ|가-힣|a-z|A-Z|]*$/);
+
 							if (form.id.value == "") {
 								alert("아이디를 입력해주세요!");
 								form.id.focus();
 								return false;
-							}
-							if (form.pw.value == "") {
+							}else if (idExp) {
+								alert("아이디는 영문 소문자/숫자, 4~16자 형식으로 작성하셔야 합니다.");
+								form.id.focus();
+								return false;
+							}else if (form.pw.value == "") {
 								alert("비밀번호를 입력해주세요!");
 								form.pw.focus();
 								return false;
-							}
-							if (form.re_pw.value == "") {
+							}else if (pwExp.length < 10 || pwExp.length > 16){
+								alert("10자리 ~ 16자리 이내로 입력해주세요.");
+								form.pw.focus();
+								return false;
+							}else if (pwExp.search(/\s/) != -1){
+								alert("비밀번호는 공백 없이 입력해주세요.");
+								form.pw.focus();
+								return false;
+							}else if ( (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0) ){
+								alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
+								form.pw.focus();
+								return false;
+							}else if (form.re_pw.value == "") {
 								alert("비밀번호 확인을 입력해주세요!");
 								form.re_pw.focus();
 								return false;
-							}
-							if (form.pw.value != form.re_pw.value) {
+							}else if (form.pw.value != form.re_pw.value) {
 								alert("비밀번호를 확인해주세요!");
 								form.pw.focus();
 								return false;
-							}
-							if (form.name.value == "") {
+							}else if (form.name.value == "") {
 								alert("이름을 입력해주세요!");
 								form.name.focus();
 								return false;
-							}
-							if (form.phone.value == "") {
+							}else if (nameExp) {
+								alert("이름에 숫자는 입력 할수 없습니다.");
+								form.name.focus();
+								return false;
+							}else if (form.addr1.value == "" || form.addr2.value == "" || form.addr3.value == "" ) {
+								alert("주소을 입력해주세요!");
+								form.addr1.focus();
+								return false;
+							}else if (form.phone.value == "") {
 								alert("휴대전화를 입력해주세요!");
 								form.phone.focus();
 								return false;
-							}
-							else if (form.email.value == "") {
-								alert("이메일을 입력해주세요!");
-								form.email.focus();
+							}else if(document.getElementById("chk1").checked != true){
+								alert("이용약관에 동의해 주세요!");
+								document.getElementById("chk1").focus();
 								return false;
+							}else if(document.getElementById("chk2").checked != true){
+								alert("개인정보 수집 및 이용 동의에 동의해 주세요!");
+								document.getElementById("chk2").focus();
+								return false;
+							}else {
+								form.submit();
 							}
-							form.submit();
 						}
 					</script>
 

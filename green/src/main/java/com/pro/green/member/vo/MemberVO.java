@@ -10,7 +10,7 @@ public class MemberVO {
 	private String id;
 	private String pw;
 	private String name;
-	private Date birth;
+	private String birth;
 	private String phone;
 	private String email1;
 	private String email2;
@@ -22,8 +22,6 @@ public class MemberVO {
 	private Integer mileage;
 	private String masterYN;
 	private Date joinDate;
-	
-	
 	public String getId() {
 		return id;
 	}
@@ -42,10 +40,10 @@ public class MemberVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getBirth() {
+	public String getBirth() {
 		return birth;
 	}
-	public void setBirth(Date birth) {
+	public void setBirth(String birth) {
 		this.birth = birth;
 	}
 	public String getPhone() {

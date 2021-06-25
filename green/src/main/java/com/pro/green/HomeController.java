@@ -90,17 +90,7 @@ public class HomeController {
 		return "find_pw";
 	}
 
-	// 회원가입
-	@RequestMapping(value = "/join.do", method = RequestMethod.GET)
-	public String join(Locale locale, Model model) {
-		return "join";
-	}
 
-	// 일반 회원가입
-	@RequestMapping(value = "/normalJoin.do", method = RequestMethod.GET)
-	public String normalJoin(Locale locale, Model model) {
-		return "normalJoin";
-	}
 
 	// SNS계정으로 회원가입
 	@RequestMapping(value = "/snsJoin.do", method = RequestMethod.GET)
