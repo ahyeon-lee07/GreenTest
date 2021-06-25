@@ -60,12 +60,7 @@ public class HomeController {
 		return "privacyPolicy";
 	}
 
-	// 로그인
-	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public String login(Locale locale, Model model) {
-		return "login";
-	}
-
+	
 	// 기존로그인
 	@RequestMapping(value = "/member.do", method = RequestMethod.GET)
 	public String member(Locale locale, Model model) {

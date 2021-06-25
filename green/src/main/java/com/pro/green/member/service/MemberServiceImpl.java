@@ -30,4 +30,9 @@ public class MemberServiceImpl implements MemberService {
 	public String overlapped(String id) throws Exception{
 		return memberDAO.selectOverlappedID(id);
 	}
+	
+	//·Î±×ÀÎ
+	public MemberVO login(MemberVO memberVO) throws Exception {
+		return memberDAO.loginById(memberVO);
+	}
 }

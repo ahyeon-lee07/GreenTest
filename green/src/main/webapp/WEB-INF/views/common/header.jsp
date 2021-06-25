@@ -20,9 +20,6 @@
                                 <a class="nav-link text-secondary" href="${contextPath }/main.do">홈</a>
                             </li>
                             <li class="nav-item mr-3">
-                                <a class="nav-link text-secondary" href="${contextPath }/login.do">로그인</a>
-                            </li>
-                            <li class="nav-item mr-3">
                                 <a class="nav-link text-secondary" href="${contextPath }/join.do">회원가입</a>
                             </li>
                             <li class="nav-item mr-3">
@@ -52,6 +49,19 @@
                                     <a class="dropdown-item" href="${contextPath }/review.do">리뷰</a>
                                 </div>
                             </li>
+                            <c:choose>
+                            	<c:when test="${isLogOn == true && member != null }">
+                            		<li class="nav-item mr-3">
+	                                	<a class="nav-link text-secondary" href="${contextPath }/member/logout.do">로그아웃</a>
+	                            	</li>
+                            	</c:when>
+                            	<c:otherwise>
+	                            	<li class="nav-item mr-3">
+	                                	<a class="nav-link text-secondary" href="${contextPath }/login.do">로그인</a>
+	                            	</li>
+                            	</c:otherwise>
+                            </c:choose>
+                            
                         </ul>
                     </div>
                     <!-- 탑 검색 -->

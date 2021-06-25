@@ -8,6 +8,13 @@ request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
+<c:choose>
+	<c:when test="${result ==  'loginFailed' }">
+	
+	</c:when>
+</c:choose>
+
+
 <!-- 메인 -->
 <main class="mainH">
 	<div class="container">

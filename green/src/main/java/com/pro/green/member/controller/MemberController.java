@@ -14,6 +14,8 @@ import com.pro.green.member.vo.MemberVO;
 public interface MemberController {
 	public ModelAndView addMember(@ModelAttribute("info") MemberVO memberVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
 
 
