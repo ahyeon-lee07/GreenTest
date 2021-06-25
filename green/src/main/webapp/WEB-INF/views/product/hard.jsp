@@ -77,7 +77,7 @@ request.setCharacterEncoding("UTF-8");
 										<!-- Product name-->
 										<h6 class="fw-bolder">[하드] 하드 케이스 1</h6>
 										<!-- Product price-->
-										$20.00
+										12,000원
 									</div>
 								</div>
 								<!-- Product actions-->
@@ -85,9 +85,7 @@ request.setCharacterEncoding("UTF-8");
 									<div class="text-center">
 										<a class="btn btn-sm btn-outline-success"
 											href="${contextPath}/orderList.do" role="button">바로구매</a> 
-										<a
-											href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">
-										관심상품</a>
+										<a href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">관심상품</a>
 									</div>
 								</div>
 							</div>
@@ -107,7 +105,11 @@ request.setCharacterEncoding("UTF-8");
 										<!-- Product name-->
 										<h6 class="fw-bolder">[하드] 하드 케이스 2</h6>
 										<!-- Product price-->
+<<<<<<< HEAD
 										$18.00
+=======
+										10,000원
+>>>>>>> refs/heads/jin
 									</div>
 								</div>
 								<!-- Product actions-->
@@ -116,8 +118,12 @@ request.setCharacterEncoding("UTF-8");
 										<a class="btn btn-sm btn-outline-success"
 											href="${contextPath}/orderList.do" role="button">바로구매</a> 
 										<a
+<<<<<<< HEAD
 											href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">
 										관심상품</a>
+=======
+											href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">관심상품</a>
+>>>>>>> refs/heads/jin
 									</div>
 								</div>
 							</div>
@@ -137,7 +143,11 @@ request.setCharacterEncoding("UTF-8");
 										<!-- Product name-->
 										<h6 class="fw-bolder">[하드] 하드 케이스 3</h6>
 										<!-- Product price-->
+<<<<<<< HEAD
 										$20.00
+=======
+										12,000원
+>>>>>>> refs/heads/jin
 									</div>
 								</div>
 								<!-- Product actions-->
@@ -146,8 +156,12 @@ request.setCharacterEncoding("UTF-8");
 										<a class="btn btn-sm btn-outline-success"
 											href="${contextPath}/orderList.do" role="button">바로구매</a> 
 										<a
+<<<<<<< HEAD
 											href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">
 										관심상품</a>
+=======
+											href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">관심상품</a>
+>>>>>>> refs/heads/jin
 									</div>
 								</div>
 							</div>
@@ -167,17 +181,27 @@ request.setCharacterEncoding("UTF-8");
 										<!-- Product name-->
 										<h6 class="fw-bolder">[하드] 하드 케이스 4</h6>
 										<!-- Product price-->
+<<<<<<< HEAD
 										$18.00
+=======
+										10,000원
+>>>>>>> refs/heads/jin
 									</div>
 								</div>
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
 										<a class="btn btn-sm btn-outline-success"
+<<<<<<< HEAD
 											href="${contextPath}/orderList.do" role="button">바로구매</a>
 										<a
 											href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">
 										관심상품</a>
+=======
+											href="${contextPath}/orderList.do" role="button">바로구매</a> 
+										<a
+											href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">관심상품</a>
+>>>>>>> refs/heads/jin
 									</div>
 								</div>
 							</div>
@@ -206,7 +230,11 @@ request.setCharacterEncoding("UTF-8");
 											<div class="bi-star-fill"></div>
 										</div>
 										<!-- Product price-->
+<<<<<<< HEAD
 										$20.00
+=======
+										12,000원
+>>>>>>> refs/heads/jin
 									</div>
 								</div>
 								<!-- Product actions-->
@@ -244,7 +272,7 @@ request.setCharacterEncoding("UTF-8");
 											<div class="bi-star-fill"></div>
 										</div>
 										<!-- Product price-->
-										$18.00
+										10,000원
 									</div>
 								</div>
 								<!-- Product actions-->
@@ -282,7 +310,11 @@ request.setCharacterEncoding("UTF-8");
 											<div class="bi-star-fill"></div>
 										</div>
 										<!-- Product price-->
+<<<<<<< HEAD
 										$20.00
+=======
+										12,000원
+>>>>>>> refs/heads/jin
 									</div>
 								</div>
 								<!-- Product actions-->
@@ -320,7 +352,7 @@ request.setCharacterEncoding("UTF-8");
 											<div class="bi-star-fill"></div>
 										</div>
 										<!-- Product price-->
-										$18.00
+										10,000원
 									</div>
 								</div>
 								<!-- Product actions-->
