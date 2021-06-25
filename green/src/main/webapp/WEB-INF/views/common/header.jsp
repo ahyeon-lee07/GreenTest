@@ -67,8 +67,8 @@
 
         <!--　로고 -->
         <div id="logoBox" class="border-bottom logoBox">
-            <img class="d-block mx-auto mt-4" src="${contextPath}/resources/img/logo.png" alt="그린케이스">
-            
+        <a href="${contextPath }/main.do">
+            <img class="d-block mx-auto mt-4" src="${contextPath}/resources/img/logo.png" alt="그린케이스"></a>
         </div>
 
         <!-- gnb -->
