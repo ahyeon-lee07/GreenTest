@@ -23,8 +23,8 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	//아이디 중복 체크
 	@Override
-	public int idChk(String user_id) throws DataAccessException {
-		int result = sqlSession.selectOne("mapper.member.idChk", user_id);
+	public String selectOverlappedID(String id) throws DataAccessException {
+		String result =  sqlSession.selectOne("mapper.member.selectOverlappedID",id);
 		return result;
 	}
 

@@ -27,9 +27,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	//아이디체크
 	@Override
-	public int idChk(String user_id) throws DataAccessException {
-		return memberDAO.idChk(user_id);
+	public String overlapped(String id) throws Exception{
+		return memberDAO.selectOverlappedID(id);
 	}
-
-
 }

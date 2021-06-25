@@ -26,15 +26,13 @@
 	<insert id="insertMember"  parameterType="memberVO">
 		<![CDATA[
 		 insert into member(id,pw,name,birth,phone,zipCode,addr1,addr2,addr3,email1,email2)
-		 values(#{id}, #{pw}, #{name}, #{birth}, #{phone}, #{zipCode}, #{addr1}, #{addr2}, #{addr3}, #{email1}, #{email2})
+		 values(#{id}, #{pw}, #{name}, #{birth}, #{phone}, #{zipCode}, #{addr1}, #{addr2}, #{addr3}, #{email1}, #{email2});
 		]]>      
 	</insert>
 	
 	<!-- 아이디 중복 체크  -->
-	<insert id="idChk" parameterType="int">
-		<![CDATA[
-			SELECT COUNT(*) FROM member WHERE id=#{id};
-		]]>   
-	</insert>
+	<select id="selectOverlappedID" parameterType="String" resultType="String">
+	   SELECT IF(COUNT(*), 'true', 'false') FROM member WHERE id=#{id};
+	</select>
 	
 </mapper>

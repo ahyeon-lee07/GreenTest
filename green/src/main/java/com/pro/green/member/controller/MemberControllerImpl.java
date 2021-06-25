@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -53,12 +55,14 @@ public class MemberControllerImpl   implements MemberController {
 		return "normalJoin";
 	}
 	
-	//아이디체크
+	//아이디체크	
 	@Override
-	@RequestMapping(value="/user/idChk" ,method = RequestMethod.GET)
-	public int idChk(@RequestParam("id") String user_id) throws Exception {
-		int result = memberService.idChk(user_id);
-		return result;
+	@RequestMapping(value="/member/overlapped.do" ,method = RequestMethod.POST)
+	public ResponseEntity overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ResponseEntity resEntity = null;
+		String result = memberService.overlapped(id);
+		resEntity =new ResponseEntity(result, HttpStatus.OK);
+		return resEntity;
 	}
 	
 	//회원 가입
