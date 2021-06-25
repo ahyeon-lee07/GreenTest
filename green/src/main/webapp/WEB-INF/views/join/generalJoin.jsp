@@ -24,13 +24,13 @@
 								</div>
 							</div>
 							<div class="bd-highlight" style="text-align: right;">
-									<img src="${contextPath }/resources/img/require.png">
-									<span class="">필수입력사항</span>
+								<img src="${contextPath }/resources/img/require.png">
+								<span class="">필수입력사항</span>
 							</div>
 							<div class="row border-bottom pm-2"></div>
 							<div class="row mb-4">
 								<div class="col-12">
-									<form action="${contextPath}/member/addMember.do" name="joinForm" method="POST" onsubmit="return checkLogin()">
+									<form name="joinForm" method="POST">
 										<div class="row border-bottom py-2">
 											<div class="col p-0">
 												<div class="d-flex bd-highlight">
@@ -40,9 +40,10 @@
 													<div class="flex-grow bd-highlight pr-2">
 														<input type="text" class="form-control" id="inputId" name="id">
 													</div>
-													<button class="btn btn-secondary btn-sm" style="height: 38px;"
-														onclick="fn_idChk()">중복 확인</button>
+													<button id="checked_id" type="button" class="btn btn-secondary btn-sm" style="height: 38px;"
+														onclick="return fn_idChk()">중복 확인</button>
 													<p class="pl-2 my-2" style="font-size: .8rem;">(영문 소문자/숫자, 4~16자)</p>
+													<input type="hidden" name="checked_id" value="">
 												</div>
 											</div>
 										</div>
@@ -56,7 +57,8 @@
 														<input type="password" class="form-control" id="Password"
 															name="pw">
 													</div>
-													<p class="my-2" style="font-size: .8rem;">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</p>
+													<p class="my-2" style="font-size: .8rem;">(영문 대소문자/숫자/특수문자 중 2가지 이상
+														조합, 10자~16자)</p>
 												</div>
 											</div>
 										</div>
@@ -68,7 +70,8 @@
 															src="${contextPath }/resources/img/require.png">비밀번호
 														확인</label>
 													<div class="flex-grow bd-highlight pr-2">
-														<input type="password" class="form-control" id="re_password" name="re_pw">
+														<input type="password" class="form-control" id="re_password"
+															name="re_pw">
 													</div>
 												</div>
 											</div>
@@ -379,8 +382,8 @@
 														</div>
 														<div class="p-2 bd-highlight">
 															<div class="form-check" style="padding: 0;">
-																<input id="chk1" type='checkbox' name='terms' value='terms1'
-																	onclick='checkSelectAll()' /> <label
+																<input id="chk1" type='checkbox' name='terms'
+																	value='terms1' onclick='checkSelectAll()' /> <label
 																	class="form-check-label pl-2" for="defaultCheck1">
 																	이용 약관에 동의 하십니까? </label>
 															</div>
@@ -453,8 +456,8 @@ o 로그 기록
 														</div>
 														<div class="p-2 bd-highlight">
 															<div class="form-check" style="padding: 0;">
-																<input id="chk2" type='checkbox' name='terms' value='terms2'
-																	onclick='checkSelectAll()' /> <label
+																<input id="chk2" type='checkbox' name='terms'
+																	value='terms2' onclick='checkSelectAll()' /> <label
 																	class="form-check-label pl-2" for="defaultCheck2">
 																	개인정보 수집 및 이용에 동의 하십니까? </label>
 															</div>
@@ -466,7 +469,8 @@ o 로그 기록
 										<!-- Button trigger modal -->
 										<div class="text-center">
 											<button type="submit" class="btn btn-success"
-												data-target="#join_membership_2">완료</button>
+												data-target="#join_membership_2"
+												onclick="return checkLogin()">완료</button>
 
 											<!-- Modal -->
 											<!-- <div class="modal fade" id="join_membership_2" tabindex="-1"
@@ -530,6 +534,44 @@ o 로그 기록
 							})
 						}
 
+						//아이디 중복 체크
+						function fn_idChk() {
+							//아이기 값 가져 오기 
+							var _id = $('#inputId').val();
+							if (!_id) {
+								alert("아이디를 입력해주세요!");
+								document.getElementById('inputId').focus();
+								return false;
+							}
+							$.ajax({
+								type: "POST",
+								async: true,
+								url: "${contextPath}/member/overlapped.do",
+								dataType: "text",
+								data: { id: _id },
+								success: function (data, textStatus) {
+									if (data == 'false') {
+										alert( _id +" 사용할 수 있는 아이디 입니다.")
+										document.getElementsByName('checked_id').values = 'Y';
+										return;
+									} else {
+										alert( _id +" 사용할 수 없는 아이디 입니다.")
+									}
+								},
+								error: function (data, textStatus) {
+									alert("에러가 발생하였습니다.")
+								},
+								complete: function (data, textStatus) {
+								}
+							});
+						}
+
+						//아이디 이력 창에 변동이 있으면 'Y' 값을 제거 한다.
+						document.getElementById('inputId').addEventListener('change', function(){
+							document.getElementsByName('checked_id').values = '';
+						});
+						
+
 						//유효성 검사
 						function checkLogin() {
 							var form = document.joinForm;
@@ -548,59 +590,64 @@ o 로그 기록
 								alert("아이디를 입력해주세요!");
 								form.id.focus();
 								return false;
-							}else if (idExp) {
+							} else if (idExp) {
 								alert("아이디는 영문 소문자/숫자, 4~16자 형식으로 작성하셔야 합니다.");
 								form.id.focus();
 								return false;
-							}else if (form.pw.value == "") {
+							} else if (form.pw.value == "") {
 								alert("비밀번호를 입력해주세요!");
 								form.pw.focus();
 								return false;
-							}else if (pwExp.length < 10 || pwExp.length > 16){
-								alert("10자리 ~ 16자리 이내로 입력해주세요.");
+							} else if (pwExp.length < 10 || pwExp.length > 16) {
+								alert("비밀번호는 10자리 ~ 16자리 이내로 입력해주세요.");
 								form.pw.focus();
 								return false;
-							}else if (pwExp.search(/\s/) != -1){
+							} else if (pwExp.search(/\s/) != -1) {
 								alert("비밀번호는 공백 없이 입력해주세요.");
 								form.pw.focus();
 								return false;
-							}else if ( (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0) ){
+							} else if ((num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0)) {
 								alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
 								form.pw.focus();
 								return false;
-							}else if (form.re_pw.value == "") {
+							} else if (form.re_pw.value == "") {
 								alert("비밀번호 확인을 입력해주세요!");
 								form.re_pw.focus();
 								return false;
-							}else if (form.pw.value != form.re_pw.value) {
+							} else if (form.pw.value != form.re_pw.value) {
 								alert("비밀번호를 확인해주세요!");
 								form.pw.focus();
 								return false;
-							}else if (form.name.value == "") {
+							} else if (form.name.value == "") {
 								alert("이름을 입력해주세요!");
 								form.name.focus();
 								return false;
-							}else if (nameExp) {
+							} else if (nameExp) {
 								alert("이름에 숫자는 입력 할수 없습니다.");
 								form.name.focus();
 								return false;
-							}else if (form.addr1.value == "" || form.addr2.value == "" || form.addr3.value == "" ) {
+							} else if (form.addr1.value == "" || form.addr2.value == "" || form.addr3.value == "") {
 								alert("주소을 입력해주세요!");
 								form.addr1.focus();
 								return false;
-							}else if (form.phone.value == "") {
+							} else if (form.phone.value == "") {
 								alert("휴대전화를 입력해주세요!");
 								form.phone.focus();
 								return false;
-							}else if(document.getElementById("chk1").checked != true){
+							} else if (document.getElementById("chk1").checked != true) {
 								alert("이용약관에 동의해 주세요!");
 								document.getElementById("chk1").focus();
 								return false;
-							}else if(document.getElementById("chk2").checked != true){
+							} else if (document.getElementById("chk2").checked != true) {
 								alert("개인정보 수집 및 이용 동의에 동의해 주세요!");
 								document.getElementById("chk2").focus();
 								return false;
+							}else if(document.getElementsByName('checked_id').values != "Y"){
+								alert("아이디를 중복체크를 해주세요.");
+								document.getElementById("inputId").focus();
+								return false;
 							}else {
+								form.action = "${contextPath}/member/addMember.do";
 								form.submit();
 							}
 						}
