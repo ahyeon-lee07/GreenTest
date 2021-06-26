@@ -1,6 +1,6 @@
 
 
-/* Ãß°¡ */
+/* ï¿½ß°ï¿½ */
 .page_title {
     font-weight: bold;
     color: #444;
@@ -16,4 +16,13 @@ a:hover {
     content: "";
     position: absolute;
     color: red;
+}
+
+.top_memberName {
+    font-size: 1rem;
+    position: relative;
+    top: 20%;
+}
+.top_memberName > span {
+    font-weight: bold;
 }
