@@ -24,7 +24,6 @@ request.setCharacterEncoding("UTF-8");
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
-				<div>${result}</div>
 				<h4 class="page_title">기존회원 로그인</h4>
 			</div>
 			<div class="bd-highlight page_subtitle">
