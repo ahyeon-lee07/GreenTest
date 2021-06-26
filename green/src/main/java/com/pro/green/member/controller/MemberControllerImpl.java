@@ -23,17 +23,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.pro.green.member.service.MemberService;
 import com.pro.green.member.vo.MemberVO;
 
-
-
-
 @Controller("memberController")
 //@EnableAspectJAutoProxy
-public class MemberControllerImpl   implements MemberController {
+public class MemberControllerImpl implements MemberController {
 	@Autowired
 	private MemberService memberService;
 	@Autowired
-	private MemberVO memberVO ;
-	
+	private MemberVO memberVO;
+
 	// /pro30/main.do로 요청 시 메인 페이지를 보여줍니다.
 //	@RequestMapping(value= {"/", "/main.do"},method = RequestMethod.GET )
 //	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
@@ -42,7 +39,7 @@ public class MemberControllerImpl   implements MemberController {
 //		mav.setViewName(viewName);
 //		return mav;
 //	}
-	
+
 	// 회원가입
 	@RequestMapping(value = "/join.do", method = RequestMethod.GET)
 	public String join(Locale locale, Model model) {
@@ -54,29 +51,35 @@ public class MemberControllerImpl   implements MemberController {
 	public String normalJoin(Locale locale, Model model) {
 		return "normalJoin";
 	}
-	
-	// 로그인
-		@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-		public String login(Locale locale, Model model) {
-			return "login";
-		}
 
-	
-	//아이디체크	
+	// 로그인
+	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
+	public String login(Locale locale, Model model) {
+		return "login";
+	}
+
+	// 기존로그인
+	@RequestMapping(value = "/member.do", method = RequestMethod.GET)
+	public String member(Locale locale, Model model) {
+		return "member";
+	}
+
+	// 아이디체크
 	@Override
-	@RequestMapping(value="/member/overlapped.do" ,method = RequestMethod.POST)
-	public ResponseEntity overlapped(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception{
+	@RequestMapping(value = "/member/overlapped.do", method = RequestMethod.POST)
+	public ResponseEntity overlapped(@RequestParam("id") String id, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		ResponseEntity resEntity = null;
 		String result = memberService.overlapped(id);
-		resEntity =new ResponseEntity(result, HttpStatus.OK);
+		resEntity = new ResponseEntity(result, HttpStatus.OK);
 		return resEntity;
 	}
-	
-	//회원 가입
+
+	// 회원 가입
 	@Override
-	@RequestMapping(value="/member/addMember.do" ,method = RequestMethod.POST)
-	public ModelAndView addMember(@ModelAttribute("member") MemberVO member,
-			                  HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/member/addMember.do", method = RequestMethod.POST)
+	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
 		int result = 0;
@@ -84,30 +87,30 @@ public class MemberControllerImpl   implements MemberController {
 		ModelAndView mav = new ModelAndView("redirect:/main.do");
 		return mav;
 	}
-	
 
-	//로그인
+	// 로그인
 	@Override
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
-	public ModelAndView login(@ModelAttribute("member") MemberVO member, //로그인 창에서 전송된 ID와 비밀번호를 MemberVO 객체를 member에 저장한다.
-								RedirectAttributes rAttr, //RedirectAttributes 클래스를 이용해 로그인 실패시 다시 로그인창으로 리다이렉트하여 실패 메시지를 전달합니다.
-								HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
+	public ModelAndView login(@ModelAttribute("member") MemberVO member, // 로그인 창에서 전송된 ID와 비밀번호를 MemberVO 객체를 member에
+																			// 저장한다.
+			RedirectAttributes rAttr, // RedirectAttributes 클래스를 이용해 로그인 실패시 다시 로그인창으로 리다이렉트하여 실패 메시지를 전달합니다.
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		ModelAndView mav = new ModelAndView();
-		memberVO = memberService.login(member);          //login() 메서드를 호출하면서 로그인 정보를 전달한다.
-		if(memberVO != null) {
+		memberVO = memberService.login(member); // login() 메서드를 호출하면서 로그인 정보를 전달한다.
+		if (memberVO != null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("member", memberVO);    //세션에 회원 정보를 저장
-			session.setAttribute("isLogOn", true);       //세션에 로그인 상태를 true로 설정
-			mav.setViewName("redirect:/main.do");        //memberVO로 반횐된 값이 있으면 세션을 이용해 로그인 상태를 true로 합니다.
-		}else {
-			rAttr.addAttribute("result", "loginFailed"); //로그인 실패 시 실패 메시지를 로그인 창으로 전달
-			mav.setViewName("redirect:/login.do");       // 로그인 실패시 다시 로그인차응로 리다이렉트 합니다.
+			session.setAttribute("member", memberVO); // 세션에 회원 정보를 저장
+			session.setAttribute("isLogOn", true); // 세션에 로그인 상태를 true로 설정
+			mav.setViewName("redirect:/main.do"); // memberVO로 반횐된 값이 있으면 세션을 이용해 로그인 상태를 true로 합니다.
+		} else {
+			rAttr.addAttribute("result", "loginFailed"); // 로그인 실패 시 실패 메시지를 로그인 창으로 전달
+			mav.setViewName("redirect:/member.do"); // 로그인 실패시 다시 로그인차응로 리다이렉트 합니다.
 		}
 		return mav;
 	}
-	
-	//로그아웃
+
+	// 로그아웃
 	@Override
 	@RequestMapping(value = "/member/logout.do", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -118,10 +121,15 @@ public class MemberControllerImpl   implements MemberController {
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
-	
-	@RequestMapping(value = "/member/join.do", method = RequestMethod.GET)
-	public ModelAndView logout(@RequestParam(value = "result", required = false) String result, //로그인 창 요청시 매개변수 result가 정송되면 변수 result에 값을 저장합니다. 최초로 로그인창을 요청할 때는 매개변수 result가 전송되지 않으므로 무시합니
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+	@RequestMapping(value = "/*.do", method = RequestMethod.GET)
+	public ModelAndView logout(@RequestParam(value = "result", required = false) String result, // 로그인 창 요청시 매개변수
+																								// result가 정송되면 변수
+																								// result에 값을 저장합니다. 최초로
+																								// 로그인창을 요청할 때는 매개변수
+																								// result가 전송되지 않으므로
+																								// 무시합니
+		HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
@@ -159,6 +167,5 @@ public class MemberControllerImpl   implements MemberController {
 		}
 		return viewName;
 	}
-
 
 }

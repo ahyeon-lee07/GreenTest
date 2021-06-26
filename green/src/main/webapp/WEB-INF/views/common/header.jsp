@@ -19,9 +19,17 @@
                             <li class="nav-item mr-3">
                                 <a class="nav-link text-secondary" href="${contextPath }/main.do">홈</a>
                             </li>
-                            <li class="nav-item mr-3">
-                                <a class="nav-link text-secondary" href="${contextPath }/join.do">회원가입</a>
-                            </li>
+                            <c:choose>
+                                <c:when test="${isLogOn != true && member == null }">
+                                    <li class="nav-item mr-3">
+                                        <a class="nav-link text-secondary" href="${contextPath }/login.do">로그인</a>
+                                    </li>
+                                    <li class="nav-item mr-3">
+                                        <a class="nav-link text-secondary" href="${contextPath }/join.do">회원가입</a>
+                                    </li>
+                                </c:when>
+                            </c:choose>
+                           
                             <li class="nav-item mr-3">
                                 <a class="nav-link text-secondary" href="${contextPath }/cart.do">장바구니</a>
                             </li>
@@ -51,15 +59,13 @@
                             </li>
                             <c:choose>
                             	<c:when test="${isLogOn == true && member != null }">
+                                    <li class="nav-item mr-3 ml-3">
+                                        <div class="top_memberName"><span>"${member.name}"</span> 님 환영합니다</div>
+                                    </li>
                             		<li class="nav-item mr-3">
-	                                	<a class="nav-link text-secondary" href="${contextPath }/member/logout.do">로그아웃</a>
+                                        <button id="btn_logout" type="button" class="btn btn-outline-danger btn-sm mt-1">로그아웃</button>
 	                            	</li>
                             	</c:when>
-                            	<c:otherwise>
-	                            	<li class="nav-item mr-3">
-	                                	<a class="nav-link text-secondary" href="${contextPath }/login.do">로그인</a>
-	                            	</li>
-                            	</c:otherwise>
                             </c:choose>
                             
                         </ul>
@@ -180,3 +186,17 @@
                 </div>
             </nav>
     </header>
+
+    <script>
+        var btnLogOut = document.getElementById('btn_logout');
+        // 로그인 버튼이 있을 경우만 실행
+        if (btnLogOut != null) { 
+            btnLogOut.addEventListener('click', function(){
+                if(confirm("정말 로그아웃 하시겠습니까?") == true ){
+                    location.href = "${ contextPath }/member/logout.do";
+                }else{
+                    return;
+                }
+            });
+        }
+    </script>
