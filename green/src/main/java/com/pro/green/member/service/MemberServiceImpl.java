@@ -31,7 +31,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectOverlappedID(id);
 	}
 	
+	//아아디찾기 
+	@Override 
+	public String findId(MemberVO member) throws Exception {
+		return memberDAO.selectFindId(member);
+	}
+	
 	//로그인
+	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception {
 		return memberDAO.loginById(memberVO);
 	}

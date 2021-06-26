@@ -28,6 +28,13 @@ public class MemberDAOImpl implements MemberDAO {
 		return result;
 	}
 	
+	//아이디 찾기
+	@Override
+	public String selectFindId(MemberVO memberVO) throws DataAccessException {
+		String result =  sqlSession.selectOne("mapper.member.selectFindId", memberVO);
+		return result;
+	}
+	
 	//로그인
 	@Override
 	public MemberVO loginById(MemberVO memberVO) throws DataAccessException {

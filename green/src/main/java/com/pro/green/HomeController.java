@@ -66,12 +66,6 @@ public class HomeController {
 		return "noMember";
 	}
 
-	// 아이디 찾기
-	@RequestMapping(value = "/find_id.do", method = RequestMethod.GET)
-	public String find_id(Locale locale, Model model) {
-		return "find_id";
-	}
-
 	// 비밀번호 찾기
 	@RequestMapping(value = "/find_pw.do", method = RequestMethod.GET)
 	public String find_pw(Locale locale, Model model) {

@@ -31,15 +31,6 @@ public class MemberControllerImpl implements MemberController {
 	@Autowired
 	private MemberVO memberVO;
 
-	// /pro30/main.do로 요청 시 메인 페이지를 보여줍니다.
-//	@RequestMapping(value= {"/", "/main.do"},method = RequestMethod.GET )
-//	private ModelAndView main(HttpServletRequest request, HttpServletResponse response) {
-//		String viewName = (String) request.getAttribute("viewName");
-//		ModelAndView mav = new ModelAndView();
-//		mav.setViewName(viewName);
-//		return mav;
-//	}
-
 	// 회원가입
 	@RequestMapping(value = "/join.do", method = RequestMethod.GET)
 	public String join(Locale locale, Model model) {
@@ -64,6 +55,12 @@ public class MemberControllerImpl implements MemberController {
 		return "member";
 	}
 
+	// 아이디 찾기
+	@RequestMapping(value = "/find_id.do", method = RequestMethod.GET)
+	public String find_id(Locale locale, Model model) {
+		return "find_id";
+	}
+
 	// 아이디체크
 	@Override
 	@RequestMapping(value = "/member/overlapped.do", method = RequestMethod.POST)
@@ -73,6 +70,17 @@ public class MemberControllerImpl implements MemberController {
 		String result = memberService.overlapped(id);
 		resEntity = new ResponseEntity(result, HttpStatus.OK);
 		return resEntity;
+	}
+
+	// 아이디 찾기
+	@Override
+	@RequestMapping(value = "/member/fintId.do", method = RequestMethod.POST)
+	public ModelAndView findId(@ModelAttribute("member") MemberVO member) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String result = memberService.findId(member);
+		mav.addObject("findId", result);
+		mav.setViewName("redirect:/find_id.do");
+		return mav;
 	}
 
 	// 회원 가입
@@ -121,7 +129,7 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
-
+	
 	@RequestMapping(value = "/*.do", method = RequestMethod.GET)
 	public ModelAndView logout(@RequestParam(value = "result", required = false) String result, // 로그인 창 요청시 매개변수
 																								// result가 정송되면 변수
@@ -129,7 +137,7 @@ public class MemberControllerImpl implements MemberController {
 																								// 로그인창을 요청할 때는 매개변수
 																								// result가 전송되지 않으므로
 																								// 무시합니
-		HttpServletRequest request, HttpServletResponse response) throws Exception {
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = getViewName(request);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);

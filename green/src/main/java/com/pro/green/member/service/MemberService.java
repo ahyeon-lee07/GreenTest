@@ -10,5 +10,6 @@ public interface MemberService {
 	public int addMember(MemberVO memberVO) throws DataAccessException;
 	public String overlapped(String id) throws Exception;
 	public MemberVO login(MemberVO memberVO) throws Exception;
+	public String findId(MemberVO member) throws Exception;
 	 
 }

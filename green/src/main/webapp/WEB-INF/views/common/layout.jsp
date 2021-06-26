@@ -52,7 +52,6 @@ request.setCharacterEncoding("UTF-8");
 </head>
 
 <body>
-
 	<!-- 헤더 -->
 	<tiles:insertAttribute name="header" />
 	<!-- 메인 -->

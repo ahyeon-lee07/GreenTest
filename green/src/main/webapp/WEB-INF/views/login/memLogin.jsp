@@ -10,7 +10,7 @@ request.setCharacterEncoding("UTF-8");
 
 <!-- 로그인 실패시 알림  -->
 <c:choose>
-	<c:when test="${result == 'loginFailed' }">
+	<c:when test="${param.result == 'loginFailed' }">
 		<script>
 			window.onload = function(){
 				alert("입력한 정보가 일치 하지 안습니다. 다시 시도해 주세요!");
@@ -64,14 +64,14 @@ request.setCharacterEncoding("UTF-8");
                         </div>
                     </div>
                     <div class="d-flex bd-highlight justify-content-center py-2 border-top">
-                        <div class="bd-highlight">
-                            <a href="${contextPath}/find_id.do" class="btn">아이디 찾기</a>
+                        <div class="bd-highlight ">
+                            <a href="${contextPath}/find_id.do" class="btn text-primary">아이디 찾기</a>
                         </div>
                         <div class="bd-highlight ">
-                            <a href="${contextPath}/find_pw.do" class="btn">비밀번호 찾기</a>
+                            <a href="${contextPath}/find_pw.do" class="btn text-primary">비밀번호 찾기</a>
                         </div>
                         <div class="bd-highlight ">
-                            <a href="${contextPath}/join.do" class="btn">회원가입</a>
+                            <a href="${contextPath}/join.do" class="btn text-primary">회원가입</a>
                         </div>
                     </div>
                 </div>
