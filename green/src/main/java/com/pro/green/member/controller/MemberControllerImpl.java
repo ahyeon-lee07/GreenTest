@@ -61,6 +61,12 @@ public class MemberControllerImpl implements MemberController {
 		return "find_id";
 	}
 
+	// 비밀번호 찾기
+	@RequestMapping(value = "/find_pw.do", method = RequestMethod.GET)
+	public String find_pw(Locale locale, Model model) {
+		return "find_pw";
+	}
+
 	// 아이디체크
 	@Override
 	@RequestMapping(value = "/member/overlapped.do", method = RequestMethod.POST)
@@ -80,6 +86,17 @@ public class MemberControllerImpl implements MemberController {
 		String result = memberService.findId(member);
 		mav.addObject("findId", result);
 		mav.setViewName("redirect:/find_id.do");
+		return mav;
+	}
+
+	// 비밀번호 찾기
+	@Override
+	@RequestMapping(value = "/member/fintPw.do", method = RequestMethod.POST)
+	public ModelAndView findPw(@ModelAttribute("member") MemberVO member) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String result = memberService.findPw(member);
+		mav.addObject("findPw", result);
+		mav.setViewName("redirect:/find_pw.do");
 		return mav;
 	}
 
@@ -129,7 +146,7 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/*.do", method = RequestMethod.GET)
 	public ModelAndView logout(@RequestParam(value = "result", required = false) String result, // 로그인 창 요청시 매개변수
 																								// result가 정송되면 변수

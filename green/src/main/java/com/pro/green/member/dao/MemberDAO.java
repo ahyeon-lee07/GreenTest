@@ -11,4 +11,5 @@ public interface MemberDAO {
 	public String selectOverlappedID(String id) throws DataAccessException;
 	public MemberVO loginById(MemberVO memberVo)throws DataAccessException;
 	public String selectFindId(MemberVO memberVO) throws DataAccessException;
+	public String selectFindPw(MemberVO memberVO) throws DataAccessException;
 }

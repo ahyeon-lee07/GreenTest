@@ -20,22 +20,29 @@ public class MemberDAOImpl implements MemberDAO {
 		int result = sqlSession.insert("mapper.member.insertMember", memberVO);
 		return result;
 	}
-	
-	//아이디 중복 체크
+
+	// 아이디 중복 체크
 	@Override
 	public String selectOverlappedID(String id) throws DataAccessException {
-		String result =  sqlSession.selectOne("mapper.member.selectOverlappedID",id);
+		String result = sqlSession.selectOne("mapper.member.selectOverlappedID", id);
 		return result;
 	}
-	
-	//아이디 찾기
+
+	// 아이디 찾기
 	@Override
 	public String selectFindId(MemberVO memberVO) throws DataAccessException {
-		String result =  sqlSession.selectOne("mapper.member.selectFindId", memberVO);
+		String result = sqlSession.selectOne("mapper.member.selectFindId", memberVO);
 		return result;
 	}
-	
-	//로그인
+
+	// 비번 찾기
+	@Override
+	public String selectFindPw(MemberVO memberVO) throws DataAccessException {
+		String result = sqlSession.selectOne("mapper.member.selectFindPw", memberVO);
+		return result;
+	}
+
+	// 로그인
 	@Override
 	public MemberVO loginById(MemberVO memberVO) throws DataAccessException {
 		MemberVO vo = sqlSession.selectOne("mapper.member.loginById", memberVO);

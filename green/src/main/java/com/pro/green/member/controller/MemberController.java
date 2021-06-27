@@ -18,6 +18,7 @@ public interface MemberController {
 	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView findId(@ModelAttribute("member") MemberVO member) throws Exception;
+	public ModelAndView findPw(@ModelAttribute("member") MemberVO member) throws Exception;
 }
 
 

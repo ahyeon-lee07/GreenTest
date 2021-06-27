@@ -11,5 +11,6 @@ public interface MemberService {
 	public String overlapped(String id) throws Exception;
 	public MemberVO login(MemberVO memberVO) throws Exception;
 	public String findId(MemberVO member) throws Exception;
+	public String findPw(MemberVO member) throws Exception;
 	 
 }

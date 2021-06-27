@@ -55,7 +55,7 @@ request.setCharacterEncoding("UTF-8");
                                         <input id="inputName" class="form-control" name="name" type="text">
                                     </div>
                                 </div>
-                                <div class="bd-highlight d-flex flex-row mt-3 mt-4 mb-2">
+                                <div class="bd-highlight d-flex flex-row mt-4 mb-2">
                                     <label for="inputEmail" class="bd-highlight col-form-label font-weight-bold" style="width: 90px;">이메일</label>
                                     <div>
                                         <input id="inputEmail" class="form-control"  type="text">

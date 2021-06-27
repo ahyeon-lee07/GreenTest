@@ -11,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.pro.green.member.dao.MemberDAO;
 import com.pro.green.member.vo.MemberVO;
 
-
-
 @Service("memberService")
 @Transactional(propagation = Propagation.REQUIRED)
 public class MemberServiceImpl implements MemberService {
@@ -24,20 +22,26 @@ public class MemberServiceImpl implements MemberService {
 	public int addMember(MemberVO member) throws DataAccessException {
 		return memberDAO.insertMember(member);
 	}
-	
-	//아이디체크
+
+	// 아이디체크
 	@Override
-	public String overlapped(String id) throws Exception{
+	public String overlapped(String id) throws Exception {
 		return memberDAO.selectOverlappedID(id);
 	}
-	
-	//아아디찾기 
-	@Override 
+
+	// 아아디찾기
+	@Override
 	public String findId(MemberVO member) throws Exception {
 		return memberDAO.selectFindId(member);
 	}
-	
-	//로그인
+
+	// 비번찾기
+	@Override
+	public String findPw(MemberVO member) throws Exception {
+		return memberDAO.selectFindPw(member);
+	}
+
+	// 로그인
 	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception {
 		return memberDAO.loginById(memberVO);
