@@ -124,7 +124,6 @@
                                                 <a class="nav-link font-weight-bold text-dark p-3" href="${contextPath }/BudsCase.do">버즈 케이스</a>
                                             </div>
                                             <div class="bd-highlight btn_menu_L_W">
-                                            	<a class="nav-link font-weight-bold text-dark p-3" href="">액세서리</a>
                                                 <a class="nav-link font-weight-bold text-dark p-3" href="${contextPath }/Accessory.do">액세서리</a>
                                                 <a class="dropdown-item py-1 text-black-50" style="text-align: left;" href="${contextPath }/KeyRing.do">키링</a>
                                                 <a class="dropdown-item py-1 text-black-50" style="text-align: left;" href="${contextPath }/SmartTok.do">스마트톡</a>
