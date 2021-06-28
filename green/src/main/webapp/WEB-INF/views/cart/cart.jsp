@@ -28,7 +28,7 @@ request.setCharacterEncoding("UTF-8");
 
 		<div class="row" style="padding: 0 15px">
             <div class="col bg-light border rounded p-2">
-                일반상품 (
+                일반 상품 (
                 <span>1</span>
                 )
             </div>
@@ -43,11 +43,11 @@ request.setCharacterEncoding("UTF-8");
                         </div>
                     </th>
                     <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 120px">이미지</th>
-                    <th class="text-center border-bottom-0 border-top-0 px-2" style="width: auto">상품정보</th>
+                    <th class="text-center border-bottom-0 border-top-0 px-2" style="width: auto">상품 정보</th>
                     <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 76px">판매가</th>
                     <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 116px">수량</th>
                     <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 66px">적립금</th>
-                    <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 90px">배송구분</th>
+                    <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 90px">배송 구분</th>
                     <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 70px">배송비</th>
                     <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 80px">합계</th>
                     <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 114px">선택</th>
@@ -75,7 +75,7 @@ request.setCharacterEncoding("UTF-8");
                         <div class="d-flex flex-column bd-highlight px-2">
                             <div class="bd-highlight d-flex">
                                 <div class="flex-grow bd-highlight pr-2">
-                                <input type="number" class="form-control" id="inputnumber" min="0" max="99">
+                                <input type="number" class="form-control" id="inputnumber" step="1" value="1" min="1" max="99">
                                 </div>
                             </div>
                             <div class="bd-highlight mt-1"><button type="button" class="btn btn-outline-secondary btn-sm" style="font-size: .6rem">변경</button></div>
@@ -92,10 +92,10 @@ request.setCharacterEncoding("UTF-8");
                         </div>
                         <div class="bd-highlight my-1">
                         	<a href="${contextPath}/wist_list.do">
-                            <button type="button" class="btn btn-outline-success btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">관심상품등록</button></a>
+                            <button type="button" class="btn btn-outline-success btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">관심상품 등록</button></a>
                         </div>
                         <div class="bd-highlight">
-                        	<a href="#">
+                        	<a href="${contextPath}/cart.do">
                             <button type="button" class="btn btn-outline-danger btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">삭제</button></a>
                         </div>
                     </td>
@@ -106,8 +106,8 @@ request.setCharacterEncoding("UTF-8");
         <div class="row" style="padding: 0 15px">
             <div class="col bg-light border rounded p-2">
                 <div class="d-flex justify-content-between">
-                    <div class="bd-highlight">[기본배송]</div>
-                    <div class="bd-highlight">상품구매금액(<span>1,000</span>)+배송비(<span>1,000</span>)-상품할인금액(<span>1,000</span>)=합계:(<span>1,000</span>)원
+                    <div class="bd-highlight">[기본 배송]</div>
+                    <div class="bd-highlight">상품 구매금액(<span>1,000</span>)+배송비(<span>1,000</span>)-상품 할인금액(<span>1,000</span>)=합계:(<span>1,000</span>)원
                     </div>
                 </div>
             </div>
@@ -139,7 +139,7 @@ request.setCharacterEncoding("UTF-8");
                     <div class="col-3 border border-left-0">
                         <div class="row text-center bg-light p-3 border-bottom" style="height: 57px;">
                             <div class="col">총 할인금액
-                                <button type="button" class="btn btn-outline-secondary btn-sm ml-1">내역보기</button>
+                                <button type="button" class="btn btn-outline-secondary btn-sm ml-1">내역 보기</button>
                             </div>
                          </div>
                          <div class="row text-center font-weight-bold p-4">
@@ -181,7 +181,7 @@ request.setCharacterEncoding("UTF-8");
         <div class="row my-5" style="padding: 0 15px">
             <div class="col border">
                 <div class="row py-2 bg-light border-bottom">
-                    <div class="col">이용안내</div>
+                    <div class="col">이용 안내</div>
                 </div>
                 <div class="row">
                     <div class="col pb-4">
