@@ -14,4 +14,5 @@ public interface MemberDAO {
 	public String selectFindPw(MemberVO memberVO) throws DataAccessException;
 	public String selectPwChk(MemberVO memberVO) throws DataAccessException;
 	public int memberDelete(MemberVO member);
+	public int editMember(MemberVO member) throws DataAccessException;
 }

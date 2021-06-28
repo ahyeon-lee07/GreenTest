@@ -21,6 +21,13 @@ request.setCharacterEncoding("UTF-8");
 			}
 		</script>
 	</c:when>
+	<c:when test="${param.joinMas != null }">
+		<script>
+			window.onload = function () {
+				alert("${param.joinMas}" );
+			}
+		</script>
+	</c:when>
 </c:choose>
 
 <!-- 메인 -->

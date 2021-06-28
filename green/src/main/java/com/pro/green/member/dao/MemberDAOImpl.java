@@ -61,5 +61,11 @@ public class MemberDAOImpl implements MemberDAO {
 		int result = sqlSession.delete("mapper.member.memeberDelete", member);
 		return result;
 	}
+	
+	//회원 수정
+	public int editMember(MemberVO member) throws DataAccessException {
+		int result = sqlSession.update("mapper.member.editMember", member);
+		return result;
+	}
 
 }

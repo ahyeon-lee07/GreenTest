@@ -72,4 +72,11 @@
 		]]>      
 	</insert>
 	
+	<!-- 회원정보 수정 -->
+	<insert id="editMember"  parameterType="memberVO">
+		<![CDATA[
+		  UPDATE member SET pw=#{pw}, name=#{name}, birth=#{birth}, phone=#{phone}, zipCode=#{zipCode}, addr1=#{addr1}, addr2=#{addr2}, addr3=#{addr3}, email1=#{email1}, email2=#{email2} WHERE id=#{id};
+		]]>      
+	</insert>
+	
 </mapper>

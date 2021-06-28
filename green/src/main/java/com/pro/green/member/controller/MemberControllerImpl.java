@@ -150,6 +150,29 @@ public class MemberControllerImpl implements MemberController {
 		;
 		return mav;
 	}
+	
+	// 회원정보 수정
+	@Override
+	@RequestMapping(value ="/member/memberEdit.do", method = RequestMethod.POST)
+	public ModelAndView memberEditOk(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+		String sessinChk = (String) session.getAttribute("joinOk");
+		
+		int result = memberService.editMember(member);
+		if(result == 0) {
+			mav.addObject("EditMas", "회원 정보 수정에 실패하였습니다. 다시 시도해 주세요.");
+			session.removeAttribute("member");
+			session.setAttribute("member", member);
+			mav.setViewName("redirect:/main.do");
+		}else {
+			mav.addObject("EditMas", "회원 정보 수정이 완료 되었습니다.");
+			mav.setViewName("redirect:/main.do");
+		}
+		return mav;
+	}
 
 	// 회원 가입
 	@Override
@@ -158,9 +181,15 @@ public class MemberControllerImpl implements MemberController {
 			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
+		ModelAndView mav = new ModelAndView();
 		int result = 0;
 		result = memberService.addMember(member);
-		ModelAndView mav = new ModelAndView("redirect:/main.do");
+		if(result == 0) {
+			mav.addObject("joinMas", "회원 가입에 실패 했습니다. 다시 시도해 주세요.");
+		}else {
+			mav.addObject("joinMas", "가입해 주셨어 감사합니다.");
+		}
+		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
 
