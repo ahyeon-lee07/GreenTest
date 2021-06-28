@@ -158,17 +158,18 @@ public class MemberControllerImpl implements MemberController {
 			HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
-		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
-		String sessinChk = (String) session.getAttribute("joinOk");
+		//MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+		//String sessinChk = (String) session.getAttribute("joinOk");
 		
 		int result = memberService.editMember(member);
+		memberVO = memberService.login(member);
 		if(result == 0) {
-			mav.addObject("EditMas", "회원 정보 수정에 실패하였습니다. 다시 시도해 주세요.");
-			session.removeAttribute("member");
-			session.setAttribute("member", member);
+			mav.addObject("joinMas", "회원 정보 수정에 실패하였습니다. 다시 시도해 주세요.");
 			mav.setViewName("redirect:/main.do");
 		}else {
-			mav.addObject("EditMas", "회원 정보 수정이 완료 되었습니다.");
+			mav.addObject("joinMas", "회원 정보 수정이 완료 되었습니다.");
+			session.setAttribute("member", memberVO); // 세션에 회원 정보를 저장
+			session.setAttribute("isLogOn", true); // 세션에 로그인 상태를 true로 설정
 			mav.setViewName("redirect:/main.do");
 		}
 		return mav;
@@ -189,7 +190,7 @@ public class MemberControllerImpl implements MemberController {
 		}else {
 			mav.addObject("joinMas", "가입해 주셨어 감사합니다.");
 		}
-		mav.setViewName("redirect:/main.do");
+		mav.setViewName("/main.do");
 		return mav;
 	}
 

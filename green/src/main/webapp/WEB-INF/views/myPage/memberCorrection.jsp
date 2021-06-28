@@ -280,25 +280,27 @@
 
 							//영문 한글 공백 허용
 							var nameExp = document.getElementById('inputName').value.search(/^[ㄱ-ㅎ|가-힣|a-z|A-Z|]*$/);
-							pwExp = '${member.pw}';
-
-							if (pwExp.search(/\s/) != -1) {
-								alert("비밀번호는 공백 없이 입력해주세요.");
-								form.pw.focus();
-								return false;
-							} else if ((num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0)) {
-								alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
-								form.pw.focus();
-								return false;
-							} else if (form.re_pw.value == "") {
-								alert("비밀번호 확인을 입력해주세요!");
-								form.re_pw.focus();
-								return false;
-							} else if (form.pw.value != form.re_pw.value) {
-								alert("비밀번호를 확인해주세요!");
-								form.pw.focus();
-								return false;
-							} else if (form.name.value == "") {
+							
+							if(pwExp != ''){
+								if (pwExp.search(/\s/) != -1) {
+									alert("비밀번호는 공백 없이 입력해주세요.");
+									form.pw.focus();
+									return false;
+								} else if ((num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0)) {
+									alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
+									form.pw.focus();
+									return false;
+								} else if (form.re_pw.value == "") {
+									alert("비밀번호 확인을 입력해주세요!");
+									form.re_pw.focus();
+									return false;
+								} else if (form.pw.value != form.re_pw.value) {
+									alert("비밀번호를 확인해주세요!");
+									form.pw.focus();
+									return false;
+								}
+							}
+							if (form.name.value == "") {
 								alert("이름을 입력해주세요!");
 								form.name.focus();
 								return false;
@@ -316,70 +318,16 @@
 								return false;
 							} else {
 								if (confirm("입력한 내용을 정보를 변경하기겠습니까? ") == true) {
+									if (pwExp == '') {
+										document.getElementById('Password').value = '${member.pw}';
+									};
 									form.action = "${contextPath}/member/memberEdit.do";
 									form.submit();
 								} else {
 									return;
 								}
 							}
-
-
 						});
-
-						//유효성 검사
-						// function checkLogin() {
-						// 	var form = document.memberEdit;
-						// 	//영문,숫자,특수문자 혼합하여 10자리~16자리 이내.(비밀번호 표준)
-						// 	var pwExp = document.getElementById('Password').value;
-						// 	var num = pwExp.search(/[0-9]/g);
-						// 	var eng = pwExp.search(/[a-z]/ig);
-						// 	var spe = pwExp.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
-
-						// 	//영문 한글 공백 허용
-						// 	var nameExp = document.getElementById('inputName').value.search(/^[ㄱ-ㅎ|가-힣|a-z|A-Z|]*$/);
-
-						// 	if (pwExp == null) {
-						// 		pwExp = '${member.pw}';
-						// 	} else if (pwExp != null) {
-						// 		if (pwExp.search(/\s/) != -1) {
-						// 			alert("비밀번호는 공백 없이 입력해주세요.");
-						// 			form.pw.focus();
-						// 			return false;
-						// 		} else if ((num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0)) {
-						// 			alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
-						// 			form.pw.focus();
-						// 			return false;
-						// 		} else if (form.re_pw.value == "") {
-						// 			alert("비밀번호 확인을 입력해주세요!");
-						// 			form.re_pw.focus();
-						// 			return false;
-						// 		} else if (form.pw.value != form.re_pw.value) {
-						// 			alert("비밀번호를 확인해주세요!");
-						// 			form.pw.focus();
-						// 			return false;
-						// 		}
-						// 	} else if (form.name.value == "") {
-						// 		alert("이름을 입력해주세요!");
-						// 		form.name.focus();
-						// 		return false;
-						// 	} else if (nameExp) {
-						// 		alert("이름에 숫자는 입력 할수 없습니다.");
-						// 		form.name.focus();
-						// 		return false;
-						// 	} else if (form.addr1.value == "" || form.addr2.value == "" || form.addr3.value == "") {
-						// 		alert("주소을 입력해주세요!");
-						// 		form.addr1.focus();
-						// 		return false;
-						// 	} else if (form.phone.value == "") {
-						// 		alert("휴대전화를 입력해주세요!");
-						// 		form.phone.focus();
-						// 		return false;
-						// 	} else {
-						// 		form.action = "${contextPath}/member/memberEdit.do";
-						// 		form.submit();
-						// 	}
-						// }
-
 
 						//멘버 삭제
 						document.getElementById('btn_memberDelete').addEventListener('click', function () {
