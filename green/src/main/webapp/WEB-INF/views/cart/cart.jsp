@@ -71,7 +71,7 @@ request.setCharacterEncoding("UTF-8");
                             [옵션: 2. 옐로우/아이폰6(s)]
                         </div>
                     </td>
-                    <td class="text-center align-middle px-2">12,000</td>
+                    <td class="text-center align-middle px-1">12,000원</td>
                     <td class="text-center align-middle px-2">
                         <div class="d-flex flex-column bd-highlight px-2">
                             <div class="bd-highlight d-flex">
@@ -83,9 +83,9 @@ request.setCharacterEncoding("UTF-8");
                           </div>
                     </td>
                     <td class="text-center align-middle px-2" style="font-size: .8rem;">150</td>
-                    <td class="text-center align-middle px-2">기본배송</td>
+                    <td class="text-center align-middle px-2">기본 배송</td>
                     <td class="text-center align-middle px-2">2,000원</td>
-                    <td class="text-center align-middle px-2">13,000원</td>
+                    <td class="text-center align-middle px-2">11,000원</td>
                     <td class="text-center align-middle px-2 d-flex flex-column">
                         <div class="bd-highlight">
                         	<a class="btn btn-sm btn-outline-success" href="${contextPath}/orderList.do"
@@ -108,7 +108,7 @@ request.setCharacterEncoding("UTF-8");
             <div class="col bg-light border rounded p-2">
                 <div class="d-flex justify-content-between">
                     <div class="bd-highlight">[기본 배송]</div>
-                    <div class="bd-highlight">상품 구매금액(<span>1,000</span>)+배송비(<span>1,000</span>)-상품 할인금액(<span>1,000</span>)=합계:(<span>1,000</span>)원
+                    <div class="bd-highlight">상품 구매금액(<span>12,000</span>)+배송비(<span>2,000</span>)-상품 할인금액(<span>3,000</span>)=합계:(<span>11,000</span>)원
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@ request.setCharacterEncoding("UTF-8");
                         </div>
                         <div class="row text-center font-weight-bold p-4">
                             <div class="col">
-                                <span>1,000</span> 원
+                                <span>12,000</span> 원
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@ request.setCharacterEncoding("UTF-8");
                          </div>
                          <div class="row text-center font-weight-bold p-4">
                              <div class="col">
-                                 + <span>1,000</span> 원
+                                 + <span>2,000</span> 원
                              </div>
                          </div>
                     </div>
@@ -145,7 +145,7 @@ request.setCharacterEncoding("UTF-8");
                          </div>
                          <div class="row text-center font-weight-bold p-4">
                              <div class="col">
-                                 - <span>1,000</span> 원
+                                 - <span>3,000</span> 원
                              </div>
                          </div>
                     </div>
@@ -155,7 +155,7 @@ request.setCharacterEncoding("UTF-8");
                          </div>
                          <div class="row text-center font-weight-bold p-4">
                              <div class="col">
-                                 = <span>1,000</span> 원
+                                 = <span>11,000</span> 원
                              </div>
                          </div>
                     </div>
