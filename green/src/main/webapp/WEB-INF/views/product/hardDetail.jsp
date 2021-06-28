@@ -355,9 +355,15 @@ request.setCharacterEncoding("UTF-8");
 				</div>
 			</div>
 			<div class="tab-pane fade" id="nav-contact1" role="tabpanel"
-				aria-labelledby="nav-contact-tab1">REVIEW</div>
+				aria-labelledby="nav-contact-tab1">
+				<iframe src="http://localhost:8080/green/review.do" width="90%" name="review" 
+				height="90%" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto"></iframe>
+			</div>
 			<div class="tab-pane fade" id="nav-contact2" role="tabpanel"
-				aria-labelledby="nav-contact-tab2">Q&A</div>
+				aria-labelledby="nav-contact-tab2">
+				<iframe src="http://localhost:8080/green/product.do" width="90%" name="review" 
+				height="90%" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto"></iframe>
+			</div>
 	</div>
 	</div>
 </main>

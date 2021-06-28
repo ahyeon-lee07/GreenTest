@@ -26,7 +26,7 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 		</div>
 
-		<!-- 국내배송상품 주문내역 -->
+		<!-- 국내 배송상품 주문내역 -->
         <div class="row my-4" style="padding: 0 15px">
             <div class="col">
                 <div class="row">
@@ -47,10 +47,10 @@ request.setCharacterEncoding("UTF-8");
             </div>
         </div>
 
-        <!-- 국내배송상품 주문내역 -->
+        <!-- 국내 배송상품 주문내역 -->
         <table class="table table-hover border-top m-0">
             <div class="bd-highlight my-3">
-                <h6 class="font-weight-bold">국내배송상품 주문내역</h6>
+                <h6 class="font-weight-bold">국내 배송상품 주문내역</h6>
             </div>
             <thead class=" border-bottom-0">
                 <tr>
@@ -60,11 +60,11 @@ request.setCharacterEncoding("UTF-8");
                         </div>
                     </th>
                     <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 120px">이미지</th>
-                    <th class="text-center border-bottom-0 border-top-0 px-2" style="width: auto">상품정보</th>
+                    <th class="text-center border-bottom-0 border-top-0 px-2" style="width: auto">상품 정보</th>
                     <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 76px">판매가</th>
                     <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 116px">수량</th>
                     <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 66px">적립금</th>
-                    <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 90px">배송구분</th>
+                    <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 90px">배송 구분</th>
                     <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 70px">배송비</th>
                     <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 80px">합계</th>
                 </tr>
@@ -80,7 +80,8 @@ request.setCharacterEncoding("UTF-8");
                             class="img-thumbnail" alt="#"></td>
                     <td class="align-middle pl-3">
                         <div class="row font-weight-bold pb-1">
-                            컬러칩 케이스
+                        <a href="${contextPath }/HardCaseDetail.do" style="color: black">
+                            컬러칩 케이스</a>
                         </div>
                         <div class="row" style="font-size: .8rem;">
                             [옵션: 2. 옐로우/아이폰6(s)]
@@ -90,8 +91,8 @@ request.setCharacterEncoding("UTF-8");
                     <td class="text-center align-middle px-2">
                         <div class="d-flex flex-column bd-highlight px-2">
                             <div class="bd-highlight d-flex">
-                                <div class="flex-grow bd-highlight pr-2">
-                                <input type="number" class="form-control" id="inputnumber" min="0" max="99">
+                                <div class="flex-grow bd-highlight pr-3">
+                                <input type="number" class="form-control" id="inputnumber" step="1" value="1" min="1" max="99">
                                 </div>
                                 </div>
                             </div>
@@ -101,9 +102,9 @@ request.setCharacterEncoding("UTF-8");
                         </div>
                     </td>
                     <td class="text-center align-middle px-2" style="font-size: .8rem;">150</td>
-                    <td class="text-center align-middle px-2">기본배송</td>
+                    <td class="text-center align-middle px-2">기본 배송</td>
                     <td class="text-center align-middle px-2">2,000원</td>
-                    <td class="text-center align-middle px-2">13,000원</td>
+                    <td class="text-center align-middle px-2">11,000원</td>
                 </tr>
             </tbody>
         </table>
@@ -111,9 +112,9 @@ request.setCharacterEncoding("UTF-8");
         <div class="row" style="padding: 0 15px">
             <div class="col bg-light border rounded p-2">
                 <div class="d-flex justify-content-between">
-                    <div class="bd-highlight">[기본배송]</div>
+                    <div class="bd-highlight">[기본 배송]</div>
                     <div class="bd-highlight">
-                        상품구매금액(<span>1,000</span>)+배송비(<span>1,000</span>)-상품할인금액(<span>1,000</span>)=합계:(<span>1,000</span>)원
+                        상품 구매금액(<span>12,000</span>)+배송비(<span>2,000</span>)-상품 할인금액(<span>3,000</span>)=합계:(<span>11,000</span>)원
                     </div>
                 </div>
             </div>
@@ -122,17 +123,18 @@ request.setCharacterEncoding("UTF-8");
         <div class="row mt-4 mb-5">
             <div class="col">
                 <div class="d-flex bd-highlight align-items-center">
-                    <div class="bd-highlight font-weight-bold mr-1 align-items-center">선택상품을</div>
+                    <div class="bd-highlight font-weight-bold mr-1 align-items-center">선택 상품을</div>
                     <div class="bd-highlight flex-grow-1">
                         <div class="d-flex justify-content-between bd-highlight">
                             <div class="bd-highlight d-flex flex-row">
                                 <div class="p-1 bd-highlight">
-                                    <button type="button" class="btn btn-outline-secondary">삭제하기</button>
+                                	<a href="${contextPath }/orderList.do">
+                                    <button type="button" class="btn btn-outline-danger">삭제하기</button></a>
                                 </div>
                             </div>
                             <div class="bd-highlight d-flex flex-row">
                                 <div class="p-1 bd-highright">
-                                    <button type="button" class="btn btn-outline-secondary">이전페이지</button>
+                                    <button type="button" class="btn btn-outline-secondary">이전 페이지</button>
                                 </div>
                             </div>
                         </div>
@@ -236,7 +238,7 @@ request.setCharacterEncoding("UTF-8");
                                 <label for="inputUser" class="bd-highlight col-form-label pl-2"
                                     style="width: 120px;"><img src="${contextPath }/resources/img/require.png">휴대전화</label>
                                 <div class="flex-grow bd-highlight pr-2">
-                                    <input type="email" class="form-control" id="inputUser">
+                                    <input type="email" class="form-control" id="inputUser" placeholder="'-' 없이 입력해주세요.">
                                 </div>
                             </div>
                         </div>
@@ -251,11 +253,11 @@ request.setCharacterEncoding("UTF-8");
                                     <div class="flex-grow-1 bd-highlight pr-2">
                                         <div class="d-flex flex-row">
                                             <input type="email" class="form-control" id="inputEmail"
-                                                style="width: 260px;">
+                                                style="width: 150px;">
                                             <div class="p-2">
                                                 @
                                             </div>
-                                            <select id="inputState" class="form-control" style="width: 200px;">
+                                            <select id="inputState" class="form-control" style="width: 140px;">
                                                 <option value="none" selected>선택</option>
 												<option value="네이버">naver.com</option>
 												<option value="다음">hanmail.net</option>
@@ -279,10 +281,10 @@ request.setCharacterEncoding("UTF-8");
                         <div class="col p-0">
                             <div class="d-flex bd-highlight">
                                 <label for="inputUser" class="bd-highlight col-form-label pl-2"
-                                    style="width: 120px;">배송메시지</label>
+                                    style="width: 120px;">배송 메시지</label>
                                 <div class="flex-grow bd-highlight pr-2" style="width: 86%;">
                                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                        placeholder="20자 이내로 입력해주세요"></textarea>
+                                        placeholder="20자 이내로 입력해주세요."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -330,7 +332,7 @@ request.setCharacterEncoding("UTF-8");
 
                             <div class="p-2 bd-highlight d-flex flex-row pm-3" style="font-size: .8rem;">
                                 <div class="bd-highlight font-weight-bold mr-2" style="width: 106px;">비회원 구매 시 <br>
-                                    개인정보수집 <br>이용동의</div>
+                                    개인정보 수집 <br>이용 동의</div>
                                 <div class="bd-highlight flex-grow-1 flex-column">
                                     <div class="bd-highlight">
                                         <div class="flex-grow bd-highlight" style="width: 100%;">
@@ -367,12 +369,12 @@ request.setCharacterEncoding("UTF-8");
                                 <div class="col">
                                     총 주문 금액
                                     <button type="button" class="btn btn-outline-secondary btn-sm"
-                                        style="font-size: .6rem">내역보기</button>
+                                        style="font-size: .6rem">내역 보기</button>
                                 </div>
                             </div>
                             <div class="row py-3">
                                 <div class="col">
-                                    <span class="font-weight-bold" style="font-size: 1.5rem;">18,000 </span>원
+                                    <span class="font-weight-bold" style="font-size: 1.5rem;">12,000 </span>원
                                 </div>
                             </div>
                         </div>
@@ -384,43 +386,43 @@ request.setCharacterEncoding("UTF-8");
                             </div>
                             <div class="row py-3">
                                 <div class="col">
-                                    -<span class="font-weight-bold" style="font-size: 1.5rem;">18,000 </span>원
+                                    -<span class="font-weight-bold" style="font-size: 1.5rem;">1,000 </span>원
                                 </div>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="row py-2 bg-light border-bottom">
                                 <div class="col">
-                                    총 결제예정 금액
+                                    총 결제 예정 금액
                                 </div>
                             </div>
                             <div class="row py-3">
                                 <div class="col">
-                                    =<span class="font-weight-bold" style="font-size: 1.5rem;">18,000 </span>원
+                                    =<span class="font-weight-bold" style="font-size: 1.5rem;">11,000 </span>원
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row border border-top-0" style="font-size: .9rem">
-                        <div class="col-2 bg-light py-2 border-right font-weight-bold">총 할인금액</div>
-                        <div class="col-10 py-2">5,100원</div>
+                        <div class="col-2 bg-light py-2 border-right font-weight-bold">총 할인 금액</div>
+                        <div class="col-10 py-2">3,000원</div>
                     </div>
                     <div class="row border border-top-0" style="font-size: .9rem">
-                        <div class="col-2 bg-light py-2 border-right font-weight-bold">추가할인금액</div>
-                        <div class="col-10 py-2">5,100원
+                        <div class="col-2 bg-light py-2 border-right font-weight-bold">추가 할인 금액</div>
+                        <div class="col-10 py-2">0원
                             <button type="button" class="btn btn-outline-secondary btn-sm ml-4"
-                                style="font-size: .6rem">내역보기</button>
+                                style="font-size: .6rem">내역 보기</button>
                         </div>
                     </div>
                     <div class="row border rounded-bottom border-top-0" style="font-size: .9rem">
-                        <div class="col-2 bg-light py-2 border-right font-weight-bold">총 부가결제금액</div>
-                        <div class="col-10 py-2">5,100원</div>
+                        <div class="col-2 bg-light py-2 border-right font-weight-bold">총 부가 결제 금액</div>
+                        <div class="col-10 py-2">2,000원</div>
                     </div>
 
-                    <!-- 결제수단 -->
+                    <!-- 결제 수단 -->
                     <div class="row">
                         <div class="col mt-4 mb-1 p-0">
-                            <h6 class="font-weight-bold">결제수단</h6>
+                            <h6 class="font-weight-bold">결제 수단</h6>
                         </div>
                     </div>
                     <div class="row border rounded">
@@ -430,7 +432,7 @@ request.setCharacterEncoding("UTF-8");
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="customRadioInline1" name="customRadioInline1"
                                             class="custom-control-input">
-                                        <label class="custom-control-label" for="customRadioInline1">카드결제</label>
+                                        <label class="custom-control-label" for="customRadioInline1">카드 결제</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="customRadioInline2" name="customRadioInline1"
@@ -460,12 +462,12 @@ request.setCharacterEncoding("UTF-8");
                             </div>
                             <div class="row text-danger">
                                 <div class="col">
-                                    <span class="font-weight-bold" style="font-size: 1.8rem;">12,900</span> 원
+                                    <span class="font-weight-bold" style="font-size: 1.8rem;">11,000</span> 원
                                 </div>
                             </div>
                             <div class="row mt-3 mb-3">
                                 <div class="col">
-                                    <button type="button" class="btn btn-dark btn-block">결제하기</button>
+                                    <button type="button" class="btn btn-outline-success btn-block">결제하기</button>
                                 </div>
                             </div>
                         </div>
