@@ -33,18 +33,23 @@
                             <li class="nav-item mr-3">
                                 <a class="nav-link text-secondary" href="${contextPath }/cart.do">장바구니</a>
                             </li>
-                            <li class="nav-item dropdown mr-3">
-                                <a class="nav-link text-secondary" href="#" id="navbarDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    마이페이지
-                                </a>
-                                <div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
-                                	<a class="dropdown-item" href="${contextPath }/myPage.do">마이페이지</a>
-                                    <a class="dropdown-item" href="${contextPath }/memberEdit.do">회원정보 수정/탈퇴</a>
-                                    <a class="dropdown-item" href="${contextPath }/purchaseList.do">구매내역조회</a>
-                                    <a class="dropdown-item" href="${contextPath }/wist_list.do">관심상품내역조회</a>
-                                </div>
-                            </li>
+                            <c:choose>
+                            	<c:when test="${isLogOn == true && member != null }">
+                                    <li class="nav-item dropdown mr-3">
+                                        <a class="nav-link text-secondary" href="#" id="navbarDropdown" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            마이페이지
+                                        </a>
+                                        <div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="${contextPath }/myPage.do">마이페이지</a>
+                                            <a class="dropdown-item" href="${contextPath }/memberEdit.do">회원정보 수정/탈퇴</a>
+                                            <a class="dropdown-item" href="${contextPath }/purchaseList.do">구매내역조회</a>
+                                            <a class="dropdown-item" href="${contextPath }/wist_list.do">관심상품내역조회</a>
+                                        </div>
+                                    </li>
+                            	</c:when>
+                            </c:choose>
+                            
                             <li class="nav-item dropdown mr-3">
                                 <a class="nav-link text-secondary" href="#" id="navbarDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
