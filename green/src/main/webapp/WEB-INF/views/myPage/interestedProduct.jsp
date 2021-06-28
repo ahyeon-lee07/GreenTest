@@ -14,13 +14,13 @@ request.setCharacterEncoding("UTF-8");
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
-				<h4>관심상품내역 조회</h4>
+				<h4>관심상품 내역조회</h4>
 			</div>
 			<div class="bd-highlight">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb p-0 bg bg-transparent">
 						<li class="breadcrumb-item"><a href="${contextPath }/main.do">홈</a></li>
-						<li class="breadcrumb-item active" aria-current="page">관심상품내역 조회</li>
+						<li class="breadcrumb-item active" aria-current="page">관심상품 내역조회</li>
 					</ol>
 				</nav>
 			</div>
@@ -31,7 +31,7 @@ request.setCharacterEncoding("UTF-8");
 
             <div class="row" style="padding: 0 15px">
                 <div class="col bg-light border rounded p-2">
-                    일반상품 (
+                    일반 상품 (
                     <span>1</span>
                     )
                 </div>
@@ -46,11 +46,11 @@ request.setCharacterEncoding("UTF-8");
                             </div>
                         </th>
                         <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 120px">이미지</th>
-                        <th class="text-center border-bottom-0 border-top-0 px-2" style="width: auto">상품정보</th>
+                        <th class="text-center border-bottom-0 border-top-0 px-2" style="width: auto">상품 정보</th>
                         <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 76px">판매가</th>
                         <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 116px">수량</th>
                         <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 66px">적립금</th>
-                        <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 90px">배송구분</th>
+                        <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 90px">배송 구분</th>
                         <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 70px">배송비</th>
                         <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 80px">합계</th>
                         <th class="text-center border-bottom-0 border-top-0 px-2" style="width: 114px">선택</th>
@@ -86,18 +86,19 @@ request.setCharacterEncoding("UTF-8");
                               </div>
                         </td>
                         <td class="text-center align-middle px-2" style="font-size: .8rem;">150</td>
-                        <td class="text-center align-middle px-2">기본배송</td>
+                        <td class="text-center align-middle px-2">기본 배송</td>
                         <td class="text-center align-middle px-2">2,000원</td>
                         <td class="text-center align-middle px-2">13,000원</td>
                         <td class="text-center align-middle px-2 d-flex flex-column">
                             <div class="bd-highlight">
-                                <button type="button" class="btn btn-primary btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">주문하기</button>
+                            	<a href="${contextPath }/orderList.do">
+                                <button type="button" class="btn btn-outline-success btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">주문하기</button></a>
                             </div>
-                            <div class="bd-highlight my-1">
-                                <button type="button" class="btn btn-outline-secondary btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">관심상품등록</button>
-                            </div>
+                            <br>
+                            <br>
                             <div class="bd-highlight">
-                                <button type="button" class="btn btn-outline-secondary btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">삭제</button>
+                            	<a href="${contextPath }/wist_list.do">
+                                <button type="button" class="btn btn-outline-danger btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">삭제</button></a>
                             </div>
                         </td>
                     </tr>
@@ -107,23 +108,26 @@ request.setCharacterEncoding("UTF-8");
             <div class="row mt-4 mb-5">
                 <div class="col">
                     <div class="d-flex bd-highlight align-items-center">
-                        <div class="bd-highlight font-weight-bold mr-1 align-items-center">선택상품을</div>
+                        <div class="bd-highlight font-weight-bold mr-1 align-items-center">선택 상품을</div>
                         <div class="bd-highlight flex-grow-1">
                             <div class="d-flex justify-content-between bd-highlight">
                                 <div class="bd-highlight d-flex flex-row">
                                         <div class="p-1 bd-highlight">
-                                            <button type="button" class="btn btn-outline-secondary">삭제하기</button>
+                                            <a href="${contextPath }/wist_list.do">
+                                            <button type="button" class="btn btn-outline-danger">삭제하기</button></a>
                                         </div>
                                         <div class="p-1 bd-highlight">
-                                            <button type="button" class="btn btn-outline-secondary">장바구니 담기</button>
+                                        	<a href="${contextPath }/cart.do">
+                                            <button type="button" class="btn btn-outline-secondary">장바구니 담기</button></a>
                                         </div>
                                 </div>
                                 <div class="bd-highlight d-flex flex-row">
                                     <div class="p-1 bd-highright">
-                                        <button type="button" class="btn btn-outline-secondary">관심상품 비우기</button>
+                                        <button type="button" class="btn btn-outline-danger">관심상품 비우기</button>
                                     </div>
                                     <div class="p-1 bd-highright">
-                                        <button type="button" class="btn btn-primary">전체상품 주문</button>
+                                    	<a href="${contextPath }/orderList.do">
+                                        <button type="button" class="btn btn-outline-success">전체 상품주문</button></a>
                                     </div>
                                 </div>
                               </div>
