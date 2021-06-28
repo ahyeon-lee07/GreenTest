@@ -22,6 +22,7 @@ public interface MemberController {
 	public ModelAndView memberPwChk(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr, HttpServletRequest request) throws Exception;
 	public ModelAndView memberEdit(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView memberDelete(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView memberEditOk(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
 
 
