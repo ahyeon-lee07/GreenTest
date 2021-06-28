@@ -43,8 +43,8 @@
                                         <div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="${contextPath }/myPage.do">마이페이지</a>
                                             <a class="dropdown-item" href="${contextPath }/memberEdit.do">회원정보 수정/탈퇴</a>
-                                            <a class="dropdown-item" href="${contextPath }/purchaseList.do">구매내역조회</a>
-                                            <a class="dropdown-item" href="${contextPath }/wist_list.do">관심상품내역조회</a>
+                                            <a class="dropdown-item" href="${contextPath }/purchaseList.do">구매 내역조회</a>
+                                            <a class="dropdown-item" href="${contextPath }/wist_list.do">관심상품 내역조회</a>
                                         </div>
                                     </li>
                             	</c:when>
@@ -58,7 +58,7 @@
                                 <div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="${contextPath }/product.do">Q&A</a>
                                     <a class="dropdown-item" href="${contextPath }/notice.do">공지사항</a>
-                                    <a class="dropdown-item" href="${contextPath }/event.do">이벤트게시판</a>
+                                    <a class="dropdown-item" href="${contextPath }/event.do">이벤트 게시판</a>
                                     <a class="dropdown-item" href="${contextPath }/review.do">리뷰</a>
                                 </div>
                             </li>
@@ -78,7 +78,7 @@
                     <!-- 탑 검색 -->
                     <div class="top_find bd-highlight">
                         <form class="form-inline border rounded">
-                            <input class="form-control border-0" type="text" placeholder="Search" aria-label="Search">
+                            <input class="form-control border-0" type="text" placeholder="검색" aria-label="Search">
                             <button class="btn btn-outline-success border-0 btn_search" type="submit"></button>
                         </form>
                     </div>
@@ -88,8 +88,10 @@
 
         <!--　로고 -->
         <div id="logoBox" class="border-bottom logoBox">
-        <a href="${contextPath }/main.do">
-            <img class="d-block mx-auto mt-4" src="${contextPath}/resources/img/logo.png" alt="그린케이스"></a>
+        	<p style="text-align: center; padding:20px 0px;">
+        	<a href="${contextPath }/main.do">
+            <img src="${contextPath}/resources/img/logo.png" alt="그린케이스" /></a>
+            </p>
         </div>
 
         <!-- gnb -->
