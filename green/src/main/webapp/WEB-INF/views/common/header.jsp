@@ -42,7 +42,7 @@
                                         </a>
                                         <div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="${contextPath }/myPage.do">마이페이지</a>
-                                            <a class="dropdown-item" href="${contextPath }/memberEdit.do">회원정보 수정/탈퇴</a>
+                                            <a class="dropdown-item" href="${contextPath }/memberEditChk.do">회원정보 수정/탈퇴</a>
                                             <a class="dropdown-item" href="${contextPath }/purchaseList.do">구매내역조회</a>
                                             <a class="dropdown-item" href="${contextPath }/wist_list.do">관심상품내역조회</a>
                                         </div>
