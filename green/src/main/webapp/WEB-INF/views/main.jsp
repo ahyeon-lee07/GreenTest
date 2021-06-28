@@ -6,7 +6,22 @@
 request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+<c:choose>
+	<c:when test="${param.msg == 'fail' }">
+		<script>
+			window.onload = function () {
+				alert("회원 탈퇴에 실패 하였습니다.");
+			}
+		</script>
+	</c:when>
+	<c:when test="${param.msg == 'memberDelete' }">
+		<script>
+			window.onload = function () {
+				alert("정상적으로 탈퇴 처리 되었습니다." );
+			}
+		</script>
+	</c:when>
+</c:choose>
 
 <!-- 메인 -->
 <main class="mainH">

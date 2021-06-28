@@ -52,4 +52,10 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO login(MemberVO memberVO) throws Exception {
 		return memberDAO.loginById(memberVO);
 	}
+	
+	// È¸¿ø Å»Åð
+	@Override
+	public int memeberDelete(MemberVO member) throws Exception {
+		return memberDAO.memberDelete(member);
+	}
 }

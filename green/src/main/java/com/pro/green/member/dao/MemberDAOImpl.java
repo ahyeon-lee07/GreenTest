@@ -55,5 +55,11 @@ public class MemberDAOImpl implements MemberDAO {
 		MemberVO vo = sqlSession.selectOne("mapper.member.loginById", memberVO);
 		return vo;
 	}
+	
+	// È¸¿ø Å»Åð
+	public int memberDelete(MemberVO member) {
+		int result = sqlSession.delete("mapper.member.memeberDelete", member);
+		return result;
+	}
 
 }
