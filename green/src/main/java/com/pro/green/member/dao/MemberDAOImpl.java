@@ -42,6 +42,13 @@ public class MemberDAOImpl implements MemberDAO {
 		return result;
 	}
 
+	// 회원정수 수정 비번체크
+	@Override
+	public String selectPwChk(MemberVO memberVO) throws DataAccessException {
+		String result = sqlSession.selectOne("mapper.member.selectPwChk", memberVO);
+		return result;
+	}
+
 	// 로그인
 	@Override
 	public MemberVO loginById(MemberVO memberVO) throws DataAccessException {

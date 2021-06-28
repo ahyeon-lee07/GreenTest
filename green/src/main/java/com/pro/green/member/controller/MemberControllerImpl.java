@@ -67,6 +67,18 @@ public class MemberControllerImpl implements MemberController {
 		return "find_pw";
 	}
 
+	// 회원정보 수정/탈퇴 비번체크
+	@RequestMapping(value = "/memberEditChk.do", method = RequestMethod.GET)
+	public String memberEditChk(Locale locale, Model model) {
+		return "memberEditChk";
+	}
+
+	// 회원정보 수정/탈퇴
+	@RequestMapping(value = "/memberEdit.do", method = RequestMethod.GET)
+	public String memberEdit(Locale locale, Model model) {
+		return "memberEdit";
+	}
+
 	// 아이디체크
 	@Override
 	@RequestMapping(value = "/member/overlapped.do", method = RequestMethod.POST)
@@ -97,6 +109,22 @@ public class MemberControllerImpl implements MemberController {
 		String result = memberService.findPw(member);
 		mav.addObject("findPw", result);
 		mav.setViewName("redirect:/find_pw.do");
+		return mav;
+	}
+
+	// 회원정보 수정 비번 체트
+	@Override
+	@RequestMapping(value = "/member/pwChk.do", method = RequestMethod.POST)
+	public ModelAndView memberPwChk(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String result = memberService.memberPwChk(member);
+		if(result != null) {
+			mav.setViewName("redirect:/memberEdit.do");
+			
+		}else {
+			rAttr.addAttribute("msg", "joinNo");
+			mav.setViewName("redirect:/memberEditChk.do");
+		}
 		return mav;
 	}
 

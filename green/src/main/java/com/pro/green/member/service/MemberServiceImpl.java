@@ -41,6 +41,12 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectFindPw(member);
 	}
 
+	// 회원정보 수정 비번체크
+	@Override
+	public String memberPwChk(MemberVO member) throws Exception {
+		return memberDAO.selectPwChk(member);
+	}
+
 	// 로그인
 	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception {
