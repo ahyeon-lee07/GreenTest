@@ -13,4 +13,5 @@ public interface MemberService {
 	public String findId(MemberVO member) throws Exception;
 	public String findPw(MemberVO member) throws Exception;
 	public String memberPwChk(MemberVO member) throws Exception;
+	public int memeberDelete(MemberVO member) throws Exception;
 }
