@@ -67,7 +67,8 @@ request.setCharacterEncoding("UTF-8");
                                 class="img-thumbnail" alt="#"></td>
                         <td class="align-middle pl-3">
                             <div class="row font-weight-bold pb-1">
-                                컬러칩 케이스
+                            <a href="${contextPath }/HardCaseDetail.do" style="color: black">
+                                컬러칩 케이스</a>
                             </div>
                             <div class="row" style="font-size: .8rem;">
                                 [옵션: 2. 옐로우/아이폰6(s)]
@@ -77,13 +78,12 @@ request.setCharacterEncoding("UTF-8");
                         <td class="text-center align-middle px-2">
                             <div class="d-flex flex-column bd-highlight px-2">
                                 <div class="bd-highlight d-flex">
-                                <div class="flex-grow bd-highlight pr-2">
-                                <input type="number" class="form-control" id="inputnumber" min="0" max="99">
+                                <div class="flex-grow bd-highlight pr-3">
+                                <input type="number" class="form-control" id="inputnumber" step="1" value="1" min="1" max="99">
                                 </div>
                             	</div>
                                 </div>
                                 <div class="bd-highlight mt-1"><button type="button" class="btn btn-outline-secondary btn-sm" style="font-size: .6rem">변경</button></div>
-                              </div>
                         </td>
                         <td class="text-center align-middle px-2" style="font-size: .8rem;">150</td>
                         <td class="text-center align-middle px-2">기본 배송</td>
