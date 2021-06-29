@@ -164,12 +164,12 @@ request.setCharacterEncoding("UTF-8");
 					<div class="card h-100">
 						<!-- Product image-->
 						<img class="card-img-top"
-							src="${contextPath }/resources/img/케이스이미지2.PNG" alt="케이스이미지" />
+							src="${contextPath }/resources/img/젤_붕어빵 귤곰.png" alt="[젤] 붕어빵 귤곰" />
 						<!-- Product details-->
 						<div class="card-body p-4">
 							<div class="text-center">
 								<!-- Product name-->
-								<h5 class="fw-bolder">귤곰 케이스</h5>
+								<h5 class="fw-bolder">[젤] 붕어빵 귤곰</h5>
 								<!-- Product price-->
 								12000원
 							</div>
@@ -189,12 +189,12 @@ request.setCharacterEncoding("UTF-8");
 							style="top: 0.5rem; right: 0.5rem">Sale</div>
 						<!-- Product image-->
 						<img class="card-img-top"
-							src="${contextPath}/resources/img/케이스이미지3.PNG" alt="케이스이미지" />
+							src="${contextPath}/resources/img/젤_티비보는 애기귤곰.png" alt="[젤] 티비보는 애기귤곰" />
 						<!-- Product details-->
 						<div class="card-body p-4">
 							<div class="text-center">
 								<!-- Product name-->
-								<h5 class="fw-bolder">곰귤 케이스</h5>
+								<h5 class="fw-bolder">[젤] 티비보는 애기귤곰</h5>
 								<!-- Product reviews-->
 								<!-- <div class="d-flex justify-content-center small text-warning mb-2">
 									<div class="bi-star-fill"></div>
@@ -204,7 +204,7 @@ request.setCharacterEncoding("UTF-8");
 									<div class="bi-star-fill"></div>
 								</div> -->
 								<!-- Product price-->
-								12000원
+								10000원
 							</div>
 						</div>
 						<!-- Product actions-->
@@ -222,14 +222,14 @@ request.setCharacterEncoding("UTF-8");
 							style="top: 0.5rem; right: 0.5rem">Sale</div>
 						<!-- Product image-->
 						<img class="card-img-top"
-							src="${contextPath}/resources/img/케이스이미지4.PNG" alt="케이스이미지" />
+							src="${contextPath}/resources/img/젤_세마리 당근토끼 화이트.png" alt="[젤] 세마리 당근토끼 화이트" />
 						<!-- Product details-->
 						<div class="card-body p-4">
 							<div class="text-center">
 								<!-- Product name-->
-								<h5 class="fw-bolder">귤곰 케이스</h5>
+								<h5 class="fw-bolder">[젤] 세마리 당근토끼 화이트</h5>
 								<!-- Product price-->
-								12000원
+								10000원
 							</div>
 						</div>
 						<!-- Product actions-->
@@ -244,12 +244,12 @@ request.setCharacterEncoding("UTF-8");
 					<div class="card h-100">
 						<!-- Product image-->
 						<img class="card-img-top"
-							src="${contextPath}/resources/img/케이스이미지.PNG" alt="케이스이미지" />
+							src="${contextPath}/resources/img/젤_콩이 아이보리.png" alt="[젤] 콩이 아이보리" />
 						<!-- Product details-->
 						<div class="card-body p-4">
 							<div class="text-center">
 								<!-- Product name-->
-								<h5 class="fw-bolder">곰귤 케이스</h5>
+								<h5 class="fw-bolder">[젤] 콩이 아이보리</h5>
 								<!-- Product reviews-->
 								<!-- <div
 									class="d-flex justify-content-center small text-warning mb-2">
@@ -386,4 +386,4 @@ request.setCharacterEncoding("UTF-8");
 function cart_checkform() {
 alert("해당 상품을 장바구니에 담았습니다!");
 }
-</script>
+</script>​
