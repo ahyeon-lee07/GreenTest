@@ -184,11 +184,7 @@ public class HomeController {
 		return "myPage";
 	}
 	
-	//회원정보 수정/탈퇴
-	@RequestMapping(value = "/memberEdit.do", method = RequestMethod.GET)
-	public String memberEdit(Locale locale, Model model) {
-		return "memberEdit";
-	}
+
 	
 	//구매내역 조회
 	@RequestMapping(value = "/purchaseList.do", method = RequestMethod.GET)
