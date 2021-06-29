@@ -27,65 +27,77 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 
 		<table class="table table-hover">
-            <thead class="table-primary border-bottom-0">
-                <tr>
-                    <th class="text-center border-bottom-0" style="width: 68px">번호</th>
-                    <th class="text-center border-bottom-0" style="width: auto">제목</th>
-                    <th class="text-center border-bottom-0" style="width: 100px">작성자</th>
-                    <th class="text-center border-bottom-0" style="width: 116px">작성일</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="border-bottom ">
-                    <th class="text-center align-middle">1</th>
-                    <td class="text-center align-middle">
-                    	<a class="" href="${contextPath }/notice_in.do">Otto</a>
-					</td>
-                    <td class="text-center align-middle">관리자</td>
-                    <td class="text-center align-middle">2020-00-00</td>
-                </tr>
-            </tbody>
-        </table>
+			<thead class="table-primary border-bottom-0">
+				<tr>
+					<th class="text-center border-bottom-0" style="width: 68px">번호</th>
+					<th class="text-center border-bottom-0" style="width: auto">제목</th>
+					<th class="text-center border-bottom-0" style="width: 100px">작성자</th>
+					<th class="text-center border-bottom-0" style="width: 116px">작성일</th>
 
-        <div class="row justify-content-between px-4">
-            <div class="">
-                <div class="btn-group">
-                    <form action="#">
-                        <div class="form-row">
-                            <div class="form-group d-flex justify-content-start ">
-                                <select id="inputState" class="form-control form-control-sm" style="width: 90px;">
-                                    <option selected>제목</option>
-                                    <option selected>내용</option>
-                                    <option selected>글쓰기</option>
-                                </select>
-                                <input class="form-control form-control-sm mx-2" type="text" placeholder="">
-                                <button type="submit" class="btn btn-secondary btn-sm col-2">검색</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-          
-        </div>
+				</tr>
+			</thead>
+			<tbody>
+				<c:choose>
+					<c:when test="${notice ==null }">
+						<tr height="10">
+							<td colspan="4">
+								<p align="center">
+									<b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b>
+								</p>
+							</td>
+						</tr>
+					</c:when>
+					<c:when test="${notice !=null }">
+						<c:forEach var="notice" items="${notice}" varStatus="noticeNum">	
+							<tr class="border-bottom ">
+								<th class="text-center align-middle">${noticeNum.count}</th>
+								<td class="text-center align-middle">
+								<a class=""href="${contextPath }/notice_in.do">${notice.noticeTitle }</a></td>
+								<td class="text-center align-middle">${notice.id }</td>
+								<td class="text-center align-middle">${notice.noticeDate}</td>
+							</tr>
+						</c:forEach>
+					</c:when>
+				</c:choose>
+			</tbody>
 
-        <nav aria-label="Page navigation example row">
-            <ul class="pagination d-flex justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+		</table>
+
+		<div class="row justify-content-between px-4">
+			<div class="">
+				<div class="btn-group">
+					<form action="#">
+						<div class="form-row">
+							<div class="form-group d-flex justify-content-start ">
+								<select id="inputState" class="form-control form-control-sm"
+									style="width: 90px;">
+									<option selected>제목</option>
+									<option selected>내용</option>
+									<option selected>글쓰기</option>
+								</select> <input class="form-control form-control-sm mx-2" type="text"
+									placeholder="">
+								<button type="submit" class="btn btn-secondary btn-sm col-2">검색</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+
+		<nav aria-label="Page navigation example row">
+			<ul class="pagination d-flex justify-content-center">
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+				</a></li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				</a></li>
+			</ul>
+		</nav>
 
 	</div>
 </main>
