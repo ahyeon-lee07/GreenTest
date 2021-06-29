@@ -42,11 +42,30 @@ public class MemberDAOImpl implements MemberDAO {
 		return result;
 	}
 
+	// 회원정수 수정 비번체크
+	@Override
+	public String selectPwChk(MemberVO memberVO) throws DataAccessException {
+		String result = sqlSession.selectOne("mapper.member.selectPwChk", memberVO);
+		return result;
+	}
+
 	// 로그인
 	@Override
 	public MemberVO loginById(MemberVO memberVO) throws DataAccessException {
 		MemberVO vo = sqlSession.selectOne("mapper.member.loginById", memberVO);
 		return vo;
+	}
+	
+	// 회원 탈퇴
+	public int memberDelete(MemberVO member) {
+		int result = sqlSession.delete("mapper.member.memeberDelete", member);
+		return result;
+	}
+	
+	//회원 수정
+	public int editMember(MemberVO member) throws DataAccessException {
+		int result = sqlSession.update("mapper.member.editMember", member);
+		return result;
 	}
 
 }

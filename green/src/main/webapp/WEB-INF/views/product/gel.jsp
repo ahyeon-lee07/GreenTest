@@ -71,22 +71,22 @@ request.setCharacterEncoding("UTF-8");
 								<!-- <img class="card-img-top" src="${contextPath }/resources/img/케이스이미지.PNG" alt="..." />  -->
 								<a href="${contextPath}/GelCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/gel.png" alt="..." /></a>
+									src="${contextPath }/resources/img/젤_귤따는 귤곰.png" alt="[젤] 귤따는 귤곰" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[젤] 귤따는 귤곰 </h6>
 										<!-- Product price-->
-										$20.00
+										12,000원
 									</div>
 								</div>
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
-										<a class="btn btn-sm btn-outline-secondary"
+										<a class="btn btn-sm btn-outline-success"
 											href="${contextPath}/orderList.do" role="button">바로구매</a> <a
-											href="#" class="btn btn-sm btn-outline-secondary">관심상품</a>
+											href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">관심상품</a>
 									</div>
 								</div>
 							</div>
@@ -99,22 +99,22 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product image-->
 								<a href="${contextPath}/GelCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/gel.png" alt="..." /></a>
+									src="${contextPath }/resources/img/젤_귤곰과 나비.png" alt="[젤] 귤곰과 나비" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[젤] 귤곰과 나비</h6>
 										<!-- Product price-->
-										$18.00
+										10,000원
 									</div>
 								</div>
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
-										<a class="btn btn-sm btn-outline-secondary"
+										<a class="btn btn-sm btn-outline-success"
 											href="${contextPath}/buyPage.do" role="button">바로구매</a> <a
-											href="#" class="btn btn-sm btn-outline-secondary">관심상품</a>
+											href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">관심상품</a>
 									</div>
 								</div>
 							</div>
@@ -127,22 +127,22 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product image-->
 								<a href="${contextPath}/GelCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/gel.png" alt="..." /></a>
+									src="${contextPath }/resources/img/젤_귤곰의 물놀이.png" alt="[젤] 귤곰의 물놀이" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[젤] 귤곰의 물놀이</h6>
 										<!-- Product price-->
-										$20.00
+										12,000원
 									</div>
 								</div>
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
-										<a class="btn btn-sm btn-outline-secondary"
+										<a class="btn btn-sm btn-outline-success"
 											href="${contextPath}/buyPage.do" role="button">바로구매</a> <a
-											href="#" class="btn btn-sm btn-outline-secondary">관심상품</a>
+											href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">관심상품</a>
 									</div>
 								</div>
 							</div>
@@ -155,23 +155,22 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product image-->
 								<a href="${contextPath}/GelCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/gel.png" alt="..." /></a>
+									src="${contextPath }/resources/img/젤_꽃길만 걷자.png" alt="[젤] 꽃길만 걷자" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[젤] 꽃길만 걷자</h6>
 										<!-- Product price-->
-										<span class="text-muted text-decoration-line-through">$20.00</span>
-										$18.00
+									    10,000원
 									</div>
 								</div>
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
-										<a class="btn btn-sm btn-outline-secondary"
+										<a class="btn btn-sm btn-outline-success"
 											href="${contextPath}/buyPage.do" role="button">바로구매</a> <a
-											href="#" class="btn btn-sm btn-outline-secondary">관심상품</a>
+											href="${contextPath}/wist_list.do" class="btn btn-sm btn-outline-success">관심상품</a>
 									</div>
 								</div>
 							</div>
@@ -184,12 +183,12 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product image-->
 								<a href="${contextPath}/GelCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/gel.png" alt="..." /></a>
+									src="${contextPath }/resources/img/젤_빅 데이지.png" alt="[젤] 빅 데이지" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[젤] 빅 데이지</h6>
 										<!-- Product reviews-->
 										<div
 											class="d-flex justify-content-center small text-warning mb-2">
@@ -200,15 +199,16 @@ request.setCharacterEncoding("UTF-8");
 											<div class="bi-star-fill"></div>
 										</div>
 										<!-- Product price-->
-										$20.00
+										12,000원
 									</div>
 								</div>
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
 										<a href="${contextPath}/buyPage.do"
-											class="btn btn-sm btn-outline-secondary">바로구매</a> <a href="#"
-											class="btn btn-sm btn-outline-secondary">관심상품</a>
+											class="btn btn-sm btn-outline-success">바로구매</a> 
+										<a href="${contextPath}/wist_list.do"
+											class="btn btn-sm btn-outline-success">관심상품</a>
 									</div>
 								</div>
 							</div>
@@ -221,12 +221,12 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product image-->
 								<a href="${contextPath}/GelCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/gel.png" alt="..." /></a>
+									src="${contextPath }/resources/img/젤_당근 패턴.png" alt="[젤] 당근 패턴" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[젤] 당근 패턴</h6>
 										<!-- Product reviews-->
 										<div
 											class="d-flex justify-content-center small text-warning mb-2">
@@ -237,15 +237,16 @@ request.setCharacterEncoding("UTF-8");
 											<div class="bi-star-fill"></div>
 										</div>
 										<!-- Product price-->
-										$18.00
+										10,000원
 									</div>
 								</div>
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
 										<a href="${contextPath}/buyPage.do"
-											class="btn btn-sm btn-outline-secondary">바로구매</a> <a href="#"
-											class="btn btn-sm btn-outline-secondary">관심상품</a>
+											class="btn btn-sm btn-outline-success">바로구매</a> 
+										<a href="${contextPath}/wist_list.do"
+											class="btn btn-sm btn-outline-success">관심상품</a>
 									</div>
 								</div>
 							</div>
@@ -258,12 +259,12 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product image-->
 								<a href="${contextPath}/GelCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/gel.png" alt="..." /></a>
+									src="${contextPath }/resources/img/젤_세마리 당근토끼 핑크.png" alt="[젤] 세마리 당근토끼 핑크" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[젤] 세마리 당근토끼 핑크</h6>
 										<!-- Product reviews-->
 										<div
 											class="d-flex justify-content-center small text-warning mb-2">
@@ -274,15 +275,16 @@ request.setCharacterEncoding("UTF-8");
 											<div class="bi-star-fill"></div>
 										</div>
 										<!-- Product price-->
-										$20.00
+										12,000원
 									</div>
 								</div>
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
 										<a href="${contextPath}/buyPage.do"
-											class="btn btn-sm btn-outline-secondary">바로구매</a> <a href="#"
-											class="btn btn-sm btn-outline-secondary">관심상품</a>
+											class="btn btn-sm btn-outline-success">바로구매</a> 
+										<a href="${contextPath}/wist_list.do"
+											class="btn btn-sm btn-outline-success">관심상품</a>
 									</div>
 								</div>
 							</div>
@@ -295,12 +297,12 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product image-->
 								<a href="${contextPath}/GelCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/gel.png" alt="..." /></a>
+									src="${contextPath }/resources/img/젤_콩이 브라운.png" alt="[젤] 콩이 브라운" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">Fancy Product</h6>
+										<h6 class="fw-bolder">[젤] 콩이 브라운</h6>
 										<!-- Product reviews-->
 										<div
 											class="d-flex justify-content-center small text-warning mb-2">
@@ -311,15 +313,16 @@ request.setCharacterEncoding("UTF-8");
 											<div class="bi-star-fill"></div>
 										</div>
 										<!-- Product price-->
-										$18.00
+										10,000원
 									</div>
 								</div>
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
 										<a href="${contextPath}/buyPage.do"
-											class="btn btn-sm btn-outline-secondary">바로구매</a> <a href="#"
-											class="btn btn-sm btn-outline-secondary">관심상품</a>
+											class="btn btn-sm btn-outline-success">바로구매</a> 
+										<a href="${contextPath}/wist_list.do"
+											class="btn btn-sm btn-outline-success">관심상품</a>
 									</div>
 								</div>
 							</div>

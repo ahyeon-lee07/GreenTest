@@ -1,0 +1,28 @@
+
+
+/* �߰� */
+.page_title {
+    font-weight: bold;
+    color: #444;
+}
+.page_subtitle {
+    font-size: .9rem;
+}
+a:hover {
+    text-decoration: none;
+}
+
+.placeholderText::after {
+    content: "";
+    position: absolute;
+    color: red;
+}
+
+.top_memberName {
+    font-size: 1rem;
+    position: relative;
+    top: 20%;
+}
+.top_memberName > span {
+    font-weight: bold;
+}

@@ -70,12 +70,12 @@ request.setCharacterEncoding("UTF-8");
 								<!-- <img class="card-img-top" src="${contextPath }/resources/img/케이스이미지.PNG" alt="..." />  -->
 								<a href="${contextPath}/HardCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/케이스이미지.PNG" alt="..." /></a>
+									src="${contextPath }/resources/img/귤따는 귤곰.png" alt="[하드] 귤따는 귤곰" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">[하드] 하드 케이스 1</h6>
+										<h6 class="fw-bolder">[하드] 귤따는 귤곰</h6>
 										<!-- Product price-->
 										12,000원
 									</div>
@@ -98,12 +98,12 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product image-->
 								<a href="${contextPath}/HardCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/케이스이미지.PNG" alt="..." /></a>
+									src="${contextPath }/resources/img/귤곰과 나비.png" alt="[하드] 귤곰과 나비" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">[하드] 하드 케이스 2</h6>
+										<h6 class="fw-bolder">[하드] 귤곰과 나비</h6>
 										<!-- Product price-->
 										10,000원
 									</div>
@@ -126,12 +126,12 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product image-->
 								<a href="${contextPath}/HardCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/케이스이미지.PNG" alt="..." /></a>
+									src="${contextPath }/resources/img/귤곰의 물놀이.png" alt="[하드] 귤곰의 물놀이" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">[하드] 하드 케이스 3</h6>
+										<h6 class="fw-bolder">[하드] 귤곰의 물놀이</h6>
 										<!-- Product price-->
 										12,000원
 									</div>
@@ -154,12 +154,12 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product image-->
 								<a href="${contextPath}/HardCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/케이스이미지.PNG" alt="..." /></a>
+									src="${contextPath }/resources/img/티비보는 애기귤곰.png" alt="[하드] 티비보는 애기귤곰" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">[하드] 하드 케이스 4</h6>
+										<h6 class="fw-bolder">[하드] 티비보는 애기귤곰</h6>
 										<!-- Product price-->
 										10,000원
 									</div>
@@ -183,12 +183,12 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product image-->
 								<a href="${contextPath}/HardCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/케이스이미지.PNG" alt="..." /></a>
+									src="${contextPath }/resources/img/냥냥펀치 핑크.png" alt="[하드] 냥냥펀치 핑크" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">[하드] 하드 케이스 5</h6>
+										<h6 class="fw-bolder">[하드] 냥냥펀치 핑크</h6>
 										<!-- Product reviews-->
 										<div
 											class="d-flex justify-content-center small text-warning mb-2">
@@ -221,12 +221,12 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product image-->
 								<a href="${contextPath}/HardCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/케이스이미지.PNG" alt="..." /></a>
+									src="${contextPath }/resources/img/세마리 당근토끼 핑크.png" alt="[하드] 세마리 당근토끼 핑크" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">[하드] 하드 케이스 6</h6>
+										<h6 class="fw-bolder">[하드] 세마리 당근토끼 핑크</h6>
 										<!-- Product reviews-->
 										<div
 											class="d-flex justify-content-center small text-warning mb-2">
@@ -259,12 +259,12 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product image-->
 								<a href="${contextPath}/HardCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/케이스이미지.PNG" alt="..." /></a>
+									src="${contextPath }/resources/img/콩이 레드.png" alt="[하드] 콩이 레드" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">[하드] 하드 케이스 7</h6>
+										<h6 class="fw-bolder">[하드] 콩이 레드</h6>
 										<!-- Product reviews-->
 										<div
 											class="d-flex justify-content-center small text-warning mb-2">
@@ -297,12 +297,12 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product image-->
 								<a href="${contextPath}/HardCaseDetail.do"><img
 									class="card-img-top"
-									src="${contextPath }/resources/img/케이스이미지.PNG" alt="..." /></a>
+									src="${contextPath }/resources/img/콩이 핑크.png" alt="[하드] 콩이 핑크" /></a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<h6 class="fw-bolder">[하드] 하드 케이스 8</h6>
+										<h6 class="fw-bolder">[하드] 콩이 핑크</h6>
 										<!-- Product reviews-->
 										<div
 											class="d-flex justify-content-center small text-warning mb-2">

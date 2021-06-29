@@ -67,6 +67,12 @@ public class MemberControllerImpl implements MemberController {
 		return "find_pw";
 	}
 
+	// 회원정보 수정/탈퇴 비번체크
+	@RequestMapping(value = "/memberEditChk.do", method = RequestMethod.GET)
+	public String memberEditChk(Locale locale, Model model) {
+		return "memberEditChk";
+	}
+
 	// 아이디체크
 	@Override
 	@RequestMapping(value = "/member/overlapped.do", method = RequestMethod.POST)
@@ -100,6 +106,80 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 
+	// 회원정보 수정 비번 체트
+	@Override
+	@RequestMapping(value = "/member/pwChk.do", method = RequestMethod.POST)
+	public ModelAndView memberPwChk(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr,
+			HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String result = memberService.memberPwChk(member);
+		if (result != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("joinOk", "sessinChk");
+			mav.setViewName("redirect:/memberEdit.do");
+
+		} else {
+			rAttr.addAttribute("msg", "joinNo");
+			mav.setViewName("redirect:/memberEditChk.do");
+		}
+		return mav;
+	}
+
+	// 회원정보 수정/탈퇴
+	@Override
+	@RequestMapping(value = "/memberEdit.do", method = RequestMethod.GET)
+	public ModelAndView memberEdit(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+		String sessinChk = (String) session.getAttribute("joinOk");
+
+		if (sessinLogin == null) {
+			mav.setViewName("redirect:/member.do");
+
+		} else if (sessinChk == null) {
+			mav.setViewName("redirect:/memberEditChk.do");
+
+		} else {
+			mav.addObject("member", sessinLogin);
+			mav.addObject("joinOk", sessinChk);
+			mav.setViewName("memberEdit");
+
+		};
+		return mav;
+	}
+	
+	// 회원정보 수정
+	@Override
+	@RequestMapping(value ="/member/memberEdit.do", method = RequestMethod.POST)
+	public ModelAndView memberEditOk(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		
+		int result = memberService.editMember(member);
+		memberVO = memberService.login(member);
+		
+		try {
+			if(result == 0) {
+				mav.addObject("joinMas", "회원 정보 수정에 실패하였습니다. 다시 시도해 주세요.");
+				mav.setViewName("redirect:/main.do");
+			}else {
+				mav.addObject("joinMas", "회원 정보 수정이 완료 되었습니다.");
+				session.setAttribute("member", memberVO); // 세션에 회원 정보를 저장
+				session.setAttribute("isLogOn", true); // 세션에 로그인 상태를 true로 설정
+				mav.setViewName("redirect:/main.do");
+			}
+		} catch (Exception e) {
+			System.out.println("오류가 발생하였습니다 :" + e );
+			mav.addObject("joinMas", "오류가 발생하였습니다.");
+			mav.setViewName("redirect:/main.do");
+		}
+		
+		return mav;
+	}
+
 	// 회원 가입
 	@Override
 	@RequestMapping(value = "/member/addMember.do", method = RequestMethod.POST)
@@ -107,9 +187,15 @@ public class MemberControllerImpl implements MemberController {
 			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
+		ModelAndView mav = new ModelAndView();
 		int result = 0;
 		result = memberService.addMember(member);
-		ModelAndView mav = new ModelAndView("redirect:/main.do");
+		if(result == 0) {
+			mav.addObject("joinMas", "회원 가입에 실패 했습니다. 다시 시도해 주세요.");
+		}else {
+			mav.addObject("joinMas", "가입해 주셨어 감사합니다.");
+		}
+		mav.setViewName("/main.do");
 		return mav;
 	}
 
@@ -143,6 +229,26 @@ public class MemberControllerImpl implements MemberController {
 		session.removeAttribute("member");
 		session.removeAttribute("isLogOn");
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/main.do");
+		return mav;
+	}
+
+	// 회원 탈퇴
+	@Override
+	@RequestMapping(value = "/member/memberDelete.do", method = RequestMethod.POST)
+	public ModelAndView memberDelete(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		ModelAndView mav = new ModelAndView();
+		int result = memberService.memeberDelete(member);
+		if(result == 0) {
+			mav.addObject("msg", "fail");
+		}else {
+			session.removeAttribute("member");
+			session.removeAttribute("isLogOn");
+			session.removeAttribute("joinOk");
+			mav.addObject("msg", "memberDelete");
+		}
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
