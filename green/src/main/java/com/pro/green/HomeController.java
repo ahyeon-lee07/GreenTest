@@ -4,6 +4,9 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -38,7 +41,9 @@ public class HomeController {
 
 	// 메인화면
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("joinOk");
 		return "main";
 	}
 
@@ -65,10 +70,6 @@ public class HomeController {
 	public String unMember(Locale locale, Model model) {
 		return "noMember";
 	}
-
-	
-
-
 
 	// SNS계정으로 회원가입
 	@RequestMapping(value = "/snsJoin.do", method = RequestMethod.GET)
