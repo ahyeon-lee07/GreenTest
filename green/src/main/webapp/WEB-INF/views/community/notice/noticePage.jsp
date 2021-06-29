@@ -8,6 +8,7 @@ request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
+
 <!-- 메인 -->
 <main class="mainH">
 	<div class="container">
@@ -32,7 +33,7 @@ request.setCharacterEncoding("UTF-8");
                     <div class="row border-bottom border-top d-flex bd-highlight py-2">
                         <label for="inputTitle" class="bd-highlight col-form-label pl-2" style="width: 100px;">제목</label>
                         <div class="flex-grow-1 bd-highlight pr-2">
-                            <input type="email" class="form-control" id="inputTitle" readonly>
+                            <input type="text" class="form-control" value="${notice.noticeTitle }"  name="title"  id="inputTitle" readonly />
                         </div>
                     </div>
                     <div class="row border-bottom py-2">
