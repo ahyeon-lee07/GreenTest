@@ -1,4 +1,3 @@
-<!--규찬5 상진3 아연2-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
