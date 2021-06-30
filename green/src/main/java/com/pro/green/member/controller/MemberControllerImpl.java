@@ -158,9 +158,16 @@ public class MemberControllerImpl implements MemberController {
 			HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
+<<<<<<< HEAD
 
+=======
+		//MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+		//String sessinChk = (String) session.getAttribute("joinOk");
+		
+>>>>>>> branch 'master' of https://github.com/ahyeon-lee07/GreenTest.git
 		int result = memberService.editMember(member);
 		memberVO = memberService.login(member);
+<<<<<<< HEAD
 
 		try {
 			if (result == 0) {
@@ -175,9 +182,21 @@ public class MemberControllerImpl implements MemberController {
 		} catch (Exception e) {
 			System.out.println("오류가 발생하였습니다 :" + e);
 			mav.addObject("joinMas", "오류가 발생하였습니다.");
+=======
+		if(result == 0) {
+			mav.addObject("joinMas", "회원 정보 수정에 실패하였습니다. 다시 시도해 주세요.");
+			mav.setViewName("redirect:/main.do");
+		}else {
+			mav.addObject("joinMas", "회원 정보 수정이 완료 되었습니다.");
+			session.setAttribute("member", memberVO); // 세션에 회원 정보를 저장
+			session.setAttribute("isLogOn", true); // 세션에 로그인 상태를 true로 설정
+>>>>>>> branch 'master' of https://github.com/ahyeon-lee07/GreenTest.git
 			mav.setViewName("redirect:/main.do");
 		}
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/ahyeon-lee07/GreenTest.git
 		return mav;
 	}
 
