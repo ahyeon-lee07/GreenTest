@@ -229,7 +229,7 @@ public class HomeController {
 	public String product_reWrite(Locale locale, Model model) {
 		return "product_reWrite";
 	}
-	
+	/*
 	//공지사항
 	@RequestMapping(value = "/notice.do", method = RequestMethod.GET)
 	public String notice(Locale locale, Model model) {
@@ -241,7 +241,7 @@ public class HomeController {
 	public String notice_in(Locale locale, Model model) {
 		return "notice_in";
 	}
-	
+	*/
 	//이벤트
 	@RequestMapping(value = "/event.do", method = RequestMethod.GET)
 	public String event(Locale locale, Model model) {
