@@ -162,21 +162,14 @@ public class MemberControllerImpl implements MemberController {
 		int result = memberService.editMember(member);
 		memberVO = memberService.login(member);
 
-
-		try {
-			if (result == 0) {
-				mav.addObject("joinMas", "회원 정보 수정에 실패하였습니다. 다시 시도해 주세요.");
-				mav.setViewName("redirect:/main.do");
-			} else {
-				mav.addObject("joinMas", "회원 정보 수정이 완료 되었습니다.");
-				session.setAttribute("member", memberVO); // 세션에 회원 정보를 저장
-				session.setAttribute("isLogOn", true); // 세션에 로그인 상태를 true로 설정
-				mav.setViewName("redirect:/main.do");
-			}
-		} catch (Exception e) {
-			System.out.println("오류가 발생하였습니다 :" + e);
-			mav.addObject("joinMas", "오류가 발생하였습니다.");
-			
+		if (result == 0) {
+			mav.addObject("joinMas", "회원 정보 수정에 실패하였습니다. 다시 시도해 주세요.");
+			mav.setViewName("redirect:/main.do");
+		} else {
+			mav.addObject("joinMas", "회원 정보 수정이 완료 되었습니다.");
+			session.setAttribute("member", memberVO); // 세션에 회원 정보를 저장
+			session.setAttribute("isLogOn", true); // 세션에 로그인 상태를 true로 설정
+			mav.setViewName("redirect:/main.do");
 		}
 		return mav;
 	}
@@ -190,20 +183,14 @@ public class MemberControllerImpl implements MemberController {
 		response.setContentType("html/text;charset=utf-8");
 		ModelAndView mav = new ModelAndView();
 
-		try {
-			int result = 0;
-			result = memberService.addMember(member);
-			if (result == 0) {
-				mav.addObject("joinMas", "회원 가입에 실패 했습니다. 다시 시도해 주세요.");
-			} else {
-				mav.addObject("joinMas", "가입해 주셨어 감사합니다.");
-			}
-			mav.setViewName("/main.do");
-		} catch (Exception e) {
-			System.out.println("오류가 발생하였습니다 :" + e);
-			mav.addObject("joinMas", "오류가 발생하였습니다.");
-			mav.setViewName("redirect:/main.do");
+		int result = 0;
+		result = memberService.addMember(member);
+		if (result == 0) {
+			mav.addObject("joinMas", "회원 가입에 실패 했습니다. 다시 시도해 주세요.");
+		} else {
+			mav.addObject("joinMas", "가입해 주셨어 감사합니다.");
 		}
+		mav.setViewName("/main.do");
 		return mav;
 	}
 

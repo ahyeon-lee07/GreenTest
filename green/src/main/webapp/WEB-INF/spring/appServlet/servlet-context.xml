@@ -40,6 +40,7 @@
 		<beans:property name="viewClass"
 			value="org.springframework.web.servlet.view.tiles2.TilesView" />
 	</beans:bean>
+<<<<<<< master
 	
 	<!-- 파일업로드 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -48,6 +49,8 @@
 		<beans:property name="defaultEncoding" value="UTF-8"/>
 		
 	</beans:bean>
+=======
+>>>>>>> b4e9b07 이미지 파일 과련 테스트 파일
 
 	<context:component-scan
 		base-package="com.pro.green" />
