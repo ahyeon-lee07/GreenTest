@@ -190,7 +190,7 @@ public class MemberControllerImpl implements MemberController {
 		} else {
 			mav.addObject("joinMas", "가입해 주셨어 감사합니다.");
 		}
-		mav.setViewName("/main.do");
+		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
 
