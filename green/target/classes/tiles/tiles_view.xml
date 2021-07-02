@@ -279,5 +279,15 @@
 		<put-attribute name="title" value="리뷰 상세" />
 		<put-attribute name="main" value="/WEB-INF/views/community/review/reviewPage.jsp" />
 	</definition>
-
+	
+	
+	<!-- 이미지 테스트 -->
+	<definition name="uploadForm" extends="baseLayout">
+		<put-attribute name="title" value="리뷰 상ㅁㄴㅇ세" />
+		<put-attribute name="main" value="/WEB-INF/views/uploadForm.jsp" />
+	</definition>
+	<definition name="result" extends="baseLayout">
+		<put-attribute name="title" value="리뷰 상ㅁㄴㅇ세" />
+		<put-attribute name="main" value="/WEB-INF/views/result.jsp" />
+	</definition>
 </tiles-definitions>
