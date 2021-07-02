@@ -40,12 +40,21 @@
 		<beans:property name="viewClass"
 			value="org.springframework.web.servlet.view.tiles2.TilesView" />
 	</beans:bean>
+<<<<<<< HEAD
 	<!-- 다중 파일 업로드 -->
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="52428000" />
 		<beans:property name="maxInMemorySize" value="1000000" />
 		<beans:property name="defaultEncoding" value="utf-8" />
+=======
+	
+	<!-- 파일업로드 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="52428800"/>
+		<beans:property name="maxInMemorySize" value="1000000"/>
+		<beans:property name="defaultEncoding" value="UTF-8"/>
+>>>>>>> branch 'master' of https://github.com/ahyeon-lee07/GreenTest.git
 	</beans:bean>
 
 	<context:component-scan

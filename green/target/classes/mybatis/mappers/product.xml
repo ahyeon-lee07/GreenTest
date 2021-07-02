@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.product">
+<resultMap id="productsResult" type="productVO">
+    <result property="level" column="level" />
+    <result property="productNO" column="productNO" />
+    <result property="parentNO" column="parentNO" />
+    <result property="title" column="title" />
+    <result property="content" column="content" />
+    <result property="writeDate" column="writeDate" />
+    <result property="imageFileName" column="imageFileName" />
+  </resultMap> 
+  
+  <resultMap id="imgResult" type="imageVO">
+	  <result property="imageFileNO" column="imageFileNO" />
+	  <result property="productNO" column="productNO" />
+	  <result property="imageFileName" column="imageFileName" />
+ </resultMap>
+
+  <select id="selectAllProductsList" resultMap="productsResult"   >
+    <![CDATA[
+      SELECT level, productNO, parentNO, title, content, writeDate, imageFileName, id
+      from product
+      START WITH  parentNO=0
+      CONNECT BY PRIOR productNO=parentNO 
+      ORDER SIBLINGS BY productNO DESC		
+    ]]>
+  </select>
+  
+	<!--단일이미지 추가  -->
+	 
+  <insert id="insertNewProduct"  parameterType="java.util.Map">
+		<![CDATA[
+			INSERT into product(productNO,  title, content, imageFileName, id)
+			VALUES(#{productNO},#{title},#{content}, #{imageFileName},	#{id})
+		]]>      
+	</insert>
+	
+  <select id="selectNewProductNO" resultType="int"  >
+		<![CDATA[
+			SELECT  nvl(max(productNO), 0) + 1 from product	
+		]]>
+	</select>
+	
+  <select id="selectProduct" resultType="productVO"   parameterType="int">
+    <![CDATA[
+      SELECT * from product
+      where productNO = #{productNO}		
+    ]]>
+  </select>
+  
+  <update id="updateProduct"  parameterType="java.util.Map">
+			update product
+			set title=#{title},	 
+			content=#{content}
+			 <if test="imageFileName!='' and imageFileName!=null">
+			  , imageFileName=#{imageFileName}
+			</if>
+			where productNO=#{productNO}
+	</update>
+	
+	<delete id="deleteProduct"  parameterType="int">
+    <![CDATA[
+      delete from product
+      where productNO in (
+         SELECT productNO FROM product
+         START WITH productNO = #{productNO}
+         CONNECT BY PRIOR  productNO = parentNO )
+    ]]>      
+  </delete>
+
+ <!--다중 이미지 추가 SQL문 -->   
+  <!--
+    <insert id="insertNewArticle"  parameterType="java.util.Map">
+    <![CDATA[
+      insert into product(productNO, id, title, content, imageFileName)
+      values(#{productNO}, #{id}, #{title}, #{content}, null)
+    ]]>      
+  </insert>
+ 
+   <insert id="insertNewImage"  parameterType="java.util.Map">
+    <foreach item="item"  collection="list"   open="INSERT ALL" 
+                  separator=" " close="SELECT * FROM DUAL" >
+      INTO t_imageFile(imageFileNO, imageFileName, articleNO, regDate)
+      VALUES (#{item.imageFileNO}, #{item.imageFileName}, #{item.articleNO}, sysdate)
+    </foreach>
+  </insert>
+ -->
+ 
+  <select id="selectNewImageFileNO" resultType="int"  >
+    <![CDATA[
+      SELECT  nvl(max(imageFileNO),0) from t_imageFile		
+    ]]>
+  </select>
+	
+
+  <select  id="selectImageFileList" resultMap="imgResult" parameterType="int">
+    <![CDATA[
+      SELECT * from t_imageFile
+      where productNO=#{productNO}	
+    ]]>
+  </select> 
+  
+</mapper>
