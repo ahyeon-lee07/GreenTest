@@ -64,6 +64,13 @@
                                 </div>
                             </li>
                             <c:choose>
+                            	<c:when test="${member.masterYN == 'M' }">
+                                    <li class="nav-item mr-3">
+                                        <a class="nav-link text-secondary" href="${contextPath }/addProduct.do">상품등록</a>
+                                    </li>
+                            	</c:when>
+                            </c:choose>
+                            <c:choose>
                             	<c:when test="${isLogOn == true && member != null }">
                                     <li class="nav-item mr-3 ml-3">
                                         <div class="top_memberName"><span>"${member.name}"</span> 님 환영합니다</div>
