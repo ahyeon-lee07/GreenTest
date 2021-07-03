@@ -26,29 +26,55 @@ public class ProductControllerImpl2 implements ProductController2 {
 	@Autowired
 	private MemberVO memberVO;
 
-	// 사품등록
+	// 사품등록 리스트
 	@Override
-	@RequestMapping(value = "/addProduct.do", method = RequestMethod.GET)
-	public ModelAndView addProduct(@ModelAttribute("member") MemberVO member, HttpServletRequest request) throws Exception {
+	@RequestMapping(value = "/productList.do", method = RequestMethod.GET)
+	public ModelAndView productList(@ModelAttribute("member") MemberVO member, HttpServletRequest request)
+			throws Exception {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
-		
-		
+
 		if (sessinLogin != null) {
 			String rightChk = (String) sessinLogin.getMasterYN();
-			if(rightChk.equals("M")) {
+			if (rightChk.equals("M")) {
 				mav.addObject("member", sessinLogin);
-				mav.setViewName("addProduct");
-			}else {
+				mav.setViewName("productList");
+			} else {
 				mav.addObject("joinMas", "잘못된 경로로 접속하셨습니다.");
 				mav.setViewName("redirect:/main.do");
 			}
-		}else {
+		} else {
 			mav.addObject("joinMas", "잘못된 경로로 접속하셨습니다.");
 			mav.setViewName("redirect:/main.do");
 		}
-		
+
+		return mav;
+	}
+
+	// 사품등록
+	@Override
+	@RequestMapping(value = "/addProduct.do", method = RequestMethod.GET)
+	public ModelAndView addProduct(@ModelAttribute("member") MemberVO member, HttpServletRequest request)
+			throws Exception {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+
+		if (sessinLogin != null) {
+			String rightChk = (String) sessinLogin.getMasterYN();
+			if (rightChk.equals("M")) {
+				mav.addObject("member", sessinLogin);
+				mav.setViewName("addProduct");
+			} else {
+				mav.addObject("joinMas", "잘못된 경로로 접속하셨습니다.");
+				mav.setViewName("redirect:/main.do");
+			}
+		} else {
+			mav.addObject("joinMas", "잘못된 경로로 접속하셨습니다.");
+			mav.setViewName("redirect:/main.do");
+		}
+
 		return mav;
 	}
 }
