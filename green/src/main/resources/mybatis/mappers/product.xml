@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.product">
+	<resultMap id="productResult" type="productVO">
+		<result property="productId" column="productId" />
+		<result property="p_group" column="p_group" />
+		<result property="productName" column="productName" />
+		<result property="price" column="price" />
+		<result property="discount" column="discount" />
+		<result property="productMileage" column="productMileage" />
+		<result property="salesSum" column="salesSum" />
+		<result property="discountYN" column="discountYN" />
+		<result property="productDate" column="productDate" />
+		<result property="showYN" column="showYN" />
+        
+        <result property="product_optionId" column="product_optionId" />
+        <result property="option" column="option" />
+        <result property="stock" column="stock" />
+        
+        <result property="ImageId" column="ImageId" />
+        <result property="imgType" column="imgType" />
+        <result property="imgURL" column="imgURL" />
+	</resultMap> 
+	
+	<!-- 회원가입 (활성화여부, 상품구분, 상품명, 판매가, 할인여부, 할인가, 상품적입금)--> 
+	<insert id="insertProduct"  parameterType="productVO">
+		<![CDATA[
+		 CALL addProductEdit(#{showYN}, #{p_group}, #{productName}, #{price}, #{discountYN}, #{discount}, #{productMileage});
+		]]>      
+	</insert>
+	
+</mapper>

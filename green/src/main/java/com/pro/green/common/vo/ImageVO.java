@@ -6,6 +6,7 @@ public class ImageVO {
 	private String productId;
 	private String imgType;
 	private String imgURL;
+	
 	public String getImageId() {
 		return ImageId;
 	}

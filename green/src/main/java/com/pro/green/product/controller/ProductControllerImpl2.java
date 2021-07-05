@@ -17,14 +17,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pro.green.member.service.MemberService;
 import com.pro.green.member.vo.MemberVO;
+import com.pro.green.product.vo.ProductVO2;
+import com.pro.green.product.service.ProductService2;
 
-@Controller("ProductControllerImpl2")
+@Controller("ProductController")
 public class ProductControllerImpl2 implements ProductController2 {
 
 	@Autowired
 	private MemberService memberService;
 	@Autowired
 	private MemberVO memberVO;
+	@Autowired
+	private ProductService2 productService;
+	@Autowired
+	private ProductVO2 product;
 
 	// 사품등록 리스트
 	@Override
@@ -75,6 +81,23 @@ public class ProductControllerImpl2 implements ProductController2 {
 			mav.setViewName("redirect:/main.do");
 		}
 
+		return mav;
+	}
+	
+	
+	//상품 등록
+	@Override
+	@RequestMapping(value = "/product/addEdit.do", method = RequestMethod.POST)
+	public ModelAndView addProductEdit(@ModelAttribute("product") ProductVO2 product , HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("html/text;charset=utf-8");
+		ModelAndView mav = new ModelAndView();
+		
+		int result = 0;
+		result = productService.addProductEdit(product);
+		
+		mav.setViewName("redirect:/productList.do");
 		return mav;
 	}
 }

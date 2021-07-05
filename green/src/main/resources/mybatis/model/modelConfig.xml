@@ -7,5 +7,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 		<typeAlias type="com.pro.green.member.vo.MemberVO"  alias="memberVO" />
 		<typeAlias type="com.pro.green.board.vo.ArticleVO"  alias="articleVO" />
+		<typeAlias type="com.pro.green.product.vo.ProductVO2"  alias="productVO" />
 	</typeAliases>
 </configuration>
