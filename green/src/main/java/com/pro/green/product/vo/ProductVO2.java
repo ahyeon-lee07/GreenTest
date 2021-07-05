@@ -1,6 +1,7 @@
 package com.pro.green.product.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -28,6 +29,17 @@ public class ProductVO2 {
 	private String ImageId;
 	private String imgType;
 	private String imgURL;
+	
+	private List<ProductVO2> productVOList;
+
+
+	public List<ProductVO2> getProductVOList() {
+		return productVOList;
+	}
+
+	public void setProductVOList(List<ProductVO2> productVOList) {
+		this.productVOList = productVOList;
+	}
 
 	public ProductVO2() {
 

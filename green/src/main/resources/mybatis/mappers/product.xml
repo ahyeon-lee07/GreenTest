@@ -26,10 +26,10 @@
 	</resultMap> 
 	
 	<!-- 회원가입 (활성화여부, 상품구분, 상품명, 판매가, 할인여부, 할인가, 상품적입금)--> 
-	<insert id="insertProduct"  parameterType="productVO">
+	<insert id="insertProduct"  parameterType="productVO" useGeneratedKeys="true" keyProperty="productId">
 		<![CDATA[
 		 CALL addProductEdit(#{showYN}, #{p_group}, #{productName}, #{price}, #{discountYN}, #{discount}, #{productMileage});
-		]]>      
+		]]>
 	</insert>
 	
 </mapper>

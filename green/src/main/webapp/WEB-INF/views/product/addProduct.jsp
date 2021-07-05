@@ -319,10 +319,10 @@
 
                             plusUl.id = "O_" + count;
                             plusUl.setAttribute('class', 'd-flex flex-row bd-highlight mt-2 p-0 mb-0');
-
+                        
                             str += '<div class="d-flex bd-highlight pr-2"  style="width: 30px;"><span class="listNum bd-highlight pt-2"></span></div>';
-                            str += '<div class="bd-highlight pr-2" style="width: 450px;"><input type="text" class="form-control" id="inputOption" name="option"></div>';
-                            str += '<div class="d-flex flex-row bd-highlight pr-2"><span class="bd-highlight pr-1 pt-2">재고수량:</span><input type="number" class="form-control" id="inputStock" name="stock" min="0" style="width: 80px;"></div>';
+                            str += '<div class="bd-highlight pr-2" style="width: 450px;"><input type="text" class="form-control" id="inputOption" name="productVOList['+ count + '].option"></div>';
+                            str += '<div class="d-flex flex-row bd-highlight pr-2"><span class="bd-highlight pr-1 pt-2">재고수량:</span><input type="number" class="form-control" id="inputStock" name="productVOList['+ count + '].stock" min="0" style="width: 80px;"></div>';
                             str += '<div class="bd-highlight"><button id="btn_OptionDel" type="button" class="btn btn-outline-danger" onclick="optionDel_click(' + count + ');" style="font-size:.8rem; height:38px;">삭제</button></div>';
 
                             plusUl.innerHTML = str;
