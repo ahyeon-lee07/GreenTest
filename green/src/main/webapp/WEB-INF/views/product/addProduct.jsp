@@ -98,28 +98,7 @@
                                                                 class="btn btn-secondary"
                                                                 style="font-size:.8rem; height:38px;">
                                                                 옵션 추가</button>
-                                                            <div id="optionList"
-                                                                class="d-flex bd-highlight flex-column ">
-                                                                <!-- <div class="d-flex flex-row bd-highlight mt-2">
-                                                <div class="d-flex bd-highlight pr-2"><span
-                                                        class="bd-highlight pt-2">1.</span></div>
-                                                <div class="bd-highlight pr-2" style="width: 450px;">
-                                                    <input type="text" class="form-control" id="inputOption"
-                                                        name="option">
-                                                </div>
-                                                <div class="d-flex flex-row bd-highlight pr-2">
-                                                    <span class="bd-highlight pr-1 pt-2">재고수량:</span><input
-                                                        type="number" class="form-control" id="inputStock" name="stock"
-                                                        min="0" style="width: 80px;">
-                                                </div>
-                                                <div class="bd-highlight">
-                                                    <button id="btn_addOption" type="button"
-                                                        class="btn btn-outline-danger"
-                                                        style="font-size:.8rem; height:38px;">
-                                                        삭제</button>
-                                                </div>
-                                            </div> -->
-
+                                                            <div id="optionList" class="d-flex bd-highlight flex-column" data-value=0>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -311,22 +290,23 @@
 
                         //옵션 버튼
                         var addOption = document.getElementById('btn_addOption');
-                        var count = 0;
+                        
                         addOption.addEventListener('click', function () {
                             var List = document.getElementById('optionList');
+                            var count = List.dataset.value;
                             var plusUl = document.createElement('dir');
                             var str = "";
 
                             plusUl.id = "O_" + count;
-                            plusUl.setAttribute('class', 'd-flex flex-row bd-highlight mt-2 p-0 mb-0');
+                            plusUl.setAttribute('class', 'd-flex flex-row bd-highlight mt-2 p-0 mb-0 optionList optionID');
                         
                             str += '<div class="d-flex bd-highlight pr-2"  style="width: 30px;"><span class="listNum bd-highlight pt-2"></span></div>';
-                            str += '<div class="bd-highlight pr-2" style="width: 450px;"><input type="text" class="form-control" id="inputOption" name="productVOList['+ count + '].option"></div>';
-                            str += '<div class="d-flex flex-row bd-highlight pr-2"><span class="bd-highlight pr-1 pt-2">재고수량:</span><input type="number" class="form-control" id="inputStock" name="productVOList['+ count + '].stock" min="0" style="width: 80px;"></div>';
+                            str += '<div class="bd-highlight pr-2" style="width: 450px;"><input type="text" class="form-control optionTitle" id="inputOption'+ count +'" name="productVOList['+ count + '].option"></div>';
+                            str += '<div class="d-flex flex-row bd-highlight pr-2"><span class="bd-highlight pr-1 pt-2">재고수량:</span><input type="number" class="form-control stockTitle" id="inputStock'+ count +'" name="productVOList['+ count + '].stock" min="0" style="width: 80px;"></div>';
                             str += '<div class="bd-highlight"><button id="btn_OptionDel" type="button" class="btn btn-outline-danger" onclick="optionDel_click(' + count + ');" style="font-size:.8rem; height:38px;">삭제</button></div>';
 
                             plusUl.innerHTML = str;
-                            count++;
+                            document.getElementById('optionList').dataset.value++
                             List.appendChild(plusUl);
 
                             //옵션 리스트 숫자
@@ -336,6 +316,7 @@
                         //옵션 삭제
                         function optionDel_click(n) {
                             document.getElementById('O_' + n).remove();
+                            document.getElementById('optionList').dataset.value--;
                             listNumbering();
                         };
 
@@ -345,17 +326,40 @@
 
                             for (var i = 0; i < listBox.length; i++) {
                                 document.getElementsByClassName('listNum')[i].innerHTML = (i + 1) + '. ';
+                                document.getElementsByClassName('optionID')[i].id = "O_" + i;
                             }
                         }
 
-                        //전송 체크
+                        //전송 체크  document.getElementById('optionList').childNodes
                         function checkLogin() {
                             var form = document.addProduct;
+
+                            //옵션 리스트 빈값 체크
+                            function optinoListChk(optionTitle) {
+                                for(var i=0; i<document.getElementsByClassName(optionTitle).length; i++){
+                                    if(document.getElementsByClassName(optionTitle)[i].value == ""){
+                                        return optionTitle;
+                                    }
+                                }
+                            }
+
+                            var optionChk = optinoListChk("optionTitle");
+                            var stockChk = optinoListChk("stockTitle");
+
+
                             //상품 옵션. 이미지 필수 체크 추가 되어야 함.  
                             if (form.productName.value == "") {
                                 alert("상품명을 입력해 주세요.");
                                 return false;
-
+                            }else if (document.getElementsByClassName('optionList').length == 0) {
+                                alert("상품 옵션은 한개 이상 입력 하셔야 합니다.");
+                                return false;
+                            }else if (optionChk == "optionTitle") {
+                                alert("옵션 내용을 입력해 주세요.");
+                                return false;
+                            }else if (stockChk == "stockTitle") {
+                                alert("옵션 수량을 입력해 주세요.");
+                                return false;
                             }else if (form.price.value == "") {
                                 alert("판매가를 입력해 주세요.");
                                 return false;

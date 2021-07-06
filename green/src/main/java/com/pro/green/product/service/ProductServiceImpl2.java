@@ -1,5 +1,8 @@
 package com.pro.green.product.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -21,5 +24,15 @@ public class ProductServiceImpl2 implements ProductService2 {
 	@Override
 	public int addProductEdit(ProductVO2 product) throws DataAccessException {
 		return productDAO.insertProduct(product);
+	}
+	
+	// 등록한 상품 아이디 가져오기
+	public String selectProductId(ProductVO2 product) throws DataAccessException {
+		return productDAO.selectProductId(product);
+	}
+	
+	//옵션 등록
+	public int addProductOption(Map<String, Object> paramMap) throws DataAccessException {
+		return productDAO.insertProductOption(paramMap);
 	}
 }

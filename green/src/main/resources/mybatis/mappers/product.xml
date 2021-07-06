@@ -25,11 +25,31 @@
         <result property="imgURL" column="imgURL" />
 	</resultMap> 
 	
-	<!-- 회원가입 (활성화여부, 상품구분, 상품명, 판매가, 할인여부, 할인가, 상품적입금)--> 
-	<insert id="insertProduct"  parameterType="productVO" useGeneratedKeys="true" keyProperty="productId">
+	<!-- 상품등록 (활성화여부, 상품구분, 상품명, 판매가, 할인여부, 할인가, 상품적입금)--> 
+	<insert id="insertProduct"  parameterType="productVO">
 		<![CDATA[
 		 CALL addProductEdit(#{showYN}, #{p_group}, #{productName}, #{price}, #{discountYN}, #{discount}, #{productMileage});
 		]]>
+	</insert>
+	
+	
+	<!-- 등록 후 상품 아아디 조회 (상품구분 , 상품명)--> 
+	<select id="selectProductId"  parameterType="productVO" resultType="String">
+		<![CDATA[
+		 CALL selectProductId(#{p_group}, #{productName});
+		]]>
+	</select>
+	
+	<!-- 상품옵션등록 --> 
+	<insert id="insertProductOption"  parameterType="java.util.HashMap">
+		 INSERT INTO 
+				product_option(productId, p_option, p_stock) 
+			VALUES
+				(
+					#{productId},
+				    #{option},
+				    #{stock}
+				);
 	</insert>
 	
 </mapper>

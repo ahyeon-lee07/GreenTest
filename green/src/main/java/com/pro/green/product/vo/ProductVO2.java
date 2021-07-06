@@ -21,9 +21,9 @@ public class ProductVO2 {
 	private String showYN;
 
 	// 상품 옵션 관련
-	private String product_optionId;
-	private String option;
-	private int stock;
+	private String p_optionId;
+	private String p_option;
+	private int p_stock;
 
 	// 이미지 관려
 	private String ImageId;
@@ -31,7 +31,7 @@ public class ProductVO2 {
 	private String imgURL;
 	
 	private List<ProductVO2> productVOList;
-
+	
 
 	public List<ProductVO2> getProductVOList() {
 		return productVOList;
@@ -44,6 +44,7 @@ public class ProductVO2 {
 	public ProductVO2() {
 
 	}
+	
 
 	public String getProductId() {
 		return productId;
@@ -126,27 +127,27 @@ public class ProductVO2 {
 	}
 
 	public String getProduct_optionId() {
-		return product_optionId;
+		return p_optionId;
 	}
 
-	public void setProduct_optionId(String product_optionId) {
-		this.product_optionId = product_optionId;
+	public void setProduct_optionId(String p_optionId) {
+		this.p_optionId = p_optionId;
 	}
 
 	public String getOption() {
-		return option;
+		return p_option;
 	}
 
-	public void setOption(String option) {
-		this.option = option;
+	public void setOption(String p_option) {
+		this.p_option = p_option;
 	}
 
 	public int getStock() {
-		return stock;
+		return p_stock;
 	}
 
-	public void setStock(int stock) {
-		this.stock = stock;
+	public void setStock(int p_stock) {
+		this.p_stock = p_stock;
 	}
 
 	public String getImageId() {
@@ -172,5 +173,5 @@ public class ProductVO2 {
 	public void setImgURL(String imgURL) {
 		this.imgURL = imgURL;
 	}
-
+	
 }
