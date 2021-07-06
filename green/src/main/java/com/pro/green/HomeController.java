@@ -89,17 +89,19 @@ public class HomeController {
 		return "orderList";
 	}
 
-	// 하드 케이스
+	/*	
+    // 하드 케이스
 	@RequestMapping(value = "/HardCase.do", method = RequestMethod.GET)
 	public String HardCase(Locale locale, Model model) {
 		return "HardCase";
 	}
-
+	*/
 	// 하드 케이스 상세페이지
 	@RequestMapping(value = "/HardCaseDetail.do", method = RequestMethod.GET)
 	public String HardCaseDetail(Locale locale, Model model) {
 		return "HardCaseDetail";
 	}
+	
 	
 	// 젤 케이스
 	@RequestMapping(value = "/GelCase.do", method = RequestMethod.GET)
