@@ -15,53 +15,86 @@
 		<result property="discountYN" column="discountYN" />
 		<result property="productDate" column="productDate" />
 		<result property="showYN" column="showYN" />
-        
-        <result property="product_optionId" column="product_optionId" />
-        <result property="option" column="option" />
-        <result property="stock" column="stock" />
-        
-        <result property="ImageId" column="ImageId" />
-        <result property="imgType" column="imgType" />
-        <result property="imgURL" column="imgURL" />
-	</resultMap> 
-	
-	<!-- 상품등록 (활성화여부, 상품구분, 상품명, 판매가, 할인여부, 할인가, 상품적입금)--> 
-	<insert id="insertProduct"  parameterType="productVO">
+
+		<result property="product_optionId" column="product_optionId" />
+		<result property="option" column="option" />
+		<result property="stock" column="stock" />
+
+		<result property="ImageId" column="ImageId" />
+		<result property="imgType" column="imgType" />
+		<result property="imgURL" column="imgURL" />
+	</resultMap>
+
+	<!-- 상품등록 (활성화여부, 상품구분, 상품명, 판매가, 할인여부, 할인가, 상품적입금) -->
+	<insert id="insertProduct" parameterType="productVO">
 		<![CDATA[
 		 CALL addProductEdit(#{showYN}, #{p_group}, #{productName}, #{price}, #{discountYN}, #{discount}, #{productMileage});
 		]]>
 	</insert>
-	
-	
-	<!-- 등록 후 상품 아아디 조회 (상품구분 , 상품명)--> 
-	<select id="selectProductId"  parameterType="productVO" resultType="String">
+
+
+	<!-- 등록 후 상품 아아디 조회 (상품구분 , 상품명) -->
+	<select id="selectProductId" parameterType="productVO"
+		resultType="String">
 		<![CDATA[
 		 CALL selectProductId(#{p_group}, #{productName});
 		]]>
 	</select>
-	
-	<!-- 상품옵션등록 --> 
-	<insert id="insertProductOption"  parameterType="java.util.HashMap">
-		 INSERT INTO 
-				product_option(productId, p_option, p_stock) 
-			VALUES
-				(
-					#{productId},
-				    #{option},
-				    #{stock}
-				);
+
+	<!-- 상품옵션등록 -->
+	<insert id="insertProductOption"
+		parameterType="java.util.HashMap">
+		INSERT INTO
+		product_option(productId, p_option, p_stock)
+		VALUES
+		(
+		#{productId},
+		#{option},
+		#{stock}
+		);
 	</insert>
-	
-	<!-- 상품이미지 등록 --> 
-	<insert id="insertProductImg"  parameterType="java.util.HashMap">
-		 INSERT INTO 
-				image(productId, imgType, imgURL) 
-			VALUES
-				(
-					#{productId},
-				    #{imgType},
-				    #{imgURL}
-				);
+
+	<!-- 상품이미지 등록 -->
+	<insert id="insertProductImg" parameterType="java.util.HashMap">
+		INSERT INTO
+		image(productId, imgType, imgURL)
+		VALUES
+		(
+		#{productId},
+		#{imgType},
+		#{imgURL}
+		);
 	</insert>
-	
+
+
+	<!-- 테스트 -->
+	<select id="selectBoardList" resultType="hashmap"
+		parameterType="hashmap">
+    <![CDATA[
+       SELECT 
+			A.*,
+		    B.imgId,
+		    B.imgType,
+		    B.imgURL
+		FROM 
+			product AS A
+		LEFT JOIN 
+			image AS B ON A.productId = B.productId
+		WHERE
+			B.imgType = 'product_M'
+		ORDER BY productDate DESC LIMIT #{pageStart}, #{perPageNum};
+    ]]>
+	</select>
+
+	<select id="countBoardList" resultType="Integer">
+    <![CDATA[
+        SELECT
+            count(*)
+        FROM
+            product
+    ]]>
+	</select>
+
+
+
 </mapper>
