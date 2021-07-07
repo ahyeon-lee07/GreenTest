@@ -1,6 +1,7 @@
 package com.pro.green.product.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pro.green.product.vo.Criteria;
 import com.pro.green.product.vo.ProductVO2;
 import com.pro.green.product.dao.ProductDAO2;
 
@@ -39,5 +41,13 @@ public class ProductServiceImpl2 implements ProductService2 {
 	//상품 이미지 등록
 	public int addProductImg(Map<String, Object> imageMap) throws DataAccessException{
 		return productDAO.insertProductImg(imageMap);
+	}
+	
+	//test
+	public List<Map<String, Object>> selectBoardList(Criteria cri) throws DataAccessException {
+		return productDAO.selectBoardList(cri);
+	}
+	public int countBoardListTotal() throws DataAccessException {
+		return productDAO.countBoardListTotal();
 	}
 }

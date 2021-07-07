@@ -26,6 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pro.green.member.service.MemberService;
 import com.pro.green.member.vo.MemberVO;
+import com.pro.green.product.vo.Criteria;
+import com.pro.green.product.vo.PageMaker;
 import com.pro.green.product.vo.ProductVO2;
 import com.pro.green.product.service.ProductService2;
 
@@ -40,6 +42,49 @@ public class ProductControllerImpl2 implements ProductController2 {
 	private ProductService2 productService;
 	@Autowired
 	private ProductVO2 product;
+	
+	@Autowired
+	private Criteria criteria;
+	@Autowired
+	private PageMaker pageMaker;
+	
+	// 사품등록 리스트 Test
+	@Override
+	@RequestMapping(value = "/productListTest.do", method = RequestMethod.GET)
+	public ModelAndView productListTest(@ModelAttribute("member") MemberVO member, HttpServletRequest request, Criteria cri)
+			throws Exception {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+
+		if (sessinLogin != null) {
+			String rightChk = (String) sessinLogin.getMasterYN();
+			if (rightChk.equals("M")) {
+				mav.addObject("member", sessinLogin);
+				mav.setViewName("productList");
+			} else {
+				mav.addObject("joinMas", "잘못된 경로로 접속하셨습니다.");
+				mav.setViewName("redirect:/main.do");
+			}
+		} else {
+			mav.addObject("joinMas", "잘못된 경로로 접속하셨습니다.");
+			mav.setViewName("redirect:/main.do");
+		}
+		
+		PageMaker pageMaker = new PageMaker();
+		
+		int pageTotal = productService.countBoardListTotal();
+		
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(pageTotal);
+		
+		List<Map<String,Object>> list = productService.selectBoardList(cri);
+	    mav.addObject("list", list);
+	    mav.addObject("pageMaker", pageMaker);
+
+	    
+		return mav;
+	}
 
 	// 사품등록 리스트
 	@Override
@@ -137,9 +182,12 @@ public class ProductControllerImpl2 implements ProductController2 {
 		return mav;
 	}
 	
-	private static final String CURR_IMAGE_REPO_PATH = "C:\\upload\\green";
 	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest, String selectProductID) throws Exception {
 		
+		//이미지 경로
+		String root_path = multipartRequest.getSession().getServletContext().getRealPath("/");  
+		String image_path = root_path + "resources\\img" ;
+
 		List<String> fileList = new ArrayList<String>();
 		String imgPart = multipartRequest.getParameter("p_group");
 		
@@ -154,7 +202,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 			MultipartFile mFile = multipartRequest.getFile(FileName);	//파일 이름에 대한 MultipartFile 객체를 가져옴
 			String originalFileName = mFile.getOriginalFilename();		//실제 파일 이름을 가져옴
 			fileList.add(originalFileName);		//파일 이름을 하나씩 fileList에 저장
-			File file = new File(CURR_IMAGE_REPO_PATH + "\\" + imgPart + "\\" + FileName);
+			File file = new File(image_path + "\\" + imgPart + "\\" + FileName);
 			if(mFile.getSize() != 0) {	//첨부된 파일이 있는지 체크
 				//경로에 파일이 없으면 그 경로에 해당하는 디렉토리를 만든 후 파일 생성
 				if(! file.exists()) {
@@ -162,7 +210,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 						file.createNewFile();
 					}
 				}
-				mFile.transferTo(new File(CURR_IMAGE_REPO_PATH + "\\" + imgPart + "\\" + originalFileName));	//임시로 저장된 mutipartFile을 실제 파일로 전송
+				mFile.transferTo(new File(image_path + "\\" + imgPart + "\\" + originalFileName));	//임시로 저장된 mutipartFile을 실제 파일로 전송
 			}
 			
 			//이미지 디비에 저장
