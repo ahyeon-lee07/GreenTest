@@ -13,6 +13,5 @@ import com.pro.green.product.vo.ProductVO2;
 public interface ProductController2 {
 	public ModelAndView productList(@ModelAttribute("member") MemberVO member, HttpServletRequest request) throws Exception;
 	public ModelAndView addProduct(@ModelAttribute("member") MemberVO member, HttpServletRequest request) throws Exception;
-	public ModelAndView addProductEdit(@ModelAttribute("product") ProductVO2 product , HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView addProductEditaddEditTest(@ModelAttribute("product") ProductVO2 product, MultipartHttpServletRequest request,HttpServletResponse response) throws Exception;
+	public ModelAndView addProductEditaddEdit(@ModelAttribute("product") ProductVO2 product, MultipartHttpServletRequest request,HttpServletResponse response) throws Exception;
 }
