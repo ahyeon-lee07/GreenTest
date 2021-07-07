@@ -33,4 +33,10 @@ public class ProductDAOImpl2 implements ProductDAO2 {
 		int result = sqlSession.insert("mapper.product.insertProductOption", paramMap);
 		return result;
 	}
+	
+	//상품 이미지 등록
+	public int insertProductImg(Map<String, Object> imageMap) throws DataAccessException {
+		int result = sqlSession.insert("mapper.product.insertProductImg", imageMap);
+		return result;
+	}
 }

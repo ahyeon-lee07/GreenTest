@@ -11,4 +11,5 @@ public interface ProductService2 {
 	public int addProductEdit(ProductVO2 product) throws DataAccessException;
 	public String selectProductId(ProductVO2 product) throws DataAccessException;
 	public int addProductOption(Map<String, Object> paramMap) throws DataAccessException;
+	public int addProductImg(Map<String, Object> imageMap) throws DataAccessException;
 }
