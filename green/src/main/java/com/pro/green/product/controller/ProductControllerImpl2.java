@@ -93,46 +93,11 @@ public class ProductControllerImpl2 implements ProductController2 {
 		return mav;
 	}
 
+	
 	// 상품 등록
 	@Override
 	@RequestMapping(value = "/product/addEdit.do", method = RequestMethod.POST)
-	public ModelAndView addProductEdit(@ModelAttribute("product") ProductVO2 product, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("html/text;charset=utf-8");
-		ModelAndView mav = new ModelAndView();
-
-		int result = 0;
-		result = productService.addProductEdit(product);
-
-		// 등록한 상품 아이디 가져오기
-		String selectProductID = productService.selectProductId(product);
-
-		// 상품 옵션등록
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("productId", selectProductID);
-
-		for (int i = 0; i < product.getProductVOList().size(); i++) {
-
-			System.out.println(product.getProductVOList().get(i).getOption());
-			System.out.println(product.getProductVOList().get(i).getStock());
-
-			paramMap.put("option", product.getProductVOList().get(i).getOption());
-			paramMap.put("stock", product.getProductVOList().get(i).getStock());
-
-			result = productService.addProductOption(paramMap);
-		}
-
-		mav.setViewName("redirect:/productList.do");
-		return mav;
-	}
-
-	
-	// 상품 등록 Test
-	@Override
-	@RequestMapping(value = "/product/addEditTest.do", method = RequestMethod.POST)
-	public ModelAndView addProductEditaddEditTest(@ModelAttribute("product") ProductVO2 product, MultipartHttpServletRequest request,
+	public ModelAndView addProductEditaddEdit(@ModelAttribute("product") ProductVO2 product, MultipartHttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
 		request.setCharacterEncoding("utf-8");
