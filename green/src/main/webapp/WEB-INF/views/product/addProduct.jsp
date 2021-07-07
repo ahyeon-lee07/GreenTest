@@ -19,7 +19,7 @@
                                 <img src="${contextPath }/resources/img/require.png">
                                 <span class="">필수입력사항</span>
                             </div>
-                            <form action="${contextPath }/product/addEdit.do" method="POST" name="addProduct">
+                            <form action="${contextPath }/product/addEditTest.do" method="POST" name="addProduct" enctype="multipart/form-data">
                                 <div class="row border-bottom pm-2"></div>
                                 <div class="row mb-4">
                                     <div class="col-12">

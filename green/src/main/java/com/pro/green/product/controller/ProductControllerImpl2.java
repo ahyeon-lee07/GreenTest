@@ -1,6 +1,8 @@
 package com.pro.green.product.controller;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -18,6 +20,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pro.green.member.service.MemberService;
@@ -101,28 +105,115 @@ public class ProductControllerImpl2 implements ProductController2 {
 
 		int result = 0;
 		result = productService.addProductEdit(product);
-		
+
 		// 등록한 상품 아이디 가져오기
 		String selectProductID = productService.selectProductId(product);
 
-		
-		//상품 옵션등록
+		// 상품 옵션등록
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("productId", selectProductID);
-		
+
 		for (int i = 0; i < product.getProductVOList().size(); i++) {
-			
+
 			System.out.println(product.getProductVOList().get(i).getOption());
 			System.out.println(product.getProductVOList().get(i).getStock());
 
 			paramMap.put("option", product.getProductVOList().get(i).getOption());
 			paramMap.put("stock", product.getProductVOList().get(i).getStock());
-			
+
 			result = productService.addProductOption(paramMap);
 		}
 
 		mav.setViewName("redirect:/productList.do");
 		return mav;
+	}
+
+	
+	// 상품 등록 Test
+	@Override
+	@RequestMapping(value = "/product/addEditTest.do", method = RequestMethod.POST)
+	public ModelAndView addProductEditaddEditTest(@ModelAttribute("product") ProductVO2 product, MultipartHttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("html/text;charset=utf-8");
+		ModelAndView mav = new ModelAndView();
+
+		int result = 0;
+		result = productService.addProductEdit(product);
+
+		// 등록한 상품 아이디 가져오기
+		String selectProductID = productService.selectProductId(product);
+
+		// 상품 옵션등록
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("productId", selectProductID);
+
+		for (int i = 0; i < product.getProductVOList().size(); i++) {
+
+			paramMap.put("option", product.getProductVOList().get(i).getOption());
+			paramMap.put("stock", product.getProductVOList().get(i).getStock());
+
+			result = productService.addProductOption(paramMap);
+		}
+		
+		
+		//이미지 업로드
+		//Map map = new HashMap();	//매개변수 정보와 파일 정보를 저장할 Map을 생성
+				
+		//파일을 업로드한 후 반환된 파일 이름이 저장된 FileList를 다시 map에 저장
+		List fileList = fileProcess(request, selectProductID);
+		
+		//map.put("fileList", fileList);
+		//mao을 결과창으로 포워딩
+		//mav.addObject("map", map);
+
+		mav.setViewName("redirect:/productList.do");
+		return mav;
+	}
+	
+	private static final String CURR_IMAGE_REPO_PATH = "C:\\upload\\green";
+	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest, String selectProductID) throws Exception {
+		
+		List<String> fileList = new ArrayList<String>();
+		String imgPart = multipartRequest.getParameter("p_group");
+		
+		Map<String, Object> ImageMap = new HashMap<String, Object>();
+		ImageMap.put("productId", selectProductID);
+		int result = 0;
+		
+		//첨부된 파일 이름을 가져옵니다.
+		Iterator<String> fileNames = multipartRequest.getFileNames();
+		while(fileNames.hasNext()) {
+			String FileName = fileNames.next();
+			MultipartFile mFile = multipartRequest.getFile(FileName);	//파일 이름에 대한 MultipartFile 객체를 가져옴
+			String originalFileName = mFile.getOriginalFilename();		//실제 파일 이름을 가져옴
+			fileList.add(originalFileName);		//파일 이름을 하나씩 fileList에 저장
+			File file = new File(CURR_IMAGE_REPO_PATH + "\\" + imgPart + "\\" + FileName);
+			if(mFile.getSize() != 0) {	//첨부된 파일이 있는지 체크
+				//경로에 파일이 없으면 그 경로에 해당하는 디렉토리를 만든 후 파일 생성
+				if(! file.exists()) {
+					if(file.getParentFile().mkdirs()) {
+						file.createNewFile();
+					}
+				}
+				mFile.transferTo(new File(CURR_IMAGE_REPO_PATH + "\\" + imgPart + "\\" + originalFileName));	//임시로 저장된 mutipartFile을 실제 파일로 전송
+			}
+			
+			//이미지 디비에 저장
+			if(FileName.equals("imgURL_product_M")) {
+				ImageMap.put("imgType", "product_M");
+				ImageMap.put("imgURL", originalFileName);
+				result = productService.addProductImg(ImageMap);
+				
+			}else if(FileName.equals("imgURL_product_S")) {
+				ImageMap.put("imgType", "product_S");
+				ImageMap.put("imgURL", originalFileName);
+				result = productService.addProductImg(ImageMap);
+			}
+			
+		}
+		return fileList;
 	}
 
 }

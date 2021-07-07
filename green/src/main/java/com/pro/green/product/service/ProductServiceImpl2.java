@@ -35,4 +35,9 @@ public class ProductServiceImpl2 implements ProductService2 {
 	public int addProductOption(Map<String, Object> paramMap) throws DataAccessException {
 		return productDAO.insertProductOption(paramMap);
 	}
+	
+	//상품 이미지 등록
+	public int addProductImg(Map<String, Object> imageMap) throws DataAccessException{
+		return productDAO.insertProductImg(imageMap);
+	}
 }

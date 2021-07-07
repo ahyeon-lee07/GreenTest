@@ -52,4 +52,16 @@
 				);
 	</insert>
 	
+	<!-- 상품이미지 등록 --> 
+	<insert id="insertProductImg"  parameterType="java.util.HashMap">
+		 INSERT INTO 
+				image(productId, imgType, imgURL) 
+			VALUES
+				(
+					#{productId},
+				    #{imgType},
+				    #{imgURL}
+				);
+	</insert>
+	
 </mapper>
