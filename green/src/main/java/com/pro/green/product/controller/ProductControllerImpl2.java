@@ -84,6 +84,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 			String productId = (String) list.get(i).get("productId");
 			List optionList = productService.selectOptionLIst(productId);
 			System.out.println(productId);
+			
 		}
 		
 		
