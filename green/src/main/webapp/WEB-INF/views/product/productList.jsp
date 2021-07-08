@@ -71,33 +71,6 @@
 									</tr>
 								</thead>
 								<tbody class="border-bottom">
-									<!-- <tr class="">
-					<th class="text-center align-middle align-middle px-1">
-						<div>
-							<input type='checkbox' name='Choice' />
-						</div>
-					</th>
-					<td class="text-center align-middle px-2"><img
-						src="${contextPath}/resources/img/케이스이미지.PNG"
-						class="img-thumbnail" alt="#"></td>
-					<td class="text-center align-middle px-2">hard</td>
-					<td class="align-middle pl-3">
-						<div class="row font-weight-bold pb-1">
-							<a href="${contextPath }/HardCaseDetail.do" style="color: black">
-								컬러칩 케이스</a>
-						</div>
-					</td>
-					<td class="text-center align-middle px-2">12,000</td>
-					<td class="text-center align-middle px-2" style="font-size: .8rem;">150</td>
-					<td class="text-center align-middle px-2">
-						<div class="bd-highlight">
-							<a href="${contextPath }/orderList.do">
-								<button type="button" class="btn btn-outline-secondary btn-sm"
-									style="font-size: 0.7rem; width: 100%; display: block;">상세정보</button>
-							</a>
-						</div>
-					</td>
-				</tr> -->
 									<c:forEach items="${list }" var="list">
 										<tr id="${list.productId }" class="">
 											<th class="text-center align-middle align-middle px-1">
@@ -109,11 +82,20 @@
 													src="${contextPath}/resources/img/${list.p_group }/${list.imgURL }"
 													class="img-thumbnail" alt="#"></td>
 											<td class="text-center align-middle px-2">${list.p_group }</td>
-											<td class="align-middle pl-3">
-												<div class="row font-weight-bold pb-1">
-													<a href="${contextPath }/HardCaseDetail.do" style="color: black">
-														${list.productName }</a>
+											<td class="align-middle flex-column">
+												<div class="font-weight-bold pb-1 bd-highlight">
+													<a href="${contextPath }/HardCaseDetail.do" style="color: black">${list.productName }</a>
 												</div>
+												<c:forEach items="${optionList }" var="optionList1">
+													<c:forEach items="${optionList1 }" var="optionList" varStatus="Num">
+														<c:if test="${list.productId eq optionList.productId}">
+															<div class="bd-highlight">
+															${Num.count}. ${optionList.p_option }
+																<span class="pl-4">재고: ${optionList.p_stock } 개</span>
+															</div>
+														</c:if>
+													</c:forEach>
+												</c:forEach>
 											</td>
 											<!-- 판매가 discountYN 여부에 따라 할인 가격 표시  -->
 											<td class="text-center align-middle px-2">

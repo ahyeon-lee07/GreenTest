@@ -95,7 +95,7 @@
     ]]>
 	</select>
 	
-	<select id="selectOptionLIst" resultType="list" parameterType="String">
+	<select id="selectOptionLIst" resultType="hashmap" parameterType="String">
     <![CDATA[
        SELECT 
 			*
