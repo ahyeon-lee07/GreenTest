@@ -50,4 +50,7 @@ public class ProductServiceImpl2 implements ProductService2 {
 	public int countBoardListTotal() throws DataAccessException {
 		return productDAO.countBoardListTotal();
 	}
+	public List selectOptionLIst(String productId) throws DataAccessException{
+		return productDAO.selectOptionLIst(productId);
+	}
 }

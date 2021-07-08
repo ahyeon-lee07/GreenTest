@@ -79,6 +79,14 @@ public class ProductControllerImpl2 implements ProductController2 {
 		pageMaker.setTotalCount(pageTotal);
 		
 		List<Map<String,Object>> list = productService.selectBoardList(cri);
+		
+		for(int i=0; i<list.size(); i++) {
+			String productId = (String) list.get(i).get("productId");
+			List optionList = productService.selectOptionLIst(productId);
+			System.out.println(productId);
+		}
+		
+		
 	    mav.addObject("list", list);
 	    mav.addObject("pageMaker", pageMaker);
 

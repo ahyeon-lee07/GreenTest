@@ -17,4 +17,5 @@ public interface ProductDAO2 {
 	
 	public List<Map<String, Object>> selectBoardList(Criteria cri) throws DataAccessException;
 	public int countBoardListTotal() throws DataAccessException;
+	public List selectOptionLIst(String productId) throws DataAccessException;
 }
