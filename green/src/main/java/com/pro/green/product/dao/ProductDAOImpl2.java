@@ -52,4 +52,8 @@ public class ProductDAOImpl2 implements ProductDAO2 {
 		int result = sqlSession.selectOne("mapper.product.countBoardList");
 		return result;
 	}
+	public List selectOptionLIst(String productId) throws DataAccessException {
+		List result = sqlSession.selectList("mapper.product.selectOptionLIst", productId);
+		return result;
+	}
 }

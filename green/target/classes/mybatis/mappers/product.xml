@@ -94,6 +94,17 @@
             product
     ]]>
 	</select>
+	
+	<select id="selectOptionLIst" resultType="list" parameterType="String">
+    <![CDATA[
+       SELECT 
+			*
+		FROM 
+			product_option
+		WHERE
+			productId = #{productId};
+    ]]>
+	</select>
 
 
 
