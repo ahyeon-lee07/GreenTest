@@ -66,7 +66,7 @@
                             <c:choose>
                             	<c:when test="${member.masterYN == 'M' }">
                                     <li class="nav-item mr-3">
-                                        <a class="nav-link text-secondary" href="${contextPath }/productListTest.do">상품등록</a>
+                                        <a class="nav-link text-secondary" href="${contextPath }/productList.do">상품등록</a>
                                     </li>
                             	</c:when>
                             </c:choose>
