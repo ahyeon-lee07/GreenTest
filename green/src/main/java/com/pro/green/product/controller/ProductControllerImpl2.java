@@ -48,7 +48,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 	@Autowired
 	private PageMaker pageMaker;
 	
-	// 사품등록 리스트 Test
+	// 사품등록 리스트
 	@Override
 	@RequestMapping(value = "/productList.do", method = RequestMethod.GET)
 	public ModelAndView productList(@ModelAttribute("member") MemberVO member, HttpServletRequest request, Criteria cri)
@@ -210,13 +210,6 @@ public class ProductControllerImpl2 implements ProductController2 {
 			
 		}
 		return fileList;
-	}
-
-
-	@Override
-	public ModelAndView productList(MemberVO member, HttpServletRequest request) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
