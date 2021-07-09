@@ -1,295 +1,339 @@
 <!--상진8 규찬2-->
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
-    <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-        <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-            <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-                <% request.setCharacterEncoding("UTF-8"); %>
-                    <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-                    <!-- 메인 -->
-                    <!-- 메인 -->
-                    <main class="mainH">
-                        <div class="container">
-                            <!-- 페이지 타이틀 부분 -->
-                            <div class="d-flex justify-content-between mt-5">
-                                <div class="bd-highlight">
-                                    <h4 class="page_title">상품등록22</h4>
-                                </div>
-                            </div>
-                            <div class="bd-highlight" style="text-align: right;">
-                                <img src="${contextPath }/resources/img/require.png">
-                                <span class="">필수입력사항</span>
-                            </div>
-                            <form action="${contextPath }/product/addEdit.do" method="POST" name="addProduct"
-                                enctype="multipart/form-data">
-                                <div class="row border-bottom pm-2"></div>
-                                <div class="row mb-4">
-                                    <div class="col-12">
-                                        <form name="joinForm" method="POST">
-                                            <div class="row border-bottom py-2">
-                                                <div class="col p-0">
-                                                    <div class="d-flex bd-highlight">
-                                                        <label for="inputShowYN"
-                                                            class="bd-highlight col-form-label pl-2"
-                                                            style="width: 140px;">활성화 여부</label>
-                                                        <div class="d-flex flex-row bd-highlight pr-2">
-                                                            <div class="custom-control custom-switch pt-2">
-                                                                <input type="checkbox"
-                                                                    class="custom-control-input YNChk" id="inputShowYN"
-                                                                    value="${ProductVO.showYN }" checked>
-                                                                <input id="showYN_V" class="input_V" type="text"
-                                                                    name="showYN" value="${ProductVO.showYN }" style="display: none;">
-                                                                <label id="inputShowYNLabel"
-                                                                    class="custom-control-label" for="inputShowYN"
-                                                                    style="width: 70px;">활성화</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row border-bottom py-2">
-                                                <div class="col p-0">
-                                                    <div class="d-flex bd-highlight">
-                                                        <label for="inputGroup" class="bd-highlight col-form-label pl-2"
-                                                            style="width: 140px;">
-                                                            상품 구분
-                                                        </label>
-                                                        <div class="flex-grow bd-highlight flex-column pr-2">
-                                                            <div class="flex-grow-1 bd-highlight pr-2">
-                                                                <div class="d-flex">
-                                                                    <select id="inputGroup" class="form-control "
-                                                                        name="p_group">
-                                                                        <option value="hard" selected>하드케이스</option>
-                                                                        <option value="gel">젤케이스</option>
-                                                                        <option value="card">카드케이스</option>
-                                                                        <option value="airPods">에어팟케이스</option>
-                                                                        <option value="buds">버즈케이스</option>
-                                                                        <option value="keyring">키링</option>
-                                                                        <option value="smart">스마트톡</option>
-                                                                    </select>
-                                                                    <div id="p_group" style="display: none;">${ProductVO.p_group }</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row border-bottom py-2">
-                                                <div class="col p-0">
-                                                    <div class="d-flex bd-highlight">
-                                                        <label for="inputProductName"
-                                                            class="bd-highlight col-form-label pl-2"
-                                                            style="width: 140px;"><img
-                                                                src="${contextPath }/resources/img/require.png">상품명</label>
-                                                        <div class="flex-grow-1 bd-highlight pr-2">
-                                                        	<c:choose>
-                                                        		<c:when test="${ProductVO != null}">
-                                                        			<input type="text" class="form-control"
-                                                                		id="inputProductName" name="productName" value="${ProductVO.productName }">
-                                                        		</c:when>
-                                                        		<c:otherwise>
-	                                                        		<input type="text" class="form-control"
-	                                                                id="inputProductName" name="productName">
-                                                        		</c:otherwise>
-                                                        	</c:choose>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row border-bottom py-2">
-                                                <div class="col p-0">
-                                                    <div class="d-flex bd-highlight">
-                                                        <label for="inputProductOption"
-                                                            class="bd-highlight col-form-label pl-2"
-                                                            style="width: 140px;"><img
-                                                                src="${contextPath }/resources/img/require.png">상품
-                                                            옵션</label>
-                                                        <div class="flex-grow bd-highlight pr-2 flex-column">
-                                                            <button id="btn_addOption" type="button"
-                                                                class="btn btn-secondary"
-                                                                style="font-size:.8rem; height:38px;">
-                                                                옵션 추가</button>
-                                                            <div id="optionList" class="d-flex bd-highlight flex-column" data-value=0>
-                                                            
-                                                            
-                                                            	<c:choose>
-	                                                        		<c:when test="${ProductVO != null}">
-	                                                        			<div id="chan">${option }</div>
-	                                                        			<c:forEach items="${option }" var="optionBox"  varStatus="Num">
-	                                                        				
-	                                                        				<div class="d-flex flex-row bd-highlight mt-2 p-0 mb-0 optionList optionID">
-																				<div class="d-flex bd-highlight pr-2"  style="width: 30px;"><span class="listNum bd-highlight pt-2">${Num.count }.</span></div>
-																				
-	                                                        				<c:forEach items="${optionBox }" var="option" varStatus="ccc" >
-		                                                        				${option }
-		                                                        			</c:forEach>
-		                                                        			
-		                                                        			</div>
-	                                                        			</c:forEach>
-	                                                        		</c:when>
-	                                                        	</c:choose>
-	                                                        	
-	                                                        	
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row border-bottom py-2">
-                                                <div class="col p-0">
-                                                    <div class="d-flex bd-highlight">
-                                                        <label for="inputPrice" class="bd-highlight col-form-label pl-2"
-                                                            style="width: 140px;"><img
-                                                                src="${contextPath }/resources/img/require.png">판매가</label>
-                                                        <div class="d-flex flex-row bd-highlight pr-2">
-                                                        	<c:choose>
-                                                        		<c:when test="${ProductVO != null}">
-	                                                        		<input type="number" class="form-control" id="inputPrice"
-		                                                                name="price" min="0" oninput="disconuntUpdate()" value="${ProductVO.price }">
-		                                                            <span class="bd-highlight pl-2 pt-2">원</span>     
-                                                        		</c:when>
-                                                        		<c:otherwise>
-	                                                        		<input type="number" class="form-control" id="inputPrice"
-		                                                                name="price" min="0" oninput="disconuntUpdate()">
-		                                                            <span class="bd-highlight pl-2 pt-2">원</span>
-                                                        		</c:otherwise>
-                                                        	</c:choose>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row border-bottom py-2">
-                                                <div class="col p-0">
-                                                    <div class="d-flex bd-highlight">
-                                                        <label for="inputDiscountYN"
-                                                            class="bd-highlight col-form-label pl-2"
-                                                            style="width: 140px;">할인 여부</label>
-                                                        <div class="d-flex flex-row bd-highlight pr-2">
-                                                            <div class="custom-control custom-switch pt-2">
-                                                                <input type="checkbox"
-                                                                    class="custom-control-input YNChk"
-                                                                    id="inputDiscountYN" value="${ProductVO.discountYN }">
-                                                                <input id="discountYN_V" class="input_V" type="text"
-                                                                    name="discountYN" value="${ProductVO.discountYN }" style="display: none;">
-                                                                <label id="discountYNLabel" class="custom-control-label"
-                                                                    for="inputDiscountYN"
-                                                                    style="width: 50px;">미할인</label>
-                                                            </div>
-                                                            <div class="d-flex flex-row bd-highlight pl-3 pr-2">
-                                                                <input type="number" class="form-control"
-                                                                    id="discountYN_Num" min="0" max="100"
-                                                                    style="width: 102px;" disabled oninput="disconuntUpdate()"> <span
-                                                                    class="bd-highlight pl-2 pt-2">%</span>
-                                                            </div>
-                                                            <div id="discountBox" class="d-flex flex-row bd-highlight "
-                                                                style="visibility: hidden;">
-                                                                <span class="bd-highlight pt-2 ml-3 text-danger"> 할인가 :
-                                                                </span>
-                                                                
-                                                                <c:choose>
-	                                                        		<c:when test="${ProductVO != null}">
-	                                                        			<input type="text"
-		                                                                    class="form-control text-danger bg-white border-0 pl-1"
-		                                                                    id="discount" name="discount"
-		                                                                    style="width: 70px; text-align: right;" value="${ProductVO.discount }">
-		                                                                <span class="bd-highlight pt-2 text-danger"> 원</span>
-	                                                        		</c:when>
-	                                                        		<c:otherwise>
-		                                                        		<input type="text"
-		                                                                    class="form-control text-danger bg-white border-0 pl-1"
-		                                                                    id="discount" name="discount"
-		                                                                    style="width: 70px; text-align: right;" value=""
-		                                                                    readonly>
-		                                                                <span class="bd-highlight pt-2 text-danger"> 원</span>
-	                                                        		</c:otherwise>
-	                                                        	</c:choose>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row border-bottom py-2">
-                                                <div class="col p-0">
-                                                    <div class="d-flex bd-highlight">
-                                                        <label for="inputProductMileage"
-                                                            class="bd-highlight col-form-label pl-2"
-                                                            style="width: 140px;">상품적립금</label>
-                                                        <div class="d-flex flex-row bd-highlight pr-2">
-                                                        	<c:choose>
-                                                        		<c:when test="${ProductVO != null}">
-	                                                        		<input type="number" class="form-control"
-			                                                                id="inputProductMileage" name="productMileage" min="0"
-			                                                                value="${ProductVO.productMileage }">
-                                                        		</c:when>
-                                                        		<c:otherwise>
-	                                                        		<input type="number" class="form-control"
-		                                                                id="inputProductMileage" name="productMileage" min="0"
-		                                                                value="0">
-                                                        		</c:otherwise>
-                                                        	</c:choose>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row border-bottom py-2">
-                                                <div class="col p-0">
-                                                    <div class="d-flex bd-highlight">
-                                                        <label for="inputImgURL_product_M"
-                                                            class="bd-highlight col-form-label pl-2"
-                                                            style="width: 140px;"><img
-                                                                src="${contextPath }/resources/img/require.png">상품이미지</label>
-                                                        <div class="d-flex flex-column bd-highlight pr-2 pt-1">
-                                                            <input type="file" class="form-control-file bd-highlight"
-                                                                id="inputImgURL_product_M" name="imgURL_product_M">
-                                                                
-                                                            <c:choose>
-                                                        		<c:when test="${ProductVO != null}">
-	                                                        		<img class="bd-highlight mt-2" style="width: 200px;" id="inputImgURL_product_M_V" src="${contextPath }/resources/img/${ProductVO.p_group }/${product_M }">
-                                                        		</c:when>
-                                                        		<c:otherwise>
-	                                                        		<img class="bd-highlight mt-2" style="width: 200px;" id="inputImgURL_product_M_V" src="">
-                                                        		</c:otherwise>
-                                                        	</c:choose>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row border-bottom py-2">
-                                                <div class="col p-0">
-                                                    <div class="d-flex bd-highlight">
-                                                        <label for="inputImgURL_product_S"
-                                                            class="bd-highlight col-form-label pl-2"
-                                                            style="width: 140px;"><img
-                                                                src="${contextPath }/resources/img/require.png">상품상세이미지</label>
-                                                        <div class="d-flex flex-column bd-highlight pr-2 pt-1">
-                                                            <input type="file" class="form-control-file"
-                                                                id="inputImgURL_product_S" name="imgURL_product_S">
-                                                                
-                                                            <c:choose>
-                                                        		<c:when test="${ProductVO != null}">
-	                                                        		<img class="bd-highlight mt-2" style="width: 200px;" id="inputImgURL_product_S_V" src="${contextPath }/resources/img/${ProductVO.p_group }/${product_S }">
-                                                        		</c:when>
-                                                        		<c:otherwise>
-                                                        		</c:otherwise>
-                                                        	</c:choose>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Button trigger modal -->
-                                            <div class="text-center mt-3">
-                                                <button type="submit" class="btn btn-success"
-                                                    onclick="return checkLogin()">등록</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </main>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+request.setCharacterEncoding("UTF-8");
+%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<!-- 메인 -->
+<!-- 메인 -->
+<main class="mainH">
+	<div class="container">
+		<!-- 페이지 타이틀 부분 -->
+		<div class="d-flex justify-content-between mt-5">
+			<div class="bd-highlight">
+				<h4 class="page_title">${pageTitle }</h4>
+			</div>
+		</div>
+		<div class="bd-highlight" style="text-align: right;">
+			<img src="${contextPath }/resources/img/require.png"> <span
+				class="">필수입력사항</span>
+		</div>
+		<form action="${contextPath }/product/addEdit.do" method="POST"
+			name="addProduct" enctype="multipart/form-data">
+			<div class="row border-bottom pm-2"></div>
+			<div class="row mb-4">
+				<div class="col-12">
+					<form name="joinForm" method="POST">
+						<div class="row border-bottom py-2">
+							<div class="col p-0">
+								<div class="d-flex bd-highlight">
+									<label for="inputShowYN"
+										class="bd-highlight col-form-label pl-2" style="width: 140px;">활성화
+										여부</label>
+									<div class="d-flex flex-row bd-highlight pr-2">
+										<div class="custom-control custom-switch pt-2">
+											<input type="checkbox" class="custom-control-input YNChk"
+												id="inputShowYN" value="${ProductVO.showYN }" checked>
+											<input id="showYN_V" class="input_V" type="text"
+												name="showYN" value="${ProductVO.showYN }"
+												style="display: none;"> <label id="inputShowYNLabel"
+												class="custom-control-label" for="inputShowYN"
+												style="width: 70px;">활성화</label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row border-bottom py-2">
+							<div class="col p-0">
+								<div class="d-flex bd-highlight">
+									<label for="inputGroup"
+										class="bd-highlight col-form-label pl-2" style="width: 140px;">
+										상품 구분 </label>
+									<div class="flex-grow bd-highlight flex-column pr-2">
+										<div class="flex-grow-1 bd-highlight pr-2">
+											<div class="d-flex">
+												<select id="inputGroup" class="form-control " name="p_group">
+													<option value="hard" selected>하드케이스</option>
+													<option value="gel">젤케이스</option>
+													<option value="card">카드케이스</option>
+													<option value="airPods">에어팟케이스</option>
+													<option value="buds">버즈케이스</option>
+													<option value="keyring">키링</option>
+													<option value="smart">스마트톡</option>
+												</select>
+												<div id="p_group" style="display: none;">${ProductVO.p_group }</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row border-bottom py-2">
+							<div class="col p-0">
+								<div class="d-flex bd-highlight">
+									<label for="inputProductName"
+										class="bd-highlight col-form-label pl-2" style="width: 140px;"><img
+										src="${contextPath }/resources/img/require.png">상품명</label>
+									<div class="flex-grow-1 bd-highlight pr-2">
+										<c:choose>
+											<c:when test="${ProductVO != null}">
+												<input type="text" class="form-control"
+													id="inputProductName" name="productName"
+													value="${ProductVO.productName }">
+											</c:when>
+											<c:otherwise>
+												<input type="text" class="form-control"
+													id="inputProductName" name="productName">
+											</c:otherwise>
+										</c:choose>
 
-                    <script>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row border-bottom py-2">
+							<div class="col p-0">
+								<div class="d-flex bd-highlight">
+									<label for="inputProductOption"
+										class="bd-highlight col-form-label pl-2" style="width: 140px;"><img
+										src="${contextPath }/resources/img/require.png">상품 옵션</label>
+									<div class="flex-grow bd-highlight pr-2 flex-column">
+										<button id="btn_addOption" type="button"
+											class="btn btn-secondary"
+											style="font-size: .8rem; height: 38px;">옵션 추가</button>
+										<div id="optionList" class="d-flex bd-highlight flex-column"
+											data-value=0>
+
+											<c:choose>
+												<c:when test="${ProductVO != null}">
+													<c:forEach items="${option }" var="option" varStatus="Num">
+														<div id="O_${Num.index }"
+															class="d-flex flex-row bd-highlight mt-2 p-0 mb-0 optionList optionID">
+															<div class="d-flex bd-highlight pr-2"
+																style="width: 30px;">
+																<span class="listNum bd-highlight pt-2">${Num.count }.</span>
+															</div>
+															<div class="bd-highlight pr-2" style="width: 450px;">
+																<input type="text" class="form-control optionTitle"
+																	id="inputOption${Num.index }"
+																	name="productVOList[${Num.index }].option"
+																	value="${option.p_option }">
+															</div>
+															<div class="d-flex flex-row bd-highlight pr-2">
+																<span class="bd-highlight pr-1 pt-2">재고수량:</span> <input
+																	type="number" class="form-control stockTitle"
+																	id="inputStock${Num.index }"
+																	name="productVOList[${Num.index }].stock" min="0"
+																	value="${option.p_stock }" style="width: 80px;">
+															</div>
+															<div class="bd-highlight">
+																<button id="btn_OptionDel" type="button"
+																	class="btn btn-outline-danger optionBtn"
+																	onclick="optionDel_click(${Num.index });"
+																	style="font-size: .8rem; height: 38px;">삭제</button>
+															</div>
+														</div>
+													</c:forEach>
+												</c:when>
+											</c:choose>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row border-bottom py-2">
+							<div class="col p-0">
+								<div class="d-flex bd-highlight">
+									<label for="inputPrice"
+										class="bd-highlight col-form-label pl-2" style="width: 140px;"><img
+										src="${contextPath }/resources/img/require.png">판매가</label>
+									<div class="d-flex flex-row bd-highlight pr-2">
+										<c:choose>
+											<c:when test="${ProductVO != null}">
+												<input type="number" class="form-control" id="inputPrice"
+													name="price" min="0" oninput="disconuntUpdate()"
+													value="${ProductVO.price }">
+												<span class="bd-highlight pl-2 pt-2">원</span>
+											</c:when>
+											<c:otherwise>
+												<input type="number" class="form-control" id="inputPrice"
+													name="price" min="0" oninput="disconuntUpdate()">
+												<span class="bd-highlight pl-2 pt-2">원</span>
+											</c:otherwise>
+										</c:choose>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row border-bottom py-2">
+							<div class="col p-0">
+								<div class="d-flex bd-highlight">
+									<label for="inputDiscountYN"
+										class="bd-highlight col-form-label pl-2" style="width: 140px;">할인
+										여부</label>
+									<div class="d-flex flex-row bd-highlight pr-2">
+										<div class="custom-control custom-switch pt-2">
+											<input type="checkbox" class="custom-control-input YNChk"
+												id="inputDiscountYN" value="${ProductVO.discountYN }">
+											<input id="discountYN_V" class="input_V" type="text"
+												name="discountYN" value="${ProductVO.discountYN }"
+												style="display: none;"> <label id="discountYNLabel"
+												class="custom-control-label" for="inputDiscountYN"
+												style="width: 50px;">미할인</label>
+										</div>
+										<div class="d-flex flex-row bd-highlight pl-3 pr-2">
+											<input type="number" class="form-control" id="discountYN_Num"
+												min="0" max="100" style="width: 102px;" disabled
+												oninput="disconuntUpdate()"> <span
+												class="bd-highlight pl-2 pt-2">%</span>
+										</div>
+										<div id="discountBox" class="d-flex flex-row bd-highlight "
+											style="visibility: hidden;">
+											<span class="bd-highlight pt-2 ml-3 text-danger"> 할인가
+												: </span>
+
+											<c:choose>
+												<c:when test="${ProductVO != null}">
+													<input type="text"
+														class="form-control text-danger bg-white border-0 pl-1"
+														id="discount" name="discount"
+														style="width: 70px; text-align: right;"
+														value="${ProductVO.discount }">
+													<span class="bd-highlight pt-2 text-danger"> 원</span>
+												</c:when>
+												<c:otherwise>
+													<input type="text"
+														class="form-control text-danger bg-white border-0 pl-1"
+														id="discount" name="discount"
+														style="width: 70px; text-align: right;" value="" readonly>
+													<span class="bd-highlight pt-2 text-danger"> 원</span>
+												</c:otherwise>
+											</c:choose>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row border-bottom py-2">
+							<div class="col p-0">
+								<div class="d-flex bd-highlight">
+									<label for="inputProductMileage"
+										class="bd-highlight col-form-label pl-2" style="width: 140px;">상품적립금</label>
+									<div class="d-flex flex-row bd-highlight pr-2">
+										<c:choose>
+											<c:when test="${ProductVO != null}">
+												<input type="number" class="form-control"
+													id="inputProductMileage" name="productMileage" min="0"
+													value="${ProductVO.productMileage }">
+											</c:when>
+											<c:otherwise>
+												<input type="number" class="form-control"
+													id="inputProductMileage" name="productMileage" min="0"
+													value="0">
+											</c:otherwise>
+										</c:choose>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row border-bottom py-2">
+							<div class="col p-0">
+								<div class="d-flex bd-highlight">
+									<label for="inputImgURL_product_M"
+										class="bd-highlight col-form-label pl-2" style="width: 140px;"><img
+										src="${contextPath }/resources/img/require.png">상품이미지</label>
+									<div class="d-flex flex-column bd-highlight pr-2 pt-1">
+										<input type="file" class="form-control-file bd-highlight"
+											id="inputImgURL_product_M" name="imgURL_product_M">
+										<c:choose>
+											<c:when test="${ProductVO != null}">
+												<img class="bd-highlight mt-2" style="width: 200px;"
+													id="inputImgURL_product_M_V"
+													src="${contextPath }/resources/img/${ProductVO.p_group }/${product_M }">
+											</c:when>
+											<c:otherwise>
+												<img class="bd-highlight mt-2" style="width: 200px;"
+													id="inputImgURL_product_M_V" src="">
+											</c:otherwise>
+										</c:choose>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row border-bottom py-2">
+							<div class="col p-0">
+								<div class="d-flex bd-highlight">
+									<label for="inputImgURL_product_S"
+										class="bd-highlight col-form-label pl-2" style="width: 140px;"><img
+										src="${contextPath }/resources/img/require.png">상품상세이미지</label>
+									<div class="d-flex flex-column bd-highlight pr-2 pt-1">
+										<input type="file" class="form-control-file"
+											id="inputImgURL_product_S" name="imgURL_product_S">
+										<c:choose>
+											<c:when test="${ProductVO != null}">
+												<img class="bd-highlight mt-2" style="width: 200px;"
+													id="inputImgURL_product_S_V"
+													src="${contextPath }/resources/img/${ProductVO.p_group }/${product_S }">
+											</c:when>
+											<c:otherwise>
+												<img class="bd-highlight mt-2" style="width: 200px;"
+														id="inputImgURL_product_S_V" src="">
+											</c:otherwise>
+										</c:choose>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Button trigger modal -->
+						<c:choose>
+							<c:when test="${ProductVO != null}">
+								<div class="row justify-content-between my-3">
+							            <div class="">
+							            	<a class="" href="${contextPath }/productList.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }">
+							            		<button type="button" class="btn btn-secondary">목록</button>
+							            	</a>	
+							            </div>
+							            <div class="text-center d-flex justify-content-end">
+							            		<a href="${contextPath }/productList/productDelete_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }">
+								            		<button type="submit" class="btn bg-danger text-white"
+														onclick="return checkLogin()">삭제 </button>
+							            		</a>
+								            	<a href="${contextPath }/productList/productUpdate_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }">
+								            		<button type="submit" class="btn btn-success ml-3"
+														onclick="return checkLogin()">수정</button>
+							            		</a>
+										</div>
+					            </div>
+							</c:when>
+							<c:otherwise>
+								<div class="row justify-content-between my-3">
+						            <div class="">
+						            	<a class="" href="${contextPath }/productList.do">
+						            		<button type="button" class="btn btn-secondary">목록</button>
+						            	</a>	
+						            </div>
+						            <div class="text-center">
+										<button type="submit" class="btn btn-success"
+											onclick="return checkLogin()">등록</button>
+									</div>
+					            </div>
+							</c:otherwise>
+						</c:choose>
+					</form>
+				</div>
+			</div>
+		</form>
+	</div>
+</main>
+
+<script>
                         //회면 로딩시 스위치 YN 체크
                         window.onload = function () {
                             var YNChk = document.getElementsByClassName('YNChk');
@@ -313,43 +357,46 @@
                                 }
                             }
 
-                            //할인가 표시
-                            var discountYN = document.getElementById('inputDiscountYN');
-                            var discountYN_V = discountYN.value;
-                            var Label = document.getElementById('discountYNLabel');
-                            var Num = document.getElementById('discountYN_Num');
-                            var V = document.getElementById('discountYN_V');
+                            <c:choose>
+								<c:when test="${ProductVO != null}">
+								//할인가 표시
+	                            var discountYN = document.getElementById('inputDiscountYN');
+	                            var discountYN_V = discountYN.value;
+	                            var Label = document.getElementById('discountYNLabel');
+	                            var Num = document.getElementById('discountYN_Num');
+	                            var V = document.getElementById('discountYN_V');
 
-                            if (discountYN_V == "N") {
-                                discountYN.value = "N";
-                                V.value = "N";
-                                Label.innerHTML = "미할인";
-                                Num.value = "";
-                                document.getElementById('discount').value = "";
-                                document.getElementById('discountBox').style.visibility = 'hidden';
-                                Num.disabled = true;
-                            } else {
-                                discountYN.value = "Y";
-                                V.value = "Y";
-                                Label.innerHTML = "할인";
-                                Num.value = ${ProductVO.discount }/${ProductVO.price }*100;
-                                Num.disabled = false;
-                            }
-                            disconuntUpdate();
+	                            if (discountYN_V == "N") {
+	                                discountYN.value = "N";
+	                                V.value = "N";
+	                                Label.innerHTML = "미할인";
+	                                Num.value = "";
+	                                document.getElementById('discount').value = "";
+	                                document.getElementById('discountBox').style.visibility = 'hidden';
+	                                Num.disabled = true;
+	                            } else {
+	                                discountYN.value = "Y";
+	                                V.value = "Y";
+	                                Label.innerHTML = "할인";
+	                                Num.value = ${ProductVO.discount }/${ProductVO.price }*100;
+	                                Num.disabled = false;
+	                            }
+	                            disconuntUpdate();
 
-                            //옵션 값 선택
+	                            //옵션 값 선택
+	                            var group = document.getElementById('p_group').innerText;
+	                            if(group != null){
+	                                var optionList = document.getElementById('inputGroup').options;
 
-                            var group = document.getElementById('p_group').innerText;
-                            if(group != null){
-                                var optionList = document.getElementById('inputGroup').options;
-
-                                for(var i=0; i<optionList.length; i++){
-                                    var optionValue = optionList[i].value;
-                                    if(optionValue == group){
-                                        optionList[i].selected = true;
-                                    }
-                                }
-                            }
+	                                for(var i=0; i<optionList.length; i++){
+	                                    var optionValue = optionList[i].value;
+	                                    if(optionValue == group){
+	                                        optionList[i].selected = true;
+	                                    }
+	                                }
+	                            }
+								</c:when>
+							</c:choose>
                             
                         };
 

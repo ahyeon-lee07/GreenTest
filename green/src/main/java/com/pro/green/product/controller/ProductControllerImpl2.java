@@ -115,6 +115,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 		List<Map<String,Object>> option = productService.selectOptionLIst(productId);
 		List<Map<String,Object>> img = productService.selectProductImg(productId);
 		
+		mav.addObject("pageTitle","상품 상세");
         mav.addObject("ProductVO",ProductVO);
         mav.addObject("option",option);
         mav.addObject("product_M",img.get(0).get("imgURL"));
@@ -182,7 +183,8 @@ public class ProductControllerImpl2 implements ProductController2 {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
-
+		
+		mav.addObject("pageTitle","상품 등록");
 		//관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
 		sessionChk(mav, sessinLogin, "addProduct");
 
@@ -220,7 +222,8 @@ public class ProductControllerImpl2 implements ProductController2 {
 		
 		//파일을 업로드한 후 반환된 파일 이름이 저장된 FileList를 다시 map에 저장
 		List fileList = fileProcess(request, selectProductID);
-
+		
+		
 		mav.setViewName("redirect:/productList.do");
 		return mav;
 	}

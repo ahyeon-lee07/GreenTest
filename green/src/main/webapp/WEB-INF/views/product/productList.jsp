@@ -150,8 +150,7 @@
 								</div>
 								<div class="">
 									<a class="" href="${contextPath }/addProduct.do">
-										<button type="button" class="btn btn-primary btn-sm">상품
-											등록하기</button>
+										<button type="button" class="btn btn-primary">상품 등록하기</button>
 									</a>
 								</div>
 							</div>
