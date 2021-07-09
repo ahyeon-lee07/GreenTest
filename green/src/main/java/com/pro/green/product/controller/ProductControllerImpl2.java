@@ -1,6 +1,8 @@
 package com.pro.green.product.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -23,12 +25,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pro.green.member.service.MemberService;
 import com.pro.green.member.vo.MemberVO;
 import com.pro.green.product.vo.Criteria;
 import com.pro.green.product.vo.PageMaker;
 import com.pro.green.product.vo.ProductVO2;
+
+import net.coobird.thumbnailator.Thumbnails;
+
 import com.pro.green.product.service.ProductService2;
 
 @Controller("ProductController")
@@ -57,19 +63,8 @@ public class ProductControllerImpl2 implements ProductController2 {
 		HttpSession session = request.getSession();
 		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
 
-		if (sessinLogin != null) {
-			String rightChk = (String) sessinLogin.getMasterYN();
-			if (rightChk.equals("M")) {
-				mav.addObject("member", sessinLogin);
-				mav.setViewName("productList");
-			} else {
-				mav.addObject("joinMas", "잘못된 경로로 접속하셨습니다.");
-				mav.setViewName("redirect:/main.do");
-			}
-		} else {
-			mav.addObject("joinMas", "잘못된 경로로 접속하셨습니다.");
-			mav.setViewName("redirect:/main.do");
-		}
+		//관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
+		sessionChk(mav, sessinLogin, "productList");
 		
 		PageMaker pageMaker = new PageMaker();
 		
@@ -93,7 +88,90 @@ public class ProductControllerImpl2 implements ProductController2 {
 
 		return mav;
 	}
+	
+	
+// 테스트 ----------------------------------------------------
+	
+	@RequestMapping("/productList/productDetail_M.do")
+    public ModelAndView boardDetail(HttpServletRequest request, HttpServletResponse response, Criteria cri) throws Exception {
+        
+        ModelAndView mav = new ModelAndView();
+        
+        HttpSession session = request.getSession();
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+		
+		//상품 아이디
+		String productId = request.getParameter("productId");
 
+		//관리자 세션 체크 (ModelAndView, 세션정보, "화면이름")
+		sessionChk(mav, sessinLogin, "productDetail_M");
+		
+		ProductVO2 ProductVO = new ProductVO2();
+        
+		//상품 정보 가져오기
+		ProductVO = productService.viewProductDetail(productId);
+		//상품 옵션 가져오기
+		List<Map<String,Object>> option = productService.selectOptionLIst(productId);
+		List<Map<String,Object>> img = productService.selectProductImg(productId);
+		
+        mav.addObject("ProductVO",ProductVO);
+        mav.addObject("option",option);
+        mav.addObject("product_M",img.get(0).get("imgURL"));
+        mav.addObject("product_S",img.get(1).get("imgURL"));
+        
+        PageMaker pageMaker = new PageMaker();
+        pageMaker.setCri(cri);
+        mav.addObject("page",cri.getPage());
+        mav.addObject("pageMaker", pageMaker);
+        
+        return mav;
+    }
+ 
+    @RequestMapping(value="/productList/productUpdate_M.do")
+    public ModelAndView boardUpdate( Criteria cri) throws Exception {
+        
+        ModelAndView mv = new ModelAndView("/board/boardUpdate");
+       // Map<String, Object> detail = productService.selectProductDetail(commandMap.getMap());
+       // mv.addObject("detail",detail);
+        
+        PageMaker pageMaker = new PageMaker();
+        pageMaker.setCri(cri);
+        mv.addObject("page",cri.getPage());
+        mv.addObject("pageMaker", pageMaker);
+        
+        return mv;
+    }
+ 
+    @RequestMapping(value="/productList/productUpdate_M.do", method=RequestMethod.POST)
+    public ModelAndView boardUpdatePOST( Criteria cri, RedirectAttributes redAttr) throws Exception {
+        
+        ModelAndView mv = new ModelAndView("redirect:/board/boardDetail");
+       // mv.addObject("idx", commandMap.get("idx"));
+        
+        int result = 0;
+       // result  = productService.updateProduct(commandMap.getMap());
+        
+        redAttr.addAttribute("page", cri.getPage());
+        redAttr.addAttribute("perPagNum", cri.getPerPageNum());
+        
+        return mv;
+    }
+    
+    @RequestMapping(value="/productList/productDelete_M.do")
+    public ModelAndView boardDelete( Criteria cri, RedirectAttributes redAttr) throws Exception {
+        ModelAndView mv = new ModelAndView("redirect:/board/boardList");
+        
+        int result = 0;
+       // result  = productService.deleteProduct(commandMap.getMap());
+        
+        redAttr.addAttribute("page", cri.getPage());
+        redAttr.addAttribute("perPagNum", cri.getPerPageNum());
+        
+        return mv;
+    }
+
+	
+ // 테스트 ----------------------------------------------------
 	
 	// 사품등록
 	@Override
@@ -104,19 +182,8 @@ public class ProductControllerImpl2 implements ProductController2 {
 		HttpSession session = request.getSession();
 		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
 
-		if (sessinLogin != null) {
-			String rightChk = (String) sessinLogin.getMasterYN();
-			if (rightChk.equals("M")) {
-				mav.addObject("member", sessinLogin);
-				mav.setViewName("addProduct");
-			} else {
-				mav.addObject("joinMas", "잘못된 경로로 접속하셨습니다.");
-				mav.setViewName("redirect:/main.do");
-			}
-		} else {
-			mav.addObject("joinMas", "잘못된 경로로 접속하셨습니다.");
-			mav.setViewName("redirect:/main.do");
-		}
+		//관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
+		sessionChk(mav, sessinLogin, "addProduct");
 
 		return mav;
 	}
@@ -150,23 +217,14 @@ public class ProductControllerImpl2 implements ProductController2 {
 			result = productService.addProductOption(paramMap);
 		}
 		
-		
-		//이미지 업로드
-		//Map map = new HashMap();	//매개변수 정보와 파일 정보를 저장할 Map을 생성
-				
 		//파일을 업로드한 후 반환된 파일 이름이 저장된 FileList를 다시 map에 저장
 		List fileList = fileProcess(request, selectProductID);
-		
-		//map.put("fileList", fileList);
-		//mao을 결과창으로 포워딩
-		//mav.addObject("map", map);
 
 		mav.setViewName("redirect:/productList.do");
 		return mav;
 	}
 	
 	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest, String selectProductID) throws Exception {
-		
 		//이미지 경로
 		String root_path = multipartRequest.getSession().getServletContext().getRealPath("/");  
 		String image_path = root_path + "resources\\img" ;
@@ -211,5 +269,26 @@ public class ProductControllerImpl2 implements ProductController2 {
 		}
 		return fileList;
 	}
-
+	
+	
+	//관리자 세션 체크 (ModelAndView, 세션정보, 접속할 화면 )
+	private ModelAndView sessionChk(ModelAndView mav, MemberVO sessinLogin, String view) throws Exception {
+		if (sessinLogin != null) {
+			String rightChk = (String) sessinLogin.getMasterYN();
+			if (rightChk.equals("M")) {
+				mav.addObject("member", sessinLogin);
+				mav.setViewName(view);
+				return mav;
+			} else {
+				mav.addObject("joinMas", "잘못된 경로로 접속하셨습니다.");
+				mav.setViewName("redirect:/main.do");
+				return mav;
+			}
+		} else {
+			mav.addObject("joinMas", "잘못된 경로로 접속하셨습니다.");
+			mav.setViewName("redirect:/main.do");
+			return mav;
+		}
+	}
 }
+

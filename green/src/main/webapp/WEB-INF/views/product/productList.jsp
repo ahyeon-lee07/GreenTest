@@ -84,8 +84,9 @@
 											<td class="text-center align-middle px-2">${list.p_group }</td>
 											<td class="align-middle flex-column">
 												<div class="font-weight-bold pb-1 bd-highlight">
-													<a href="${contextPath }/HardCaseDetail.do" style="color: black">${list.productName }</a>
+													${list.productName }
 												</div>
+												<!-- 상품 옵션 -->
 												<c:forEach items="${optionList }" var="optionList1">
 													<c:forEach items="${optionList1 }" var="optionList" varStatus="Num">
 														<c:if test="${list.productId eq optionList.productId}">
@@ -117,7 +118,7 @@
 												${list.productMileage }</td>
 											<td class="text-center align-middle px-2">
 												<div class="bd-highlight">
-													<a href="${contextPath }/orderList.do">
+													<a href="${contextPath }/productList/productDetail_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${list.productId }">
 														<button type="button" class="btn btn-outline-secondary btn-sm"
 															style="font-size: 0.7rem; width: 100%; display: block;">상세정보</button>
 													</a>
@@ -154,23 +155,9 @@
 									</a>
 								</div>
 							</div>
+							
+							<!-- 페이징 영역 -->
 							<nav aria-label="Page navigation example row">
-								<!-- <ul class="pagination d-flex justify-content-center">
-				<li class="page-item">
-					<a class="page-link" href="#" aria-label="Previous"> 
-						<span aria-hidden="true">&laquo;</span>
-					</a>
-				</li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item">
-					<a class="page-link" href="#" aria-label="Next"> 
-						<span aria-hidden="true">&raquo;</span>
-					</a>
-				</li>
-			</ul> -->
-
 								<ul class="pagination d-flex justify-content-center">
 									<c:if test="${pageMaker.prev }">
 										<li class="page-item"><a class="page-link"
@@ -182,7 +169,7 @@
 									<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
 										var="pageNum">
 										<li class="page-item"><a class="page-link"
-												href='${contextPath }/productListTest.do?page=${pageNum }'>${pageNum
+												href='${contextPath }/productList.do?page=${pageNum }'>${pageNum
 												}</a>
 										</li>
 									</c:forEach>

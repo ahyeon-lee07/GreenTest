@@ -24,23 +24,16 @@
 		<result property="imgType" column="imgType" />
 		<result property="imgURL" column="imgURL" />
 	</resultMap>
-
+	
+	<!-- 등록==========================================================================================  -->
+	
 	<!-- 상품등록 (활성화여부, 상품구분, 상품명, 판매가, 할인여부, 할인가, 상품적입금) -->
 	<insert id="insertProduct" parameterType="productVO">
 		<![CDATA[
 		 CALL addProductEdit(#{showYN}, #{p_group}, #{productName}, #{price}, #{discountYN}, #{discount}, #{productMileage});
 		]]>
 	</insert>
-
-
-	<!-- 등록 후 상품 아아디 조회 (상품구분 , 상품명) -->
-	<select id="selectProductId" parameterType="productVO"
-		resultType="String">
-		<![CDATA[
-		 CALL selectProductId(#{p_group}, #{productName});
-		]]>
-	</select>
-
+	
 	<!-- 상품옵션등록 -->
 	<insert id="insertProductOption"
 		parameterType="java.util.HashMap">
@@ -53,7 +46,7 @@
 		#{stock}
 		);
 	</insert>
-
+	
 	<!-- 상품이미지 등록 -->
 	<insert id="insertProductImg" parameterType="java.util.HashMap">
 		INSERT INTO
@@ -65,9 +58,19 @@
 		#{imgURL}
 		);
 	</insert>
+	
+	<!-- /등록==========================================================================================  -->
+	<!-- 조회==========================================================================================  -->
 
-
-	<!-- 테스트 -->
+	<!-- 등록 후 상품 아아디 조회 (상품구분 , 상품명) -->
+	<select id="selectProductId" parameterType="productVO"
+		resultType="String">
+		<![CDATA[
+		 CALL selectProductId(#{p_group}, #{productName});
+		]]>
+	</select>
+	
+	<!-- 관리자 상품 리스트 조회 -->
 	<select id="selectBoardList" resultType="hashmap"
 		parameterType="hashmap">
     <![CDATA[
@@ -85,7 +88,8 @@
 		ORDER BY productDate DESC LIMIT #{pageStart}, #{perPageNum};
     ]]>
 	</select>
-
+	
+	<!-- 관리자 상품 리스트 개수 조회 -->
 	<select id="countBoardList" resultType="Integer">
     <![CDATA[
         SELECT
@@ -95,6 +99,7 @@
     ]]>
 	</select>
 	
+	<!-- 관리자 상품 옵션 조회 -->
 	<select id="selectOptionLIst" resultType="hashmap" parameterType="String">
     <![CDATA[
        SELECT 
@@ -105,7 +110,54 @@
 			productId = #{productId};
     ]]>
 	</select>
+	
+	<!-- 관리자 상품 조회 -->
+	<select id="selectProduct" resultType="productVO" parameterType="String">
+    <![CDATA[
+       SELECT 
+			*
+		FROM 
+			product
+		WHERE
+			productId = #{productId};
+    ]]>
+	</select>
+	
+	<!-- 이미지 조회 -->
+	<select id="selectProductImg" resultType="hashmap" parameterType="String">
+    <![CDATA[
+       SELECT 
+			imgType,
+			imgURL
+		FROM 
+			image
+		WHERE
+			productId = #{productId};
+    ]]>
+	</select>
+	
+	<!-- /조회==========================================================================================  -->
+	
+	<!-- 수정==========================================================================================  -->
+	
+	<!-- /수정==========================================================================================  -->
+	
+	<!-- 삭제==========================================================================================  -->
+	
+	<!-- /삭제==========================================================================================  -->
 
+
+
+
+
+
+
+
+	
+
+	
+
+	
 
 
 </mapper>

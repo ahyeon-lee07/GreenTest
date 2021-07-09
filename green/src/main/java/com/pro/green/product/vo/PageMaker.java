@@ -1,6 +1,8 @@
 package com.pro.green.product.vo;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Component("PageMaker")
 public class PageMaker {
@@ -73,6 +75,23 @@ public class PageMaker {
     }
     public void setDisplayPageNum(int displayPageNum) {
         this.displayPageNum = displayPageNum;
+    }
+    
+    public String makeQueryPage(int page) {
+        UriComponents uri = UriComponentsBuilder.newInstance()
+                .queryParam("page", page)
+                .queryParam("perPageNum", cri.getPerPageNum())
+                .build();
+        return uri.toUriString();
+    }
+    
+    public String makeQueryPage(int idx, int page) {
+        UriComponents uri = UriComponentsBuilder.newInstance()
+                .queryParam("idx", idx)
+                .queryParam("page", page)
+                .queryParam("perPageNum", cri.getPerPageNum())
+                .build();
+        return uri.toUriString();
     }
 	
 }

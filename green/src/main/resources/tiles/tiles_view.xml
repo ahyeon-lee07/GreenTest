@@ -291,5 +291,11 @@
 		<put-attribute name="title" value="상품등록" />
 		<put-attribute name="main" value="/WEB-INF/views/product/addProduct.jsp" />
 	</definition>
+	
+	<!-- 관리자 상품상세 -->
+	<definition name="productDetail_M" extends="baseLayout">
+		<put-attribute name="title" value="상품등록" />
+		<put-attribute name="main" value="/WEB-INF/views/product/productDetail_M.jsp" />
+	</definition>
 
 </tiles-definitions>

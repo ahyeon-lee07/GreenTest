@@ -43,14 +43,36 @@ public class ProductServiceImpl2 implements ProductService2 {
 		return productDAO.insertProductImg(imageMap);
 	}
 	
-	//test
+	//관리자 상품 리스트 조회 
 	public List<Map<String, Object>> selectBoardList(Criteria cri) throws DataAccessException {
 		return productDAO.selectBoardList(cri);
 	}
+	//관리자 상품 리스트 개수
 	public int countBoardListTotal() throws DataAccessException {
 		return productDAO.countBoardListTotal();
 	}
+	//관리자 상품 리스트 옵션
 	public List<Map<String,Object>> selectOptionLIst(String productId) throws DataAccessException{
 		return productDAO.selectOptionLIst(productId);
+	}
+	
+	
+//	테스트-------------
+	public ProductVO2 viewProductDetail(String productId) throws DataAccessException{
+		return productDAO.viewProductDetail(productId);
+	}
+	public Map<String, Object> selectProductDetail(Map<String, Object> map) throws DataAccessException{
+		return productDAO.selectProductDetail(map);
+	}
+	public int updateProduct(Map<String, Object> map) throws DataAccessException{
+		return productDAO.updateProduct(map);
+	}
+	public int deleteProduct(Map<String, Object> map) throws DataAccessException{
+		return productDAO.deleteProduct(map);
+	}
+	
+	//상품 이미지조회
+	public List<Map<String,Object>> selectProductImg(String productId) throws DataAccessException{
+		return productDAO.selectProductImg(productId);
 	}
 }
