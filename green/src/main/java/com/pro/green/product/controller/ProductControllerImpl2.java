@@ -92,6 +92,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 	
 // 테스트 ----------------------------------------------------
 	
+	//관리자 상세페이지
 	@RequestMapping("/productList/productDetail_M.do")
     public ModelAndView boardDetail(HttpServletRequest request, HttpServletResponse response, Criteria cri) throws Exception {
         
@@ -224,6 +225,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 		return mav;
 	}
 	
+	//이미지 저장
 	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest, String selectProductID) throws Exception {
 		//이미지 경로
 		String root_path = multipartRequest.getSession().getServletContext().getRealPath("/");  

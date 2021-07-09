@@ -109,8 +109,27 @@
                                                                 class="btn btn-secondary"
                                                                 style="font-size:.8rem; height:38px;">
                                                                 옵션 추가</button>
-                                                            <div id="optionList" class="d-flex bd-highlight flex-column"
-                                                                data-value=0>
+                                                            <div id="optionList" class="d-flex bd-highlight flex-column" data-value=0>
+                                                            
+                                                            
+                                                            	<c:choose>
+	                                                        		<c:when test="${ProductVO != null}">
+	                                                        			<div id="chan">${option }</div>
+	                                                        			<c:forEach items="${option }" var="optionBox"  varStatus="Num">
+	                                                        				
+	                                                        				<div class="d-flex flex-row bd-highlight mt-2 p-0 mb-0 optionList optionID">
+																				<div class="d-flex bd-highlight pr-2"  style="width: 30px;"><span class="listNum bd-highlight pt-2">${Num.count }.</span></div>
+																				
+	                                                        				<c:forEach items="${optionBox }" var="option" varStatus="ccc" >
+		                                                        				${option }
+		                                                        			</c:forEach>
+		                                                        			
+		                                                        			</div>
+	                                                        			</c:forEach>
+	                                                        		</c:when>
+	                                                        	</c:choose>
+	                                                        	
+	                                                        	
                                                             </div>
                                                         </div>
                                                     </div>
@@ -271,7 +290,6 @@
                     </main>
 
                     <script>
-
                         //회면 로딩시 스위치 YN 체크
                         window.onload = function () {
                             var YNChk = document.getElementsByClassName('YNChk');

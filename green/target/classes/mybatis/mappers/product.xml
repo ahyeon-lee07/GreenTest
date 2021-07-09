@@ -127,8 +127,7 @@
 	<select id="selectProductImg" resultType="hashmap" parameterType="String">
     <![CDATA[
        SELECT 
-			imgType,
-			imgURL
+			*
 		FROM 
 			image
 		WHERE
