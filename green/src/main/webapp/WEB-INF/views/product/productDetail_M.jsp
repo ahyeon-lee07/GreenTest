@@ -295,21 +295,19 @@ request.setCharacterEncoding("UTF-8");
 						<c:choose>
 							<c:when test="${ProductVO != null}">
 								<div class="row justify-content-between my-3">
-							            <div class="">
-							            	<a class="" href="${contextPath }/productList.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }">
-							            		<button type="button" class="btn btn-secondary">목록</button>
+							    	<div class="">
+							        	<a class="" href="${contextPath }/productList.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }">
+							            	<button type="button" class="btn btn-secondary">목록</button>
 							            	</a>	
-							            </div>
-							            <div class="text-center d-flex justify-content-end">
-							            		<a href="${contextPath }/productList/productDelete_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }">
-								            		<button type="submit" class="btn bg-danger text-white"
-														onclick="return checkLogin()">삭제 </button>
-							            		</a>
-								            	<a href="${contextPath }/productList/productUpdate_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }">
-								            		<button type="submit" class="btn btn-success ml-3"
-														onclick="return checkLogin()">수정</button>
-							            		</a>
-										</div>
+							    	</div>
+							    	<div class="text-center d-flex justify-content-end">
+							        	<a href="#" onclick="productDelete()">
+								    		<button type="button" class="btn bg-danger text-white" >삭제 </button>
+							            </a>
+								   		<a href="${contextPath }/productList/productUpdate_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }">
+								        	<button type="button" class="btn btn-success ml-3" onclick="return checkLogin()">수정</button>
+							        	</a>
+									</div>
 					            </div>
 							</c:when>
 							<c:otherwise>
@@ -378,7 +376,7 @@ request.setCharacterEncoding("UTF-8");
 	                                discountYN.value = "Y";
 	                                V.value = "Y";
 	                                Label.innerHTML = "할인";
-	                                Num.value = ${ProductVO.discount }/${ProductVO.price }*100;
+	                                Num.value = 100 - Math.floor(${ProductVO.discount }/${ProductVO.price }*100);
 	                                Num.disabled = false;
 	                            }
 	                            disconuntUpdate();
@@ -583,5 +581,18 @@ request.setCharacterEncoding("UTF-8");
                         }
                         previewImg("inputImgURL_product_M");
                         previewImg("inputImgURL_product_S");
+                        
+                        <c:choose>
+							<c:when test="${ProductVO != null}">
+								function productDelete(){
+									if(confirm("정말 상품을 삭제 하시겠습니까?") == true){
+										location.href = "${contextPath }/productList/productDelete_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${ProductVO.productId }";
+										return true;
+									}else {
+										return false;
+									}
+								}
+							</c:when>
+						</c:choose>
 
                     </script>

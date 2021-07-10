@@ -75,9 +75,10 @@ public class ProductDAOImpl2 implements ProductDAO2 {
 		int result = sqlSession.update(null, map);
 		return result;
 	}
-
-	public int deleteProduct(Map<String, Object> map) throws DataAccessException {
-		int result = sqlSession.delete(null, map);
+	
+	//包府磊 惑前 昏力
+	public int deleteProduct(String productId) throws DataAccessException {
+		int result = sqlSession.delete("mapper.product.deleteProduct", productId);
 		return result;
 	}
 	

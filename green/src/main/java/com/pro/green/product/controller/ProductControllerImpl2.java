@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -145,26 +146,28 @@ public class ProductControllerImpl2 implements ProductController2 {
     }
  
     @RequestMapping(value="/productList/productUpdate_M.do", method=RequestMethod.POST)
-    public ModelAndView boardUpdatePOST( Criteria cri, RedirectAttributes redAttr) throws Exception {
+    public ModelAndView boardUpdatePOST(Criteria cri, RedirectAttributes redAttr) throws Exception {
         
-        ModelAndView mv = new ModelAndView("redirect:/board/boardDetail");
+        ModelAndView mav = new ModelAndView("redirect:/productList.do");
        // mv.addObject("idx", commandMap.get("idx"));
         
         int result = 0;
        // result  = productService.updateProduct(commandMap.getMap());
         
+        
         redAttr.addAttribute("page", cri.getPage());
         redAttr.addAttribute("perPagNum", cri.getPerPageNum());
         
-        return mv;
+        return mav;
     }
     
     @RequestMapping(value="/productList/productDelete_M.do")
-    public ModelAndView boardDelete( Criteria cri, RedirectAttributes redAttr) throws Exception {
-        ModelAndView mv = new ModelAndView("redirect:/board/boardList");
+    public ModelAndView boardDelete(@RequestParam String productId, Criteria cri, RedirectAttributes redAttr) throws Exception {
+    	
+        ModelAndView mv = new ModelAndView("redirect:/productList.do");
         
         int result = 0;
-       // result  = productService.deleteProduct(commandMap.getMap());
+        result  = productService.deleteProduct(productId);
         
         redAttr.addAttribute("page", cri.getPage());
         redAttr.addAttribute("perPagNum", cri.getPerPageNum());

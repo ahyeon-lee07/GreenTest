@@ -23,6 +23,6 @@ public interface ProductService2 {
 	public ProductVO2 viewProductDetail(String productId) throws DataAccessException;
 	public Map<String, Object> selectProductDetail(Map<String, Object> map) throws DataAccessException;
 	public int updateProduct(Map<String, Object> map) throws DataAccessException;
-	public int deleteProduct(Map<String, Object> map) throws DataAccessException;
 	public List<Map<String,Object>> selectProductImg(String productId) throws DataAccessException;
+	public int deleteProduct(String productId) throws DataAccessException;
 }

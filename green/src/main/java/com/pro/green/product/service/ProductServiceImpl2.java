@@ -67,8 +67,8 @@ public class ProductServiceImpl2 implements ProductService2 {
 	public int updateProduct(Map<String, Object> map) throws DataAccessException{
 		return productDAO.updateProduct(map);
 	}
-	public int deleteProduct(Map<String, Object> map) throws DataAccessException{
-		return productDAO.deleteProduct(map);
+	public int deleteProduct(String productId) throws DataAccessException{
+		return productDAO.deleteProduct(productId);
 	}
 	
 	//상품 이미지조회
