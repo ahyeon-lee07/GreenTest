@@ -161,6 +161,7 @@ public class ProductControllerImpl2 implements ProductController2 {
         return mav;
     }
     
+    //상품 삭제
     @RequestMapping(value="/productList/productDelete_M.do")
     public ModelAndView boardDelete(@RequestParam String productId, Criteria cri, RedirectAttributes redAttr) throws Exception {
     	

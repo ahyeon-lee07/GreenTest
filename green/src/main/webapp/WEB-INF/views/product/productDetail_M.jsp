@@ -36,11 +36,17 @@ request.setCharacterEncoding("UTF-8");
 										여부</label>
 									<div class="d-flex flex-row bd-highlight pr-2">
 										<div class="custom-control custom-switch pt-2">
-											<input type="checkbox" class="custom-control-input YNChk"
-												id="inputShowYN" value="${ProductVO.showYN }" checked>
-											<input id="showYN_V" class="input_V" type="text"
-												name="showYN" value="${ProductVO.showYN }"
-												style="display: none;"> <label id="inputShowYNLabel"
+										<c:choose>
+											<c:when test="${ProductVO != null}">
+												<input type="checkbox" class="custom-control-input YNChk"id="inputShowYN" value="${ProductVO.showYN }" checked>
+												<input id="showYN_V" class="input_V" type="text"name="showYN" value="${ProductVO.showYN }" style="display: none;">
+											</c:when>
+											<c:otherwise>
+												<input type="checkbox" class="custom-control-input YNChk" id="inputShowYN" value="Y" checked>
+												<input id="showYN_V" class="input_V" type="text" name="showYN" value="Y" style="display: none;">
+											</c:otherwise>
+										</c:choose>
+											 <label id="inputShowYNLabel"
 												class="custom-control-label" for="inputShowYN"
 												style="width: 70px;">활성화</label>
 										</div>
@@ -178,15 +184,23 @@ request.setCharacterEncoding("UTF-8");
 										class="bd-highlight col-form-label pl-2" style="width: 140px;">할인
 										여부</label>
 									<div class="d-flex flex-row bd-highlight pr-2">
-										<div class="custom-control custom-switch pt-2">
-											<input type="checkbox" class="custom-control-input YNChk"
-												id="inputDiscountYN" value="${ProductVO.discountYN }">
-											<input id="discountYN_V" class="input_V" type="text"
-												name="discountYN" value="${ProductVO.discountYN }"
-												style="display: none;"> <label id="discountYNLabel"
-												class="custom-control-label" for="inputDiscountYN"
-												style="width: 50px;">미할인</label>
-										</div>
+										<c:choose>
+											<c:when test="${ProductVO != null}">
+												<div class="custom-control custom-switch pt-2">
+													<input type="checkbox" class="custom-control-input YNChk" id="inputDiscountYN" value="${ProductVO.discountYN }">
+													<input id="discountYN_V" class="input_V" type="text" name="discountYN" value="${ProductVO.discountYN }" style="display: none;"> 
+													<label id="discountYNLabel" class="custom-control-label" for="inputDiscountYN" style="width: 50px;">미할인</label>
+												</div>
+											</c:when>
+											<c:otherwise>
+												<div class="custom-control custom-switch pt-2">
+													<input type="checkbox" class="custom-control-input YNChk" id="inputDiscountYN" value="N">
+													<input id="discountYN_V" class="input_V" type="text"name="discountYN" value="N" style="display: none;"> 
+													<label id="discountYNLabel" class="custom-control-label" for="inputDiscountYN" style="width: 50px;">미할인</label>
+												</div>
+											</c:otherwise>
+										</c:choose>
+										
 										<div class="d-flex flex-row bd-highlight pl-3 pr-2">
 											<input type="number" class="form-control" id="discountYN_Num"
 												min="0" max="100" style="width: 102px;" disabled
@@ -305,7 +319,7 @@ request.setCharacterEncoding("UTF-8");
 								    		<button type="button" class="btn bg-danger text-white" >삭제 </button>
 							            </a>
 								   		<a href="${contextPath }/productList/productUpdate_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }">
-								        	<button type="button" class="btn btn-success ml-3" onclick="return checkLogin()">수정</button>
+								        	<button type="submit" class="btn btn-success ml-3" onclick="return checkEdit()">수정</button>
 							        	</a>
 									</div>
 					            </div>
@@ -313,13 +327,13 @@ request.setCharacterEncoding("UTF-8");
 							<c:otherwise>
 								<div class="row justify-content-between my-3">
 						            <div class="">
-						            	<a class="" href="${contextPath }/productList.do">
+						            	<a class="" href="${contextPath }/productList.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }">
 						            		<button type="button" class="btn btn-secondary">목록</button>
 						            	</a>	
 						            </div>
 						            <div class="text-center">
 										<button type="submit" class="btn btn-success"
-											onclick="return checkLogin()">등록</button>
+											onclick="return checkAdd()">등록</button>
 									</div>
 					            </div>
 							</c:otherwise>
@@ -329,6 +343,7 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 		</form>
 	</div>
+	${ProductVO.showYN }
 </main>
 
 <script>
@@ -337,7 +352,9 @@ request.setCharacterEncoding("UTF-8");
                             var YNChk = document.getElementsByClassName('YNChk');
                             var input_V = document.getElementsByClassName('input_V');
                             var Label = document.getElementById('inputShowYNLabel');
-
+                            
+                            
+                            
                             for (var i = 0; i < YNChk.length; i++) {
                                 var Chk = YNChk[i];
                                 var IV = input_V[i];
@@ -504,7 +521,7 @@ request.setCharacterEncoding("UTF-8");
                         }
 
                         //전송 체크  document.getElementById('optionList').childNodes
-                        function checkLogin() {
+                        function checkAdd() {
                             var form = document.addProduct;
 
                             //옵션 리스트 빈값 체크
