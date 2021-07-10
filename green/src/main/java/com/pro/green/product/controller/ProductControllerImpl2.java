@@ -109,6 +109,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 		sessionChk(mav, sessinLogin, "productDetail_M");
 		
 		ProductVO2 ProductVO = new ProductVO2();
+		
         
 		//상품 정보 가져오기
 		ProductVO = productService.viewProductDetail(productId);
@@ -129,7 +130,7 @@ public class ProductControllerImpl2 implements ProductController2 {
         
         return mav;
     }
- 
+ /*
     @RequestMapping(value="/productList/productUpdate_M.do")
     public ModelAndView boardUpdate( Criteria cri) throws Exception {
         
@@ -144,15 +145,37 @@ public class ProductControllerImpl2 implements ProductController2 {
         
         return mv;
     }
- 
+ */
     @RequestMapping(value="/productList/productUpdate_M.do", method=RequestMethod.POST)
-    public ModelAndView boardUpdatePOST(Criteria cri, RedirectAttributes redAttr) throws Exception {
+    public ModelAndView boardUpdatePOST(@ModelAttribute("product") ProductVO2 product, @RequestParam String productId, MultipartHttpServletRequest request, Criteria cri, RedirectAttributes redAttr) throws Exception {
         
         ModelAndView mav = new ModelAndView("redirect:/productList.do");
-       // mv.addObject("idx", commandMap.get("idx"));
+        
+        product.setProductId(productId);
+        //mav.addObject("idx", commandMap.get("idx"));
         
         int result = 0;
-       // result  = productService.updateProduct(commandMap.getMap());
+        result = productService.updateProduct(product);
+        
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("productId", productId);
+		
+		//옵션 삭제 후 재 등록
+		result = productService.deleteProductOption(productId);
+		for (int i = 0; i < product.getProductVOList().size(); i++) {
+
+			System.out.println(product.getProductVOList().get(i).getOption());
+			System.out.println(product.getProductVOList().get(i).getStock());
+			paramMap.put("option", product.getProductVOList().get(i).getOption());
+			paramMap.put("stock", product.getProductVOList().get(i).getStock());
+
+			result = productService.addProductOption(paramMap);
+		}
+		
+		result = productService.deleteProductImge(productId);
+		
+		//파일을 업로드한 후 반환된 파일 이름이 저장된 FileList를 다시 map에 저장
+		List fileList = fileProcess(request, productId);
         
         
         redAttr.addAttribute("page", cri.getPage());
@@ -299,5 +322,6 @@ public class ProductControllerImpl2 implements ProductController2 {
 			return mav;
 		}
 	}
+	
 }
 

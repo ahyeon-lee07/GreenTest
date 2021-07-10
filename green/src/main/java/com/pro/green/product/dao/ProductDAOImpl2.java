@@ -71,8 +71,16 @@ public class ProductDAOImpl2 implements ProductDAO2 {
 		return result;
 	}
 
-	public int updateProduct(Map<String, Object> map) throws DataAccessException {
-		int result = sqlSession.update(null, map);
+	public int updateProduct(ProductVO2 product) throws DataAccessException {
+		int result = sqlSession.update("mapper.product.updateProduct", product);
+		return result;
+	}
+	public int deleteProductOption(String productId) throws DataAccessException {
+		int result = sqlSession.delete("mapper.product.deleteProductOption", productId);
+		return result;
+	}
+	public int deleteProductImge(String productId) throws DataAccessException{
+		int result = sqlSession.delete("mapper.product.deleteProductImge", productId);
 		return result;
 	}
 	

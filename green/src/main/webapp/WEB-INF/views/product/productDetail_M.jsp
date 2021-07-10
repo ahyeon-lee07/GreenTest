@@ -22,12 +22,18 @@ request.setCharacterEncoding("UTF-8");
 			<img src="${contextPath }/resources/img/require.png"> <span
 				class="">필수입력사항</span>
 		</div>
-		<form action="${contextPath }/product/addEdit.do" method="POST"
-			name="addProduct" enctype="multipart/form-data">
+		<c:choose>
+			<c:when test="${ProductVO != null}">
+				<form action="${contextPath }/productList/productUpdate_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${ProductVO.productId }" method="POST" name="addProduct" enctype="multipart/form-data">
+			</c:when>
+			<c:otherwise>
+				<form action="${contextPath }/product/addEdit.do" method="POST" name="addProduct" enctype="multipart/form-data">
+			</c:otherwise>
+		</c:choose>
+		
 			<div class="row border-bottom pm-2"></div>
 			<div class="row mb-4">
 				<div class="col-12">
-					<form name="joinForm" method="POST">
 						<div class="row border-bottom py-2">
 							<div class="col p-0">
 								<div class="d-flex bd-highlight">
@@ -63,16 +69,33 @@ request.setCharacterEncoding("UTF-8");
 									<div class="flex-grow bd-highlight flex-column pr-2">
 										<div class="flex-grow-1 bd-highlight pr-2">
 											<div class="d-flex">
-												<select id="inputGroup" class="form-control " name="p_group">
-													<option value="hard" selected>하드케이스</option>
-													<option value="gel">젤케이스</option>
-													<option value="card">카드케이스</option>
-													<option value="airPods">에어팟케이스</option>
-													<option value="buds">버즈케이스</option>
-													<option value="keyring">키링</option>
-													<option value="smart">스마트톡</option>
-												</select>
-												<div id="p_group" style="display: none;">${ProductVO.p_group }</div>
+												<c:choose>
+													<c:when test="${ProductVO != null}">
+														<select id="inputGroup" class="form-control " name="p_group" disabled>
+															<option value="hard" selected>하드케이스</option>
+															<option value="gel">젤케이스</option>
+															<option value="card">카드케이스</option>
+															<option value="airPods">에어팟케이스</option>
+															<option value="buds">버즈케이스</option>
+															<option value="keyring">키링</option>
+															<option value="smart">스마트톡</option>
+														</select>
+														<input type="text" id="p_group" name="p_group" style="display: none;" value="${ProductVO.p_group }">
+													</c:when>
+													<c:otherwise>
+														<select id="inputGroup" class="form-control " name="p_group">
+															<option value="hard" selected>하드케이스</option>
+															<option value="gel">젤케이스</option>
+															<option value="card">카드케이스</option>
+															<option value="airPods">에어팟케이스</option>
+															<option value="buds">버즈케이스</option>
+															<option value="keyring">키링</option>
+															<option value="smart">스마트톡</option>
+														</select>
+													</c:otherwise>
+												</c:choose>
+											
+												
 											</div>
 										</div>
 									</div>
@@ -318,9 +341,8 @@ request.setCharacterEncoding("UTF-8");
 							        	<a href="#" onclick="productDelete()">
 								    		<button type="button" class="btn bg-danger text-white" >삭제 </button>
 							            </a>
-								   		<a href="${contextPath }/productList/productUpdate_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }">
+								   	
 								        	<button type="submit" class="btn btn-success ml-3" onclick="return checkEdit()">수정</button>
-							        	</a>
 									</div>
 					            </div>
 							</c:when>
@@ -338,7 +360,6 @@ request.setCharacterEncoding("UTF-8");
 					            </div>
 							</c:otherwise>
 						</c:choose>
-					</form>
 				</div>
 			</div>
 		</form>
@@ -605,6 +626,57 @@ request.setCharacterEncoding("UTF-8");
 									if(confirm("정말 상품을 삭제 하시겠습니까?") == true){
 										location.href = "${contextPath }/productList/productDelete_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${ProductVO.productId }";
 										return true;
+									}else {
+										return false;
+									}
+								}
+								
+								function checkEdit(){
+									if(confirm("입력한 내용으로 수정 하시겠습니까?") == true){
+										
+										var form = document.addProduct;
+
+										//옵션 리스트 빈값 체크
+										function optinoListChk(optionTitle) {
+											for (var i = 0; i < document.getElementsByClassName(optionTitle).length; i++) {
+												if (document.getElementsByClassName(optionTitle)[i].value == "") {
+													return optionTitle;
+												}
+											}
+										}
+
+										var optionChk = optinoListChk("optionTitle");
+										var stockChk = optinoListChk("stockTitle");
+
+
+										//상품 옵션. 이미지 필수 체크 추가 되어야 함.  
+										if (form.productName.value == "") {
+											alert("상품명을 입력해 주세요.");
+											return false;
+										} else if (document.getElementsByClassName('optionList').length == 0) {
+											alert("상품 옵션은 한개 이상 입력 하셔야 합니다.");
+											return false;
+										} else if (optionChk == "optionTitle") {
+											alert("옵션 내용을 입력해 주세요.");
+											return false;
+										} else if (stockChk == "stockTitle") {
+											alert("옵션 수량을 입력해 주세요.");
+											return false;
+										} else if (form.price.value == "") {
+											alert("판매가를 입력해 주세요.");
+											return false;
+										} else if (form.productMileage.value == "") {
+											alert("상품적립금을 입력해 주세요.");
+											return false;
+										} else if (form.discountYN.value == "N") {
+											form.discountYN.value = "N";
+											form.discount.value = 0;
+										} else if (form.productMileage.value == "") {
+											form.productMileage.value = 0;
+										} else {
+											form.submit();
+										}
+
 									}else {
 										return false;
 									}

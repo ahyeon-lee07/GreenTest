@@ -64,13 +64,20 @@ public class ProductServiceImpl2 implements ProductService2 {
 	public Map<String, Object> selectProductDetail(Map<String, Object> map) throws DataAccessException{
 		return productDAO.selectProductDetail(map);
 	}
-	public int updateProduct(Map<String, Object> map) throws DataAccessException{
-		return productDAO.updateProduct(map);
+	public int updateProduct(ProductVO2 product) throws DataAccessException{
+		return productDAO.updateProduct(product);
 	}
 	public int deleteProduct(String productId) throws DataAccessException{
 		return productDAO.deleteProduct(productId);
 	}
-	
+	//옵션 삭제 
+	public int deleteProductOption(String productId) throws DataAccessException {
+		return productDAO.deleteProductOption(productId);
+	}
+	//이미지 삭제
+	public int deleteProductImge(String productId) throws DataAccessException {
+		return productDAO.deleteProductImge(productId);
+	}
 	//상품 이미지조회
 	public List<Map<String,Object>> selectProductImg(String productId) throws DataAccessException{
 		return productDAO.selectProductImg(productId);

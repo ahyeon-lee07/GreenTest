@@ -138,15 +138,46 @@
 	<!-- /조회==========================================================================================  -->
 	
 	<!-- 수정==========================================================================================  -->
+	<update id="updateProduct" parameterType="productVO">
+		<![CDATA[
+		UPDATE 
+			product
+		SET
+		    product.productName = #{productName},
+		    product.price = #{price},
+		    product.discount = #{discount},
+		    product.productMileage = #{productMileage},
+		    product.discountYN = #{discountYN},
+		    product.showYN = #{showYN}
+		WHERE
+			product.productId = #{productId};
+	 	]]>
+	</update>
 	
 	<!-- /수정==========================================================================================  -->
 	
 	<!-- 삭제==========================================================================================  -->
 	
-	<!-- 관리자 사품 삭제 -->
+	<!-- 관리자 상품 삭제 -->
 	<delete id="deleteProduct" parameterType="String">
 		<![CDATA[
 		CALL ptoductDelete(#{productId});
+		]]>
+	</delete>
+	
+	<!-- 상품 옵션 삭제 -->
+	<delete id="deleteProductOption" parameterType="String">
+		<![CDATA[
+		DELETE FROM product_option
+		WHERE productId = #{productId};
+		]]>
+	</delete>
+	
+	<!-- 상품 이미지 삭제 -->
+	<delete id="deleteProductImge" parameterType="String">
+		<![CDATA[
+		DELETE FROM image
+		WHERE productId = #{productId};
 		]]>
 	</delete>
 	
