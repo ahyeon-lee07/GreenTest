@@ -58,7 +58,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 	// 사품등록 리스트
 	@Override
 	@RequestMapping(value = "/productList.do", method = RequestMethod.GET)
-	public ModelAndView productList(@ModelAttribute("member") MemberVO member, HttpServletRequest request, Criteria cri)
+	public ModelAndView productList(@ModelAttribute("member") MemberVO member, @RequestParam String options, HttpServletRequest request, Criteria cri)
 			throws Exception {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
@@ -74,7 +74,21 @@ public class ProductControllerImpl2 implements ProductController2 {
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(pageTotal);
 		
-		List<Map<String,Object>> list = productService.selectBoardList(cri);
+		List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
+		
+		if (options == "") {
+			//옵션 값이 없을떄
+			list = productService.selectBoardList(cri);
+		}else {
+			//옵션값이 있을때 (필터)
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("cri", cri);
+			paramMap.put("options", options);
+			
+			list = productService.selectFilterBoardList(paramMap);
+		}
+		
+		
 		List optionList = new ArrayList();
 		
 		for(int i=0; i<list.size(); i++) {
@@ -86,6 +100,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 	    mav.addObject("list", list);
 	    mav.addObject("optionList", optionList);
 	    mav.addObject("pageMaker", pageMaker);
+	    mav.addObject("options", options);
 
 		return mav;
 	}
@@ -169,8 +184,6 @@ public class ProductControllerImpl2 implements ProductController2 {
 
 			result = productService.addProductOption(paramMap);
 		}
-		
-		//result = productService.deleteProductImge(productId);
 		
 		//파일을 업로드한 후 반환된 파일 이름이 저장된 FileList를 다시 map에 저장
 		List fileList = fileProcess(request, productId);

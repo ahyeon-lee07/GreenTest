@@ -47,6 +47,11 @@ public class ProductDAOImpl2 implements ProductDAO2 {
 		List<Map<String, Object>> result = sqlSession.selectList("mapper.product.selectBoardList", cri);
 		return result;
 	}
+	// 관리자 상품 리스트 조회 (필터)
+	public List<Map<String, Object>> selectFilterBoardList(Map<String, Object> paramMap) throws DataAccessException {
+		List<Map<String, Object>> result = sqlSession.selectList("mapper.product.selectFilterBoardList", paramMap);
+		return result;
+	}
 
 	// 관리자 상품 리스트 개수 조회
 	public int countBoardListTotal() throws DataAccessException {

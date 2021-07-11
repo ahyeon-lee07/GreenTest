@@ -16,6 +16,7 @@ public interface ProductService2 {
 	public int addProductImg(Map<String, Object> imageMap) throws DataAccessException;
 	
 	public List<Map<String, Object>> selectBoardList(Criteria cri) throws DataAccessException;
+	public List<Map<String, Object>> selectFilterBoardList(Map<String, Object> paramMap) throws DataAccessException;
 	public int countBoardListTotal() throws DataAccessException;
 	public List<Map<String,Object>> selectOptionLIst(String productId) throws DataAccessException;
 	

@@ -24,27 +24,41 @@
 							</div>
 
 							<!-- 필터영역 -->
-							<div class="d-flex justify-content-start border-bottom mt-2">
-								<div class="bd-highlight btn-group btn-group-toggle mb-2" data-toggle="buttons">
-									<label class="btn btn-outline-secondary active"> <input type="radio" name="options"
-											id="option1" checked> All
-									</label> <label class="btn btn-outline-secondary"> <input type="radio"
-											name="options" id="option2"> hard
-									</label> <label class="btn btn-outline-secondary"> <input type="radio"
-											name="options" id="option3"> gel
-									</label> <label class="btn btn-outline-secondary"> <input type="radio"
-											name="options" id="option3"> card
-									</label> <label class="btn btn-outline-secondary"> <input type="radio"
-											name="options" id="option3"> airPods
-									</label> <label class="btn btn-outline-secondary"> <input type="radio"
-											name="options" id="option3"> buds
-									</label> <label class="btn btn-outline-secondary"> <input type="radio"
-											name="options" id="option3"> keyring
-									</label> <label class="btn btn-outline-secondary"> <input type="radio"
-											name="options" id="option3"> smart
-									</label>
+							<form action="${contextPath }/productList.do" method="GET" name="productlist">
+								<div class="d-flex justify-content-start border-bottom mt-2">
+									<div class="bd-highlight btn-group btn-group-toggle mb-2" data-toggle="buttons" onclick="listFilter()">
+										<label class="btn btn-outline-secondary"> <input type="radio" name="options" id="option1" value="" checked> 
+											All
+										</label> 
+										<label class="btn btn-outline-secondary"> <input type="radio" name="options" id="option2" value="hard"> 
+											hard
+										</label> 
+										<label class="btn btn-outline-secondary"> <input type="radio" name="options" id="option3" value="gel"> 
+											gel
+										</label> 
+										<label class="btn btn-outline-secondary"> <input type="radio" name="options" id="option4" value="card"> 
+											card
+										</label> 
+										<label class="btn btn-outline-secondary"> <input type="radio" name="options" id="option5" value="airPods"> 
+											airPods
+										</label> 
+										<label class="btn btn-outline-secondary"> <input type="radio" name="options" id="option6" value="buds"> 
+											buds
+										</label> 
+										<label class="btn btn-outline-secondary"> <input type="radio" name="options" id="option7" value="keyring"> 
+											keyring
+										</label> 
+										<label class="btn btn-outline-secondary"> <input type="radio" name="options" id="option8" value="smart"> 
+											smart
+										</label>
+									</div>
 								</div>
-							</div>
+							</form>
+							<c:choose>
+								<c:when test="${options != null}">
+									<div id="filterV" style="display:none">${options }</div>
+								</c:when>
+							</c:choose>
 
 							<table class="table table-hover m-0">
 								<thead class=" border-bottom-0 bg-light">
@@ -183,3 +197,27 @@
 							</nav>
 						</div>
 					</main>
+
+					<script>
+					//필터 버튼 활성화 처리
+					window.onload = function () {
+							var filterV = document.getElementById('filterV').innerText;
+							var optins = document.getElementsByName('options');
+
+							for(var i=0; i< optins.length; i++){
+								var optin = optins[i];
+								optin.parentNode.setAttribute('class', 'btn btn-outline-secondary');
+								if(optin.value == filterV) {
+									optin.parentNode.setAttribute('class', 'btn btn-outline-secondary active');
+									optin.checked = true;
+								}
+							}
+
+						}
+					
+						function listFilter(){
+							 var form = document.productlist;
+							 form.submit();
+						}
+						
+					</script>
