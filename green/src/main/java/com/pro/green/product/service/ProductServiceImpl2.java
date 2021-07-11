@@ -75,8 +75,8 @@ public class ProductServiceImpl2 implements ProductService2 {
 		return productDAO.deleteProductOption(productId);
 	}
 	//이미지 삭제
-	public int deleteProductImge(String productId) throws DataAccessException {
-		return productDAO.deleteProductImge(productId);
+	public int deleteProductImge(Map<String, Object> imageMap) throws DataAccessException {
+		return productDAO.deleteProductImge(imageMap);
 	}
 	//상품 이미지조회
 	public List<Map<String,Object>> selectProductImg(String productId) throws DataAccessException{

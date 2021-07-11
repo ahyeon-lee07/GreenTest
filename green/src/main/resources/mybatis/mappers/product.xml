@@ -174,10 +174,10 @@
 	</delete>
 	
 	<!-- 상품 이미지 삭제 -->
-	<delete id="deleteProductImge" parameterType="String">
+	<delete id="deleteProductImge" parameterType="hashmap">
 		<![CDATA[
 		DELETE FROM image
-		WHERE productId = #{productId};
+		WHERE productId = #{productId} AND imgType = #{imgType};
 		]]>
 	</delete>
 	

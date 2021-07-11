@@ -43,18 +43,25 @@ request.setCharacterEncoding("UTF-8");
 									<div class="d-flex flex-row bd-highlight pr-2">
 										<div class="custom-control custom-switch pt-2">
 										<c:choose>
-											<c:when test="${ProductVO != null}">
+											<c:when test="${ProductVO != null && ProductVO.showYN == 'Y'}">
 												<input type="checkbox" class="custom-control-input YNChk"id="inputShowYN" value="${ProductVO.showYN }" checked>
 												<input id="showYN_V" class="input_V" type="text"name="showYN" value="${ProductVO.showYN }" style="display: none;">
+												<label id="inputShowYNLabel" class="custom-control-label" for="inputShowYN" style="width: 70px;">활성화</label>
+											</c:when>
+											<c:when test="${ProductVO != null && ProductVO.showYN == 'N'}">
+												<input type="checkbox" class="custom-control-input YNChk"id="inputShowYN" value="${ProductVO.showYN }" checked>
+												<input id="showYN_V" class="input_V" type="text"name="showYN" value="${ProductVO.showYN }" style="display: none;">
+												<label id="inputShowYNLabel" class="custom-control-label" for="inputShowYN" style="width: 70px;">비활성화</label>
 											</c:when>
 											<c:otherwise>
 												<input type="checkbox" class="custom-control-input YNChk" id="inputShowYN" value="Y" checked>
 												<input id="showYN_V" class="input_V" type="text" name="showYN" value="Y" style="display: none;">
-											</c:otherwise>
-										</c:choose>
-											 <label id="inputShowYNLabel"
+												<label id="inputShowYNLabel"
 												class="custom-control-label" for="inputShowYN"
 												style="width: 70px;">활성화</label>
+											</c:otherwise>
+										</c:choose>
+											 
 										</div>
 									</div>
 								</div>
@@ -372,9 +379,6 @@ request.setCharacterEncoding("UTF-8");
                         window.onload = function () {
                             var YNChk = document.getElementsByClassName('YNChk');
                             var input_V = document.getElementsByClassName('input_V');
-                            var Label = document.getElementById('inputShowYNLabel');
-                            
-                            
                             
                             for (var i = 0; i < YNChk.length; i++) {
                                 var Chk = YNChk[i];
@@ -384,12 +388,10 @@ request.setCharacterEncoding("UTF-8");
                                     Chk.value = "Y"
                                     IV.value = "Y"
                                     Chk.checked = true;
-                                    Label.innerHTML = "비활성화";
                                 } else {
                                     Chk.value = "N"
-                                    Chk.value = "N"
+                                    IV.value = "N"
                                     Chk.checked = false;
-                                    Label.innerHTML = "활성화";
                                 }
                             }
 

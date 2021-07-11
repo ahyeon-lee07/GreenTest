@@ -27,5 +27,5 @@ public interface ProductDAO2 {
 	public List<Map<String,Object>> selectProductImg(String productId) throws DataAccessException;
 	public int deleteProduct(String productId) throws DataAccessException;
 	public int deleteProductOption(String productId) throws DataAccessException;
-	public int deleteProductImge(String productId) throws DataAccessException;
+	public int deleteProductImge(Map<String, Object> imageMap) throws DataAccessException;
 }

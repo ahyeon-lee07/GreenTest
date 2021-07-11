@@ -164,15 +164,13 @@ public class ProductControllerImpl2 implements ProductController2 {
 		result = productService.deleteProductOption(productId);
 		for (int i = 0; i < product.getProductVOList().size(); i++) {
 
-			System.out.println(product.getProductVOList().get(i).getOption());
-			System.out.println(product.getProductVOList().get(i).getStock());
 			paramMap.put("option", product.getProductVOList().get(i).getOption());
 			paramMap.put("stock", product.getProductVOList().get(i).getStock());
 
 			result = productService.addProductOption(paramMap);
 		}
 		
-		result = productService.deleteProductImge(productId);
+		//result = productService.deleteProductImge(productId);
 		
 		//파일을 업로드한 후 반환된 파일 이름이 저장된 FileList를 다시 map에 저장
 		List fileList = fileProcess(request, productId);
@@ -284,20 +282,24 @@ public class ProductControllerImpl2 implements ProductController2 {
 					}
 				}
 				mFile.transferTo(new File(image_path + "\\" + imgPart + "\\" + originalFileName));	//임시로 저장된 mutipartFile을 실제 파일로 전송
-			}
-			
-			//이미지 디비에 저장
-			if(FileName.equals("imgURL_product_M")) {
-				ImageMap.put("imgType", "product_M");
-				ImageMap.put("imgURL", originalFileName);
-				result = productService.addProductImg(ImageMap);
 				
-			}else if(FileName.equals("imgURL_product_S")) {
-				ImageMap.put("imgType", "product_S");
-				ImageMap.put("imgURL", originalFileName);
-				result = productService.addProductImg(ImageMap);
+				
+				//이미지 디비에 저장
+				if(FileName.equals("imgURL_product_M")) {
+					ImageMap.put("imgType", "product_M");
+					ImageMap.put("imgURL", originalFileName);
+					
+					result = productService.deleteProductImge(ImageMap);
+					result = productService.addProductImg(ImageMap);
+					
+				}else if(FileName.equals("imgURL_product_S")) {
+					ImageMap.put("imgType", "product_S");
+					ImageMap.put("imgURL", originalFileName);
+					
+					result = productService.deleteProductImge(ImageMap);
+					result = productService.addProductImg(ImageMap);
+				}
 			}
-			
 		}
 		return fileList;
 	}
