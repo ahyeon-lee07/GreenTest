@@ -48,6 +48,12 @@ public class ProductDAOImpl2 implements ProductDAO2 {
 		return result;
 	}
 
+	// 관리자 리스트에서 활성화 여부 변경
+	public int showYNChk(Map<String, Object> paramMap) throws DataAccessException {
+		int result = sqlSession.update("mapper.product.showYNChk", paramMap);
+		return result;
+	}
+
 	// 관리자 상품 리스트 조회 (필터)
 	public List<Map<String, Object>> selectFilterBoardList(Map<String, Object> paramMap) throws DataAccessException {
 		List<Map<String, Object>> result = sqlSession.selectList("mapper.product.selectFilterBoardList", paramMap);
@@ -59,7 +65,8 @@ public class ProductDAOImpl2 implements ProductDAO2 {
 		int result = sqlSession.selectOne("mapper.product.countBoardList");
 		return result;
 	}
-	public int filterCountBoardListTotal(String options) throws DataAccessException{
+
+	public int filterCountBoardListTotal(String options) throws DataAccessException {
 		int result = sqlSession.selectOne("mapper.product.filterCountBoardListTotal", options);
 		return result;
 	}
@@ -108,13 +115,15 @@ public class ProductDAOImpl2 implements ProductDAO2 {
 	}
 
 	// 관리자 상품 리스트 검색
-	public List<Map<String, Object>> searchSelectBoardList(Map<String, Object> paramMap) throws DataAccessException{
+	public List<Map<String, Object>> searchSelectBoardList(Map<String, Object> paramMap) throws DataAccessException {
 		List<Map<String, Object>> result = sqlSession.selectList("mapper.product.searchSelectBoardList", paramMap);
 		return result;
 	}
 
-	public List<Map<String, Object>> searchSelectFilterBoardList(Map<String, Object> paramMap) throws DataAccessException{
-		List<Map<String, Object>> result = sqlSession.selectList("mapper.product.searchSelectFilterBoardList", paramMap);
+	public List<Map<String, Object>> searchSelectFilterBoardList(Map<String, Object> paramMap)
+			throws DataAccessException {
+		List<Map<String, Object>> result = sqlSession.selectList("mapper.product.searchSelectFilterBoardList",
+				paramMap);
 		return result;
 	}
 }

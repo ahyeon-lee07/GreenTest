@@ -91,10 +91,10 @@
 												<div>
 													<c:choose>
 														<c:when test="${list.showYN eq 'Y' }">
-															<input type='checkbox' name='Choice' checked/>
+															<input class="checkbox" type='checkbox' name='Choice' value='Y' onclick="fn_showYNChk()" checked/>
 														</c:when>
 														<c:when test="${list.showYN eq 'N' || list.showYN eq ''}">
-															<input type='checkbox' name='Choice'/>
+															<input class="checkbox" type='checkbox' name='Choice' value='N' onclick="fn_showYNChk()"/>
 														</c:when>
 													</c:choose>
 												</div>
@@ -236,6 +236,34 @@
 							}else{
 								form.submit();
 							}
+						}
+						
+						function fn_showYNChk(){
+							var productId = event.currentTarget.parentNode.parentNode.parentNode.id;
+							var showYNChk = event.currentTarget.value;
+							var showYNChk_V;
+							if(showYNChk == 'Y'){
+								showYNChk_V = event.currentTarget.value = 'N';
+							}else {
+								showYNChk_V = event.currentTarget.value = 'Y';
+							}
+							 $.ajax({
+								type: "POST",
+								async: true,
+								url: "${contextPath}/productList/showYNChk.do",
+								dataType: "text",
+								data: { id: productId, value: showYNChk_V },
+								success: function (data, textStatus) {
+									
+								},
+								error: function (data, textStatus) {
+									
+								},
+								complete: function (data, textStatus) {
+									
+								}
+							});
+							
 						}
 						
 					</script>

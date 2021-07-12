@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -105,6 +107,22 @@ public class ProductControllerImpl2 implements ProductController2 {
 		mav.addObject("options", options);
 
 		return mav;
+	}
+	
+	// 관리자 상품 리스트 활성화요부 변경
+	@RequestMapping(value = "/productList/showYNChk.do", method = RequestMethod.POST)
+	public ResponseEntity overlapped(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ResponseEntity resEntity = null;
+		String id = request.getParameter("id");
+		String value = request.getParameter("value");
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("id", id);
+		paramMap.put("value", value);
+		
+		int result = productService.showYNChk(paramMap);
+		resEntity = new ResponseEntity(result, HttpStatus.OK);
+		return resEntity;
 	}
 
 	//관리자 상품 검색

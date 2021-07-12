@@ -34,5 +34,8 @@ public interface ProductService2 {
 	//관리자 상품 리스트 검색
 	public List<Map<String, Object>> searchSelectBoardList(Map<String, Object> paramMap) throws DataAccessException;
 	public List<Map<String, Object>> searchSelectFilterBoardList(Map<String, Object> paramMap) throws DataAccessException;
+	//관리자 리스트에서 활성화 여부 변경
+	public int showYNChk(Map<String, Object> paramMap) throws DataAccessException;
+
 	
 }

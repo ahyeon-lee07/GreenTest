@@ -47,6 +47,11 @@ public class ProductServiceImpl2 implements ProductService2 {
 		return productDAO.selectBoardList(cri);
 	}
 
+	// 관리자 리스트에서 활성화 여부 변경
+	public int showYNChk(Map<String, Object> paramMap) throws DataAccessException {
+		return productDAO.showYNChk(paramMap);
+	}
+
 	// 관리자 상품 리스트 조회 (필터)
 	public List<Map<String, Object>> selectFilterBoardList(Map<String, Object> paramMap) throws DataAccessException {
 		return productDAO.selectFilterBoardList(paramMap);
@@ -56,7 +61,8 @@ public class ProductServiceImpl2 implements ProductService2 {
 	public int countBoardListTotal() throws DataAccessException {
 		return productDAO.countBoardListTotal();
 	}
-	public int filterCountBoardListTotal(String options) throws DataAccessException{
+
+	public int filterCountBoardListTotal(String options) throws DataAccessException {
 		return productDAO.filterCountBoardListTotal(options);
 	}
 
@@ -99,11 +105,13 @@ public class ProductServiceImpl2 implements ProductService2 {
 	}
 
 	// 관리자 상품 리스트 검색
-	public List<Map<String, Object>> searchSelectBoardList(Map<String, Object> paramMap) throws DataAccessException{
+	public List<Map<String, Object>> searchSelectBoardList(Map<String, Object> paramMap) throws DataAccessException {
 		return productDAO.searchSelectBoardList(paramMap);
 	}
+
 	// 관리자 상품 리스트 검색
-	public List<Map<String, Object>> searchSelectFilterBoardList(Map<String, Object> paramMap) throws DataAccessException{
+	public List<Map<String, Object>> searchSelectFilterBoardList(Map<String, Object> paramMap)
+			throws DataAccessException {
 		return productDAO.searchSelectFilterBoardList(paramMap);
 	}
 }
