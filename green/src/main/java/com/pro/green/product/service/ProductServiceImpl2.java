@@ -56,6 +56,9 @@ public class ProductServiceImpl2 implements ProductService2 {
 	public int countBoardListTotal() throws DataAccessException {
 		return productDAO.countBoardListTotal();
 	}
+	public int filterCountBoardListTotal(String options) throws DataAccessException{
+		return productDAO.filterCountBoardListTotal(options);
+	}
 
 	// 包府磊 惑前 府胶飘 可记
 	public List<Map<String, Object>> selectOptionLIst(String productId) throws DataAccessException {

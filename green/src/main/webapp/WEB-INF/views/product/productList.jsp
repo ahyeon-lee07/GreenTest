@@ -66,8 +66,8 @@
 										<th class="text-center border-bottom-0 align-middle border-top-0 px-1"
 											style="width: 36px">
 											<div>
-												<input type='checkbox' name='selectall' value='selectall'
-													onclick='selectAll(this)' />
+												<!-- <input type='checkbox' name='selectall' value='selectall'
+													onclick='selectAll(this)' /> -->
 											</div>
 										</th>
 										<th class="text-center border-bottom-0 border-top-0 px-2" style="width: 120px">
@@ -89,7 +89,14 @@
 										<tr id="${list.productId }" class="">
 											<th class="text-center align-middle align-middle px-1">
 												<div>
-													<input type='checkbox' name='Choice' />
+													<c:choose>
+														<c:when test="${list.showYN eq 'Y' }">
+															<input type='checkbox' name='Choice' checked/>
+														</c:when>
+														<c:when test="${list.showYN eq 'N' || list.showYN eq ''}">
+															<input type='checkbox' name='Choice'/>
+														</c:when>
+													</c:choose>
 												</div>
 											</th>
 											<td class="text-center align-middle px-2"><img
@@ -132,7 +139,7 @@
 												${list.productMileage }</td>
 											<td class="text-center align-middle px-2">
 												<div class="bd-highlight">
-													<a href="${contextPath }/productList/productDetail_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${list.productId }">
+													<a href="${contextPath }/productList/productDetail_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${list.productId }&options=${options }">
 														<button type="button" class="btn btn-outline-secondary btn-sm"
 															style="font-size: 0.7rem; width: 100%; display: block;">상세정보</button>
 													</a>

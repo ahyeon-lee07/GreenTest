@@ -24,7 +24,7 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 		<c:choose>
 			<c:when test="${ProductVO != null}">
-				<form action="${contextPath }/productList/productUpdate_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${ProductVO.productId }" method="POST" name="addProduct" enctype="multipart/form-data">
+				<form action="${contextPath }/productList/productUpdate_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${ProductVO.productId }&options=${options }" method="POST" name="addProduct" enctype="multipart/form-data">
 			</c:when>
 			<c:otherwise>
 				<form action="${contextPath }/product/addEdit.do" method="POST" name="addProduct" enctype="multipart/form-data">
@@ -340,7 +340,7 @@ request.setCharacterEncoding("UTF-8");
 							<c:when test="${ProductVO != null}">
 								<div class="row justify-content-between my-3">
 							    	<div class="">
-							        	<a class="" href="${contextPath }/productList.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }">
+							        	<a class="" href="${contextPath }/productList.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&options=${options }">
 							            	<button type="button" class="btn btn-secondary">목록</button>
 							            	</a>	
 							    	</div>
@@ -356,7 +356,7 @@ request.setCharacterEncoding("UTF-8");
 							<c:otherwise>
 								<div class="row justify-content-between my-3">
 						            <div class="">
-						            	<a class="" href="${contextPath }/productList.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }">
+						            	<a class="" href="${contextPath }/productList.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&options=${options }">
 						            		<button type="button" class="btn btn-secondary">목록</button>
 						            	</a>	
 						            </div>
@@ -371,7 +371,6 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 		</form>
 	</div>
-	${ProductVO.showYN }
 </main>
 
 <script>
@@ -626,7 +625,7 @@ request.setCharacterEncoding("UTF-8");
 							<c:when test="${ProductVO != null}">
 								function productDelete(){
 									if(confirm("정말 상품을 삭제 하시겠습니까?") == true){
-										location.href = "${contextPath }/productList/productDelete_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${ProductVO.productId }";
+										location.href = "${contextPath }/productList/productDelete_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${ProductVO.productId }&options=";
 										return true;
 									}else {
 										return false;

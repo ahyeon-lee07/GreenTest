@@ -59,6 +59,10 @@ public class ProductDAOImpl2 implements ProductDAO2 {
 		int result = sqlSession.selectOne("mapper.product.countBoardList");
 		return result;
 	}
+	public int filterCountBoardListTotal(String options) throws DataAccessException{
+		int result = sqlSession.selectOne("mapper.product.filterCountBoardListTotal", options);
+		return result;
+	}
 
 	// 包府磊 惑前 府胶飘 可记 炼雀
 	public List<Map<String, Object>> selectOptionLIst(String productId) throws DataAccessException {

@@ -156,6 +156,16 @@
             product
     ]]>
 	</select>
+	<select id="filterCountBoardListTotal" resultType="Integer" parameterType="int">
+    <![CDATA[
+        SELECT
+            count(*)
+        FROM
+            product
+        WHERE
+        	p_group = #{options}
+    ]]>
+	</select>
 	
 	<!-- 관리자 상품 옵션 조회 -->
 	<select id="selectOptionLIst" resultType="hashmap" parameterType="String">

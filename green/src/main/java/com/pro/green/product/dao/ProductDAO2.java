@@ -17,7 +17,11 @@ public interface ProductDAO2 {
 	
 	public List<Map<String, Object>> selectBoardList(Criteria cri) throws DataAccessException;
 	public List<Map<String, Object>> selectFilterBoardList(Map<String, Object> paramMap) throws DataAccessException;
+	
+	//상품 리스트 총 개수
 	public int countBoardListTotal() throws DataAccessException;
+	public int filterCountBoardListTotal(String options) throws DataAccessException;
+	
 	public List<Map<String,Object>> selectOptionLIst(String productId) throws DataAccessException;
 	
 	public ProductVO2 viewProductDetail(String productId) throws DataAccessException;
@@ -30,4 +34,5 @@ public interface ProductDAO2 {
 	// 관리자 상품 리스트 검색
 	public List<Map<String, Object>> searchSelectBoardList(Map<String, Object> paramMap) throws DataAccessException;
 	public List<Map<String, Object>> searchSelectFilterBoardList(Map<String, Object> paramMap) throws DataAccessException;
+	
 }

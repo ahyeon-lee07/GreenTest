@@ -69,24 +69,27 @@ public class ProductControllerImpl2 implements ProductController2 {
 
 		PageMaker pageMaker = new PageMaker();
 
-		int pageTotal = productService.countBoardListTotal();
+		int pageTotal = 0;
 
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(pageTotal);
 
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
 		if (options == "") {
 			// 옵션 값이 없을떄
+			pageTotal = productService.countBoardListTotal();
 			list = productService.selectBoardList(cri);
 		} else {
 			// 옵션값이 있을때 (필터)
 			Map<String, Object> paramMap = new HashMap<String, Object>();
 			paramMap.put("cri", cri);
 			paramMap.put("options", options);
-
+			
+			pageTotal = productService.filterCountBoardListTotal(options);
 			list = productService.selectFilterBoardList(paramMap);
 		}
+		
+		pageMaker.setTotalCount(pageTotal);
 
 		List optionList = new ArrayList();
 
@@ -162,7 +165,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 
 		HttpSession session = request.getSession();
 		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
-
+		
 		// 상품 아이디
 		String productId = request.getParameter("productId");
 
@@ -186,6 +189,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		mav.addObject("page", cri.getPage());
+		mav.addObject("options", request.getParameter("options"));
 		mav.addObject("pageMaker", pageMaker);
 
 		return mav;
@@ -221,7 +225,8 @@ public class ProductControllerImpl2 implements ProductController2 {
 
 		redAttr.addAttribute("page", cri.getPage());
 		redAttr.addAttribute("perPagNum", cri.getPerPageNum());
-
+		redAttr.addAttribute("options", request.getParameter("options"));
+		
 		return mav;
 	}
 
@@ -230,7 +235,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 	public ModelAndView boardDelete(@RequestParam String productId, Criteria cri, RedirectAttributes redAttr)
 			throws Exception {
 
-		ModelAndView mv = new ModelAndView("redirect:/productList.do");
+		ModelAndView mv = new ModelAndView("redirect:/productList.do?options=");
 
 		int result = 0;
 		result = productService.deleteProduct(productId);
@@ -289,7 +294,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 		// 파일을 업로드한 후 반환된 파일 이름이 저장된 FileList를 다시 map에 저장
 		List fileList = fileProcess(request, selectProductID);
 
-		mav.setViewName("redirect:/productList.do");
+		mav.setViewName("redirect:/productList.do?options=");
 		return mav;
 	}
 
