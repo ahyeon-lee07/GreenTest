@@ -49,133 +49,164 @@ public class ProductControllerImpl2 implements ProductController2 {
 	private ProductService2 productService;
 	@Autowired
 	private ProductVO2 product;
-	
+
 	@Autowired
 	private Criteria criteria;
 	@Autowired
 	private PageMaker pageMaker;
-	
+
 	// 사품등록 리스트
 	@Override
 	@RequestMapping(value = "/productList.do", method = RequestMethod.GET)
-	public ModelAndView productList(@ModelAttribute("member") MemberVO member, @RequestParam String options, HttpServletRequest request, Criteria cri)
-			throws Exception {
+	public ModelAndView productList(@ModelAttribute("member") MemberVO member, @RequestParam String options,
+			HttpServletRequest request, Criteria cri) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
 
-		//관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
+		// 관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
 		sessionChk(mav, sessinLogin, "productList");
+
+		PageMaker pageMaker = new PageMaker();
+
+		int pageTotal = productService.countBoardListTotal();
+
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(pageTotal);
+
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+
+		if (options == "") {
+			// 옵션 값이 없을떄
+			list = productService.selectBoardList(cri);
+		} else {
+			// 옵션값이 있을때 (필터)
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			paramMap.put("cri", cri);
+			paramMap.put("options", options);
+
+			list = productService.selectFilterBoardList(paramMap);
+		}
+
+		List optionList = new ArrayList();
+
+		for (int i = 0; i < list.size(); i++) {
+			String productId = (String) list.get(i).get("productId");
+			List<Map<String, Object>> option = productService.selectOptionLIst(productId);
+			optionList.add(option);
+		}
+		
+		mav.addObject("list", list);
+		mav.addObject("optionList", optionList);
+		mav.addObject("pageMaker", pageMaker);
+		mav.addObject("options", options);
+
+		return mav;
+	}
+
+	//관리자 상품 검색
+	@RequestMapping(value = "/productList/search.do", method = RequestMethod.GET)
+	public ModelAndView productList(@RequestParam(value = "searchKeyWordOption") String searchKeyWordOption,
+									@RequestParam(value = "keyWord") String keyWord,
+									@RequestParam(value = "searchOptions") String options,
+									HttpServletRequest request, Criteria cri) throws Exception{
+		ModelAndView mav = new ModelAndView();
 		
 		PageMaker pageMaker = new PageMaker();
 		
 		int pageTotal = productService.countBoardListTotal();
-		
+
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(pageTotal);
-		
-		List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
-		
+
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
 		if (options == "") {
-			//옵션 값이 없을떄
-			list = productService.selectBoardList(cri);
-		}else {
-			//옵션값이 있을때 (필터)
-			Map<String, Object> paramMap = new HashMap<String, Object>();
+			// 옵션 값이 없을떄
+			paramMap.put("cri", cri);
+			paramMap.put("keyWord", keyWord);
+			list = productService.searchSelectBoardList(paramMap);
+		} else {
+			// 옵션값이 있을때 (필터)
 			paramMap.put("cri", cri);
 			paramMap.put("options", options);
+			paramMap.put("keyWord", keyWord);
 			
-			list = productService.selectFilterBoardList(paramMap);
+			list = productService.searchSelectFilterBoardList(paramMap);
 		}
-		
-		
+
 		List optionList = new ArrayList();
-		
-		for(int i=0; i<list.size(); i++) {
+
+		for (int i = 0; i < list.size(); i++) {
 			String productId = (String) list.get(i).get("productId");
-			List<Map<String,Object>> option = productService.selectOptionLIst(productId);
+			List<Map<String, Object>> option = productService.selectOptionLIst(productId);
 			optionList.add(option);
 		}
 		
-	    mav.addObject("list", list);
-	    mav.addObject("optionList", optionList);
-	    mav.addObject("pageMaker", pageMaker);
-	    mav.addObject("options", options);
-
+		mav.addObject("list", list);
+		mav.addObject("optionList", optionList);
+		mav.addObject("pageMaker", pageMaker);
+		mav.addObject("options", options);
+		mav.setViewName("productList");
+		
 		return mav;
 	}
 	
-	
-// 테스트 ----------------------------------------------------
-	
-	//관리자 상세페이지
+	// 관리자 상세페이지
 	@RequestMapping("/productList/productDetail_M.do")
-    public ModelAndView boardDetail(HttpServletRequest request, HttpServletResponse response, Criteria cri) throws Exception {
-        
-        ModelAndView mav = new ModelAndView();
-        
-        HttpSession session = request.getSession();
+	public ModelAndView boardDetail(HttpServletRequest request, HttpServletResponse response, Criteria cri)
+			throws Exception {
+
+		ModelAndView mav = new ModelAndView();
+
+		HttpSession session = request.getSession();
 		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
-		
-		//상품 아이디
+
+		// 상품 아이디
 		String productId = request.getParameter("productId");
 
-		//관리자 세션 체크 (ModelAndView, 세션정보, "화면이름")
+		// 관리자 세션 체크 (ModelAndView, 세션정보, "화면이름")
 		sessionChk(mav, sessinLogin, "productDetail_M");
-		
+
 		ProductVO2 ProductVO = new ProductVO2();
-		
-        
-		//상품 정보 가져오기
+
+		// 상품 정보 가져오기
 		ProductVO = productService.viewProductDetail(productId);
-		//상품 옵션 가져오기
-		List<Map<String,Object>> option = productService.selectOptionLIst(productId);
-		List<Map<String,Object>> img = productService.selectProductImg(productId);
-		
-		mav.addObject("pageTitle","상품 상세");
-        mav.addObject("ProductVO",ProductVO);
-        mav.addObject("option",option);
-        mav.addObject("product_M",img.get(0).get("imgURL"));
-        mav.addObject("product_S",img.get(1).get("imgURL"));
-        
-        PageMaker pageMaker = new PageMaker();
-        pageMaker.setCri(cri);
-        mav.addObject("page",cri.getPage());
-        mav.addObject("pageMaker", pageMaker);
-        
-        return mav;
-    }
- /*
-    @RequestMapping(value="/productList/productUpdate_M.do")
-    public ModelAndView boardUpdate( Criteria cri) throws Exception {
-        
-        ModelAndView mv = new ModelAndView("/board/boardUpdate");
-       // Map<String, Object> detail = productService.selectProductDetail(commandMap.getMap());
-       // mv.addObject("detail",detail);
-        
-        PageMaker pageMaker = new PageMaker();
-        pageMaker.setCri(cri);
-        mv.addObject("page",cri.getPage());
-        mv.addObject("pageMaker", pageMaker);
-        
-        return mv;
-    }
- */
-    @RequestMapping(value="/productList/productUpdate_M.do", method=RequestMethod.POST)
-    public ModelAndView boardUpdatePOST(@ModelAttribute("product") ProductVO2 product, @RequestParam String productId, MultipartHttpServletRequest request, Criteria cri, RedirectAttributes redAttr) throws Exception {
-        
-        ModelAndView mav = new ModelAndView("redirect:/productList.do");
-        
-        product.setProductId(productId);
-        //mav.addObject("idx", commandMap.get("idx"));
-        
-        int result = 0;
-        result = productService.updateProduct(product);
-        
-        Map<String, Object> paramMap = new HashMap<String, Object>();
+		// 상품 옵션 가져오기
+		List<Map<String, Object>> option = productService.selectOptionLIst(productId);
+		List<Map<String, Object>> img = productService.selectProductImg(productId);
+
+		mav.addObject("pageTitle", "상품 상세");
+		mav.addObject("ProductVO", ProductVO);
+		mav.addObject("option", option);
+		mav.addObject("product_M", img.get(0).get("imgURL"));
+		mav.addObject("product_S", img.get(1).get("imgURL"));
+
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		mav.addObject("page", cri.getPage());
+		mav.addObject("pageMaker", pageMaker);
+
+		return mav;
+	}
+
+	//관리자 상품 수정
+	@RequestMapping(value = "/productList/productUpdate_M.do", method = RequestMethod.POST)
+	public ModelAndView boardUpdatePOST(@ModelAttribute("product") ProductVO2 product, @RequestParam String productId,
+			MultipartHttpServletRequest request, Criteria cri, RedirectAttributes redAttr) throws Exception {
+
+		ModelAndView mav = new ModelAndView("redirect:/productList.do");
+
+		product.setProductId(productId);
+
+		int result = 0;
+		result = productService.updateProduct(product);
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("productId", productId);
-		
-		//옵션 삭제 후 재 등록
+
+		// 옵션 삭제 후 재 등록
 		result = productService.deleteProductOption(productId);
 		for (int i = 0; i < product.getProductVOList().size(); i++) {
 
@@ -184,35 +215,33 @@ public class ProductControllerImpl2 implements ProductController2 {
 
 			result = productService.addProductOption(paramMap);
 		}
-		
-		//파일을 업로드한 후 반환된 파일 이름이 저장된 FileList를 다시 map에 저장
-		List fileList = fileProcess(request, productId);
-        
-        
-        redAttr.addAttribute("page", cri.getPage());
-        redAttr.addAttribute("perPagNum", cri.getPerPageNum());
-        
-        return mav;
-    }
-    
-    //상품 삭제
-    @RequestMapping(value="/productList/productDelete_M.do")
-    public ModelAndView boardDelete(@RequestParam String productId, Criteria cri, RedirectAttributes redAttr) throws Exception {
-    	
-        ModelAndView mv = new ModelAndView("redirect:/productList.do");
-        
-        int result = 0;
-        result  = productService.deleteProduct(productId);
-        
-        redAttr.addAttribute("page", cri.getPage());
-        redAttr.addAttribute("perPagNum", cri.getPerPageNum());
-        
-        return mv;
-    }
 
-	
- // 테스트 ----------------------------------------------------
-	
+		// 파일을 업로드한 후 반환된 파일 이름이 저장된 FileList를 다시 map에 저장
+		List fileList = fileProcess(request, productId);
+
+		redAttr.addAttribute("page", cri.getPage());
+		redAttr.addAttribute("perPagNum", cri.getPerPageNum());
+
+		return mav;
+	}
+
+	// 상품 삭제
+	@RequestMapping(value = "/productList/productDelete_M.do")
+	public ModelAndView boardDelete(@RequestParam String productId, Criteria cri, RedirectAttributes redAttr)
+			throws Exception {
+
+		ModelAndView mv = new ModelAndView("redirect:/productList.do");
+
+		int result = 0;
+		result = productService.deleteProduct(productId);
+
+		redAttr.addAttribute("page", cri.getPage());
+		redAttr.addAttribute("perPagNum", cri.getPerPageNum());
+
+		return mv;
+	}
+
+
 	// 사품등록
 	@Override
 	@RequestMapping(value = "/addProduct.do", method = RequestMethod.GET)
@@ -221,20 +250,19 @@ public class ProductControllerImpl2 implements ProductController2 {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
-		
-		mav.addObject("pageTitle","상품 등록");
-		//관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
+
+		mav.addObject("pageTitle", "상품 등록");
+		// 관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
 		sessionChk(mav, sessinLogin, "addProduct");
 
 		return mav;
 	}
 
-	
 	// 상품 등록
 	@Override
 	@RequestMapping(value = "/product/addEdit.do", method = RequestMethod.POST)
-	public ModelAndView addProductEditaddEdit(@ModelAttribute("product") ProductVO2 product, MultipartHttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public ModelAndView addProductEditaddEdit(@ModelAttribute("product") ProductVO2 product,
+			MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
@@ -257,58 +285,59 @@ public class ProductControllerImpl2 implements ProductController2 {
 
 			result = productService.addProductOption(paramMap);
 		}
-		
-		//파일을 업로드한 후 반환된 파일 이름이 저장된 FileList를 다시 map에 저장
+
+		// 파일을 업로드한 후 반환된 파일 이름이 저장된 FileList를 다시 map에 저장
 		List fileList = fileProcess(request, selectProductID);
-		
-		
+
 		mav.setViewName("redirect:/productList.do");
 		return mav;
 	}
-	
-	//이미지 저장
-	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest, String selectProductID) throws Exception {
-		//이미지 경로
-		String root_path = multipartRequest.getSession().getServletContext().getRealPath("/");  
-		String image_path = root_path + "resources\\img" ;
+
+	// 이미지 저장
+	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest, String selectProductID)
+			throws Exception {
+		// 이미지 경로
+		String root_path = multipartRequest.getSession().getServletContext().getRealPath("/");
+		String image_path = root_path + "resources\\img";
 
 		List<String> fileList = new ArrayList<String>();
 		String imgPart = multipartRequest.getParameter("p_group");
-		
+
 		Map<String, Object> ImageMap = new HashMap<String, Object>();
 		ImageMap.put("productId", selectProductID);
 		int result = 0;
-		
-		//첨부된 파일 이름을 가져옵니다.
+
+		// 첨부된 파일 이름을 가져옵니다.
 		Iterator<String> fileNames = multipartRequest.getFileNames();
-		while(fileNames.hasNext()) {
+		while (fileNames.hasNext()) {
 			String FileName = fileNames.next();
-			MultipartFile mFile = multipartRequest.getFile(FileName);	//파일 이름에 대한 MultipartFile 객체를 가져옴
-			String originalFileName = mFile.getOriginalFilename();		//실제 파일 이름을 가져옴
-			fileList.add(originalFileName);		//파일 이름을 하나씩 fileList에 저장
+			MultipartFile mFile = multipartRequest.getFile(FileName); // 파일 이름에 대한 MultipartFile 객체를 가져옴
+			String originalFileName = mFile.getOriginalFilename(); // 실제 파일 이름을 가져옴
+			fileList.add(originalFileName); // 파일 이름을 하나씩 fileList에 저장
 			File file = new File(image_path + "\\" + imgPart + "\\" + FileName);
-			if(mFile.getSize() != 0) {	//첨부된 파일이 있는지 체크
-				//경로에 파일이 없으면 그 경로에 해당하는 디렉토리를 만든 후 파일 생성
-				if(! file.exists()) {
-					if(file.getParentFile().mkdirs()) {
+			if (mFile.getSize() != 0) { // 첨부된 파일이 있는지 체크
+				// 경로에 파일이 없으면 그 경로에 해당하는 디렉토리를 만든 후 파일 생성
+				if (!file.exists()) {
+					if (file.getParentFile().mkdirs()) {
 						file.createNewFile();
 					}
 				}
-				mFile.transferTo(new File(image_path + "\\" + imgPart + "\\" + originalFileName));	//임시로 저장된 mutipartFile을 실제 파일로 전송
-				
-				
-				//이미지 디비에 저장
-				if(FileName.equals("imgURL_product_M")) {
+				mFile.transferTo(new File(image_path + "\\" + imgPart + "\\" + originalFileName)); // 임시로 저장된
+																									// mutipartFile을 실제
+																									// 파일로 전송
+
+				// 이미지 디비에 저장
+				if (FileName.equals("imgURL_product_M")) {
 					ImageMap.put("imgType", "product_M");
 					ImageMap.put("imgURL", originalFileName);
-					
+
 					result = productService.deleteProductImge(ImageMap);
 					result = productService.addProductImg(ImageMap);
-					
-				}else if(FileName.equals("imgURL_product_S")) {
+
+				} else if (FileName.equals("imgURL_product_S")) {
 					ImageMap.put("imgType", "product_S");
 					ImageMap.put("imgURL", originalFileName);
-					
+
 					result = productService.deleteProductImge(ImageMap);
 					result = productService.addProductImg(ImageMap);
 				}
@@ -316,9 +345,8 @@ public class ProductControllerImpl2 implements ProductController2 {
 		}
 		return fileList;
 	}
-	
-	
-	//관리자 세션 체크 (ModelAndView, 세션정보, 접속할 화면 )
+
+	// 관리자 세션 체크 (ModelAndView, 세션정보, 접속할 화면 )
 	private ModelAndView sessionChk(ModelAndView mav, MemberVO sessinLogin, String view) throws Exception {
 		if (sessinLogin != null) {
 			String rightChk = (String) sessinLogin.getMasterYN();
@@ -337,6 +365,5 @@ public class ProductControllerImpl2 implements ProductController2 {
 			return mav;
 		}
 	}
-	
-}
 
+}

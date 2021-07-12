@@ -47,6 +47,7 @@ public class ProductDAOImpl2 implements ProductDAO2 {
 		List<Map<String, Object>> result = sqlSession.selectList("mapper.product.selectBoardList", cri);
 		return result;
 	}
+
 	// 관리자 상품 리스트 조회 (필터)
 	public List<Map<String, Object>> selectFilterBoardList(Map<String, Object> paramMap) throws DataAccessException {
 		List<Map<String, Object>> result = sqlSession.selectList("mapper.product.selectFilterBoardList", paramMap);
@@ -65,7 +66,6 @@ public class ProductDAOImpl2 implements ProductDAO2 {
 		return result;
 	}
 
-	// 태스트 -----------------
 	public ProductVO2 viewProductDetail(String productId) throws DataAccessException {
 		ProductVO2 result = sqlSession.selectOne("mapper.product.selectProduct", productId);
 		return result;
@@ -80,24 +80,37 @@ public class ProductDAOImpl2 implements ProductDAO2 {
 		int result = sqlSession.update("mapper.product.updateProduct", product);
 		return result;
 	}
+
 	public int deleteProductOption(String productId) throws DataAccessException {
 		int result = sqlSession.delete("mapper.product.deleteProductOption", productId);
 		return result;
 	}
-	public int deleteProductImge(Map<String, Object> imageMap) throws DataAccessException{
+
+	public int deleteProductImge(Map<String, Object> imageMap) throws DataAccessException {
 		int result = sqlSession.delete("mapper.product.deleteProductImge", imageMap);
 		return result;
 	}
-	
-	//관리자 상품 삭제
+
+	// 관리자 상품 삭제
 	public int deleteProduct(String productId) throws DataAccessException {
 		int result = sqlSession.delete("mapper.product.deleteProduct", productId);
 		return result;
 	}
-	
-	//상품 이미지 조회
-	public List<Map<String,Object>> selectProductImg(String productId) throws DataAccessException{
-		List<Map<String,Object>> result = sqlSession.selectList("mapper.product.selectProductImg", productId);
+
+	// 상품 이미지 조회
+	public List<Map<String, Object>> selectProductImg(String productId) throws DataAccessException {
+		List<Map<String, Object>> result = sqlSession.selectList("mapper.product.selectProductImg", productId);
+		return result;
+	}
+
+	// 관리자 상품 리스트 검색
+	public List<Map<String, Object>> searchSelectBoardList(Map<String, Object> paramMap) throws DataAccessException{
+		List<Map<String, Object>> result = sqlSession.selectList("mapper.product.searchSelectBoardList", paramMap);
+		return result;
+	}
+
+	public List<Map<String, Object>> searchSelectFilterBoardList(Map<String, Object> paramMap) throws DataAccessException{
+		List<Map<String, Object>> result = sqlSession.selectList("mapper.product.searchSelectFilterBoardList", paramMap);
 		return result;
 	}
 }

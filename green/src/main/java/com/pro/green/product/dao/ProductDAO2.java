@@ -20,8 +20,6 @@ public interface ProductDAO2 {
 	public int countBoardListTotal() throws DataAccessException;
 	public List<Map<String,Object>> selectOptionLIst(String productId) throws DataAccessException;
 	
-	
-	//태스트 -----------------
 	public ProductVO2 viewProductDetail(String productId) throws DataAccessException;
 	public Map<String, Object> selectProductDetail(Map<String, Object> map) throws DataAccessException;
 	public int updateProduct(ProductVO2 product) throws DataAccessException;
@@ -29,4 +27,7 @@ public interface ProductDAO2 {
 	public int deleteProduct(String productId) throws DataAccessException;
 	public int deleteProductOption(String productId) throws DataAccessException;
 	public int deleteProductImge(Map<String, Object> imageMap) throws DataAccessException;
+	// 관리자 상품 리스트 검색
+	public List<Map<String, Object>> searchSelectBoardList(Map<String, Object> paramMap) throws DataAccessException;
+	public List<Map<String, Object>> searchSelectFilterBoardList(Map<String, Object> paramMap) throws DataAccessException;
 }

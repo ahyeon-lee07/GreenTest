@@ -62,11 +62,12 @@ public class ProductServiceImpl2 implements ProductService2 {
 		return productDAO.selectOptionLIst(productId);
 	}
 
-//	테스트-------------
+	// 관리자 상품 상세페이지
 	public ProductVO2 viewProductDetail(String productId) throws DataAccessException {
 		return productDAO.viewProductDetail(productId);
 	}
 
+	// 관리자 상품 상세페이지
 	public Map<String, Object> selectProductDetail(Map<String, Object> map) throws DataAccessException {
 		return productDAO.selectProductDetail(map);
 	}
@@ -92,5 +93,14 @@ public class ProductServiceImpl2 implements ProductService2 {
 	// 상품 이미지조회
 	public List<Map<String, Object>> selectProductImg(String productId) throws DataAccessException {
 		return productDAO.selectProductImg(productId);
+	}
+
+	// 관리자 상품 리스트 검색
+	public List<Map<String, Object>> searchSelectBoardList(Map<String, Object> paramMap) throws DataAccessException{
+		return productDAO.searchSelectBoardList(paramMap);
+	}
+	// 관리자 상품 리스트 검색
+	public List<Map<String, Object>> searchSelectFilterBoardList(Map<String, Object> paramMap) throws DataAccessException{
+		return productDAO.searchSelectFilterBoardList(paramMap);
 	}
 }

@@ -147,18 +147,17 @@
 							<div class="row justify-content-between px-3 mt-3">
 								<div class="">
 									<div class="btn-group">
-										<form action="#">
+										<form action="${contextPath }/productList/search.do" method="GET" name="searchBox">
 											<div class="form-row">
 												<div class="form-group d-flex justify-content-start ">
-													<select id="inputState" class="form-control form-control-sm"
-														style="width: 90px;">
-														<option selected>상품명</option>
-													</select> <input class="form-control form-control-sm mx-2"
-														type="text" placeholder="">
-													<button type="submit"
-														class="btn btn-secondary btn-sm col-2">검색</button>
+													<select id="inputState" class="form-control form-control-sm"  name="searchKeyWordOption" style="width: 90px;">
+														<option value="productName" selected>상품명</option>
+													</select> 
+													<input class="form-control form-control-sm mx-2" type="text" placeholder="" name="keyWord">
+													<button type="submit" class="btn btn-secondary btn-sm col-2" onclick="return search()">검색</button>
 												</div>
 											</div>
+											<input type="text" name="searchOptions" value="${options }" style="display:none">
 										</form>
 									</div>
 								</div>
@@ -181,9 +180,8 @@
 									<!-- ${contextPath }/productListTest.do?page=${pageNum }"/> <c:url value="/productListTest.do?page=${pageNum }"/>-->
 									<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }"
 										var="pageNum">
-										<li class="page-item"><a class="page-link"
-												href='${contextPath }/productList.do?page=${pageNum }'>${pageNum
-												}</a>
+										<li class="page-item">
+											<a class="page-link" href='${contextPath }/productList.do?page=${pageNum }&options=${options }'>${pageNum}</a>
 										</li>
 									</c:forEach>
 									<c:if test="${pageMaker.next && pageMaker.endPage >0 }">
@@ -200,7 +198,7 @@
 
 					<script>
 					//필터 버튼 활성화 처리
-					window.onload = function () {
+						window.onload = function () {
 							var filterV = document.getElementById('filterV').innerText;
 							var optins = document.getElementsByName('options');
 
@@ -214,10 +212,23 @@
 							}
 
 						}
-					
+
+						//필터 form 전송
 						function listFilter(){
 							 var form = document.productlist;
 							 form.submit();
+						}
+
+						//검색
+						function search() {
+							var form = document.searchBox;
+
+							if(form.keyWord.value == ""){
+								alert("키워드를 입력해주세요.");
+								return false;
+							}else{
+								form.submit();
+							}
 						}
 						
 					</script>
