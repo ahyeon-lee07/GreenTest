@@ -34,14 +34,14 @@ public class MemberControllerImpl implements MemberController {
 	// 회원가입
 	@RequestMapping(value = "/join.do", method = RequestMethod.GET)
 	public String join(Locale locale, Model model) {
-		return "join";
+		return "normalJoin";
 	}
 
 	// 일반 회원가입
-	@RequestMapping(value = "/normalJoin.do", method = RequestMethod.GET)
-	public String normalJoin(Locale locale, Model model) {
-		return "normalJoin";
-	}
+	//@RequestMapping(value = "/normalJoin.do", method = RequestMethod.GET)
+	//public String normalJoin(Locale locale, Model model) {
+	//	return "normalJoin";
+	//}
 
 	// 로그인
 	//@RequestMapping(value = "/login.do", method = RequestMethod.GET)
