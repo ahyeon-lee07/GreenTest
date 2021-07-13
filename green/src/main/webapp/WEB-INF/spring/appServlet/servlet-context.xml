@@ -52,6 +52,7 @@
 	<context:component-scan
 		base-package="com.pro.green" />
 
-
+	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
+	<beans:bean id="naverLoginBO" class="com.pro.green.snsJoin.NaverLoginBO" />
 
 </beans:beans>

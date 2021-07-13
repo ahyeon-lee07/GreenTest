@@ -298,4 +298,15 @@
 		<put-attribute name="main" value="/WEB-INF/views/product/productDetail_M.jsp" />
 	</definition>
 
+
+	<!-- sns계정으로 회원가입  -->
+	<definition name="snsJoin" extends="baseLayout">
+		<put-attribute name="title" value="sns계정으로 회원가입" />
+		<put-attribute name="main" value="/WEB-INF/views/join/snsJoin.jsp" />
+	</definition>
+	<!-- sns계정으로 회원가입  -->
+	<definition name="naverSuccess" extends="baseLayout">
+		<put-attribute name="title" value="sns계정으로 회원가입" />
+		<put-attribute name="main" value="/WEB-INF/views/join/naverSuccess.jsp" />
+	</definition>
 </tiles-definitions>

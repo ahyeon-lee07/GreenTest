@@ -8,7 +8,9 @@
 request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+<script type="text/javascript"
+	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js"
+	charset="utf-8"></script>
 <!-- 메인 -->
 <main class="mainH">
 	<div class="container">
@@ -30,14 +32,23 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 
 		<div class="d-flex justify-content-center mt-5">
-                <div class="bd-highlight border d-flex flex-column text-center rounded py-3 px-5" style="width: 360px; height: 200px;">
-                    <a class="mt-4" href="${contextPath }/.do">
-                        <button class="btn btn-success btn-lg btn-block" >카카오로 가입하기</button>
-                    </a>
-                    <a class="mt-4" href="${contextPath }/.do">
-                        <button class="btn btn-success btn-lg btn-block" >네이버로 가입하기</button>
-                    </a>
-                </div>
-         </div>
+			<div
+				class="bd-highlight border d-flex flex-column text-center rounded py-3 px-5"
+				style="width: 360px; height: 200px;">
+				<a class="mt-4" href="${contextPath }/.do">
+					<button class="btn btn-success btn-lg btn-block">카카오로
+						가입하기</button>
+				</a> <a class="mt-4" href="${contextPath }/.do">
+					<button class="btn btn-success btn-lg btn-block">네이버로
+						가입하기</button>
+				</a>
+				<div id="naver_id_login" style="text-align: center">
+					<a href="${url}"> <img width="223"
+						src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+				</div>
+				<br>
+
+			</div>
+		</div>
 	</div>
 </main>

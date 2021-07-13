@@ -72,10 +72,10 @@ public class HomeController {
 	}
 
 	// SNS계정으로 회원가입
-	@RequestMapping(value = "/snsJoin.do", method = RequestMethod.GET)
-	public String snsJoin(Locale locale, Model model) {
-		return "snsJoin";
-	}
+	//@RequestMapping(value = "/snsJoin.do", method = RequestMethod.GET)
+	//public String snsJoin(Locale locale, Model model) {
+	//	return "snsJoin";
+	//}
 
 	// 장바구니
 	@RequestMapping(value = "/cart.do", method = RequestMethod.GET)
