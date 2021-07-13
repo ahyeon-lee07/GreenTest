@@ -27,7 +27,7 @@ request.setCharacterEncoding("UTF-8");
                 </div>
             </div>
             
-            <div class="d-flex justify-content-center mt-5">
+            <div class="d-flex justify-content-center my-5">
                 <div class="bd-highlight border d-flex flex-column text-center rounded py-3 px-5" style="width: 360px;">
                     <a class="mt-4" href="${contextPath }/member.do">
                         <button class="btn btn-success btn-lg btn-block" >기존 회원 로그인</button>

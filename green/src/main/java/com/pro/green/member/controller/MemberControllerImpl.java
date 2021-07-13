@@ -69,8 +69,16 @@ public class MemberControllerImpl implements MemberController {
 
 	// 회원정보 수정/탈퇴 비번체크
 	@RequestMapping(value = "/memberEditChk.do", method = RequestMethod.GET)
-	public String memberEditChk(Locale locale, Model model) {
-		return "memberEditChk";
+	public String memberEditChk(Locale locale, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+		
+		if(sessinLogin.getPw().equals("SNSJoin")) {
+			model.addAttribute("memberType", "SNSJoin");
+			return "memberEdit";
+		}else {
+			return "memberEditChk";
+		}
 	}
 
 	// 아이디체크
