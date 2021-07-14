@@ -33,7 +33,21 @@ request.setCharacterEncoding("UTF-8");
 		<div class="row border-bottom pm-2"></div>
 		<div class="row mb-4">
 			<div class="col-12">
-				<form name="joinForm" method="POST">
+				<form name="memberEdit" method="POST">
+					<div class="row border-bottom py-2">
+						<div class="col p-0">
+							<div class="d-flex bd-highlight">
+								<label for="inputMasterYN" class="bd-highlight col-form-label pl-2" style="width: 140px;">회원권한</label>
+								<div class="d-flex flex-row bd-highlight pr-2">
+									<div class="custom-control custom-switch pt-2">
+										<input type="checkbox" class="custom-control-input YNChk" id="inputMasterYN" value="${memerInf.masterYN }">
+										<input id="masterYN_V" class="input_V" type="text" name="masterYN" value="${memerInf.masterYN }" style="display: none;">
+										<label id="inputMasterYNLabel" class="custom-control-label" for="inputMasterYN" style="width: 70px;"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 					<c:choose>
 						<c:when test="${memerInf.pw == 'SNSJoin'}">
 							<div class="row border-bottom py-2">
@@ -238,6 +252,40 @@ request.setCharacterEncoding("UTF-8");
 							</div>
 						</div>
 					</div>
+					<div class="row border-bottom py-2">
+						<div class="col p-0">
+							<div class="d-flex bd-highlight">
+								<label for="inputGrade" class="bd-highlight col-form-label pl-2" style="width: 140px;">회원등급</label>
+								<div class="flex-grow-1 bd-highlight flex-column pr-2">
+									<select id="inputGrade" class="form-control" style="width: 140px;" name="grade">
+										<option value="new" selected>신규</option>
+										<option value="gold">골드</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row border-bottom py-2">
+						<div class="col p-0">
+							<div class="d-flex bd-highlight">
+								<label for="inputMileage" class="bd-highlight col-form-label pl-2" style="width: 140px;">마일리지</label>
+								<div class="flex-grow bd-highlight pr-2">
+									<input type="number" class="form-control" id="inputMileage" name="mileage" min="0" value="${memerInf.mileage}">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row border-bottom py-2">
+						<div class="col p-0">
+							<div class="d-flex bd-highlight">
+								<label for="inputOrderPriceSum" class="bd-highlight col-form-label pl-2" style="width: 140px;">누적 구매 금액</label>
+								<div class="flex-grow bd-highlight pr-2">
+									<input type="number" class="form-control" id="inputOrderPriceSum" name="orderPriceSum" min="0"
+										value='<fmt:formatNumber value="${memerInf.orderPriceSum }" pattern="#,###" />' readonly>
+								</div>
+							</div>
+						</div>
+					</div>
 					<!-- Button trigger modal -->
 					<div class="row py-2 mt-3">
 						<div class="d-flex flex-fill justify-content-between">
@@ -260,16 +308,48 @@ request.setCharacterEncoding("UTF-8");
 </main>
 
 <script>
-
-//페이지가 노드 되면서 memver의 email2 주소는 입력
+//페이지가 노드 되면서 memver의 email2 주소는 입력 , 회면 로딩시 스위치 YN 체크
 window.onload = function() {
 	document.getElementById('inputEmail2').value = "${memerInf.email2}";
-}
 
+	var YNChk = document.getElementById('inputMasterYN');
+	var input_V = document.getElementById('masterYN_V');
+
+
+		if (YNChk.value == "M") {
+			YNChk.value = "M"
+			input_V.value = "M"
+			YNChk.checked = true;
+			document.getElementById('inputMasterYNLabel').innerHTML = "관리자";
+		} else {
+			YNChk.value = "N"
+			input_V.value = "N"
+			YNChk.checked = false;
+			document.getElementById('inputMasterYNLabel').innerHTML = "일반";
+		}
+
+}
+	// 활성화 여부
+	var showYN = document.getElementById('inputMasterYN');
+	showYN.addEventListener('click', function () {
+		var showYN_V = showYN.value;
+		var Label = document.getElementById('inputMasterYNLabel');
+		var V = document.getElementById('masterYN_V');
+
+		if (showYN_V != "N") {
+			showYN.value = "N";
+			V.value = "N";
+			Label.innerHTML = "일반";
+		} else {
+			showYN.value = "M";
+			V.value = "M";
+			Label.innerHTML = "관리자";
+		}
+	});
 
 						//유효성 검사
 						function checkLogin() {
-							var form = document.joinForm;
+							var form = document.memberEdit;
 							//영문 소문자/숫자, 4~16자
 							var idExp = document.getElementById('inputId').value.search(/^[a-zA-Z0-9]{4,16}$/);
 							//영문,숫자,특수문자 혼합하여 10자리~16자리 이내.(비밀번호 표준)
@@ -423,7 +503,7 @@ window.onload = function() {
 						document.getElementById('btn_memberDelete').addEventListener('click', function() {
 									var form = document.memberEdit;
 									if (confirm("탈퇴시 모든 정보는 삭제됩니다. 그래도 탈퇴 하시겠습니까?") == true) {
-										form.action = "${ contextPath }/member/memberDelete.do";
+										form.action = "${ contextPath }/memberList/memberDelete.do";
 										form.submit();
 									} else {
 										return;

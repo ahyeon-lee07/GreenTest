@@ -20,6 +20,7 @@
         <result property="mileage" column="mileage" />
         <result property="masterYN" column="masterYN" />
         <result property="joinDate" column="joinDate" />
+        <result property="orderPriceSum" column="orderPriceSum" />
 	</resultMap> 
 	
 	<!-- 회원가입 -->

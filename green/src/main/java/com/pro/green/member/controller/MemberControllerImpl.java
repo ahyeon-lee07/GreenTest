@@ -296,10 +296,9 @@ public class MemberControllerImpl implements MemberController {
 
 	// 회원관리 상세 리스트
 	@RequestMapping(value = "/memberList/memberEdit.do", method = RequestMethod.GET)
-	public ModelAndView memberEdit(@ModelAttribute("member") MemberVO member, 
-									@RequestParam(value = "productId") String productId,
-									@RequestParam(value = "options") String options,
-									HttpServletRequest request, Criteria cri) throws Exception {
+	public ModelAndView memberEdit(@ModelAttribute("member") MemberVO member,
+			@RequestParam(value = "productId") String productId, @RequestParam(value = "options") String options,
+			HttpServletRequest request, Criteria cri) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
@@ -310,12 +309,28 @@ public class MemberControllerImpl implements MemberController {
 		MemberVO memerInf = new MemberVO();
 
 		memerInf = memberService.memberDetail(productId);
-		
+
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		mav.addObject("memerInf", memerInf);
 		mav.addObject("pageMaker", pageMaker);
 
+		return mav;
+	}
+
+	// 회원관리 탈퇴
+	@RequestMapping(value = "/memberList/memberDelete.do", method = RequestMethod.POST)
+	public ModelAndView memberListDelete(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		ModelAndView mav = new ModelAndView();
+		int result = memberService.memeberDelete(member);
+		if (result == 0) {
+			mav.addObject("msg", "fail");
+		} else {
+			mav.addObject("msg", "memberDelete");
+		}
+		mav.setViewName("redirect:/memberList.do");
 		return mav;
 	}
 
