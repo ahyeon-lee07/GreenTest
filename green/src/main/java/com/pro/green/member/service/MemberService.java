@@ -21,4 +21,5 @@ public interface MemberService {
 	public int memberCount() throws Exception;
 	public List<Map<String, Object>> selectMemberList(Criteria cri) throws Exception;
 	public List<Map<String, Object>> searchMemberList(Map<String, Object> searchOption) throws Exception;
+	public MemberVO memberDetail(String productId) throws Exception;
 }

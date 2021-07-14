@@ -87,4 +87,10 @@ public class MemberDAOImpl implements MemberDAO {
 		List<Map<String, Object>> result = sqlSession.selectList("mapper.member.searchMemberList", searchOption);
 		return result;
 	}
+	
+	//회원상세
+	public MemberVO memberDetail(String productId) throws DataAccessException {
+		MemberVO vo = sqlSession.selectOne("mapper.member.memberDetail", productId);
+		return vo;
+	}
 }

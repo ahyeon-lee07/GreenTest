@@ -114,4 +114,17 @@
 		ORDER BY joinDate DESC LIMIT #{cri.pageStart}, #{cri.perPageNum};
     ]]>
 	</select>
+	
+	<!-- 회원상세내용 -->
+	<select id="memberDetail" resultType="memberVO"
+		parameterType="String">
+    <![CDATA[
+        SELECT 
+			*
+		FROM 
+			member
+		WHERE
+			id = #{productId}
+    ]]>
+	</select>
 </mapper>

@@ -106,7 +106,7 @@
 											</td>
 											<td class="text-center align-middle px-2">
 												<div class="bd-highlight">
-													<a href="${contextPath }/productList/productDetail_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${list.id }&options=${options }">
+													<a href="${contextPath }/memberList/memberEdit.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${list.id }&options=${options }">
 														<button type="button" class="btn btn-outline-secondary btn-sm"
 															style="font-size: 0.7rem; width: 100%; display: block;">상세정보</button>
 													</a>

@@ -81,4 +81,9 @@ public class MemberServiceImpl implements MemberService {
 	public List<Map<String, Object>> searchMemberList(Map<String, Object> searchOption) throws Exception {
 		return memberDAO.searchMemberList(searchOption);
 	}
+	
+	//회원상세내용
+	public MemberVO memberDetail(String productId) throws Exception{
+		return memberDAO.memberDetail(productId);
+	}
 }

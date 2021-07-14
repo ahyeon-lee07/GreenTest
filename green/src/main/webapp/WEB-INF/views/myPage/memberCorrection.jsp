@@ -399,17 +399,3 @@ request.setCharacterEncoding("UTF-8");
 				}
 			});
 </script>
-
-<!-- 회원정보 수정 -->
-<script type="text/javascript">
-	function complet_checkform() {
-		alert("회원정보 수정이 완료되었습니다!");
-	}
-</script>
-
-<!-- 회원 탈퇴 -->
-<script type="text/javascript">
-	function delete_checkform() {
-		alert("회원 탈퇴하였습니다!");
-	}
-</script>

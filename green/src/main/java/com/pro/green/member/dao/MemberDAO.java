@@ -21,4 +21,5 @@ public interface MemberDAO {
 	public int memberCount() throws DataAccessException;
 	public List<Map<String, Object>> selectMemberList(Criteria cri) throws DataAccessException;
 	public List<Map<String, Object>> searchMemberList(Map<String, Object> searchOption) throws DataAccessException;
+	public MemberVO memberDetail(String productId) throws DataAccessException;
 }

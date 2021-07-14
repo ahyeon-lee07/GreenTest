@@ -293,21 +293,47 @@ public class MemberControllerImpl implements MemberController {
 
 		return mav;
 	}
-	
+
+	// 회원관리 상세 리스트
+	@RequestMapping(value = "/memberList/memberEdit.do", method = RequestMethod.GET)
+	public ModelAndView memberEdit(@ModelAttribute("member") MemberVO member, 
+									@RequestParam(value = "productId") String productId,
+									@RequestParam(value = "options") String options,
+									HttpServletRequest request, Criteria cri) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+
+		// 관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
+		sessionChk(mav, sessinLogin, "memberDetail");
+
+		MemberVO memerInf = new MemberVO();
+
+		memerInf = memberService.memberDetail(productId);
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		mav.addObject("memerInf", memerInf);
+		mav.addObject("pageMaker", pageMaker);
+
+		return mav;
+	}
+
 	// 회원리스트 검색 검색
 	@RequestMapping(value = "/memberList/search.do", method = RequestMethod.GET)
 	public ModelAndView productList(@RequestParam(value = "searchKeyWordOption") String searchKeyWordOption,
-			@RequestParam(value = "keyWord") String keyWord, HttpServletRequest request, Criteria cri) throws Exception {
-		
+			@RequestParam(value = "keyWord") String keyWord, HttpServletRequest request, Criteria cri)
+			throws Exception {
+
 		ModelAndView mav = new ModelAndView();
 		PageMaker pageMaker = new PageMaker();
 
-		//int pageTotal = productService.countBoardListTotal();
+		// int pageTotal = productService.countBoardListTotal();
 		int pageTotal = 0;
-		
+
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(pageTotal);
-		
+
 		Map<String, Object> searchOption = new HashMap<String, Object>();
 		searchOption.put("cri", cri);
 		searchOption.put("searchKeyWordOption", searchKeyWordOption);
@@ -342,8 +368,6 @@ public class MemberControllerImpl implements MemberController {
 			return mav;
 		}
 	}
-
-
 
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();
