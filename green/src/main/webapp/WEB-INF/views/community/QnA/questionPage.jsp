@@ -28,53 +28,72 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 
 		<div class="row mb-4">
-            <div class="col-12">
-                <form action="#">
-                    <div class="row border-bottom border-top d-flex bd-highlight py-2">
-                        <label for="inputTitle" class="bd-highlight col-form-label pl-2" style="width: 100px;">제목</label>
-                        <div class="flex-grow-1 bd-highlight pr-2">
-                            <input type="email" class="form-control" id="inputTitle" readonly>
-                        </div>
-                    </div>
-                    <div class="row border-bottom py-2">
-                        <div class="col p-0">
-                            <div class="d-flex bd-highlight">
-                                <label for="inputUser" class="bd-highlight col-form-label pl-2"
-                                    style="width: 100px;">작성자</label>
-                                <div class="flex-grow-1 bd-highlight pr-2">
-                                    <input type="email" class="form-control" id="inputUser" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col p-0">
-                            <div class="d-flex bd-highlight">
-                                <label for="inputDay" class="bd-highlight col-form-label pl-2"
-                                    style="width: 100px;">작성일</label>
-                                <div class="flex-grow-1 bd-highlight pr-2">
-                                    <input type="email" class="form-control" id="inputDay" readonly >
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row border-bottom p-2">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="14"></textarea>
-                    </div>
-                </form>
-            </div>
-        </div>
+			<div class="col-12">
+				<form action="#">
+					<div class="row border-bottom border-top d-flex bd-highlight py-2">
+						<label for="inputTitle" class="bd-highlight col-form-label pl-2"
+							style="width: 100px;">제목</label>
+						<div class="flex-grow-1 bd-highlight pr-2">
+							<input type="text" value="${viewQ&A.Q&ATitle}"
+								class="
+								form-control" readonly>
+						</div>
+					</div>
+					<div class="row border-bottom py-2">
+						<div class="col p-0">
+							<div class="d-flex bd-highlight">
+								<label for="inputDay" class="bd-highlight col-form-label pl-2"
+									style="width: 100px;">글번호</label>
+								<div class="flex-grow-1 bd-highlight pr-2">
+									<input type="email" name="Q&ANum"
+										value="${viewQ&A.Q&ANum}" class="form-control" readonly>
+								</div>
+							</div>
+						</div>
+						<div class="col p-0">
+							<div class="d-flex bd-highlight">
+								<label for="inputUser" class="bd-highlight col-form-label pl-2"
+									style="width: 100px;">작성자</label>
+								<div class="flex-grow-1 bd-highlight pr-2">
+									<input type="text" value="${viewQ&A.id}"
+										class="
+										form-control" readonly>
 
-        <div class="row justify-content-between mb-5">
-            <div class="">
-            	<a class="" href="${contextPath }/product.do">
-            		<button type="button" class="btn btn-secondary btn-sm">목록</button>
-            	</a>	
-            </div>
-            <div class="">
-            	<a class="" href="${contextPath }/product_reWrite.do">
-            		<button type="button" class="btn btn-primary btn-sm">댓글</button>
-            	</a>
-            </div>
-        </div>
+								</div>
+							</div>
+						</div>
+						<div class="col p-0">
+							<div class="d-flex bd-highlight">
+								<label for="inputDay" class="bd-highlight col-form-label pl-2"
+									style="width: 100px;">작성일</label>
+								<div class="flex-grow-1 bd-highlight pr-2">
+									<input type="text" value="${viewQ&A.Q&ADate}"
+										class="
+										form-control" readonly>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row border-bottom p-2">
+						<textarea class="form-control" id="exampleFormControlTextarea1"
+							rows="14">${viewQ&A.Q&AContent}</textarea>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="row justify-content-between mb-5">
+			<div class="">
+				<a class="" href="${contextPath }/listQ&A.do">
+					<button type="button" class="btn btn-secondary btn-sm">목록</button>
+				</a>
+			</div>
+			<div class="">
+				<a class="" href="${contextPath }/product_reWrite.do">
+					<button type="button" class="btn btn-primary btn-sm">댓글</button>
+				</a>
+			</div>
+		</div>
 
 	</div>
 </main>

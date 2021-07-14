@@ -1,88 +1,173 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.board">
-<resultMap id="articlesResult" type="articleVO">
-    	<result property="noticeNum" column="noticeNum" />
-        <result property="id" column="id" />
-        <result property="noticeTitle" column="noticeTitle" />
-        <result property="noticeContent" column="noticeContent" />
-        <result property="noticeDate" column="noticeDate" />
-  </resultMap> 
+	<!-- 공지사항 -->
+	<resultMap id="noticeResult" type="articleVO">
+		<result property="noticeNum" column="noticeNum" />
+		<result property="id" column="id" />
+		<result property="noticeTitle" column="noticeTitle" />
+		<result property="noticeContent" column="noticeContent" />
+		<result property="noticeDate" column="noticeDate" />
+	</resultMap>
+
+	<!-- 이벤트 -->
+	<resultMap id="eventResult" type="articleVO">
+		<result property="eventNum" column="eventNum" />
+		<result property="id" column="id" />
+		<result property="eventTitle" column="eventTitle" />
+		<result property="eventContent" column="eventContent" />
+		<result property="eventDate" column="eventDate" />
+	</resultMap>
+
+	<!-- QnA -->
+	<resultMap id="QnAResult" type="articleVO">
+		<result property="QnANum" column="QnANum" />
+		<result property="id" column="id" />
+		<result property="productId" column="productId" />
+		<result property="QnATitle" column="QnATitle" />
+		<result property="QnAContent" column="QnAContent" />
+		<result property="QnAHits" column="QnAHits" />
+		<result property="QnAPw" column="QnAPw" />
+		<result property="QnADate" column="QnADate" />
+	</resultMap>
+
+	<!-- review -->
+	<resultMap id="reviewResult" type="articleVO">
+		<result property="reviewNum" column="reviewNum" />
+		<result property="productId" column="productId" />
+		<result property="id" column="id" />
+		<result property="reviewTitle" column="reviewTitle" />
+		<result property="reviewContent" column="reviewContent" />
+		<result property="reviewHits" column="reviewHits" />
+		<result property="reviewDate" column="reviewDate" />
+	</resultMap>
+
+	<!-- 이미지 -->
+	<resultMap id="imageResult" type="articleVO">
+		<result property="imageFileName" column="imageFileName" />
+	</resultMap>
 
 
- <!-- 게시물 목록 조회 -->
-  <select id="selectAllArticlesList" resultMap="articlesResult"   >
+	<!-- 공지사항 게시물 목록 조회 -->
+	<select id="selectAllNoticeList" resultMap="noticeResult">
     <![CDATA[
 		select noticeNum, noticeTitle, id, noticeDate from notice
+		order by noticeDate DESC
     ]]>
-  </select>
-  
-  
+	</select>
 
-   <select id="selectArticle" resultType="articleVO"   parameterType="int">
+	<!-- 공지사항 상세내용 조회 -->
+	<select id="selectNotice" resultType="articleVO"
+		parameterType="int">
     <![CDATA[
-      SELECT noticeTitle, id, noticeDate, noticeContent from notice
+      SELECT * from notice
       where noticeNum = #{noticeNum}		
     ]]>
-  </select>
-  
-  
-  
-    <!--
- <insert id="insertNewArticle"  parameterType="java.util.Map">
+	</select>
+
+	<!-- 공지사항 삭제 -->
+	<delete id="deleteNotice" parameterType="int">
+    <![CDATA[
+      delete from notice 
+      where noticeNum = #{noticeNum}
+    ]]>
+	</delete>
+
+	<!-- 공지사항 등록 -->
+	<insert id="insertNewNotice" parameterType="java.util.Map">
 		<![CDATA[
-			INSERT into notice(id,noticeTitle,noticeContent)
-			VALUES(#{id}, #{noticeTitle}, #{noticeContent})
-		]]>      
+			INSERT into notice(noticeNum,  noticeTitle, id, noticeContent)
+			VALUES(#{noticeNum},#{noticeTitle},	#{id}, #{noticeContent})
+		]]>
 	</insert>
-	
-	
-  <select id="selectNewArticleNO" resultType="int"  >
+	<select id="selectNewNoticeNum" resultType="int">
 		<![CDATA[
-			SELECT  nvl(max(articleNO), 0) + 1 from notice		
+			SELECT max(noticeNum)+ 1 from notice	
 		]]>
 	</select>
-  
-  
-  
-	
- 
-  
-  <update id="updateArticle"  parameterType="java.util.Map">
-			update notice
-			set title=#{title},	 
-			content=#{content}
-			 <if test="imageFileName!='' and imageFileName!=null">
-			  , imageFileName=#{imageFileName}
-			</if>
-			where articleNO=#{articleNO}
+	<!-- =================================================================================================== -->
+	<!-- 이벤트 게시물 목록 조회 -->
+	<select id="selectAllEventList" resultMap="eventResult">
+    <![CDATA[
+		select eventNum, eventTitle, id, eventDate from event
+		order by eventDate DESC
+    ]]>
+	</select>
+
+	<!-- 이벤트 상세내용 조회 -->
+	<select id="selectEvent" resultType="articleVO"
+		parameterType="int">
+    <![CDATA[
+      SELECT * from event
+      where eventNum = #{eventNum}		
+    ]]>
+	</select>
+
+	<!-- 이벤트 삭제 -->
+	<delete id="deleteEvent" parameterType="int">
+    <![CDATA[
+      delete from event 
+      where eventNum = #{eventNum}
+    ]]>
+	</delete>
+
+	<!-- 이벤트 등록 -->
+	<insert id="insertNewEvent" parameterType="java.util.Map">
+		<![CDATA[
+			INSERT into event(eventNum,  eventTitle, id, eventContent)
+			VALUES(#{eventNum},#{eventTitle},	#{id}, #{eventContent})
+		]]>
+	</insert>
+	<select id="selectNewEventNum" resultType="int">
+		<![CDATA[
+			SELECT max(eventNum)+ 1 from event	
+		]]>
+	</select>
+
+
+
+	<!-- =================================================================================================== -->
+	<!-- review 게시물 목록 조회 -->
+	<select id="selectAllReviewList" resultMap="reviewResult">
+    <![CDATA[
+		select reviewNum, productId, reviewTitle, id, reviewDate,reviewHits from review
+		order by reviewDate DESC
+    ]]>
+	</select>
+
+	<!-- review 상세내용 조회 -->
+	<select id="selectReview" resultType="articleVO"
+		parameterType="int">
+    <![CDATA[
+      SELECT * from review
+      where reviewNum = #{reviewNum}		
+    ]]>
+	</select>
+
+	<!-- review 조회수 -->
+	<update id="increasereviewHits">
+    <![CDATA[
+			update review set reviewHits = reviewHits + 1
+			where reviewNum = #{reviewNum}	
+		]]>
 	</update>
 	
-	<delete id="deleteArticle"  parameterType="int">
-    <![CDATA[
-      delete from notice
-      where articleNO in (
-         SELECT articleNO FROM  notice
-         START WITH articleNO = #{articleNO}
-         CONNECT BY PRIOR  articleNO = parentNO )
-    ]]>      
-  </delete>
+	<!-- review 수정 -->
+	<update id="updateReview"  parameterType="java.util.Map">
+			update review
+			set reviewTitle=#{reviewTitle},	 
+			reviewContent=#{reviewContent}
+			where reviewNum=#{reviewNum}
+	</update>
 
-  <select id="selectNewImageFileNO" resultType="int"  >
+	<!-- =================================================================================================== -->
+	<!-- QnA 게시물 목록 조회 -->
+	<select id="selectAllQnAList" resultMap="QnAResult">
     <![CDATA[
-      SELECT  nvl(max(imageFileNO),0) from t_imageFile		
+		select QnANum, productId, QnATitle, id, QnADate, QnAHits from qna
+		order by QnADate DESC
     ]]>
-  </select>
-	
+	</select>
 
-  <select  id="selectImageFileList" resultMap="imgResult" parameterType="int">
-    <![CDATA[
-      SELECT * from t_imageFile
-      where articleNO=#{articleNO}	
-    ]]>
-  </select> 
-   -->
 </mapper>

@@ -57,10 +57,10 @@
                                     커뮤니티
                                 </a>
                                 <div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="${contextPath }/product.do">Q&A</a>
-                                    <a class="dropdown-item" href="${contextPath }/notice.do">공지사항</a>
-                                    <a class="dropdown-item" href="${contextPath }/event.do">이벤트 게시판</a>
-                                    <a class="dropdown-item" href="${contextPath }/review.do">리뷰</a>
+                                    <a class="dropdown-item" href="${contextPath }/listQnA.do">Q&A</a>
+                                    <a class="dropdown-item" href="${contextPath }/listNotice.do">공지사항</a>
+                                    <a class="dropdown-item" href="${contextPath }/listEvent.do">이벤트 게시판</a>
+                                    <a class="dropdown-item" href="${contextPath }/listReview.do">리뷰</a>
                                 </div>
                             </li>
                             <c:choose>
@@ -145,13 +145,13 @@
                                                     <div class="bd-highlight border-bottom font-weight-bold py-2">커뮤니티
                                                     </div>
                                                     <a class="py-1 text-black-50"
-                                                        href="${contextPath }/product.do">Q&A</a>
+                                                        href="${contextPath }/listQnA.do">Q&A</a>
                                                     <a class="pb-1 text-black-50"
-                                                        href="${contextPath }/notice.do">공지사항</a>
+                                                        href="${contextPath }/listNotice.do">공지사항</a>
                                                     <a class="pb-1 text-black-50"
-                                                        href="${contextPath }/event.do">이벤트게시판</a>
+                                                        href="${contextPath }/listEvent.do">이벤트게시판</a>
                                                     <a class="pb-1 text-black-50"
-                                                        href="${contextPath }/review.do">리뷰</a>
+                                                        href="${contextPath }/listReview.do">리뷰</a>
                                                 </div>
                                             </div>
                                             <div class="bd-highlight">

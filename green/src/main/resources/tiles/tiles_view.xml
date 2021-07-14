@@ -215,19 +215,19 @@
 	</definition>
 	
 	<!-- Q&A -->
-	<definition name="product" extends="baseLayout">
+	<definition name="listQnA" extends="baseLayout">
 		<put-attribute name="title" value="QA" />
 		<put-attribute name="main" value="/WEB-INF/views/community/QnA/question.jsp" />
 	</definition>
 	
 	<!-- Q&A 상세 -->
-	<definition name="product_in" extends="baseLayout">
-		<put-attribute name="title" value="QA" />
+	<definition name="viewQnA" extends="baseLayout">
+		<put-attribute name="title" value="QA 상세" />
 		<put-attribute name="main" value="/WEB-INF/views/community/QnA/questionPage.jsp" />
 	</definition>
 	
 	<!-- Q&A 글쓰기 -->
-	<definition name="product_write" extends="baseLayout">
+	<definition name="addNewQnA" extends="baseLayout">
 		<put-attribute name="title" value="QA 글쓰기" />
 		<put-attribute name="main" value="/WEB-INF/views/community/QnA/writeQuestion.jsp" />
 	</definition>
@@ -245,39 +245,69 @@
 	</definition>
 	
 	<!-- 공지사항 -->
-	<definition name="notice" extends="baseLayout">
+	<definition name="listNotice" extends="baseLayout">
 		<put-attribute name="title" value="공지사항" />
 		<put-attribute name="main" value="/WEB-INF/views/community/notice/notice.jsp" />
 	</definition>
 	
 	<!-- 공지사항 상세 -->
-	<definition name="notice_in" extends="baseLayout">
+	<definition name="viewNotice" extends="baseLayout">
 		<put-attribute name="title" value="공지사항 상세" />
 		<put-attribute name="main" value="/WEB-INF/views/community/notice/noticePage.jsp" />
 	</definition>
 	
+	<!-- 공지사항 글쓰기 -->
+	<definition name="addNewNotice" extends="baseLayout">
+		<put-attribute name="title" value="공지사항 글쓰기" />
+		<put-attribute name="main" value="/WEB-INF/views/community/notice/writeNotice.jsp" />
+	</definition>
+	
 	<!-- 이벤트게시판 -->
-	<definition name="event" extends="baseLayout">
+	<definition name="listEvent" extends="baseLayout">
 		<put-attribute name="title" value="이벤트게시판" />
 		<put-attribute name="main" value="/WEB-INF/views/community/event/event.jsp" />
 	</definition>
 	
 	<!-- 이벤트게시판 상세 -->
-	<definition name="event_in" extends="baseLayout">
+	<definition name="viewEvent" extends="baseLayout">
 		<put-attribute name="title" value="이벤트게시판 상세" />
 		<put-attribute name="main" value="/WEB-INF/views/community/event/eventPage.jsp" />
 	</definition>
 	
+	<!-- 이벤트게시판 글쓰기 -->
+	<definition name="addNewEvent" extends="baseLayout">
+		<put-attribute name="title" value="공지사항 글쓰기" />
+		<put-attribute name="main" value="/WEB-INF/views/community/event/writeEvent.jsp" />
+	</definition>
+	
 	<!-- 리뷰 -->
-	<definition name="review" extends="baseLayout">
+	<definition name="listReview" extends="baseLayout">
 		<put-attribute name="title" value="리뷰" />
 		<put-attribute name="main" value="/WEB-INF/views/community/review/review.jsp" />
 	</definition>
 	
 	<!-- 리뷰 상세 -->
-	<definition name="review_in" extends="baseLayout">
+	<definition name="viewReview" extends="baseLayout">
 		<put-attribute name="title" value="리뷰 상세" />
 		<put-attribute name="main" value="/WEB-INF/views/community/review/reviewPage.jsp" />
+	</definition>
+	
+	<!-- 리뷰 글쓰기 -->
+	<definition name="addNewReview" extends="baseLayout">
+		<put-attribute name="title" value="QA 글쓰기" />
+		<put-attribute name="main" value="/WEB-INF/views/community/review/writeReview.jsp" />
+	</definition>
+	
+	<!-- 리뷰 수정/삭제 -->
+	<definition name="modReview" extends="baseLayout">
+		<put-attribute name="title" value="QA 수정삭제" />
+		<put-attribute name="main" value="/WEB-INF/views/community/QnA/reviewM_D.jsp" />
+	</definition>
+	
+	<!-- 리뷰 댓글 -->
+	<definition name="reivew_reWrite" extends="baseLayout">
+		<put-attribute name="title" value="QA 댓글" />
+		<put-attribute name="main" value="/WEB-INF/views/community/QnA/reviewComment.jsp" />
 	</definition>
 	
 	<!-- 상품등록 리스트 -->

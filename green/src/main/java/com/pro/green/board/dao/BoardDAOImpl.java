@@ -12,73 +12,128 @@ import org.springframework.stereotype.Repository;
 import com.pro.green.board.vo.ArticleVO;
 import com.pro.green.board.vo.ImageVO;
 
-
 @Repository("boardDAO")
 public class BoardDAOImpl implements BoardDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	
-	
+
+	// 공지사항 목록
 	@Override
-	public List<ArticleVO> selectAllArticlesList() throws DataAccessException {
-		List<ArticleVO> noticeList= sqlSession.selectList("mapper.board.selectAllArticlesList");
-		return noticeList;
-		
+	public List<ArticleVO> selectAllNoticeList() throws DataAccessException {
+		List<ArticleVO> listNotice = sqlSession.selectList("mapper.board.selectAllNoticeList");
+		return listNotice;
+	}
+
+	// 공지사항 상세페이지
+	@Override
+	public ArticleVO selectNotice(int noticeNum) throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectNotice", noticeNum);
+	}
+
+	// 공지사항 삭제하기
+	@Override
+	public void deleteNotice(int noticeNum) throws DataAccessException {
+		sqlSession.delete("mapper.board.deleteNotice", noticeNum);
+
+	}
+
+	// 공지사항 글쓰기
+	@Override
+	public int insertNewNotice(Map articleMap) throws DataAccessException {
+		int noticeNum = selectNewNoticeNum();
+		articleMap.put("noticeNum", noticeNum);
+		sqlSession.insert("mapper.board.insertNewNotice", articleMap);
+		return noticeNum;
+	}
+
+	private int selectNewNoticeNum() throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectNewNoticeNum");
+	}
+
+	// 이벤트 목록
+	@Override
+	public List<ArticleVO> selectAllEventList() throws DataAccessException {
+		List<ArticleVO> listEvent = sqlSession.selectList("mapper.board.selectAllEventList");
+		return listEvent;
+	}
+
+	// 이벤트 상세페이지
+	@Override
+	public ArticleVO selectEvent(int eventNum) throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectEvent", eventNum);
+	}
+
+	// 이벤트 삭제하기
+	@Override
+	public void deleteEvent(int eventNum) throws DataAccessException {
+		sqlSession.delete("mapper.board.deleteEvent", eventNum);
+
+	}
+
+	// 이벤트 글쓰기
+	@Override
+	public int insertNewEvent(Map articleMap) throws DataAccessException {
+		int eventNum = selectNewEventNum();
+		articleMap.put("eventNum", eventNum);
+		sqlSession.insert("mapper.board.insertNewEvent", articleMap);
+		return eventNum;
+	}
+
+	private int selectNewEventNum() throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectNewEventNum");
+	}
+
+	// QnA 목록
+	@Override
+	public List<ArticleVO> selectAllQnAList() throws DataAccessException {
+		List<ArticleVO> listQnA = sqlSession.selectList("mapper.board.selectAllQnAList");
+		return listQnA;
+	}
+
+	// QnA 상세페이지
+	@Override
+	public ArticleVO selectQnA(int QnANum) throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectQnA", QnANum);
+	}
+
+	// review 목록
+	@Override
+	public List<ArticleVO> selectAllReviewList() throws DataAccessException {
+		List<ArticleVO> listReview = sqlSession.selectList("mapper.board.selectAllReviewList");
+		return listReview;
+	}
+
+	// review 상세페이지
+	@Override
+	public ArticleVO selectReview(int reviewNum) throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectReview", reviewNum);
+	}
+
+	// review 삭제하기
+	@Override
+	public void deleteReview(int reviewNum) throws DataAccessException {
+		sqlSession.delete("mapper.board.deleteReview", reviewNum);
+
+	}
+
+	// review 글쓰기
+	@Override
+	public int insertNewReview(Map articleMap) throws DataAccessException {
+		int reviewNum = selectNewReviewNum();
+		articleMap.put("reviewNum", reviewNum);
+		sqlSession.insert("mapper.board.insertNewReview", articleMap);
+		return reviewNum;
+	}
+
+	private int selectNewReviewNum() throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectNewReviewNum");
+	}
+	
+	// review 수정
+	@Override
+	public void updateReview(Map articleMap) throws DataAccessException {
+		sqlSession.update("mapper.board.updateReview", articleMap);
 	}
 
 
-	/*
-	@Override
-	public int insertNewArticle(Map articleMap) throws DataAccessException {
-		int articleNO = selectNewArticleNO();
-		articleMap.put("articleNO", articleNO);
-		sqlSession.insert("mapper.board.insertNewArticle",articleMap);
-		return articleNO;
-	}
-    
-	@Override
-	public void insertNewImage(Map articleMap) throws DataAccessException {
-		List<ImageVO> imageFileList = (ArrayList)articleMap.get("imageFileList");
-		int articleNO = (Integer)articleMap.get("articleNO");
-		int imageFileNO = selectNewImageFileNO();
-		for(ImageVO imageVO : imageFileList){
-			imageVO.setImageFileNO(++imageFileNO);
-			imageVO.setArticleNO(articleNO);
-		}
-		sqlSession.insert("mapper.board.insertNewImage",imageFileList);
-	}
-	
-   */
-	
-	@Override
-	public ArticleVO selectArticle(int articleNO) throws DataAccessException {
-		return sqlSession.selectOne("mapper.board.selectArticle", articleNO);
-	}
-	/*
-	@Override
-	public void updateArticle(Map articleMap) throws DataAccessException {
-		sqlSession.update("mapper.board.updateArticle", articleMap);
-	}
-
-	@Override
-	public void deleteArticle(int articleNO) throws DataAccessException {
-		sqlSession.delete("mapper.board.deleteArticle", articleNO);
-		
-	}
-	
-	@Override
-	public List selectImageFileList(int articleNO) throws DataAccessException {
-		List<ImageVO> imageFileList = null;
-		imageFileList = sqlSession.selectList("mapper.board.selectImageFileList",articleNO);
-		return imageFileList;
-	}
-	
-	private int selectNewArticleNO() throws DataAccessException {
-		return sqlSession.selectOne("mapper.board.selectNewArticleNO");
-	}
-	
-	private int selectNewImageFileNO() throws DataAccessException {
-		return sqlSession.selectOne("mapper.board.selectNewImageFileNO");
-	}
-*/
 }

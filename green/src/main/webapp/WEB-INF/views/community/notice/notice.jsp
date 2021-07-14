@@ -8,7 +8,16 @@
 request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+<script>
+	function fn_articleForm(isLogOn, addNewNotice, login) {
+		if (isLogOn != '' && isLogOn != 'false') {
+			location.href = addNewNotice;
+		} else {
+			alert("로그인 후 글쓰기가 가능합니다.")
+			location.href = login + '?action=/addNewNotice.do';
+		}
+	}
+</script>
 <!-- 메인 -->
 <main class="mainH">
 	<div class="container">
@@ -39,7 +48,7 @@ request.setCharacterEncoding("UTF-8");
 			</thead>
 			<tbody>
 				<c:choose>
-					<c:when test="${notice ==null }">
+					<c:when test="${listNotice ==null }">
 						<tr height="10">
 							<td colspan="4">
 								<p align="center">
@@ -48,22 +57,20 @@ request.setCharacterEncoding("UTF-8");
 							</td>
 						</tr>
 					</c:when>
-					<c:when test="${notice !=null }">
-						<c:forEach var="notice" items="${notice}" varStatus="noticeNum">	
+					<c:when test="${listNotice !=null }">
+						<c:forEach var="listNotice" items="${listNotice}">
 							<tr class="border-bottom ">
-								<th class="text-center align-middle">${noticeNum.count}</th>
-								<td class="text-center align-middle">
-								<a class=""href="${contextPath }/notice_in.do">${notice.noticeTitle }</a></td>
-								<td class="text-center align-middle">${notice.id }</td>
-								<td class="text-center align-middle">${notice.noticeDate}</td>
+								<th class="text-center align-middle">${listNotice.noticeNum}</th>
+								<td class="text-center align-middle"><a
+									href="${contextPath }/viewNotice.do?noticeNum=${listNotice.noticeNum}">${listNotice.noticeTitle }</a></td>
+								<td class="text-center align-middle">${listNotice.id }</td>
+								<td class="text-center align-middle">${listNotice.noticeDate}</td>
 							</tr>
 						</c:forEach>
 					</c:when>
 				</c:choose>
 			</tbody>
-
 		</table>
-
 		<div class="row justify-content-between px-4">
 			<div class="">
 				<div class="btn-group">
@@ -83,22 +90,25 @@ request.setCharacterEncoding("UTF-8");
 					</form>
 				</div>
 			</div>
-
+			<div class="">
+				<a class=""
+					href="javascript:fn_articleForm('${isLogOn}','${contextPath}/addNewNotice.do', 
+                                                    '${contextPath}/login.do')"><button
+						type="button" class="btn btn-primary btn-sm">글쓰기</button></a>
+			</div>
 		</div>
-
-		<nav aria-label="Page navigation example row">
-			<ul class="pagination d-flex justify-content-center">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
-			</ul>
-		</nav>
-
 	</div>
+	<nav aria-label="Page navigation example row">
+		<ul class="pagination d-flex justify-content-center">
+			<li class="page-item"><a class="page-link" href="#"
+				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+			</a></li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item"><a class="page-link" href="#"
+				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+			</a></li>
+		</ul>
+	</nav>
 </main>

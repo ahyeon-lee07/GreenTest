@@ -8,20 +8,29 @@
 request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
+<script>
+	function fn_articleForm(isLogOn, addNewQnA, login) {
+		if (isLogOn != '' && isLogOn != 'false') {
+			location.href = addNewQnA;
+		} else {
+			alert("로그인 후 글쓰기가 가능합니다.")
+			location.href = login + '?action=/addNewQnA.do';
+		}
+	}
+</script>
 <!-- 메인 -->
 <main class="mainH">
 	<div class="container">
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
-				<h4>Q&A</h4>
+				<h4>QnA</h4>
 			</div>
 			<div class="bd-highlight">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb p-0 bg bg-transparent">
 						<li class="breadcrumb-item"><a href="${contextPath }/main.do">홈</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Q&A</li>
+						<li class="breadcrumb-item active" aria-current="page">QnA</li>
 					</ol>
 				</nav>
 			</div>
@@ -39,20 +48,33 @@ request.setCharacterEncoding("UTF-8");
                 </tr>
             </thead>
             <tbody>
-            
-                <tr class="border-bottom ">
-                    <th class="text-center align-middle">1</th>
-                    <td class="text-center align-middle"><img src="${contextPath }/resources/img/케이스이미지.PNG"
-                            class="img-thumbnail" alt="#"></td>
-                    <td class="text-center align-middle">
-                    	<a class="" href="${contextPath }/product_in.do">Otto</a>
-                    </td>
-                    <td class="text-center align-middle">관리자</td>
-                    <td class="text-center align-middle">2020-00-00</td>
-                    <td class="text-center align-middle">70</td>
-                </tr>
-            </tbody>
+				<c:choose>
+					<c:when test="${listQnA ==null }">
+						<tr height="10">
+							<td colspan="6">
+								<p align="center">
+									<b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b>
+								</p>
+							</td>
+						</tr>
+					</c:when>
+					<c:when test="${listQnA !=null }">
+						<c:forEach var="listQnA" items="${listQnA}">	
+							<tr class="border-bottom ">
+								<th class="text-center align-middle">${listQnA.QnANum}</th>
+								<td class="text-center align-middle">${listQnA.productId}</td>
+								<td class="text-center align-middle">
+								<a href="${contextPath }/viewQnA.do?QnANum=${listQnA.QnANum}">${listQnA.QnATitle }</a></td>
+								<td class="text-center align-middle">${listQnA.id }</td>
+								<td class="text-center align-middle">${listQnA.QnADate}</td>
+								<td class="text-center align-middle">${listQnA.QnAHits}</td>
+							</tr>
+						</c:forEach>
+					</c:when>
+				</c:choose>
+			</tbody>
         </table>
+       
 
         <div class="row justify-content-between px-4">
             <div class="">
@@ -73,28 +95,24 @@ request.setCharacterEncoding("UTF-8");
                 </div>
             </div>
             <div class="">
-            	<a class="" href="${contextPath }/product_write.do">
-            	<button type="button" class="btn btn-primary btn-sm">글쓰기</button>
-            	</a></div>
-        </div>
-
-        <nav aria-label="Page navigation example row">
-            <ul class="pagination d-flex justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-
+				<a class=""
+					href="javascript:fn_articleForm('${isLogOn}','${contextPath}/addNewQnA.do', 
+                                                    '${contextPath}/login.do')"><button
+						type="button" class="btn btn-primary btn-sm">글쓰기</button></a>
+			</div>
+		</div>
 	</div>
+	<nav aria-label="Page navigation example row">
+		<ul class="pagination d-flex justify-content-center">
+			<li class="page-item"><a class="page-link" href="#"
+				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+			</a></li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item"><a class="page-link" href="#"
+				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+			</a></li>
+		</ul>
+	</nav>
 </main>

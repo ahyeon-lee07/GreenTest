@@ -19,46 +19,98 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardDAO boardDAO;
 
-	public List<ArticleVO> notice() throws Exception {
-		List<ArticleVO> notice = boardDAO.selectAllArticlesList();
-		return notice;
+	// 공지사항 목록
+	public List<ArticleVO> listNotice() throws Exception {
+		List<ArticleVO> listNotice = boardDAO.selectAllNoticeList();
+		return listNotice;
 	}
 
-	// 다중 이미지 추가하기
-	/*
-	 * @Override public int addNewArticle(Map articleMap) throws Exception{ int
-	 * articleNO = boardDAO.insertNewArticle(articleMap);
-	 * articleMap.put("articleNO", articleNO); boardDAO.insertNewImage(articleMap);
-	 * return articleNO; }
-	 */
-
-	// 다중 파일 보이기
-	/*
+	// 공지사항 상세페이지
 	@Override
-	public Map viewArticle(int articleNO) throws Exception {
-		Map articleMap = new HashMap();
-		ArticleVO articleVO = boardDAO.selectArticle(articleNO);
-		List<ImageVO> imageFileList = boardDAO.selectImageFileList(articleNO);
-		articleMap.put("article", articleVO);
-		articleMap.put("imageFileList", imageFileList);
-		return articleMap;
-	}
- */
-	// 단일 파일 보이기
-	
-	@Override
-	public ArticleVO viewArticle(int articleNO) throws Exception {
-		ArticleVO articleVO = boardDAO.selectArticle(articleNO);
+	public ArticleVO viewNotice(int noticeNum) throws Exception {
+		ArticleVO articleVO = boardDAO.selectNotice(noticeNum);
 		return articleVO;
 	}
- 
-	/*
-	 * @Override public void modArticle(Map articleMap) throws Exception {
-	 * boardDAO.updateArticle(articleMap); }
-	 * 
-	 * @Override public void removeArticle(int articleNO) throws Exception {
-	 * boardDAO.deleteArticle(articleNO); }
-	 * 
-	 */
+
+	// 공지사항 삭제하기
+	@Override
+	public void removeNotice(int noticeNum) throws Exception {
+		boardDAO.deleteNotice(noticeNum);
+	}
+
+	// 공지사항 글쓰기
+	@Override
+	public int addNewNotice(Map articleMap) throws Exception {
+		return boardDAO.insertNewNotice(articleMap);
+	}
+
+	// 이벤트 목록
+	public List<ArticleVO> listEvent() throws Exception {
+		List<ArticleVO> listEvent = boardDAO.selectAllEventList();
+		return listEvent;
+	}
+	
+	// 이벤트 상세페이지
+	@Override
+	public ArticleVO viewEvent(int eventNum) throws Exception {
+		ArticleVO articleVO = boardDAO.selectEvent(eventNum);
+		return articleVO;
+	}
+
+	// 이벤트 삭제하기
+	@Override
+	public void removeEvent(int eventNum) throws Exception {
+		boardDAO.deleteEvent(eventNum);
+	}
+
+	// 이벤트 글쓰기
+	@Override
+	public int addNewEvent(Map articleMap) throws Exception {
+		return boardDAO.insertNewEvent(articleMap);
+	}
+
+	// QnA 목록
+	public List<ArticleVO> listQnA() throws Exception {
+		List<ArticleVO> listQnA = boardDAO.selectAllQnAList();
+		return listQnA;
+	}
+
+	// QnA 상세페이지
+	@Override
+	public ArticleVO viewQnA(int QnANum) throws Exception {
+		ArticleVO articleVO = boardDAO.selectQnA(QnANum);
+		return articleVO;
+	}
+
+	// review 목록
+	public List<ArticleVO> listReview() throws Exception {
+		List<ArticleVO> listReview = boardDAO.selectAllReviewList();
+		return listReview;
+	}
+
+	// review 상세페이지
+	@Override
+	public ArticleVO viewReview(int reviewNum) throws Exception {
+		ArticleVO articleVO = boardDAO.selectReview(reviewNum);
+		return articleVO;
+	}
+
+	// review 삭제하기
+	@Override
+	public void removeReview(int reviewNum) throws Exception {
+		boardDAO.deleteReview(reviewNum);
+	}
+
+	// review 글쓰기
+	@Override
+	public int addNewReview(Map articleMap) throws Exception {
+		return boardDAO.insertNewReview(articleMap);
+	}
+	
+	// review 수정
+	@Override
+	public void modReview(Map articleMap) throws Exception {
+		boardDAO.updateReview(articleMap);
+	}
 
 }
