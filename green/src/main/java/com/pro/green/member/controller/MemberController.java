@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pro.green.member.vo.MemberVO;
+import com.pro.green.product.vo.Criteria;
 
 public interface MemberController {
 	public ModelAndView addMember(@ModelAttribute("info") MemberVO memberVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
@@ -23,6 +24,8 @@ public interface MemberController {
 	public ModelAndView memberEdit(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView memberDelete(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView memberEditOk(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView memberList(@ModelAttribute("member") MemberVO member, HttpServletRequest request, Criteria cri) throws Exception;
 }
 
 

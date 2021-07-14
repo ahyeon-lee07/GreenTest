@@ -1,6 +1,7 @@
 package com.pro.green.member.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.pro.green.member.vo.MemberVO;
+import com.pro.green.product.vo.Criteria;
 
 @Repository("memberDAO")
 public class MemberDAOImpl implements MemberDAO {
@@ -67,5 +69,22 @@ public class MemberDAOImpl implements MemberDAO {
 		int result = sqlSession.update("mapper.member.editMember", member);
 		return result;
 	}
-
+	
+	//회원수 조회
+	public int memberCount() throws DataAccessException {
+		int result = sqlSession.selectOne("mapper.member.memberCount");
+		return result;
+	}
+	
+	//회원리스트 조회
+	public List<Map<String, Object>> selectMemberList(Criteria cri) throws DataAccessException{
+		List<Map<String, Object>> result = sqlSession.selectList("mapper.member.selectMemberList", cri);
+		return result;
+	}
+	
+	//회원 검색
+	public List<Map<String, Object>> searchMemberList(Map<String, Object> searchOption) throws DataAccessException {
+		List<Map<String, Object>> result = sqlSession.selectList("mapper.member.searchMemberList", searchOption);
+		return result;
+	}
 }

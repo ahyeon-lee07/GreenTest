@@ -1,6 +1,7 @@
 package com.pro.green.member.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pro.green.member.dao.MemberDAO;
 import com.pro.green.member.vo.MemberVO;
+import com.pro.green.product.vo.Criteria;
 
 @Service("memberService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -63,5 +65,20 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int memeberDelete(MemberVO member) throws Exception {
 		return memberDAO.memberDelete(member);
+	}
+	
+	//회원수 조회
+	public int memberCount() throws Exception {
+		return memberDAO.memberCount();
+	}
+	
+	//회원 조회
+	public List<Map<String, Object>> selectMemberList(Criteria cri) throws Exception {
+		return memberDAO.selectMemberList(cri);
+	}
+	
+	//회원 검색
+	public List<Map<String, Object>> searchMemberList(Map<String, Object> searchOption) throws Exception {
+		return memberDAO.searchMemberList(searchOption);
 	}
 }

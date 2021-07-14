@@ -79,4 +79,39 @@
 		]]>      
 	</insert>
 	
+	<!-- 회원수 조회 -->
+	<select id="memberCount" resultType="Integer">
+    <![CDATA[
+        SELECT
+            count(*)
+        FROM
+            member
+    ]]>
+    </select>
+    
+    <!-- 회원리스트 조회 검색 -->
+	<select id="selectMemberList" resultType="hashmap"
+		parameterType="hashmap">
+    <![CDATA[
+        SELECT 
+			*
+		FROM 
+			member
+		ORDER BY joinDate DESC LIMIT #{pageStart}, #{perPageNum};
+    ]]>
+	</select>
+	
+	<!-- 회원리스트 검색 -->
+	<select id="searchMemberList" resultType="hashmap"
+		parameterType="hashmap">
+    <![CDATA[
+        SELECT 
+			*
+		FROM 
+			member
+		WHERE
+			${searchKeyWordOption} LIKE CONCAT('%', #{keyWord}, '%')
+		ORDER BY joinDate DESC LIMIT #{cri.pageStart}, #{cri.perPageNum};
+    ]]>
+	</select>
 </mapper>

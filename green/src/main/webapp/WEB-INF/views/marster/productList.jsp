@@ -87,7 +87,7 @@
 								<tbody class="border-bottom">
 									<c:forEach items="${list }" var="list">
 										<tr id="${list.productId }" class="">
-											<th class="text-center align-middle align-middle px-1">
+											<td class="text-center align-middle align-middle px-1">
 												<div>
 													<c:choose>
 														<c:when test="${list.showYN eq 'Y' }">
@@ -98,7 +98,7 @@
 														</c:when>
 													</c:choose>
 												</div>
-											</th>
+											</td>
 											<td class="text-center align-middle px-2"><img
 													src="${contextPath}/resources/img/${list.p_group }/${list.imgURL }"
 													class="img-thumbnail" alt="#"></td>

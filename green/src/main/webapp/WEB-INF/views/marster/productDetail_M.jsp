@@ -356,7 +356,7 @@ request.setCharacterEncoding("UTF-8");
 							<c:otherwise>
 								<div class="row justify-content-between my-3">
 						            <div class="">
-						            	<a class="" href="${contextPath }/productList.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&options=${options }">
+						            	<a class="" href="${contextPath }/productList.do?options=${options }">
 						            		<button type="button" class="btn btn-secondary">목록</button>
 						            	</a>	
 						            </div>
