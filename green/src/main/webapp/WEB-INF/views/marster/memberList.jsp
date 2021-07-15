@@ -7,7 +7,7 @@
 					<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 					<!-- 메인 -->
 					<main class="mainH">
-						<div class="container">
+						<div class="container pt-1">
 							<!-- 페이지 타이틀 부분 -->
 							<div class="d-flex justify-content-between mt-5 mb-2">
 								<div class="bd-highlight">
