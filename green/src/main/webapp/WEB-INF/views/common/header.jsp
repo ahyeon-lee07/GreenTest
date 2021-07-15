@@ -8,7 +8,7 @@ request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<header id="header" class="bg-white">
+<header id="header" class="bg-white ftco-navbar-light">
 	<!-- sticky-top  -->
 	<div class="border-bottom topNav">
 		<div class="container bg-white">
@@ -243,4 +243,35 @@ request.setCharacterEncoding("UTF-8");
 			}
 		});
 	}
+	
+	document.addEventListener('scroll', function(){
+		var Y = window.pageYOffset;
+		console.log(Y);
+
+			if (Y > 226) {
+				if ( !document.getElementById('header').classList.contains('scrolled') ) {
+					document.getElementById('header').classList.add('scrolled');	
+					document.getElementById('logoBox').style.height = 0;
+				}
+			} 
+			if (Y < 226) {
+				if ( document.getElementById('header').classList.contains('scrolled') ) {
+					document.getElementById('header').classList.remove('scrolled');
+					document.getElementById('header').classList.remove('sleep');
+					document.getElementById('logoBox').style.height = 121 + 'px';
+				}
+			} 
+			if ( Y > 310 ) {
+				if ( !document.getElementById('header').classList.contains('awake') ) {
+					document.getElementById('header').classList.add('awake');
+					
+				}
+			}
+			if ( Y < 310 ) {
+				if ( document.getElementById('header').classList.contains('awake') ) {
+					document.getElementById('header').classList.remove('awake');
+					document.getElementById('header').classList.add('sleep');
+				}
+			}
+	})
 </script>
