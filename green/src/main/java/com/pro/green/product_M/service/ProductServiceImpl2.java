@@ -67,8 +67,8 @@ public class ProductServiceImpl2 implements ProductService2 {
 	}
 
 	// 包府磊 惑前 府胶飘 可记
-	public List<Map<String, Object>> selectOptionLIst(String productId) throws DataAccessException {
-		return productDAO.selectOptionLIst(productId);
+	public List<Map<String, Object>> selectOptionList(String productId) throws DataAccessException {
+		return productDAO.selectOptionList(productId);
 	}
 
 	// 包府磊 惑前 惑技其捞瘤

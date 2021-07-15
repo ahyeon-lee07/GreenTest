@@ -24,10 +24,10 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 		<c:choose>
 			<c:when test="${ProductVO != null}">
-				<form action="${contextPath }/productList/productUpdate_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${ProductVO.productId }&options=${options }" method="POST" name="addProduct" enctype="multipart/form-data">
+				<form action="${contextPath }/productList/productUpdate_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${ProductVO.productId }&options=${options }" method="POST" name="addProduct" enctype="multipart/form-data"/>
 			</c:when>
 			<c:otherwise>
-				<form action="${contextPath }/product/addEdit.do" method="POST" name="addProduct" enctype="multipart/form-data">
+				<form action="${contextPath }/product/addEdit.do" method="POST" name="addProduct" enctype="multipart/form-data"/>
 			</c:otherwise>
 		</c:choose>
 		

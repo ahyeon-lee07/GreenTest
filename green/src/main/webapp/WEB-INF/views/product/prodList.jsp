@@ -49,16 +49,16 @@ request.setCharacterEncoding("UTF-8");
 						<div class="col mb-5">
 							<div class="card h-100">
 								<!-- Product image-->
-								<a href="${contextPath}/HardCaseDetail.do?productId=${product.productId}"> <img
+								<a href="${contextPath}/prodList/prodDetail.do?productId=${product.productId}"> <img
 									class="card-img-top"
-									src="${contextPath }/resources/img/케이스이미지.png"
+									src="${contextPath }/resources/img/${product.p_group}/${product.imgURL}"
 									alt="${product.productName}" />
 								</a>
 								<!-- Product details-->
 								<div class="card-body p-4">
 									<div class="text-center">
 										<!-- Product name-->
-										<a href="${contextPath}/list/listDetail.do?productId=${product.productId}">
+										<a href="${contextPath}/prodList/prodDetail.do?productId=${product.productId}">
 											<p>${product.productName}</p>
 										</a>
 										<!-- Product price-->
