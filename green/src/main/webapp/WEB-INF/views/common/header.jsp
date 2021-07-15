@@ -250,15 +250,15 @@ request.setCharacterEncoding("UTF-8");
 
 			if (Y > 226) {
 				if ( !document.getElementById('header').classList.contains('scrolled') ) {
-					document.getElementById('header').classList.add('scrolled');	
-					document.getElementById('logoBox').style.height = 0;
+					document.getElementById('header').classList.add('scrolled');
+					document.getElementById('logoBox').style.display = 'none';
 				}
 			} 
 			if (Y < 226) {
 				if ( document.getElementById('header').classList.contains('scrolled') ) {
 					document.getElementById('header').classList.remove('scrolled');
 					document.getElementById('header').classList.remove('sleep');
-					document.getElementById('logoBox').style.height = 121 + 'px';
+					document.getElementById('logoBox').style.display = 'block';
 				}
 			} 
 			if ( Y > 310 ) {
