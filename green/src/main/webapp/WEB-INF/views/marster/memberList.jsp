@@ -95,7 +95,14 @@
 											</td>
 											<td class="text-center align-middle flex-column" style="font-size: .8rem;">
 												<div>
-													${list.grade }
+													<c:choose>
+														<c:when test="${list.grade == 'new' }">
+																신규
+														</c:when>
+														<c:when test="${list.grade == 'gold' }">
+																골드
+														</c:when>
+													</c:choose>
 												</div>
 											</td>
 											<td class="text-center align-middle px-2" style="font-size: .8rem;">

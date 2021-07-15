@@ -86,4 +86,9 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO memberDetail(String productId) throws Exception{
 		return memberDAO.memberDetail(productId);
 	}
+	
+	//회원관리 수정
+	public int editMember_master(MemberVO memberInf) throws Exception {
+		return memberDAO.editMember_master(memberInf);
+	}
 }

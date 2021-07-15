@@ -318,6 +318,38 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 
+	// 회원관리 상세 수정
+	@RequestMapping(value = "/memberList/memberEdit/Edit.do", method = {RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView memberEditOK(@ModelAttribute("member") MemberVO memberInf,
+			@RequestParam(value = "productId") String productId, @RequestParam(value = "options") String options,
+			HttpServletRequest request, Criteria cri) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		
+		MemberVO member = new MemberVO();
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+
+		// 관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
+		sessionChk(mav, sessinLogin, "redirect:/memberList.do");
+		
+		
+		int result = memberService.editMember_master(memberInf);
+		//memberVO = memberService.login(member);
+		
+		if (result == 0) {
+			mav.addObject("joinMas", "회원 정보 수정에 실패하였습니다. 다시 시도해 주세요.");
+		} else {
+			mav.addObject("joinMas", "회원 정보 수정이 완료 되었습니다.");
+			//session.setAttribute("member", memberVO); // 세션에 회원 정보를 저장
+		}
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		mav.addObject("pageMaker", pageMaker);
+
+		return mav;
+	}
+
 	// 회원관리 탈퇴
 	@RequestMapping(value = "/memberList/memberDelete.do", method = RequestMethod.POST)
 	public ModelAndView memberListDelete(@ModelAttribute("member") MemberVO member, HttpServletRequest request,

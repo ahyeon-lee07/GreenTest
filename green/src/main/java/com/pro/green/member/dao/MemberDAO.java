@@ -22,4 +22,6 @@ public interface MemberDAO {
 	public List<Map<String, Object>> selectMemberList(Criteria cri) throws DataAccessException;
 	public List<Map<String, Object>> searchMemberList(Map<String, Object> searchOption) throws DataAccessException;
 	public MemberVO memberDetail(String productId) throws DataAccessException;
+	
+	public int editMember_master(MemberVO memberInf) throws DataAccessException;
 }

@@ -128,4 +128,22 @@
 			id = #{productId}
     ]]>
 	</select>
+	
+	<!-- 회원관리 수정 -->
+	<insert id="editMember_master"  parameterType="memberVO">
+		<![CDATA[
+		  UPDATE 
+		  	member 
+		  SET 
+		  	pw=#{pw}, name=#{name}, 
+		  	birth=#{birth}, phone=#{phone}, 
+		  	zipCode=#{zipCode}, addr1=#{addr1}, 
+		  	addr2=#{addr2}, addr3=#{addr3}, 
+		  	email1=#{email1}, email2=#{email2}, 
+		  	grade=#{grade},
+		  	mileage=#{mileage}, masterYN=#{masterYN} 
+		  WHERE 
+		  	id=#{id}
+		]]>      
+	</insert>
 </mapper>

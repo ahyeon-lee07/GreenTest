@@ -203,10 +203,7 @@ request.setCharacterEncoding("UTF-8");
 												<input type="text" class="form-control"
 													style="width: 316px;" id="sample6_detailAddress"
 													placeholder="상세주소" name="addr2" value="${memerInf.addr2}"> 
-													<input type="text"
-													class="form-control" style="display: none;"
-													id="sample6_extraAddress" placeholder="참고항목" name="addr3"
-													readonly>
+													<input type="text" class="form-control" style="display: none;" id="sample6_extraAddress" placeholder="참고항목" name="addr3" value="${memerInf.addr3}" readonly>
 											</div>
 										</div>
 									</div>
@@ -311,6 +308,7 @@ request.setCharacterEncoding("UTF-8");
 //페이지가 노드 되면서 memver의 email2 주소는 입력 , 회면 로딩시 스위치 YN 체크
 window.onload = function() {
 	document.getElementById('inputEmail2').value = "${memerInf.email2}";
+	document.getElementById('inputGrade').value = "${memerInf.grade}";
 
 	var YNChk = document.getElementById('inputMasterYN');
 	var input_V = document.getElementById('masterYN_V');
@@ -347,45 +345,27 @@ window.onload = function() {
 		}
 	});
 
-						//유효성 검사
-						function checkLogin() {
-							var form = document.memberEdit;
-							//영문 소문자/숫자, 4~16자
-							var idExp = document.getElementById('inputId').value.search(/^[a-zA-Z0-9]{4,16}$/);
-							//영문,숫자,특수문자 혼합하여 10자리~16자리 이내.(비밀번호 표준)
-							var pwExp = document.getElementById('Password').value;
-							var num = pwExp.search(/[0-9]/g);
-							var eng = pwExp.search(/[a-z]/ig);
-							var spe = pwExp.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+//회원정보 수정 
+	document.getElementById('btn_memberEdit').addEventListener('click',function() {
+						var form = document.memberEdit;
+						//영문,숫자,특수문자 혼합하여 10자리~16자리 이내.(비밀번호 표준)
+						var pwExp = document.getElementById('Password').value;
+						var num = pwExp.search(/[0-9]/g);
+						var eng = pwExp.search(/[a-z]/ig);
+						var spe = pwExp.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
-							//영문 한글 공백 허용
-							var nameExp = document.getElementById('inputName').value.search(/^[ㄱ-ㅎ|가-힣|a-z|A-Z|]*$/);
+						//영문 한글 공백 허용
+						var nameExp = document.getElementById('inputName').value
+								.search(/^[ㄱ-ㅎ|가-힣|a-z|A-Z|]*$/);
 
-							if (form.id.value == "") {
-								alert("아이디를 입력해주세요!");
-								form.id.focus();
-								return false;
-							}
-						<c:choose>
-							<c:when test="${memberInf == null }">
-							 else if (idExp) {
-									alert("아이디는 영문 소문자/숫자, 4~16자 형식으로 작성하셔야 합니다.");
-									form.id.focus();
-									return false;
-								} 
-							else if (form.pw.value == "") {
-								alert("비밀번호를 입력해주세요!");
-								form.pw.focus();
-								return false;
-							} else if (pwExp.length < 10 || pwExp.length > 16) {
-								alert("비밀번호는 10자리 ~ 16자리 이내로 입력해주세요.");
-								form.pw.focus();
-								return false;
-							} else if (pwExp.search(/\s/) != -1) {
+						if (pwExp != '') {
+							if (pwExp.search(/\s/) != -1) {
 								alert("비밀번호는 공백 없이 입력해주세요.");
 								form.pw.focus();
 								return false;
-							} else if ((num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0)) {
+							} else if ((num < 0 && eng < 0)
+									|| (eng < 0 && spe < 0)
+									|| (spe < 0 && num < 0)) {
 								alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
 								form.pw.focus();
 								return false;
@@ -397,54 +377,39 @@ window.onload = function() {
 								alert("비밀번호를 확인해주세요!");
 								form.pw.focus();
 								return false;
-							} 
-							</c:when>
-						</c:choose>
-							
-							else if (form.name.value == "") {
-								alert("이름을 입력해주세요!");
-								form.name.focus();
-								return false;
-							} else if (nameExp) {
-								alert("이름에 숫자는 입력 할수 없습니다.");
-								form.name.focus();
-								return false;
-							} else if (form.addr1.value == "" || form.addr2.value == "" || form.addr3.value == "") {
-								alert("주소을 입력해주세요!");
-								form.addr1.focus();
-								return false;
-							} else if (form.phone.value == "") {
-								alert("휴대전화를 입력해주세요!");
-								form.phone.focus();
-								return false;
-							} else if (document.getElementById("chk1").checked != true) {
-								alert("이용약관에 동의해 주세요!");
-								document.getElementById("chk1").focus();
-								return false;
-							} else if (document.getElementById("chk2").checked != true) {
-								alert("개인정보 수집 및 이용 동의에 동의해 주세요!");
-								document.getElementById("chk2").focus();
-								return false;
-							}
-							<c:choose>
-								<c:when test="${memberInf == null }">
-								else if(document.getElementsByName('checked_id').values != "Y"){
-									alert("아이디를 중복체크를 해주세요.");
-									document.getElementById("inputId").focus();
-									return false;
-								}
-								</c:when>
-							</c:choose>
-							else {
-								form.action = "${contextPath}/member/addMember.do";
-								form.submit();
 							}
 						}
-					</script>
-
+						if (form.name.value == "") {
+							alert("이름을 입력해주세요!");
+							form.name.focus();
+							return false;
+						} else if (nameExp) {
+							alert("이름에 숫자는 입력 할수 없습니다.");
+							form.name.focus();
+							return false;
+						} else if (form.addr1.value == "" || form.addr2.value == "" || form.addr3.value == "") {
+							alert("주소을 입력해주세요!");
+							form.addr1.focus();
+							return false;
+						} else if (form.phone.value == "") {
+							alert("휴대전화를 입력해주세요!");
+							form.phone.focus();
+							return false;
+						} else {
+							if (confirm("입력한 내용을 정보를 변경하기겠습니까? ") == true) {
+								if (pwExp == '') {
+									document.getElementById('Password').value = '${memerInf.pw}';
+								};
+								form.action = "${contextPath }/memberList/memberEdit/Edit.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${memerInf.id }&options=${options }";
+								form.submit();
+							} else {
+								return;
+							}
+						}
+					});
+</script>
 <!-- 우편번호 API -->
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 						function sample6_execDaumPostcode() {
 							new daum.Postcode(
