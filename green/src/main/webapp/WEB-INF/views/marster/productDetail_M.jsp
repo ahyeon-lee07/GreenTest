@@ -11,7 +11,7 @@ request.setCharacterEncoding("UTF-8");
 <!-- 메인 -->
 <!-- 메인 -->
 <main class="mainH">
-	<div class="container  pt-1">
+	<div class="container py-1">
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
