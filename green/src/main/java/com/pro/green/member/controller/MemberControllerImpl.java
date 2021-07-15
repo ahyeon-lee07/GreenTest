@@ -25,8 +25,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pro.green.member.service.MemberService;
 import com.pro.green.member.vo.MemberVO;
-import com.pro.green.product.vo.Criteria;
-import com.pro.green.product.vo.PageMaker;
+import com.pro.green.product_M.vo.Criteria;
+import com.pro.green.product_M.vo.PageMaker;
 
 @Controller("memberController")
 //@EnableAspectJAutoProxy

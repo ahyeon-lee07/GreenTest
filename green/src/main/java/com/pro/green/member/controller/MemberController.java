@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pro.green.member.vo.MemberVO;
-import com.pro.green.product.vo.Criteria;
+import com.pro.green.product_M.vo.Criteria;
 
 public interface MemberController {
 	public ModelAndView addMember(@ModelAttribute("info") MemberVO memberVO,HttpServletRequest request, HttpServletResponse response) throws Exception;

@@ -1,4 +1,4 @@
-package com.pro.green.product.dao;
+package com.pro.green.product_M.dao;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.pro.green.product.vo.Criteria;
-import com.pro.green.product.vo.ProductVO2;
+import com.pro.green.product_M.vo.Criteria;
+import com.pro.green.product_M.vo.ProductVO2;
 
-@Repository("productDAO")
+@Repository("productDAO_M")
 public class ProductDAOImpl2 implements ProductDAO2 {
 	@Autowired
 	private SqlSession sqlSession;

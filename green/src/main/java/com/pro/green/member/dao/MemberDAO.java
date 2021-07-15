@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import com.pro.green.member.vo.MemberVO;
-import com.pro.green.product.vo.Criteria;
+import com.pro.green.product_M.vo.Criteria;
 
 public interface MemberDAO {
 	public int insertMember(MemberVO memberVO) throws DataAccessException ;

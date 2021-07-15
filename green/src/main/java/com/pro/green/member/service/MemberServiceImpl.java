@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pro.green.member.dao.MemberDAO;
 import com.pro.green.member.vo.MemberVO;
-import com.pro.green.product.vo.Criteria;
+import com.pro.green.product_M.vo.Criteria;
 
 @Service("memberService")
 @Transactional(propagation = Propagation.REQUIRED)

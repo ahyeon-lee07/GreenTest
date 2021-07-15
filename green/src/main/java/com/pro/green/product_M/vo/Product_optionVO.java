@@ -1,4 +1,4 @@
-package com.pro.green.product.vo;
+package com.pro.green.product_M.vo;
 
 public class Product_optionVO {
 	

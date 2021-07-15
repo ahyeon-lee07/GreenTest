@@ -1,4 +1,4 @@
-package com.pro.green.product.controller;
+package com.pro.green.product_M.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,8 +9,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pro.green.member.vo.MemberVO;
-import com.pro.green.product.vo.Criteria;
-import com.pro.green.product.vo.ProductVO2;
+import com.pro.green.product_M.vo.Criteria;
+import com.pro.green.product_M.vo.ProductVO2;
 
 public interface ProductController2 {
 	public ModelAndView productList(@ModelAttribute("member") MemberVO member, @RequestParam String options, HttpServletRequest request, Criteria cri) throws Exception; 

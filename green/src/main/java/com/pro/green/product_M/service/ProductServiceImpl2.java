@@ -1,4 +1,4 @@
-package com.pro.green.product.service;
+package com.pro.green.product_M.service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.pro.green.product.vo.Criteria;
-import com.pro.green.product.vo.ProductVO2;
-import com.pro.green.product.dao.ProductDAO2;
+import com.pro.green.product_M.dao.ProductDAO2;
+import com.pro.green.product_M.vo.Criteria;
+import com.pro.green.product_M.vo.ProductVO2;
 
-@Service("productService")
+@Service("productService_M")
 @Transactional(propagation = Propagation.REQUIRED)
 public class ProductServiceImpl2 implements ProductService2 {
 

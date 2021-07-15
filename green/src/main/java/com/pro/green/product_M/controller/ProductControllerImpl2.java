@@ -1,4 +1,4 @@
-package com.pro.green.product.controller;
+package com.pro.green.product_M.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,15 +32,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pro.green.member.service.MemberService;
 import com.pro.green.member.vo.MemberVO;
-import com.pro.green.product.vo.Criteria;
-import com.pro.green.product.vo.PageMaker;
-import com.pro.green.product.vo.ProductVO2;
+import com.pro.green.product_M.service.ProductService2;
+import com.pro.green.product_M.vo.Criteria;
+import com.pro.green.product_M.vo.PageMaker;
+import com.pro.green.product_M.vo.ProductVO2;
 
 import net.coobird.thumbnailator.Thumbnails;
 
-import com.pro.green.product.service.ProductService2;
-
-@Controller("ProductController")
+@Controller("ProductController_M")
 public class ProductControllerImpl2 implements ProductController2 {
 
 	@Autowired
