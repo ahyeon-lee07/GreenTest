@@ -222,9 +222,9 @@ request.setCharacterEncoding("UTF-8");
 						aria-haspopup="true" aria-expanded="false"> 액세서리</a>
 						<div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item"
-								href="${contextPath }/HardCase.do?p_group=keyRing">키링</a>
+								href="${contextPath }/list.do?p_group=keyRing">키링</a>
 							<a class="dropdown-item"
-								href="${contextPath }/HardCase.do?p_group=smart">스마트톡</a>
+								href="${contextPath }/list.do?p_group=smart">스마트톡</a>
 						</div></li>
 				</ul>
 			</div>
@@ -246,19 +246,18 @@ request.setCharacterEncoding("UTF-8");
 	
 	document.addEventListener('scroll', function(){
 		var Y = window.pageYOffset;
-		console.log(Y);
-
+		
 			if (Y > 226) {
 				if ( !document.getElementById('header').classList.contains('scrolled') ) {
-					document.getElementById('header').classList.add('scrolled');	
-					document.getElementById('logoBox').style.height = 0;
+					document.getElementById('header').classList.add('scrolled');
+					document.getElementById('logoBox').style.display = 'none';
 				}
 			} 
 			if (Y < 226) {
 				if ( document.getElementById('header').classList.contains('scrolled') ) {
 					document.getElementById('header').classList.remove('scrolled');
 					document.getElementById('header').classList.remove('sleep');
-					document.getElementById('logoBox').style.height = 121 + 'px';
+					document.getElementById('logoBox').style.display = 'block';
 				}
 			} 
 			if ( Y > 310 ) {
