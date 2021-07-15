@@ -78,7 +78,7 @@ public class ProductDAOImpl2 implements ProductDAO2 {
 	}
 
 	public ProductVO2 viewProductDetail(String productId) throws DataAccessException {
-		ProductVO2 result = sqlSession.selectOne("mapper.product.selectProduct", productId);
+		ProductVO2 result = sqlSession.selectOne("mapper.product.selectProduct_M", productId);
 		return result;
 	}
 

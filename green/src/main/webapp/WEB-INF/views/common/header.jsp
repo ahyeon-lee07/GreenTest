@@ -128,31 +128,38 @@ request.setCharacterEncoding("UTF-8");
 										class="d-flex justify-content-start flex-wrap px-3 pt-3 pb-0">
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/HardCase.do">하드 케이스</a>
+												href="${contextPath }/list.do?p_group=hard">하드
+												케이스</a>
 										</div>
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/GelCase.do">젤 케이스</a>
+												href="${contextPath }/list.do?p_group=gel">젤
+												케이스</a>
 										</div>
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/CardCase.do">카드 케이스</a>
+												href="${contextPath }/list.do?p_group=card">카드
+												케이스</a>
 										</div>
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/AirpodCase.do">에어팟 케이스</a>
+												href="${contextPath }/list.do?p_group=airPods">에어팟
+												케이스</a>
 										</div>
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/BudsCase.do">버즈 케이스</a>
+												href="${contextPath }/list.do?p_group=buds">버즈
+												케이스</a>
 										</div>
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/Accessory.do">액세서리</a> <a
-												class="dropdown-item py-1 text-black-50"
-												style="text-align: left;" href="${contextPath }/KeyRing.do">키링</a>
+												href="${contextPath }/list.do?p_group=${listProduct.p_group}">액세서리</a>
 											<a class="dropdown-item py-1 text-black-50"
-												style="text-align: left;" href="${contextPath }/SmartTok.do">스마트톡</a>
+												style="text-align: left;"
+												href="${contextPath }/list.do?p_group=keyRing">키링</a>
+											<a class="dropdown-item py-1 text-black-50"
+												style="text-align: left;"
+												href="${contextPath }/list.do?p_group=smart">스마트톡</a>
 										</div>
 									</div>
 								</div>
@@ -190,27 +197,34 @@ request.setCharacterEncoding("UTF-8");
 							</div>
 						</div></li>
 					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
-						class="nav-link text-secondary" href="${contextPath }/HardCase.do">하드
-							케이스</a></li>
-					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
-						class="nav-link text-secondary" href="${contextPath }/GelCase.do">젤
-							케이스</a></li>
-					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
-						class="nav-link text-secondary" href="${contextPath }/CardCase.do">카드
+						class="nav-link text-secondary"
+						href="${contextPath }/list.do?p_group=hard">하드
 							케이스</a></li>
 					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
 						class="nav-link text-secondary"
-						href="${contextPath }/AirpodCase.do">에어팟 케이스</a></li>
+						href="${contextPath }/list.do?p_group=gel">젤
+							케이스</a></li>
 					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
-						class="nav-link text-secondary" href="${contextPath }/BudsCase.do">버즈
+						class="nav-link text-secondary"
+						href="${contextPath }/list.do?p_group=card">카드
+							케이스</a></li>
+					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
+						class="nav-link text-secondary"
+						href="${contextPath }/list.do?p_group=airPods">에어팟
+							케이스</a></li>
+					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
+						class="nav-link text-secondary"
+						href="${contextPath }/list.do?p_group=buds">버즈
 							케이스</a></li>
 					<li class="nav-item dropdown mr-4 mx-auto"><a
 						class="nav-link text-secondary font-weight-bold" href="#"
 						id="navbarDropdown" role="button" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> 액세서리 </a>
+						aria-haspopup="true" aria-expanded="false"> 액세서리</a>
 						<div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="${contextPath }/KeyRing.do">키링</a>
-							<a class="dropdown-item" href="${contextPath }/SmartTok.do">스마트톡</a>
+							<a class="dropdown-item"
+								href="${contextPath }/HardCase.do?p_group=keyRing">키링</a>
+							<a class="dropdown-item"
+								href="${contextPath }/HardCase.do?p_group=smart">스마트톡</a>
 						</div></li>
 				</ul>
 			</div>
