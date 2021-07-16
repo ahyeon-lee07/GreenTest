@@ -11,7 +11,7 @@ request.setCharacterEncoding("UTF-8");
 
 <!-- 메인 -->
 <main class="mainH">
-	<div class="container">
+	<div class="container py-1">
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
@@ -63,6 +63,16 @@ request.setCharacterEncoding("UTF-8");
 								</div>
 							</div>
 						</div>
+						<div class="col p-0">
+							<div class="d-flex bd-highlight">
+								<label for="inputDay" class="bd-highlight col-form-label pl-2"
+									style="width: 100px;">조회수</label>
+								<div class="flex-grow-1 bd-highlight pr-2">
+										<input type=text value="${viewQnA.questionHits }"
+										class="form-control" name="questionHits" disabled />
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="row border-bottom p-2">
 						<textarea class="form-control" rows="14" name="questionContent"
@@ -86,7 +96,8 @@ request.setCharacterEncoding("UTF-8");
 								</c:if>
 								<a class="" href="${contextPath }/listQnA.do">
 									<button type="button" class="btn btn-secondary btn-sm">목록</button>
-									<input type=button value="답글쓰기" onClick="fn_reply_form('${isLogOn}','${contextPath }/QnA_reWrite.do', ${viewQnA.questionNum})">
+									<input type=button value="답글쓰기"
+									onClick="fn_reply_form('${isLogOn}','${contextPath }/QnA_reWrite.do', ${viewQnA.questionNum})">
 								</a>
 							</div>
 						</div>

@@ -17,27 +17,27 @@ public class BoardDAOImpl implements BoardDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	// °øÁö»çÇ× ¸ñ·Ï
+	// ê³µì§€ì‚¬í•­ ëª©ë¡
 	@Override
 	public List<ArticleVO> selectAllNoticeList() throws DataAccessException {
 		List<ArticleVO> listNotice = sqlSession.selectList("mapper.board.selectAllNoticeList");
 		return listNotice;
 	}
 
-	// °øÁö»çÇ× »ó¼¼ÆäÀÌÁö
+	// ê³µì§€ì‚¬í•­ ìƒì„¸í˜ì´ì§€
 	@Override
 	public ArticleVO selectNotice(int noticeNum) throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectNotice", noticeNum);
 	}
 
-	// °øÁö»çÇ× »èÁ¦ÇÏ±â
+	// ê³µì§€ì‚¬í•­ ì‚­ì œ
 	@Override
 	public void deleteNotice(int noticeNum) throws DataAccessException {
 		sqlSession.delete("mapper.board.deleteNotice", noticeNum);
 
 	}
 
-	// °øÁö»çÇ× ±Û¾²±â
+	// ê³µì§€ì‚¬í•­ ê¸€ì“°ê¸°
 	@Override
 	public int insertNewNotice(Map articleMap) throws DataAccessException {
 		int noticeNum = selectNewNoticeNum();
@@ -50,33 +50,33 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne("mapper.board.selectNewNoticeNum");
 	}
 
-	// °øÁö»çÇ× ¼öÁ¤ÇÏ±â
+	// ê³µì§€ì‚¬í•­ ìˆ˜ì •
 	@Override
 	public void updateNotice(Map articleMap) throws DataAccessException {
 		sqlSession.update("mapper.board.updateNotice", articleMap);
 	}
 
-	// ÀÌº¥Æ® ¸ñ·Ï
+	// ì´ë²¤íŠ¸ ëª©ë¡
 	@Override
 	public List<ArticleVO> selectAllEventList() throws DataAccessException {
 		List<ArticleVO> listEvent = sqlSession.selectList("mapper.board.selectAllEventList");
 		return listEvent;
 	}
 
-	// ÀÌº¥Æ® »ó¼¼ÆäÀÌÁö
+	// ì´ë²¤íŠ¸ ìƒì„¸í˜ì´ì§€
 	@Override
 	public ArticleVO selectEvent(int eventNum) throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectEvent", eventNum);
 	}
 
-	// ÀÌº¥Æ® »èÁ¦ÇÏ±â
+	// ì´ë²¤íŠ¸ ì‚­ì œ
 	@Override
 	public void deleteEvent(int eventNum) throws DataAccessException {
 		sqlSession.delete("mapper.board.deleteEvent", eventNum);
 
 	}
 
-	// ÀÌº¥Æ® ±Û¾²±â
+	// ì´ë²¤íŠ¸ ê¸€ì“°ê¸°
 	@Override
 	public int insertNewEvent(Map articleMap) throws DataAccessException {
 		int eventNum = selectNewEventNum();
@@ -89,46 +89,63 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne("mapper.board.selectNewEventNum");
 	}
 
-	// ÀÌº¥Æ® ¼öÁ¤ÇÏ±â
+	// ì´ë²¤íŠ¸ ìˆ˜ì •
 	@Override
 	public void updateEvent(Map articleMap) throws DataAccessException {
 		sqlSession.update("mapper.board.updateEvent", articleMap);
 	}
 
-	// QnA ¸ñ·Ï
+	// QnA ëª©ë¡
 	@Override
 	public List<ArticleVO> selectAllQnAList() throws DataAccessException {
 		List<ArticleVO> listQnA = sqlSession.selectList("mapper.board.selectAllQnAList");
 		return listQnA;
 	}
 
-	// QnA »ó¼¼ÆäÀÌÁö
+	// QnA ìƒì„¸í˜ì´ì§€
 	@Override
 	public ArticleVO selectQnA(int questionNum) throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectQnA", questionNum);
 	}
 
-	// review ¸ñ·Ï
+	// QnA ì‚­ì œ
+	@Override
+	public void deleteQnA(int questionNum) throws DataAccessException {
+		sqlSession.delete("mapper.board.deleteQnA", questionNum);
+
+	}
+
+	// QnA ìˆ˜ì •
+	@Override
+	public void updateQnA(Map articleMap) throws DataAccessException {
+		sqlSession.update("mapper.board.updateQnA", articleMap);
+	}
+	
+	public void updateQnAHits(int questionNum) throws DataAccessException {
+		sqlSession.update("mapper.board.QnAHits");
+	}
+
+	// review ëª©ë¡
 	@Override
 	public List<ArticleVO> selectAllReviewList() throws DataAccessException {
 		List<ArticleVO> listReview = sqlSession.selectList("mapper.board.selectAllReviewList");
 		return listReview;
 	}
 
-	// review »ó¼¼ÆäÀÌÁö
+	// review ìƒì„¸í˜ì´ì§€
 	@Override
 	public ArticleVO selectReview(int reviewNum) throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectReview", reviewNum);
 	}
 
-	// review »èÁ¦ÇÏ±â
+	// review ì‚­ì œ
 	@Override
 	public void deleteReview(int reviewNum) throws DataAccessException {
 		sqlSession.delete("mapper.board.deleteReview", reviewNum);
 
 	}
 
-	// review ±Û¾²±â
+	// review ê¸€ì“°ê¸°
 	@Override
 	public int insertNewReview(Map articleMap) throws DataAccessException {
 		int reviewNum = selectNewReviewNum();
@@ -141,7 +158,7 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne("mapper.board.selectNewReviewNum");
 	}
 
-	// review ¼öÁ¤
+	// review ìˆ˜ì •
 	@Override
 	public void updateReview(Map articleMap) throws DataAccessException {
 		sqlSession.update("mapper.board.updateReview", articleMap);

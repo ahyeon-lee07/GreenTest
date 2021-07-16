@@ -25,7 +25,10 @@ public interface BoardDAO {
 	
 	// QnA
 	public List<ArticleVO> selectAllQnAList() throws DataAccessException;
-	public ArticleVO selectQnA(int qnaNum) throws DataAccessException;
+	public ArticleVO selectQnA(int questionNum) throws DataAccessException;
+	public void deleteQnA(int questionNum) throws DataAccessException;
+	public void updateQnA(Map articleMap) throws DataAccessException;
+	public void updateQnAHits(int questionNum) throws DataAccessException;
 	
 	// ¸®ºä
 	public List<ArticleVO> selectAllReviewList() throws DataAccessException;
@@ -33,4 +36,5 @@ public interface BoardDAO {
 	public void deleteReview(int reviewNum) throws DataAccessException;
 	public int insertNewReview(Map articleMap) throws DataAccessException;
 	public void updateReview(Map articleMap) throws DataAccessException;
+	
 }

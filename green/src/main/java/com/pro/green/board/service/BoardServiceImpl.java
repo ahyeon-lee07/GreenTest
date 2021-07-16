@@ -94,6 +94,25 @@ public class BoardServiceImpl implements BoardService {
 		return articleVO;
 	}
 
+	// 조회수 올리기
+	@Override
+	public void updateQnAHits(int questionNum) {
+			boardDAO.updateQnAHits(questionNum);
+		}
+	
+		
+	// QnA 삭제하기
+	@Override
+	public void removeQnA(int questionNum) throws Exception {
+		boardDAO.deleteQnA(questionNum);
+	}
+
+	// QnA 수정하기
+	@Override
+	public void modQnA(Map articleMap) throws Exception {
+		boardDAO.updateQnA(articleMap);
+	}
+
 	// review 목록
 	public List<ArticleVO> listReview() throws Exception {
 		List<ArticleVO> listReview = boardDAO.selectAllReviewList();
@@ -124,5 +143,7 @@ public class BoardServiceImpl implements BoardService {
 	public void modReview(Map articleMap) throws Exception {
 		boardDAO.updateReview(articleMap);
 	}
+
+	
 
 }

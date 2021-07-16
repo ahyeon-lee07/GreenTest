@@ -24,6 +24,8 @@ public interface BoardService {
 	// QnA
 	public List<ArticleVO> listQnA() throws Exception;
 	public ArticleVO viewQnA(int questionNum) throws Exception;
+	public void removeQnA(int questionNum) throws Exception;
+	public void modQnA(Map articleMap) throws Exception;
 	
 	// ¸®ºä
 	public List<ArticleVO> listReview() throws Exception;
@@ -31,5 +33,6 @@ public interface BoardService {
 	public void removeReview(int reviewNum) throws Exception;
 	public int addNewReview(Map articleMap) throws Exception;
 	public void modReview(Map articleMap) throws Exception;
+	public void updateQnAHits(int questionNum);
 	
 }
