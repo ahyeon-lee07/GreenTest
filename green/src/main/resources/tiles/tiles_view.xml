@@ -107,7 +107,7 @@
 	</definition>
 	
 	<!-- 마이페이지 -->
-	<definition name="myPage" extends="baseLayout">
+	<definition name="myPageView" extends="baseLayout">
 		<put-attribute name="title" value="마이페이지" />
 		<put-attribute name="main" value="/WEB-INF/views/myPage/myPage.jsp" />
 	</definition>

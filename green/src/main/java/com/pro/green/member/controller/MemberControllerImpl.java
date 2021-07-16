@@ -257,7 +257,7 @@ public class MemberControllerImpl implements MemberController {
 		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
 		
 		mav.addObject("memberInf",sessinLogin);
-		mav.setViewName("redirect:/myPage.do");
+		mav.setViewName("myPageView");
 		return mav;
 	}
 

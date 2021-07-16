@@ -30,7 +30,7 @@ request.setCharacterEncoding("UTF-8");
 		<div class="d-flex justify-content-between bd-highlight mt-2 py-3 border-top">
 			<div class="bd-highlight">
 				<div class="pt-1">
-					환영합니다. <strong>홍길동</strong> 회원님!
+					환영합니다. <strong>${memberInf.name }</strong> 회원님!
 				</div>
 			</div>
 			<div class="bd-highlight">
@@ -46,7 +46,7 @@ request.setCharacterEncoding("UTF-8");
 				<div class="bd-highlight font-weight-bold text-black-50">가용 적립금</div>
 				<div class="d-flex justify-content-center bd-highlight mt-3">
 					<div class="bd-highlight">
-						<span>1000</span>원
+						<span>${memberInf.mileage }</span>원
 					</div>
 					<div class="bd-highlight ml-2">
 						<a href="#" class="btn btn-outline-success btn-sm">조회</a>
@@ -70,7 +70,7 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 			<div class="col-9 pl-0">
 				<div class="py-2 border border-left-0 border-right-0" style="height: 46px;">
-					저희 쇼핑몰을 이용해주셔서 감사합니다. 홍길동 회원님은 <strong>[일반회원]</strong> 등급 회원이십니다.
+					저희 쇼핑몰을 이용해주셔서 감사합니다. 홍길동 회원님은 <strong>[${memberInf.grade }]</strong> 등급 회원이십니다.
 				</div>
 			</div>
 		</div>
