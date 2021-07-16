@@ -28,7 +28,8 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	
 	// 상품 상세페이지
-
+	
+	// 상품명&가격
 	@Override
 	public ProductVO2 viewProdDetail(String productId) throws DataAccessException {
 		ProductVO2 prodDetail = sqlSession.selectOne("mapper.product.selectProduct", productId);
@@ -41,12 +42,18 @@ public class ProductDAOImpl implements ProductDAO {
 		return result;
 	}
 	
+	// 상품 옵션
 	@Override
 	public List<Map<String, Object>> selectProdOption(String productId) throws DataAccessException {
 		List<Map<String, Object>> prodOption = sqlSession.selectList("mapper.product.selectOptionList", productId);
 		return prodOption;
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> branch 'hw' of https://github.com/ahyeon-lee07/GreenTest.git
+	// 상품 이미지
 	@Override
 	public List<Map<String, Object>> selectProdImg(String productId) throws DataAccessException {
 		List<Map<String, Object>> prodImg = sqlSession.selectList("mapper.product.selectProductImg", productId);

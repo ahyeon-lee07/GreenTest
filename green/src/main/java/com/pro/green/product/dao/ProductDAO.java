@@ -15,7 +15,11 @@ public interface ProductDAO {
 	
 	// 상품 상세페이지
 	
+<<<<<<< HEAD
 	// 상품 이름&가격
+=======
+	// 상품명&가격
+>>>>>>> branch 'hw' of https://github.com/ahyeon-lee07/GreenTest.git
 	public ProductVO2 viewProdDetail(String productId) throws DataAccessException;
 
 	public Map<String, Object> selectProdDetail(Map<String, Object> map) throws DataAccessException;
@@ -25,5 +29,9 @@ public interface ProductDAO {
 
 	// 상품 이미지
 	public List<Map<String, Object>> selectProdImg(String productId) throws DataAccessException;
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'hw' of https://github.com/ahyeon-lee07/GreenTest.git
 
 }
