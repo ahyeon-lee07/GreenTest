@@ -8,6 +8,7 @@ request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
+<<<<<<< HEAD
 <header id="header" class="bg-white ftco-navbar-light">
 	<!-- sticky-top  -->
 	<div class="border-bottom topNav">
@@ -28,6 +29,92 @@ request.setCharacterEncoding("UTF-8");
 								</li>
 							</c:when>
 						</c:choose>
+=======
+<header id="header" class="bg-white">
+        <!-- sticky-top  -->
+        <div class="border-bottom topNav">
+            <div class="container bg-white">
+                <div class="d-flex justify-content-between py-1">
+                    <!-- 탑 메뉴 sticky-top -->
+                    <div class="bd-highlight ">
+                        <ul class="navbar-nav mr-auto flex-row">
+                            <li class="nav-item mr-3">
+                                <a class="nav-link text-secondary" href="${contextPath }/main.do">홈</a>
+                            </li>
+                            <c:choose>
+                                <c:when test="${isLogOn != true && member == null }">
+                                    <li class="nav-item mr-3">
+                                        <a class="nav-link text-secondary" href="${contextPath }/login.do">로그인</a>
+                                    </li>
+                                    <li class="nav-item mr-3">
+                                        <a class="nav-link text-secondary" href="${contextPath }/join.do">회원가입</a>
+                                    </li>
+                                </c:when>
+                            </c:choose>
+                           
+                            <li class="nav-item mr-3">
+                                <a class="nav-link text-secondary" href="${contextPath }/cart.do">장바구니</a>
+                            </li>
+                            <c:choose>
+                            	<c:when test="${isLogOn == true && member != null }">
+                                    <li class="nav-item dropdown mr-3">
+                                        <a class="nav-link text-secondary" href="#" id="navbarDropdown" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            마이페이지
+                                        </a>
+                                        <div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="${contextPath }/myPage.do">마이페이지</a>
+                                            <a class="dropdown-item" href="${contextPath }/memberEditChk.do">회원정보 수정/탈퇴</a>
+                                            <a class="dropdown-item" href="${contextPath }/purchaseList.do">구매내역조회</a>
+                                            <a class="dropdown-item" href="${contextPath }/wist_list.do">관심상품내역조회</a>
+                                        </div>
+                                    </li>
+                            	</c:when>
+                            </c:choose>
+                            
+                            <li class="nav-item dropdown mr-3">
+                                <a class="nav-link text-secondary" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    커뮤니티
+                                </a>
+                                <div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="${contextPath }/listQnA.do">Q&A</a>
+                                    <a class="dropdown-item" href="${contextPath }/listNotice.do">공지사항</a>
+                                    <a class="dropdown-item" href="${contextPath }/listEvent.do">이벤트 게시판</a>
+                                    <a class="dropdown-item" href="${contextPath }/listReview.do">리뷰</a>
+                                </div>
+                            </li>
+                            <c:choose>
+                            	<c:when test="${member.masterYN == 'M' }">
+                                    <li class="nav-item mr-3">
+                                        <a class="nav-link text-secondary" href="${contextPath }/productList.do?options=">상품등록</a>
+                                    </li>
+                            	</c:when>
+                            </c:choose>
+                            <c:choose>
+                            	<c:when test="${isLogOn == true && member != null }">
+                                    <li class="nav-item mr-3 ml-3">
+                                        <div class="top_memberName"><span>"${member.name}"</span> 님 환영합니다</div>
+                                    </li>
+                            		<li class="nav-item mr-3">
+                                        <button id="btn_logout" type="button" class="btn btn-outline-danger btn-sm mt-1">로그아웃</button>
+	                            	</li>
+                            	</c:when>
+                            </c:choose>
+                            
+                        </ul>
+                    </div>
+                    <!-- 탑 검색 -->
+                    <div class="top_find bd-highlight">
+                        <form class="form-inline border rounded">
+                            <input class="form-control border-0" type="text" placeholder="검색" aria-label="Search">
+                            <button class="btn btn-outline-success border-0 btn_search" type="submit"></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+>>>>>>> refs/heads/ahyeon
 
 						<li class="nav-item mr-3"><a class="nav-link text-secondary"
 							href="${contextPath }/cart.do">장바구니</a></li>
@@ -48,6 +135,7 @@ request.setCharacterEncoding("UTF-8");
 							</c:when>
 						</c:choose>
 
+<<<<<<< HEAD
 						<li class="nav-item dropdown mr-3"><a
 							class="nav-link text-secondary" href="#" id="navbarDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -84,6 +172,106 @@ request.setCharacterEncoding("UTF-8");
 								</li>
 							</c:when>
 						</c:choose>
+=======
+        <!-- gnb -->
+        <div id="gnbBox" class="gnb_bar">
+            <nav class="container">
+                <div class=" py-2">
+                    <ul class="d-flex justify-content-between navbar-nav mr-auto flex-row ">
+                        <li class="nav-item dropdown mr-4 mx-auto">
+                            <a class="nav-link text-secondary btn_menu" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="${contextPath }/resources/img/list.svg" alt="">
+                            </a>
+                            <div class="dropdown-menu all_menu" aria-labelledby="navbarDropdown" style="padding: 0;">
+                                <div class="d-flex justify-content-between">
+                                    <div class="bd-highlight btn_menu_L">
+                                        <div class="d-flex justify-content-start flex-wrap px-3 pt-3 pb-0">
+                                            <div class="bd-highlight btn_menu_L_W">
+                                                <a class="nav-link font-weight-bold text-dark p-3" href="${contextPath }/HardCase.do">하드 케이스</a>
+                                            </div>
+                                            <div class="bd-highlight btn_menu_L_W">
+                                                <a class="nav-link font-weight-bold text-dark p-3" href="${contextPath }/GelCase.do">젤 케이스</a>
+                                            </div>
+                                            <div class="bd-highlight btn_menu_L_W">
+                                                <a class="nav-link font-weight-bold text-dark p-3" href="${contextPath }/CardCase.do">카드 케이스</a>
+                                            </div>
+                                            <div class="bd-highlight btn_menu_L_W">
+                                                <a class="nav-link font-weight-bold text-dark p-3" href="${contextPath }/AirpodCase.do">에어팟 케이스</a>
+                                            </div>
+                                            <div class="bd-highlight btn_menu_L_W">
+                                                <a class="nav-link font-weight-bold text-dark p-3" href="${contextPath }/BudsCase.do">버즈 케이스</a>
+                                            </div>
+                                            <div class="bd-highlight btn_menu_L_W">
+                                                <a class="nav-link font-weight-bold text-dark p-3" href="${contextPath }/Accessory.do">액세서리</a>
+                                                <a class="dropdown-item py-1 text-black-50" style="text-align: left;" href="${contextPath }/KeyRing.do">키링</a>
+                                                <a class="dropdown-item py-1 text-black-50" style="text-align: left;" href="${contextPath }/SmartTok.do">스마트톡</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bd-highlight btn_menu_R">
+                                        <div class="d-flex flex-column bd-highlight bg-light px-3 pt-3 pb-0">
+                                            <div class="bd-highlight">
+                                                <div class="d-flex flex-column bd-highlight mb-2">
+                                                    <div class="bd-highlight border-bottom font-weight-bold py-2">커뮤니티
+                                                    </div>
+                                                    <a class="py-1 text-black-50"
+                                                        href="${contextPath }/listQnA.do">Q&A</a>
+                                                    <a class="pb-1 text-black-50"
+                                                        href="${contextPath }/listNotice.do">공지사항</a>
+                                                    <a class="pb-1 text-black-50"
+                                                        href="${contextPath }/listEvent.do">이벤트게시판</a>
+                                                    <a class="pb-1 text-black-50"
+                                                        href="${contextPath }/listReview.do">리뷰</a>
+                                                </div>
+                                            </div>
+                                            <div class="bd-highlight">
+                                                <div class="d-flex flex-column bd-highlight mb-2">
+                                                    <div class="bd-highlight border-bottom font-weight-bold py-2">쇼핑몰정보
+                                                    </div>
+                                                    <a class="py-1 text-black-50 "
+                                                        href="${contextPath }/company.do">회사소개</a>
+                                                    <a class="pb-1 text-black-50"
+                                                        href="${contextPath }/agreement.do">이용약관</a>
+                                                    <a class="pb-1 text-black-50"
+                                                        href="${contextPath }/privacyPolicy.do">개인정보취급방침</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item mr-4 mx-auto font-weight-bold">
+                            <a class="nav-link text-secondary" href="${contextPath }/HardCase.do">하드 케이스</a>
+                        </li>
+                        <li class="nav-item mr-4 mx-auto font-weight-bold">
+                            <a class="nav-link text-secondary" href="${contextPath }/GelCase.do">젤 케이스</a>
+                        </li>
+                        <li class="nav-item mr-4 mx-auto font-weight-bold">
+                            <a class="nav-link text-secondary" href="${contextPath }/CardCase.do">카드 케이스</a>
+                        </li>
+                        <li class="nav-item mr-4 mx-auto font-weight-bold">
+                            <a class="nav-link text-secondary" href="${contextPath }/AirpodCase.do">에어팟 케이스</a>
+                        </li>
+                        <li class="nav-item mr-4 mx-auto font-weight-bold">
+                            <a class="nav-link text-secondary" href="${contextPath }/BudsCase.do">버즈 케이스</a>
+                        </li>
+                        <li class="nav-item dropdown mr-4 mx-auto">
+                            <a class="nav-link text-secondary font-weight-bold" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                액세서리
+                            </a>
+                            <div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="${contextPath }/KeyRing.do">키링</a>
+                                <a class="dropdown-item" href="${contextPath }/SmartTok.do">스마트톡</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+    </header>
+>>>>>>> refs/heads/ahyeon
 
 					</ul>
 				</div>
