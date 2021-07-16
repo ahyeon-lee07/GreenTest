@@ -9,12 +9,12 @@ request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <script>
-	function fn_articleForm(isLogOn, addNewNotice, login) {
+	function fn_articleForm(isLogOn, addNewReview, login) {
 		if (isLogOn != '' && isLogOn != 'false') {
-			location.href = addNewNotice;
+			location.href = addNewReview;
 		} else {
 			alert("로그인 후 글쓰기가 가능합니다.")
-			location.href = login + '?action=/addNewNotice.do';
+			location.href = login + '?action=/addNewReview.do';
 		}
 	}
 </script>
@@ -40,6 +40,7 @@ request.setCharacterEncoding("UTF-8");
 			<thead class="table-primary border-bottom-0">
 				<tr>
 					<th class="text-center border-bottom-0" style="width: 68px">번호</th>
+					<th class="text-center border-bottom-0" style="width: 140px">상품 이미지</th>
 					<th class="text-center border-bottom-0" style="width: 140px">상품정보</th>
 					<th class="text-center border-bottom-0" style="width: auto">제목</th>
 					<th class="text-center border-bottom-0" style="width: 100px">작성자</th>
@@ -62,6 +63,7 @@ request.setCharacterEncoding("UTF-8");
 						<c:forEach var="listReview" items="${listReview}">
 							<tr class="border-bottom ">
 								<th class="text-center align-middle">${listReview.reviewNum}</th>
+								<td class="text-center align-middle"><img src="${contextPath }/resources/img/케이스이미지.PNG" class="img-thumbnail" alt="#"></td>
 								<td class="text-center align-middle">${listReview.productId }</td>
 								<td class="text-center align-middle"><a
 									href="${contextPath}/viewReview.do?reviewNum=${listReview.reviewNum}">${listReview.reviewTitle }</a></td>
@@ -85,7 +87,6 @@ request.setCharacterEncoding("UTF-8");
 									style="width: 90px;">
 									<option selected>제목</option>
 									<option selected>내용</option>
-									<option selected>글쓰기</option>
 								</select> <input class="form-control form-control-sm mx-2" type="text"
 									placeholder="">
 								<button type="submit" class="btn btn-secondary btn-sm col-2">검색</button>

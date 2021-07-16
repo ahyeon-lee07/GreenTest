@@ -11,15 +11,17 @@ public interface BoardService {
 	public ArticleVO viewNotice(int noticeNum) throws Exception;
 	public void removeNotice(int noticeNum) throws Exception;
 	public int addNewNotice(Map articleMap) throws Exception;
+	public void modNotice(Map articleMap) throws Exception;
+	
 	// ¿Ã∫•∆Æ
 	public List<ArticleVO> listEvent() throws Exception;
 	public ArticleVO viewEvent(int eventNum) throws Exception;
 	public void removeEvent(int eventNum) throws Exception;
 	public int addNewEvent(Map articleMap) throws Exception;
+	public void modEvent(Map articleMap) throws Exception;
+	
 	
 	// QnA
-	public List<ArticleVO> listQnA() throws Exception;
-	public ArticleVO viewQnA(int QnANum) throws Exception;
 	
 	// ∏Æ∫‰
 	public List<ArticleVO> listReview() throws Exception;

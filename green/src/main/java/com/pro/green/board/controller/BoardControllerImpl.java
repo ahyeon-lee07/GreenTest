@@ -147,6 +147,46 @@ public class BoardControllerImpl implements BoardController {
 		return mav;
 	}
 
+	// 공지사항 수정
+	@RequestMapping(value = "/modNotice.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity modNotice(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+			throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+		Map<String, Object> articleMap = new HashMap<String, Object>();
+		Enumeration enu = multipartRequest.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String value = multipartRequest.getParameter(name);
+			articleMap.put(name, value);
+		}
+
+		String noticeNum = (String) articleMap.get("noticeNum");
+		articleMap.put("noticeNum", noticeNum);
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			boardService.modNotice(articleMap);
+
+			message = "<script>";
+			message += " alert('글을 수정했습니다.');";
+			message += " location.href='" + multipartRequest.getContextPath() + "/viewNotice.do?noticeNum=" + noticeNum
+					+ "';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		} catch (Exception e) {
+			message = "<script>";
+			message += " alert('오류가 발생했습니다.다시 수정해주세요');";
+			message += " location.href='" + multipartRequest.getContextPath() + "/board/viewArticle.do?noticeNum="
+					+ noticeNum + "';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		}
+		return resEnt;
+	}
+
 	// 이벤트 목록
 	@Override
 	@RequestMapping(value = "/listEvent.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -241,27 +281,44 @@ public class BoardControllerImpl implements BoardController {
 		return resEnt;
 	}
 
-	// QnA 목록
-	@Override
-	@RequestMapping(value = "/listQnA.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView listQnA(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		List<ArticleVO> listQnA = boardService.listQnA();
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("listQnA", listQnA);
-		return mav;
-	}
+	// 이벤트 수정
+	@RequestMapping(value = "/modEvent.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity modEvent(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+			throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+		Map<String, Object> articleMap = new HashMap<String, Object>();
+		Enumeration enu = multipartRequest.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String value = multipartRequest.getParameter(name);
+			articleMap.put(name, value);
+		}
 
-	// QnA 상세페이지
-	@RequestMapping(value = "/viewQnA.do", method = RequestMethod.GET)
-	public ModelAndView viewQnA(@RequestParam("QnANum") int QnANum, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		articleVO = boardService.viewQnA(QnANum);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		mav.addObject("viewQnA", articleVO);
-		return mav;
+		String eventNum = (String) articleMap.get("eventNum");
+		articleMap.put("eventNum", eventNum);
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			boardService.modEvent(articleMap);
+
+			message = "<script>";
+			message += " alert('글을 수정했습니다.');";
+			message += " location.href='" + multipartRequest.getContextPath() + "/viewEvent.do?eventNum=" + eventNum
+					+ "';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		} catch (Exception e) {
+			message = "<script>";
+			message += " alert('오류가 발생했습니다.다시 수정해주세요');";
+			message += " location.href='" + multipartRequest.getContextPath() + "/board/viewArticle.do?eventNum="
+					+ eventNum + "';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		}
+		return resEnt;
 	}
 
 	// review 목록
@@ -371,8 +428,8 @@ public class BoardControllerImpl implements BoardController {
 			String value = multipartRequest.getParameter(name);
 			articleMap.put(name, value);
 		}
-
-		String reviewNum = (String) articleMap.get("articleNO");
+		String reviewNum = (String) articleMap.get("reviewNum");
+		articleMap.put("reviewNum", reviewNum);
 		String message;
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -381,16 +438,16 @@ public class BoardControllerImpl implements BoardController {
 			boardService.modReview(articleMap);
 			message = "<script>";
 			message += " alert('글을 수정했습니다.');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/viewReview.do?reviewNum="
-					+ reviewNum + "';";
+			message += " location.href='" + multipartRequest.getContextPath() + "/viewReview.do?reviewNum=" + reviewNum
+					+ "';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
 			message = "<script>";
 			message += " alert('오류가 발생했습니다.다시 수정해주세요');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/viewReview.do?reviewNum="
-					+ reviewNum + "';";
-			
+			message += " location.href='" + multipartRequest.getContextPath() + "/viewReview.do?reviewNum=" + reviewNum
+					+ "';";
+
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		}

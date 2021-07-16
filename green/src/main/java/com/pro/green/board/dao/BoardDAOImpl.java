@@ -50,6 +50,12 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne("mapper.board.selectNewNoticeNum");
 	}
 
+	// 공지사항 수정하기
+	@Override
+	public void updateNotice(Map articleMap) throws DataAccessException {
+		sqlSession.update("mapper.board.updateNotice", articleMap);
+	}
+
 	// 이벤트 목록
 	@Override
 	public List<ArticleVO> selectAllEventList() throws DataAccessException {
@@ -83,18 +89,13 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne("mapper.board.selectNewEventNum");
 	}
 
-	// QnA 목록
+	// 이벤트 수정하기
 	@Override
-	public List<ArticleVO> selectAllQnAList() throws DataAccessException {
-		List<ArticleVO> listQnA = sqlSession.selectList("mapper.board.selectAllQnAList");
-		return listQnA;
+	public void updateEvent(Map articleMap) throws DataAccessException {
+		sqlSession.update("mapper.board.updateEvent", articleMap);
 	}
 
-	// QnA 상세페이지
-	@Override
-	public ArticleVO selectQnA(int QnANum) throws DataAccessException {
-		return sqlSession.selectOne("mapper.board.selectQnA", QnANum);
-	}
+	// QnA 목록
 
 	// review 목록
 	@Override
@@ -128,12 +129,11 @@ public class BoardDAOImpl implements BoardDAO {
 	private int selectNewReviewNum() throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectNewReviewNum");
 	}
-	
+
 	// review 수정
 	@Override
 	public void updateReview(Map articleMap) throws DataAccessException {
 		sqlSession.update("mapper.board.updateReview", articleMap);
 	}
-
 
 }

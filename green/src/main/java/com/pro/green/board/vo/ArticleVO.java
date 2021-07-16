@@ -24,13 +24,6 @@ public class ArticleVO {
 	private Date eventDate;
 
 	// QnA
-	private int QnANum;
-	private String productId;
-	private String QnATitle;
-	private String QnAContent;
-	private int QnAHits;
-	private String QnAPw;
-	private Date QnADate;
 
 	// Review
 	private int reviewNum;
@@ -119,102 +112,6 @@ public class ArticleVO {
 	}
 
 	// QnA
-	public int getQnANum() {
-		return QnANum;
-	}
-
-	public void setQnANum(int QnANum) {
-		this.QnANum = QnANum;
-	}
-
-	public String getProductId() {
-		return productId;
-	}
-
-	public void setProductId(String productId) {
-		this.productId = productId;
-	}
-
-	public String getQnATitle() {
-		return QnATitle;
-	}
-
-	public void setQnATitle(String QnATitle) {
-		this.QnATitle = QnATitle;
-	}
-
-	public String getQnAContent() {
-		return QnAContent;
-	}
-
-	public void setQnAContent(String QnAContent) {
-		this.QnAContent = QnAContent;
-	}
-
-	public int getQnAHits() {
-		return QnAHits;
-	}
-
-	public void setQnAHits(int QnAHits) {
-		this.QnAHits = QnAHits;
-	}
-
-	public String getQnAPw() {
-		return QnAPw;
-	}
-
-	public void setQnAPw(String QnAPw) {
-		this.QnAPw = QnAPw;
-	}
-
-	public Date getQnADate() {
-		return QnADate;
-	}
-
-	public void setQnADate(Date QnADate) {
-		this.QnADate = QnADate;
-	}
-
-	// review
-	public int getReviewNum() {
-		return reviewNum;
-	}
-
-	public void setReviewNum(int reviewNum) {
-		this.reviewNum = reviewNum;
-	}
-
-	public String getReviewTitle() {
-		return reviewTitle;
-	}
-
-	public void setReviewTitle(String reviewTitle) {
-		this.reviewTitle = reviewTitle;
-	}
-
-	public String getReviewContent() {
-		return reviewContent;
-	}
-
-	public void setReviewContent(String reviewContent) {
-		this.reviewContent = reviewContent;
-	}
-
-	public int getReviewHits() {
-		return reviewHits;
-	}
-
-	public void setReviewHits(int reviewHits) {
-		this.reviewHits = reviewHits;
-	}
-
-	public Date getReviewDate() {
-		return reviewDate;
-	}
-
-	public void setReviewDate(Date reviewDate) {
-		this.reviewDate = reviewDate;
-	}
 
 	// ¿ÃπÃ¡ˆ
 	public String getImageFileName() {

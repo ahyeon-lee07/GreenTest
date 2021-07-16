@@ -88,7 +88,7 @@ request.setCharacterEncoding("UTF-8");
 <!-- 등록 확인 팝업창 -->
 <script type="text/javascript">
 	function check_add() {
-		var form = document.addNewEvent;
+		var form = document.addNewReview;
 
 		//상품 옵션. 이미지 필수 체크 추가 되어야 함.  
 		if (form.reviewTitle.value == "") {

@@ -31,17 +31,14 @@ public interface BoardController {
 	
 
 	// QnA
-	public ModelAndView listQnA(HttpServletRequest request, HttpServletResponse response) throws Exception;
-
-	public ModelAndView viewQnA(@RequestParam("QnANum") int QnANum, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
+	
 	
 	// ¸®ºä
 	public ModelAndView listReview(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	public ModelAndView viewReview(@RequestParam("reviewNum") int reviewNum, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
-	public ResponseEntity removeReview(@RequestParam("reviewNum") int eventNum,
+	public ResponseEntity removeReview(@RequestParam("reviewNum") int reviewNum,
             HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity addNewReview(MultipartHttpServletRequest multipartRequest,HttpServletResponse response) throws Exception;
 	public ResponseEntity modReview(MultipartHttpServletRequest multipartRequest,  HttpServletResponse response) throws Exception;

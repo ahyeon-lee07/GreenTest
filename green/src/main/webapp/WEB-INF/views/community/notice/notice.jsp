@@ -81,7 +81,6 @@ request.setCharacterEncoding("UTF-8");
 									style="width: 90px;">
 									<option selected>제목</option>
 									<option selected>내용</option>
-									<option selected>글쓰기</option>
 								</select> <input class="form-control form-control-sm mx-2" type="text"
 									placeholder="">
 								<button type="submit" class="btn btn-secondary btn-sm col-2">검색</button>

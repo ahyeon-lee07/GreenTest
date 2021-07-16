@@ -24,7 +24,7 @@ request.setCharacterEncoding("UTF-8");
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
-				<h4>QnA</h4>
+				<h4>리뷰</h4>
 			</div>
 			<div class="bd-highlight">
 				<nav aria-label="breadcrumb">
@@ -37,17 +37,17 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 
 		<table class="table table-hover">
-            <thead class="table-primary border-bottom-0">
-                <tr>
-                    <th class="text-center border-bottom-0" style="width: 68px">번호</th>
-                    <th class="text-center border-bottom-0" style="width: 140px">상품정보</th>
-                    <th class="text-center border-bottom-0" style="width: auto">제목</th>
-                    <th class="text-center border-bottom-0" style="width: 100px">작성자</th>
-                    <th class="text-center border-bottom-0" style="width: 116px">작성일</th>
-                    <th class="text-center border-bottom-0" style="width: 100px">조회수</th>
-                </tr>
-            </thead>
-            <tbody>
+			<thead class="table-primary border-bottom-0">
+				<tr>
+					<th class="text-center border-bottom-0" style="width: 68px">번호</th>
+					<th class="text-center border-bottom-0" style="width: 140px">상품정보</th>
+					<th class="text-center border-bottom-0" style="width: auto">제목</th>
+					<th class="text-center border-bottom-0" style="width: 100px">작성자</th>
+					<th class="text-center border-bottom-0" style="width: 116px">작성일</th>
+					<th class="text-center border-bottom-0" style="width: 100px">조회수</th>
+				</tr>
+			</thead>
+			<tbody>
 				<c:choose>
 					<c:when test="${listQnA ==null }">
 						<tr height="10">
@@ -59,12 +59,12 @@ request.setCharacterEncoding("UTF-8");
 						</tr>
 					</c:when>
 					<c:when test="${listQnA !=null }">
-						<c:forEach var="listQnA" items="${listQnA}">	
+						<c:forEach var="listQnA" items="${listQnA}">
 							<tr class="border-bottom ">
 								<th class="text-center align-middle">${listQnA.QnANum}</th>
-								<td class="text-center align-middle">${listQnA.productId}</td>
-								<td class="text-center align-middle">
-								<a href="${contextPath }/viewQnA.do?QnANum=${listQnA.QnANum}">${listQnA.QnATitle }</a></td>
+								<td class="text-center align-middle">${listQnA.productId }</td>
+								<td class="text-center align-middle"><a
+									href="${contextPath}/viewQnA.do?QnANum=${listQnA.reviewNum}">${listQnA.QnATitle }</a></td>
 								<td class="text-center align-middle">${listQnA.id }</td>
 								<td class="text-center align-middle">${listQnA.QnADate}</td>
 								<td class="text-center align-middle">${listQnA.QnAHits}</td>
@@ -73,46 +73,47 @@ request.setCharacterEncoding("UTF-8");
 					</c:when>
 				</c:choose>
 			</tbody>
-        </table>
-       
+		</table>
 
-        <div class="row justify-content-between px-4">
-            <div class="">
-                <div class="btn-group">
-                    <form action="#">
-                        <div class="form-row">
-                            <div class="form-group d-flex justify-content-start ">
-                                <select id="inputState" class="form-control form-control-sm" style="width: 90px;">
-                                    <option selected>제목</option>
-                                    <option selected>내용</option>
-                                    <option selected>글쓰기</option>
-                                </select>
-                                <input class="form-control form-control-sm mx-2" type="text" placeholder="">
-                                <button type="submit" class="btn btn-secondary btn-sm col-2">검색</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="">
+		<div class="row justify-content-between px-4">
+			<div class="">
+				<div class="btn-group">
+					<form action="#">
+						<div class="form-row">
+							<div class="form-group d-flex justify-content-start ">
+								<select id="inputState" class="form-control form-control-sm"
+									style="width: 90px;">
+									<option selected>제목</option>
+									<option selected>내용</option>
+								</select> <input class="form-control form-control-sm mx-2" type="text"
+									placeholder="">
+								<button type="submit" class="btn btn-secondary btn-sm col-2">검색</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="">
 				<a class=""
 					href="javascript:fn_articleForm('${isLogOn}','${contextPath}/addNewQnA.do', 
                                                     '${contextPath}/login.do')"><button
 						type="button" class="btn btn-primary btn-sm">글쓰기</button></a>
 			</div>
 		</div>
+
+		<nav aria-label="Page navigation example row">
+			<ul class="pagination d-flex justify-content-center">
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+				</a></li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				</a></li>
+			</ul>
+		</nav>
+
 	</div>
-	<nav aria-label="Page navigation example row">
-		<ul class="pagination d-flex justify-content-center">
-			<li class="page-item"><a class="page-link" href="#"
-				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-			</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#"
-				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-			</a></li>
-		</ul>
-	</nav>
 </main>

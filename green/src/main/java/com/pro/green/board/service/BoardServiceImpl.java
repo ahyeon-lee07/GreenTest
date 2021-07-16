@@ -44,12 +44,18 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.insertNewNotice(articleMap);
 	}
 
+	// 공지사항 수정하기
+	@Override
+	public void modNotice(Map articleMap) throws Exception {
+		boardDAO.updateNotice(articleMap);
+	}
+
 	// 이벤트 목록
 	public List<ArticleVO> listEvent() throws Exception {
 		List<ArticleVO> listEvent = boardDAO.selectAllEventList();
 		return listEvent;
 	}
-	
+
 	// 이벤트 상세페이지
 	@Override
 	public ArticleVO viewEvent(int eventNum) throws Exception {
@@ -69,18 +75,13 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.insertNewEvent(articleMap);
 	}
 
-	// QnA 목록
-	public List<ArticleVO> listQnA() throws Exception {
-		List<ArticleVO> listQnA = boardDAO.selectAllQnAList();
-		return listQnA;
+	// 이벤트 수정하기
+	@Override
+	public void modEvent(Map articleMap) throws Exception {
+		boardDAO.updateEvent(articleMap);
 	}
 
-	// QnA 상세페이지
-	@Override
-	public ArticleVO viewQnA(int QnANum) throws Exception {
-		ArticleVO articleVO = boardDAO.selectQnA(QnANum);
-		return articleVO;
-	}
+	// QnA 목록
 
 	// review 목록
 	public List<ArticleVO> listReview() throws Exception {
@@ -106,7 +107,7 @@ public class BoardServiceImpl implements BoardService {
 	public int addNewReview(Map articleMap) throws Exception {
 		return boardDAO.insertNewReview(articleMap);
 	}
-	
+
 	// review 수정
 	@Override
 	public void modReview(Map articleMap) throws Exception {

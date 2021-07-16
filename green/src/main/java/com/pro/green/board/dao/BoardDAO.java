@@ -14,16 +14,16 @@ public interface BoardDAO {
 	public ArticleVO selectNotice(int noticeNum) throws DataAccessException;
 	public void deleteNotice(int noticeNum) throws DataAccessException;
 	public int insertNewNotice(Map articleMap) throws DataAccessException;
+	public void updateNotice(Map articleMap) throws DataAccessException;
 	
 	// ¿Ã∫•∆Æ
 	public List<ArticleVO> selectAllEventList() throws DataAccessException;
 	public ArticleVO selectEvent(int eventNum) throws DataAccessException;
 	public void deleteEvent(int eventNum) throws DataAccessException;
 	public int insertNewEvent(Map articleMap) throws DataAccessException;
+	public void updateEvent(Map articleMap) throws DataAccessException;
 	
 	// QnA
-	public List<ArticleVO> selectAllQnAList() throws DataAccessException;
-	public ArticleVO selectQnA(int QnANum) throws DataAccessException;
 	
 	// ∏Æ∫‰
 	public List<ArticleVO> selectAllReviewList() throws DataAccessException;
