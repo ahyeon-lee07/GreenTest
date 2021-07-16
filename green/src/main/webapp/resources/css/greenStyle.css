@@ -43,6 +43,7 @@
 }
 .mainH {
    min-height: 48vh;
+   margin-top: 226px;
 }
 
 .logoBox {
@@ -51,6 +52,7 @@
 }
 #header {
 	top:0;
+	z-index: 99;
 }
 .headerF {
     z-index: 99;

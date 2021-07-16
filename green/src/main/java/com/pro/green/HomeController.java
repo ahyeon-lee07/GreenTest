@@ -88,7 +88,8 @@ public class HomeController {
 	public String orderList(Locale locale, Model model) {
 		return "orderList";
 	}
-
+	
+	/*
 	// 하드 케이스
 	@RequestMapping(value = "/HardCase.do", method = RequestMethod.GET)
 	public String HardCase(Locale locale, Model model) {
@@ -178,12 +179,13 @@ public class HomeController {
 	public String SmartTokDetail(Locale locale, Model model) {
 		return "SmartTokDetail";
 	}
+	*/
 	
 	// 마이페이지
-	@RequestMapping(value = "/myPage.do", method = RequestMethod.GET)
-	public String myPage(Locale locale, Model model) {
-		return "myPage";
-	}
+	//@RequestMapping(value = "/myPage.do", method = RequestMethod.GET)
+	//public String myPage(Locale locale, Model model) {
+	//	return "myPage";
+	//}
 	
 
 	

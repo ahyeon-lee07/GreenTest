@@ -11,7 +11,7 @@ request.setCharacterEncoding("UTF-8");
 
 <!-- 메인 -->
 <main class="mainH">
-	<div class="container">
+	<div class="container py-1">
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
@@ -398,18 +398,4 @@ request.setCharacterEncoding("UTF-8");
 					return;
 				}
 			});
-</script>
-
-<!-- 회원정보 수정 -->
-<script type="text/javascript">
-	function complet_checkform() {
-		alert("회원정보 수정이 완료되었습니다!");
-	}
-</script>
-
-<!-- 회원 탈퇴 -->
-<script type="text/javascript">
-	function delete_checkform() {
-		alert("회원 탈퇴하였습니다!");
-	}
 </script>
