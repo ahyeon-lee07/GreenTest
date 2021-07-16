@@ -48,11 +48,7 @@ public class ProductDAOImpl implements ProductDAO {
 		List<Map<String, Object>> prodOption = sqlSession.selectList("mapper.product.selectOptionList", productId);
 		return prodOption;
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> branch 'hw' of https://github.com/ahyeon-lee07/GreenTest.git
 	// 상품 이미지
 	@Override
 	public List<Map<String, Object>> selectProdImg(String productId) throws DataAccessException {

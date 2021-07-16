@@ -32,7 +32,7 @@ import com.pro.green.board.service.BoardService;
 import com.pro.green.board.vo.ArticleVO;
 import com.pro.green.board.vo.ImageVO;
 import com.pro.green.member.vo.MemberVO;
-import com.pro.green.product.vo.Criteria;
+import com.pro.green.product_M.vo.Criteria;
 
 @Controller("boardController")
 public class BoardControllerImpl implements BoardController {

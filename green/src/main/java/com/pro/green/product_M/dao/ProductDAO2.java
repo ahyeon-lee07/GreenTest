@@ -26,15 +26,9 @@ public interface ProductDAO2 {
 	public int countBoardListTotal() throws DataAccessException;
 
 	public int filterCountBoardListTotal(String options) throws DataAccessException;
-<<<<<<< HEAD
 	
 	public List<Map<String,Object>> selectOptionList(String productId) throws DataAccessException;
 	
-=======
-
-	public List<Map<String, Object>> selectOptionList(String productId) throws DataAccessException;
-
->>>>>>> branch 'hw' of https://github.com/ahyeon-lee07/GreenTest.git
 	public ProductVO2 viewProductDetail(String productId) throws DataAccessException;
 
 	public Map<String, Object> selectProductDetail(Map<String, Object> map) throws DataAccessException;
