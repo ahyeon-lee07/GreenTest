@@ -34,6 +34,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pro.green.product.service.ProductService;
+import com.pro.green.product_M.vo.Criteria;
+import com.pro.green.product_M.vo.PageMaker;
 import com.pro.green.product_M.vo.ProductVO2;
 
 @Controller("productController")
@@ -48,11 +50,38 @@ public class ProductControllerImpl implements ProductController {
 	@Override
 	@RequestMapping(value = "/prodList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView listProduct(@RequestParam("p_group") String p_group, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+			HttpServletResponse response, Criteria cri) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		if(p_group.equals("hard")) {
+			mav.addObject("pageTitle", "하드케이스");
+		}else if(p_group.equals("gel")) {
+			mav.addObject("pageTitle", "젤케이스");
+		}else if(p_group.equals("card")) {
+			mav.addObject("pageTitle", "카드케이스");
+		}else if(p_group.equals("airPods")) {
+			mav.addObject("pageTitle", "에어팟케이스");
+		}else if(p_group.equals("buds")) {
+			mav.addObject("pageTitle", "버즈케이스");
+		}else if(p_group.equals("keyRing")) {
+			mav.addObject("pageTitle", "키링");
+		}else if(p_group.equals("smart")) {
+			mav.addObject("pageTitle", "스마트톡");
+		}else {
+			mav.addObject("pageTitle", "상품");
+		}
+		
+		PageMaker pageMaker = new PageMaker();
+
+		//int pageTotal = 0;
 
 		List<ProductVO2> productsList = productService.listProduct(p_group);
-		ModelAndView mav = new ModelAndView();
+		
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(productsList.size());
+		
 		mav.setViewName("prodList");
+		mav.addObject("pageMaker", pageMaker);
 		mav.addObject("productsList", productsList);
 		return mav;
 

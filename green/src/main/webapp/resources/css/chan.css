@@ -81,7 +81,36 @@ a:hover {
     overflow: hidden;
     height: 180px;
 }
+.productListTitle {
+	/* font-size: 1.1rem; 
+	text-overflow: ellipsis;
+    white-space: nowrap;*/
+    overflow: hidden;
+    width: 100%;
+    height: 48px;
+}
+.ell {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* ellipsis line */
+	-webkit-box-orient: vertical;
 
+	/* webkit 엔진을 사용하지 않는 브라우저를 위한 속성. */
+	/* height = line-height * line = 1.2em * 3 = 3.6em  */
+	line-height: 1.5em;
+	height: 3.9em;
+}
+.btn_product {
+	width: 50%;
+}
+.prodbox {
+	    border-radius: 2px;
+}
+.prodbox:hover {
+	    box-shadow: 0 0 4px 4px rgba(0,0,0,.1);
+}
 /*--------------------------------------------------------------------*/
 
 @media screen and (min-width: 1200px) {
