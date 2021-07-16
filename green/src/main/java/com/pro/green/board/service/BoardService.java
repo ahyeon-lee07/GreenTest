@@ -22,6 +22,8 @@ public interface BoardService {
 	
 	
 	// QnA
+	public List<ArticleVO> listQnA() throws Exception;
+	public ArticleVO viewQnA(int questionNum) throws Exception;
 	
 	// ¸®ºä
 	public List<ArticleVO> listReview() throws Exception;

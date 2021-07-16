@@ -82,6 +82,17 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	// QnA 목록
+	public List<ArticleVO> listQnA() throws Exception {
+		List<ArticleVO> listQnA = boardDAO.selectAllQnAList();
+		return listQnA;
+	}
+
+	// QnA 상세페이지
+	@Override
+	public ArticleVO viewQnA(int questionNum) throws Exception {
+		ArticleVO articleVO = boardDAO.selectQnA(questionNum);
+		return articleVO;
+	}
 
 	// review 목록
 	public List<ArticleVO> listReview() throws Exception {

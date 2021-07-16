@@ -233,13 +233,13 @@
 	</definition>
 	
 	<!-- Q&A 수정/삭제 -->
-	<definition name="product_M_D" extends="baseLayout">
+	<definition name="QnA_M_D" extends="baseLayout">
 		<put-attribute name="title" value="QA 수정삭제" />
 		<put-attribute name="main" value="/WEB-INF/views/community/QnA/questionM_D.jsp" />
 	</definition>
 	
 	<!-- Q&A 댓글 -->
-	<definition name="product_reWrite" extends="baseLayout">
+	<definition name="QnA_reWrite" extends="baseLayout">
 		<put-attribute name="title" value="QA 댓글" />
 		<put-attribute name="main" value="/WEB-INF/views/community/QnA/questionComment.jsp" />
 	</definition>

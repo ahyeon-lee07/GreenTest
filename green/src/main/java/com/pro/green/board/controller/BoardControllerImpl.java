@@ -329,6 +329,7 @@ public class BoardControllerImpl implements BoardController {
 		List<ArticleVO> listReview = boardService.listReview();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("listReview", listReview);
+		System.out.println(listReview);
 		return mav;
 	}
 
@@ -454,4 +455,28 @@ public class BoardControllerImpl implements BoardController {
 		return resEnt;
 	}
 
+	// QnA 목록
+	@Override
+	@RequestMapping(value = "/listQnA.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView listQnA(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		List<ArticleVO> listQnA = boardService.listQnA();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.setViewName("listQnA");
+		mav.addObject("listQnA", listQnA);
+		System.out.println(listQnA);
+		return mav;
+	}
+
+	// 공지사항 상세페이지
+	@RequestMapping(value = "/viewQnA.do", method = RequestMethod.GET)
+	public ModelAndView viewQnA(@RequestParam("questionNum") int questionNum, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		articleVO = boardService.viewQnA(questionNum);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("viewQnA", articleVO);
+		return mav;
+	}
 }

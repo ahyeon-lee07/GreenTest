@@ -24,7 +24,7 @@ request.setCharacterEncoding("UTF-8");
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
-				<h4>리뷰</h4>
+				<h4>QnA</h4>
 			</div>
 			<div class="bd-highlight">
 				<nav aria-label="breadcrumb">
@@ -49,25 +49,24 @@ request.setCharacterEncoding("UTF-8");
 			</thead>
 			<tbody>
 				<c:choose>
-					<c:when test="${listQnA ==null }">
+					<c:when test="${listQnA ==null}">
 						<tr height="10">
 							<td colspan="6">
 								<p align="center">
 									<b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b>
 								</p>
 							</td>
-						</tr>
+							</tr>
 					</c:when>
-					<c:when test="${listQnA !=null }">
-						<c:forEach var="listQnA" items="${listQnA}">
+					<c:when test="${listQnA !=null}">
+						<c:forEach var="listQnA" items="${listQnA}">	
 							<tr class="border-bottom ">
-								<th class="text-center align-middle">${listQnA.QnANum}</th>
-								<td class="text-center align-middle">${listQnA.productId }</td>
-								<td class="text-center align-middle"><a
-									href="${contextPath}/viewQnA.do?QnANum=${listQnA.reviewNum}">${listQnA.QnATitle }</a></td>
-								<td class="text-center align-middle">${listQnA.id }</td>
-								<td class="text-center align-middle">${listQnA.QnADate}</td>
-								<td class="text-center align-middle">${listQnA.QnAHits}</td>
+								<th class="text-center align-middle">${listQnA.questionNum}</th>
+								<td class="text-center align-middle">${listQnA.productId}</td>
+								<td class="text-center align-middle"><a href="${contextPath }/viewQnA.do?questionNum=${listQnA.questionNum}">${listQnA.questionTitle }</a></td>
+								<td class="text-center align-middle">${listQnA.id}</td>
+								<td class="text-center align-middle">${listQnA.questionDate}</td>
+								<td class="text-center align-middle">${listQnA.questionHits}</td>
 							</tr>
 						</c:forEach>
 					</c:when>

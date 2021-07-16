@@ -96,6 +96,17 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	// QnA 목록
+	@Override
+	public List<ArticleVO> selectAllQnAList() throws DataAccessException {
+		List<ArticleVO> listQnA = sqlSession.selectList("mapper.board.selectAllQnAList");
+		return listQnA;
+	}
+
+	// QnA 상세페이지
+	@Override
+	public ArticleVO selectQnA(int questionNum) throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectQnA", questionNum);
+	}
 
 	// review 목록
 	@Override

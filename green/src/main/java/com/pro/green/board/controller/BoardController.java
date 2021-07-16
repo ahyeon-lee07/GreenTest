@@ -31,8 +31,9 @@ public interface BoardController {
 	
 
 	// QnA
-	
-	
+	public ModelAndView listQnA(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView viewQnA(@RequestParam("questionNum") int questionNum, HttpServletRequest request,
+			HttpServletResponse response) throws Exception;	
 	// ¸®ºä
 	public ModelAndView listReview(HttpServletRequest request, HttpServletResponse response) throws Exception;
 

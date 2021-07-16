@@ -24,6 +24,15 @@ public class ArticleVO {
 	private Date eventDate;
 
 	// QnA
+	private int questionNum;
+	private String productId;
+	private String questionTitle;
+	private String questionContent;
+	private int questionHits;
+	private int commentCount;
+	private String questionPw;
+	private String questionYN;
+	private Date questionDate;
 
 	// Review
 	private int reviewNum;
@@ -112,6 +121,118 @@ public class ArticleVO {
 	}
 
 	// QnA
+	public int getQuestionNum() {
+		return questionNum;
+	}
+
+	public void setQuestionNum(int questionNum) {
+		this.questionNum = questionNum;
+	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	public String getQuestionTitle() {
+		return questionTitle;
+	}
+
+	public void setQuestionTitle(String questionTitle) {
+		this.questionTitle = questionTitle;
+	}
+
+	public String getQuestionContent() {
+		return questionContent;
+	}
+
+	public void setQuestionContent(String questionContent) {
+		this.questionContent = questionContent;
+	}
+
+	public int getQuestionHits() {
+		return questionHits;
+	}
+
+	public void setQuestionHits(int questionHits) {
+		this.questionHits = questionHits;
+	}
+	
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+
+	public String getQuestionPw() {
+		return questionPw;
+	}
+
+	public void setQuestionPw(String questionPw) {
+		this.questionPw = questionPw;
+	}
+	
+	public String getQuestionYN() {
+		return questionYN;
+	}
+
+	public void setQuestionYN(String questionYN) {
+		this.questionYN = questionYN;
+	}
+
+	public Date getQuestionDate() {
+		return questionDate;
+	}
+
+	public void setQuestionDate(Date questionDate) {
+		this.questionDate = questionDate;
+	}
+
+	// review
+	public int getReviewNum() {
+		return reviewNum;
+	}
+
+	public void setReviewNum(int reviewNum) {
+		this.reviewNum = reviewNum;
+	}
+
+	public String getReviewTitle() {
+		return reviewTitle;
+	}
+
+	public void setReviewTitle(String reviewTitle) {
+		this.reviewTitle = reviewTitle;
+	}
+
+	public String getReviewContent() {
+		return reviewContent;
+	}
+
+	public void setReviewContent(String reviewContent) {
+		this.reviewContent = reviewContent;
+	}
+
+	public int getReviewHits() {
+		return reviewHits;
+	}
+
+	public void setReviewHits(int reviewHits) {
+		this.reviewHits = reviewHits;
+	}
+
+	public Date getReviewDate() {
+		return reviewDate;
+	}
+
+	public void setReviewDate(Date reviewDate) {
+		this.reviewDate = reviewDate;
+	}
 
 	// ¿ÃπÃ¡ˆ
 	public String getImageFileName() {
