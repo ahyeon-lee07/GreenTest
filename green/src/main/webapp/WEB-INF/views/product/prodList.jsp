@@ -62,7 +62,6 @@ request.setCharacterEncoding("UTF-8");
 											<p>${product.productName}</p>
 										</a>
 										<!-- Product price-->
-										<!-- ${product.price} -->
 										<fmt:formatNumber value="${product.price}" pattern="##,###" />
 										<!-- 가격을 표시하기 위해서 사용함. 0이 3개 있을 때마다 ,를 하나씩 찍게 한다. -->
 									</div>
