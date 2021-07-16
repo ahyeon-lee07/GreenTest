@@ -182,10 +182,10 @@ public class HomeController {
 	*/
 	
 	// 마이페이지
-	@RequestMapping(value = "/myPage.do", method = RequestMethod.GET)
-	public String myPage(Locale locale, Model model) {
-		return "myPage";
-	}
+	//@RequestMapping(value = "/myPage.do", method = RequestMethod.GET)
+	//public String myPage(Locale locale, Model model) {
+	//	return "myPage";
+	//}
 	
 
 	

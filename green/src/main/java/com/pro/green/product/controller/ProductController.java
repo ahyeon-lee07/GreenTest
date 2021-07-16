@@ -12,10 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface ProductController {
 	
+	// 상품 목록
 	public ModelAndView listProduct(@RequestParam("p_group") String p_group,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	
+	// 상품 상세페이지
 	public ModelAndView viewProduct(@RequestParam("productId") String productId,
             HttpServletRequest request, HttpServletResponse response) throws Exception;
 	

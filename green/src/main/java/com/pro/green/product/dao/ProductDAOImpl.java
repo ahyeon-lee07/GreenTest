@@ -20,15 +20,37 @@ public class ProductDAOImpl implements ProductDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
+	// 상품 목록
 	@Override
 	public List<ProductVO2> selectAllProductsList(String p_group) throws DataAccessException {
 		List<ProductVO2> productsList = sqlSession.selectList("mapper.product.selectAllProductsList", p_group);
 		return productsList;
 	}
 	
+	// 상품 상세페이지
+
 	@Override
-	public ProductVO2 selectProduct(String productId) throws DataAccessException {
-		return sqlSession.selectOne("mapper.product.selectProduct", productId);
+	public ProductVO2 viewProdDetail(String productId) throws DataAccessException {
+		ProductVO2 prodDetail = sqlSession.selectOne("mapper.product.selectProduct", productId);
+		return prodDetail;
+	}
+	
+	@Override
+	public Map<String, Object> selectProdDetail(Map<String, Object> map) throws DataAccessException {
+		Map<String, Object> result = sqlSession.selectMap(null, null);
+		return result;
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectProdOption(String productId) throws DataAccessException {
+		List<Map<String, Object>> prodOption = sqlSession.selectList("mapper.product.selectOptionList", productId);
+		return prodOption;
+	}
+
+	@Override
+	public List<Map<String, Object>> selectProdImg(String productId) throws DataAccessException {
+		List<Map<String, Object>> prodImg = sqlSession.selectList("mapper.product.selectProductImg", productId);
+		return prodImg;
 	}
 
 }

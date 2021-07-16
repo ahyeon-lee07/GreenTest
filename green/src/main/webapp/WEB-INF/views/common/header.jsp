@@ -128,38 +128,38 @@ request.setCharacterEncoding("UTF-8");
 										class="d-flex justify-content-start flex-wrap px-3 pt-3 pb-0">
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/list.do?p_group=hard">하드
+												href="${contextPath }/prodList.do?p_group=hard">하드
 												케이스</a>
 										</div>
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/list.do?p_group=gel">젤
+												href="${contextPath }/prodList.do?p_group=gel">젤
 												케이스</a>
 										</div>
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/list.do?p_group=card">카드
+												href="${contextPath }/prodList.do?p_group=card">카드
 												케이스</a>
 										</div>
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/list.do?p_group=airPods">에어팟
+												href="${contextPath }/prodList.do?p_group=airPods">에어팟
 												케이스</a>
 										</div>
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/list.do?p_group=buds">버즈
+												href="${contextPath }/prodList.do?p_group=buds">버즈
 												케이스</a>
 										</div>
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/list.do?p_group=${listProduct.p_group}">액세서리</a>
+												href="${contextPath }/prodList.do?p_group=${listProduct.p_group}">액세서리</a>
 											<a class="dropdown-item py-1 text-black-50"
 												style="text-align: left;"
-												href="${contextPath }/list.do?p_group=keyRing">키링</a>
+												href="${contextPath }/prodList.do?p_group=keyRing">키링</a>
 											<a class="dropdown-item py-1 text-black-50"
 												style="text-align: left;"
-												href="${contextPath }/list.do?p_group=smart">스마트톡</a>
+												href="${contextPath }/prodList.do?p_group=smart">스마트톡</a>
 										</div>
 									</div>
 								</div>
@@ -198,23 +198,23 @@ request.setCharacterEncoding("UTF-8");
 						</div></li>
 					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
 						class="nav-link text-secondary"
-						href="${contextPath }/list.do?p_group=hard">하드
+						href="${contextPath }/prodList.do?p_group=hard">하드
 							케이스</a></li>
 					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
 						class="nav-link text-secondary"
-						href="${contextPath }/list.do?p_group=gel">젤
+						href="${contextPath }/prodList.do?p_group=gel">젤
 							케이스</a></li>
 					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
 						class="nav-link text-secondary"
-						href="${contextPath }/list.do?p_group=card">카드
+						href="${contextPath }/prodList.do?p_group=card">카드
 							케이스</a></li>
 					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
 						class="nav-link text-secondary"
-						href="${contextPath }/list.do?p_group=airPods">에어팟
+						href="${contextPath }/prodList.do?p_group=airPods">에어팟
 							케이스</a></li>
 					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
 						class="nav-link text-secondary"
-						href="${contextPath }/list.do?p_group=buds">버즈
+						href="${contextPath }/prodList.do?p_group=buds">버즈
 							케이스</a></li>
 					<li class="nav-item dropdown mr-4 mx-auto"><a
 						class="nav-link text-secondary font-weight-bold" href="#"
@@ -222,9 +222,9 @@ request.setCharacterEncoding("UTF-8");
 						aria-haspopup="true" aria-expanded="false"> 액세서리</a>
 						<div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item"
-								href="${contextPath }/list.do?p_group=keyRing">키링</a>
+								href="${contextPath }/prodList.do?p_group=keyRing">키링</a>
 							<a class="dropdown-item"
-								href="${contextPath }/list.do?p_group=smart">스마트톡</a>
+								href="${contextPath }/prodList.do?p_group=smart">스마트톡</a>
 						</div></li>
 				</ul>
 			</div>

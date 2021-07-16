@@ -34,7 +34,7 @@ request.setCharacterEncoding("UTF-8");
 				</div>
 			</div>
 			<div class="bd-highlight">
-				<a href="http://localhost:8080/green/memberEdit.do" class="btn btn-outline-success btn-sm">회원정보 수정</a>
+				<a href="${contextPath }/memberEditChk.do" class="btn btn-outline-success btn-sm">회원정보 수정</a>
 			</div>
 		</div>
 		<div class="d-flex bd-highlight bg-light" style="font-size: 1.1rem;">

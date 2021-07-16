@@ -44,13 +44,14 @@ request.setCharacterEncoding("UTF-8");
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
-				<h4>하드 케이스</h4>
+				<h4>상품 상세창</h4>
 			</div>
 			<div class="bd-highlight">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb p-0 bg bg-transparent">
 						<li class="breadcrumb-item"><a href="${contextPath}/main.do">홈</a></li>
-						<li class="breadcrumb-item active" aria-current="page">하드 케이스</li>
+						<!-- <li class="breadcrumb-item"><a href="${contextPath}/prodList.do">상품 목록</a></li> -->
+						<li class="breadcrumb-item active" aria-current="page">상품 상세창</li>
 					</ol>
 				</nav>
 			</div>
@@ -60,14 +61,15 @@ request.setCharacterEncoding("UTF-8");
 				<div class="row gx-4 gx-lg-5 align-items-center">
 					<div class="col-md-6">
 						<img class="card-img-top mb-5 mb-md-0"
-							src="${contextPath}/resources/img/케이스이미지.PNG" alt="케이스이미지" />
+							src="${contextPath}/resources/img/${ProductVO.p_group}/${product_M}" 
+							alt="${prodList.productName}" />
 					</div>
 					<div class="col-md-6">
 						<!-- 상품명 -->
 						<div class="row">
 							<div class="col-md-3">상품명 :</div>
 							<div class="col-md-9">
-								<input type="text" value="${viewProduct.productName}" readonly>
+								<input type="text" value="${ProductVO.productName}" readonly>
 							</div>
 						</div>
 						<br>
@@ -75,7 +77,7 @@ request.setCharacterEncoding("UTF-8");
 						<div class="row">
 							<div class="col-md-3">상품가격 :</div>
 							<div class="col-md-9">
-								<input type="text" value="${viewProduct.price}" readonly>
+								<input type="text" value="${ProductVO.price}" readonly>
 							</div>
 						</div>
 						<br>
@@ -291,7 +293,7 @@ request.setCharacterEncoding("UTF-8");
 			<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
 				aria-labelledby="nav-home-tab">
 				<img hspace="5" vspace="0"
-					src="${contextPath }/resources/img/케이스이미지.PNG" alt="케이스이미지">
+					src="${contextPath}/resources/img/${ProductVO.p_group}/${product_S}" alt="${prodList.productName}">
 			</div>
 			<div class="tab-pane fade" id="nav-profile" role="tabpanel"
 				aria-labelledby="nav-profile-tab">

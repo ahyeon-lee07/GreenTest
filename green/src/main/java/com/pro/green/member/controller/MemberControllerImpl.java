@@ -248,6 +248,18 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
+	
+	//마이페이지
+	@RequestMapping(value = "/myPage.do", method = RequestMethod.GET)
+	public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		ModelAndView mav = new ModelAndView();
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+		
+		mav.addObject("memberInf",sessinLogin);
+		mav.setViewName("redirect:/myPage.do");
+		return mav;
+	}
 
 	@RequestMapping(value = "/*.do", method = RequestMethod.GET)
 	public ModelAndView logout(@RequestParam(value = "result", required = false) String result, // 로그인 창 요청시 매개변수

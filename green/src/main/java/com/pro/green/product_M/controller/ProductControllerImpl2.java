@@ -96,7 +96,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 
 		for (int i = 0; i < list.size(); i++) {
 			String productId = (String) list.get(i).get("productId");
-			List<Map<String, Object>> option = productService.selectOptionLIst(productId);
+			List<Map<String, Object>> option = productService.selectOptionList(productId);
 			optionList.add(option);
 		}
 		
@@ -160,7 +160,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 
 		for (int i = 0; i < list.size(); i++) {
 			String productId = (String) list.get(i).get("productId");
-			List<Map<String, Object>> option = productService.selectOptionLIst(productId);
+			List<Map<String, Object>> option = productService.selectOptionList(productId);
 			optionList.add(option);
 		}
 		
@@ -194,7 +194,7 @@ public class ProductControllerImpl2 implements ProductController2 {
 		// 상품 정보 가져오기
 		ProductVO = productService.viewProductDetail(productId);
 		// 상품 옵션 가져오기
-		List<Map<String, Object>> option = productService.selectOptionLIst(productId);
+		List<Map<String, Object>> option = productService.selectOptionList(productId);
 		List<Map<String, Object>> img = productService.selectProductImg(productId);
 
 		mav.addObject("pageTitle", "상품 상세");
