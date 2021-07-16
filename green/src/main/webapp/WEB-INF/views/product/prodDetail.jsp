@@ -332,6 +332,7 @@ request.setCharacterEncoding("UTF-8");
 
 <!-- 장바구니 -->
 <script type="text/javascript">
+<<<<<<< HEAD
 	function cart_checkform() {
 		alert("해당 상품을 장바구니에 담았습니다!");
 	}

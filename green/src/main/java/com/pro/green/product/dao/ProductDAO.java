@@ -15,6 +15,7 @@ public interface ProductDAO {
 	
 	// 상품 상세페이지
 	
+
 	// 상품 이름&가격
 	public ProductVO2 viewProdDetail(String productId) throws DataAccessException;
 
@@ -25,5 +26,6 @@ public interface ProductDAO {
 
 	// 상품 이미지
 	public List<Map<String, Object>> selectProdImg(String productId) throws DataAccessException;
+
 
 }

@@ -33,7 +33,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 import com.pro.green.product.service.ProductService;
 import com.pro.green.product_M.vo.ProductVO2;
 
@@ -59,6 +58,7 @@ public class ProductControllerImpl implements ProductController {
 
 	}
 
+
 	// 상품 상세페이지
 	@Override
 	@RequestMapping(value = "/prodList/prodDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -67,11 +67,13 @@ public class ProductControllerImpl implements ProductController {
 
 		ModelAndView mav = new ModelAndView();
 		ProductVO2 prodList = new ProductVO2();
+
 		prodList = productService.viewProdDetail(productId);
 		List<Map<String, Object>> prodOption = productService.selectProdOption(productId);
 		List<Map<String, Object>> img = productService.selectProdImg(productId);
 		
 		mav.setViewName("prodDetail");
+
 
 		mav.addObject("prodList", prodList);
 		mav.addObject("prodOption", prodOption);

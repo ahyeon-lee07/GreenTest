@@ -12,6 +12,7 @@ public interface ProductService {
 	// 상품 목록
 	public List<ProductVO2> listProduct(String p_group) throws Exception;
 	
+
 	// 상품 옵션
 	public List<Map<String, Object>> selectProdOption(String productId) throws DataAccessException;
 	
@@ -20,7 +21,6 @@ public interface ProductService {
 	
 	public Map<String, Object> selectProdDetail(Map<String, Object> map) throws DataAccessException;
 	
-	// 상품 이미지
 	public List<Map<String, Object>> selectProdImg(String productId) throws DataAccessException;
 	
 }
