@@ -22,7 +22,7 @@
 
 	<!-- QnA -->
 	<resultMap id="QnAResult" type="articleVO">
-		<result property="questionNum" column="questionNum" /> 
+		<result property="questionNum" column="questionNum" />
 		<result property="id" column="id" />
 		<result property="productId" column="productId" />
 		<result property="questionTitle" column="questionTitle" />
@@ -92,9 +92,11 @@
 	<!-- 공지사항 수정하기 -->
 	<update id="updateNotice" parameterType="java.util.Map">
 		update notice
-		set noticeTitle=#{noticeTitle},
+		set
+		noticeTitle=#{noticeTitle},
 		noticeContent=#{noticeContent}
-		where noticeNum=#{noticeNum}
+		where
+		noticeNum=#{noticeNum}
 	</update>
 
 
@@ -138,15 +140,17 @@
 			SELECT max(eventNum)+ 1 from event	
 		]]>
 	</select>
-	
+
 	<!-- 공지사항 수정하기 -->
 	<update id="updateEvent" parameterType="java.util.Map">
 		update event
-		set eventTitle=#{eventTitle},
+		set
+		eventTitle=#{eventTitle},
 		eventContent=#{eventContent}
-		where eventNum=#{eventNum}
+		where
+		eventNum=#{eventNum}
 	</update>
-	
+
 
 
 
@@ -179,9 +183,11 @@
 	<!-- review 수정 -->
 	<update id="updateReview" parameterType="java.util.Map">
 		update review
-		set reviewTitle=#{reviewTitle},
+		set
+		reviewTitle=#{reviewTitle},
 		reviewContent=#{reviewContent}
-		where reviewNum=#{reviewNum}
+		where
+		reviewNum=#{reviewNum}
 	</update>
 
 	<!-- review 삭제 -->
@@ -200,7 +206,7 @@
 		order by questionDate DESC
     ]]>
 	</select>
-	
+
 	<!-- QnA 상세내용 조회 -->
 	<select id="selectQnA" resultType="articleVO"
 		parameterType="int">
@@ -209,5 +215,22 @@
       where questionNum = #{questionNum}		
     ]]>
 	</select>
-	
+	<!-- QnA 삭제 -->
+	<delete id="deleteQnA" parameterType="int">
+    <![CDATA[
+      delete from qna 
+      where questionNum = #{questionNum}
+    ]]>
+	</delete>
+
+	<!-- 공지사항 수정하기 -->
+	<update id="updateQnA" parameterType="java.util.Map">
+		update qna
+		set
+		questionTitle=#{questionTitle},
+		questionContent=#{questionContent}
+		where
+		questionNum=#{questionNum}
+	</update>
+
 </mapper>
