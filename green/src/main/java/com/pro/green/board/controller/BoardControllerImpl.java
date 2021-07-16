@@ -32,6 +32,10 @@ import com.pro.green.board.service.BoardService;
 import com.pro.green.board.vo.ArticleVO;
 import com.pro.green.board.vo.ImageVO;
 import com.pro.green.member.vo.MemberVO;
+<<<<<<< HEAD
+=======
+import com.pro.green.product_M.vo.Criteria;
+>>>>>>> branch 'master' of https://github.com/ahyeon-lee07/GreenTest.git
 
 @Controller("boardController")
 public class BoardControllerImpl implements BoardController {
