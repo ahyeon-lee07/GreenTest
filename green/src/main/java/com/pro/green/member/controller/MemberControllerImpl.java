@@ -1,7 +1,10 @@
 package com.pro.green.member.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +25,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pro.green.member.service.MemberService;
 import com.pro.green.member.vo.MemberVO;
+import com.pro.green.product_M.vo.Criteria;
+import com.pro.green.product_M.vo.PageMaker;
 
 @Controller("memberController")
 //@EnableAspectJAutoProxy
@@ -36,18 +41,6 @@ public class MemberControllerImpl implements MemberController {
 	public String join(Locale locale, Model model) {
 		return "normalJoin";
 	}
-
-	// 일반 회원가입
-	//@RequestMapping(value = "/normalJoin.do", method = RequestMethod.GET)
-	//public String normalJoin(Locale locale, Model model) {
-	//	return "normalJoin";
-	//}
-
-	// 로그인
-	//@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	//public String login(Locale locale, Model model) {
-	//	return "login";
-	//}
 
 	// 기존로그인
 	@RequestMapping(value = "/member.do", method = RequestMethod.GET)
@@ -72,11 +65,11 @@ public class MemberControllerImpl implements MemberController {
 	public String memberEditChk(Locale locale, Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
-		
-		if(sessinLogin.getPw().equals("SNSJoin")) {
+
+		if (sessinLogin.getPw().equals("SNSJoin")) {
 			model.addAttribute("memberType", "SNSJoin");
 			return "memberEdit";
-		}else {
+		} else {
 			return "memberEditChk";
 		}
 	}
@@ -261,6 +254,18 @@ public class MemberControllerImpl implements MemberController {
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
+	
+	//마이페이지
+	@RequestMapping(value = "/myPage.do", method = RequestMethod.GET)
+	public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		ModelAndView mav = new ModelAndView();
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+		
+		mav.addObject("memberInf",sessinLogin);
+		mav.setViewName("myPageView");
+		return mav;
+	}
 
 	@RequestMapping(value = "/*.do", method = RequestMethod.GET)
 	public ModelAndView logout(@RequestParam(value = "result", required = false) String result, // 로그인 창 요청시 매개변수
@@ -278,6 +283,158 @@ public class MemberControllerImpl implements MemberController {
 		mav.addObject("request", request);
 		mav.addObject(viewName);
 		return mav;
+	}
+
+	// 회원관리 리스트 리스트
+	@Override
+	@RequestMapping(value = "/memberList.do", method = RequestMethod.GET)
+	public ModelAndView memberList(@ModelAttribute("member") MemberVO member, HttpServletRequest request, Criteria cri)
+			throws Exception {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+
+		// 관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
+		sessionChk(mav, sessinLogin, "memberList");
+
+		PageMaker pageMaker = new PageMaker();
+
+		int pageTotal = 0;
+
+		pageMaker.setCri(cri);
+		pageTotal = memberService.memberCount();
+
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		list = memberService.selectMemberList(cri);
+
+		pageMaker.setTotalCount(pageTotal);
+
+		mav.addObject("list", list);
+		mav.addObject("pageMaker", pageMaker);
+
+		return mav;
+	}
+
+	// 회원관리 상세 리스트
+	@RequestMapping(value = "/memberList/memberEdit.do", method = RequestMethod.GET)
+	public ModelAndView memberEdit(@ModelAttribute("member") MemberVO member,
+			@RequestParam(value = "productId") String productId, @RequestParam(value = "options") String options,
+			HttpServletRequest request, Criteria cri) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+
+		// 관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
+		sessionChk(mav, sessinLogin, "memberDetail");
+
+		MemberVO memerInf = new MemberVO();
+
+		memerInf = memberService.memberDetail(productId);
+
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		mav.addObject("memerInf", memerInf);
+		mav.addObject("pageMaker", pageMaker);
+
+		return mav;
+	}
+
+	// 회원관리 상세 수정
+	@RequestMapping(value = "/memberList/memberEdit/Edit.do", method = {RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView memberEditOK(@ModelAttribute("member") MemberVO memberInf,
+			@RequestParam(value = "productId") String productId, @RequestParam(value = "options") String options,
+			HttpServletRequest request, Criteria cri) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		
+		MemberVO member = new MemberVO();
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+
+		// 관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
+		sessionChk(mav, sessinLogin, "redirect:/memberList.do");
+		
+		
+		int result = memberService.editMember_master(memberInf);
+		//memberVO = memberService.login(member);
+		
+		if (result == 0) {
+			mav.addObject("joinMas", "회원 정보 수정에 실패하였습니다. 다시 시도해 주세요.");
+		} else {
+			mav.addObject("joinMas", "회원 정보 수정이 완료 되었습니다.");
+			//session.setAttribute("member", memberVO); // 세션에 회원 정보를 저장
+		}
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		mav.addObject("pageMaker", pageMaker);
+
+		return mav;
+	}
+
+	// 회원관리 탈퇴
+	@RequestMapping(value = "/memberList/memberDelete.do", method = RequestMethod.POST)
+	public ModelAndView memberListDelete(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		ModelAndView mav = new ModelAndView();
+		int result = memberService.memeberDelete(member);
+		if (result == 0) {
+			mav.addObject("msg", "fail");
+		} else {
+			mav.addObject("msg", "memberDelete");
+		}
+		mav.setViewName("redirect:/memberList.do");
+		return mav;
+	}
+
+	// 회원리스트 검색 검색
+	@RequestMapping(value = "/memberList/search.do", method = RequestMethod.GET)
+	public ModelAndView productList(@RequestParam(value = "searchKeyWordOption") String searchKeyWordOption,
+			@RequestParam(value = "keyWord") String keyWord, HttpServletRequest request, Criteria cri)
+			throws Exception {
+
+		ModelAndView mav = new ModelAndView();
+		PageMaker pageMaker = new PageMaker();
+
+		// int pageTotal = productService.countBoardListTotal();
+		int pageTotal = 0;
+
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(pageTotal);
+
+		Map<String, Object> searchOption = new HashMap<String, Object>();
+		searchOption.put("cri", cri);
+		searchOption.put("searchKeyWordOption", searchKeyWordOption);
+		searchOption.put("keyWord", keyWord);
+
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		list = memberService.searchMemberList(searchOption);
+
+		mav.addObject("list", list);
+		mav.addObject("pageMaker", pageMaker);
+		mav.setViewName("memberList");
+
+		return mav;
+	}
+
+	// 관리자 세션 체크 (ModelAndView, 세션정보, 접속할 화면 )
+	private ModelAndView sessionChk(ModelAndView mav, MemberVO sessinLogin, String view) throws Exception {
+		if (sessinLogin != null) {
+			String rightChk = (String) sessinLogin.getMasterYN();
+			if (rightChk.equals("M")) {
+				mav.addObject("member", sessinLogin);
+				mav.setViewName(view);
+				return mav;
+			} else {
+				mav.addObject("joinMas", "잘못된 경로로 접속하셨습니다.");
+				mav.setViewName("redirect:/main.do");
+				return mav;
+			}
+		} else {
+			mav.addObject("joinMas", "잘못된 경로로 접속하셨습니다.");
+			mav.setViewName("redirect:/main.do");
+			return mav;
+		}
 	}
 
 	private String getViewName(HttpServletRequest request) throws Exception {

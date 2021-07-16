@@ -21,7 +21,7 @@ request.setCharacterEncoding("UTF-8");
 </c:choose>
 <!-- 메인 -->
 <main class="mainH">
-	<div class="container">
+	<div class="container py-1">
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
@@ -50,7 +50,7 @@ request.setCharacterEncoding("UTF-8");
                                         <input id="inputId" class="form-control" name="id" type="text">
                                     </div>
                                 </div>
-                                <div class="bd-highlight d-flex flex-row mt-3 mt-4 mb-2">
+                                <div class="bd-highlight d-flex flex-row my-2">
                                     <label for="inputPassword" class="bd-highlight col-form-label font-weight-bold" style="width: 90px;">비밀번호</label>
                                     <div>
                                         <input id="inputPassword" class="form-control" name="pw" type="password">

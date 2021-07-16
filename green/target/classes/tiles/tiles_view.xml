@@ -94,98 +94,20 @@
 		<put-attribute name="main" value="/WEB-INF/views/cart/orderSheet.jsp" />
 	</definition>
 	
-	<!-- 하드 케이스 -->
-	<definition name="HardCase" extends="baseLayout">
-		<put-attribute name="title" value="하드 케이스" />
-		<put-attribute name="main" value="/WEB-INF/views/product/hard.jsp" />
+	<!-- 상품 리스트 -->
+	<definition name="prodList" extends="baseLayout">
+		<put-attribute name="title" value="상품 리스트" />
+		<put-attribute name="main" value="/WEB-INF/views/product/prodList.jsp" />
 	</definition>
 	
-	<!-- 하드 케이스 상세페이지 -->
-	<definition name="HardCaseDetail" extends="baseLayout">
-		<put-attribute name="title" value="하드 케이스 상품 상세페이지" />
-		<put-attribute name="main" value="/WEB-INF/views/product/hardDetail.jsp" />
-	</definition>
-	
-	<!-- 젤 케이스 -->
-	<definition name="GelCase" extends="baseLayout">
-		<put-attribute name="title" value="젤 케이스" />
-		<put-attribute name="main" value="/WEB-INF/views/product/gel.jsp" />
-	</definition>
-	
-	<!-- 젤 케이스 상세페이지 -->
-	<definition name="GelCaseDetail" extends="baseLayout">
-		<put-attribute name="title" value="젤 케이스 상품 상세페이지" />
-		<put-attribute name="main" value="/WEB-INF/views/product/gelDetail.jsp" />
-	</definition>
-	
-	<!-- 카드 케이스 -->
-	<definition name="CardCase" extends="baseLayout">
-		<put-attribute name="title" value="카드 케이스" />
-		<put-attribute name="main" value="/WEB-INF/views/product/card.jsp" />
-	</definition>
-	
-	<!-- 카드 케이스 상세페이지 -->
-	<definition name="CardCaseDetail" extends="baseLayout">
-		<put-attribute name="title" value="카드 케이스 상품 상세페이지" />
-		<put-attribute name="main" value="/WEB-INF/views/product/cardDetail.jsp" />
-	</definition>
-	
-	<!-- 에어팟 케이스 -->
-	<definition name="AirpodCase" extends="baseLayout">
-		<put-attribute name="title" value="에어팟 케이스" />
-		<put-attribute name="main" value="/WEB-INF/views/product/airpod.jsp" />
-	</definition>
-	
-	<!-- 에어팟 케이스 상세페이지 -->
-	<definition name="AirpodCaseDetail" extends="baseLayout">
-		<put-attribute name="title" value="에어팟 케이스 상품 상세페이지" />
-		<put-attribute name="main" value="/WEB-INF/views/product/airpodDetail.jsp" />
-	</definition>
-	
-	<!-- 버즈 케이스 -->
-	<definition name="BudsCase" extends="baseLayout">
-		<put-attribute name="title" value="버즈 케이스" />
-		<put-attribute name="main" value="/WEB-INF/views/product/buds.jsp" />
-	</definition>
-	
-	<!-- 버즈 케이스 상세페이지 -->
-	<definition name="BudsCaseDetail" extends="baseLayout">
-		<put-attribute name="title" value="버즈 케이스 상품 상세페이지" />
-		<put-attribute name="main" value="/WEB-INF/views/product/budsDetail.jsp" />
-	</definition>
-	
-	<!-- 액세서리 -->
-	<definition name="Accessory" extends="baseLayout">
-		<put-attribute name="title" value="액세서리" />
-		<put-attribute name="main" value="/WEB-INF/views/product/accessory.jsp" />
-	</definition>
-	
-	<!-- 키링 -->
-	<definition name="KeyRing" extends="baseLayout">
-		<put-attribute name="title" value="키링" />
-		<put-attribute name="main" value="/WEB-INF/views/product/keyRing.jsp" />
-	</definition>
-	
-	<!-- 키링 상세페이지 -->
-	<definition name="KeyRingDetail" extends="baseLayout">
-		<put-attribute name="title" value="키링 상품 상세페이지" />
-		<put-attribute name="main" value="/WEB-INF/views/product/keyRingDetail.jsp" />
-	</definition>
-	
-	<!-- 스마트톡 -->
-	<definition name="SmartTok" extends="baseLayout">
-		<put-attribute name="title" value="스마트톡" />
-		<put-attribute name="main" value="/WEB-INF/views/product/smartTok.jsp" />
-	</definition>
-	
-	<!-- 스마트톡 상세페이지 -->
-	<definition name="SmartTokDetail" extends="baseLayout">
-		<put-attribute name="title" value="스마트톡 상품 상세페이지" />
-		<put-attribute name="main" value="/WEB-INF/views/product/smartTokDetail.jsp" />
+	<!-- 상품 리스트 상세 -->
+	<definition name="prodDetail" extends="baseLayout">
+		<put-attribute name="title" value="상품상세 리스트" />
+		<put-attribute name="main" value="/WEB-INF/views/product/prodDetail.jsp" />
 	</definition>
 	
 	<!-- 마이페이지 -->
-	<definition name="myPage" extends="baseLayout">
+	<definition name="myPageView" extends="baseLayout">
 		<put-attribute name="title" value="마이페이지" />
 		<put-attribute name="main" value="/WEB-INF/views/myPage/myPage.jsp" />
 	</definition>
@@ -314,21 +236,20 @@
 	<!-- 상품등록 리스트 -->
 	<definition name="productList" extends="baseLayout">
 		<put-attribute name="title" value="상품등록리스트" />
-		<put-attribute name="main" value="/WEB-INF/views/product/productList.jsp" />
+		<put-attribute name="main" value="/WEB-INF/views/marster/productList.jsp" />
 	</definition>
 	
 	<!-- 상품등록 -->
 	<definition name="addProduct" extends="baseLayout">
 		<put-attribute name="title" value="상품등록" />
-		<put-attribute name="main" value="/WEB-INF/views/product/productDetail_M.jsp" />
+		<put-attribute name="main" value="/WEB-INF/views/marster/productDetail_M.jsp" />
 	</definition>
 	
 	<!-- 관리자 상품상세 -->
 	<definition name="productDetail_M" extends="baseLayout">
 		<put-attribute name="title" value="상품등록" />
-		<put-attribute name="main" value="/WEB-INF/views/product/productDetail_M.jsp" />
+		<put-attribute name="main" value="/WEB-INF/views/marster/productDetail_M.jsp" />
 	</definition>
-
 
 	<!-- sns계정으로 회원가입  -->
 	<definition name="snsJoin" extends="baseLayout">
@@ -340,4 +261,17 @@
 		<put-attribute name="title" value="sns계정으로 회원가입" />
 		<put-attribute name="main" value="/WEB-INF/views/join/naverSuccess.jsp" />
 	</definition>
+	
+	<!-- 회원관리 리스트 -->
+	<definition name="memberList" extends="baseLayout">
+		<put-attribute name="title" value="회원관리 리스트" />
+		<put-attribute name="main" value="/WEB-INF/views/marster/memberList.jsp" />
+	</definition>
+	
+	<!-- 회원관리 상세페이지 -->
+	<definition name="memberDetail" extends="baseLayout">
+		<put-attribute name="title" value="회원관리 상세페이지" />
+		<put-attribute name="main" value="/WEB-INF/views/marster/memberDetail.jsp" />
+	</definition>
+	
 </tiles-definitions>

@@ -22,6 +22,14 @@ public class MemberVO {
 	private Integer mileage;
 	private String masterYN;
 	private Date joinDate;
+	private Integer orderPriceSum;
+	
+	public Integer getOrderPriceSum() {
+		return orderPriceSum;
+	}
+	public void setOrderPriceSum(Integer orderPriceSum) {
+		this.orderPriceSum = orderPriceSum;
+	}
 	public String getId() {
 		return id;
 	}
