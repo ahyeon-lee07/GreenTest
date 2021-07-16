@@ -12,6 +12,7 @@ public interface ProductService {
 	// 상품 목록
 	public List<ProductVO2> listProduct(String p_group) throws Exception;
 	
+<<<<<<< HEAD
 	// 상품 옵션
 	public List<Map<String, Object>> selectProdOption(String productId) throws DataAccessException;
 	
@@ -21,6 +22,14 @@ public interface ProductService {
 	public Map<String, Object> selectProdDetail(Map<String, Object> map) throws DataAccessException;
 	
 	// 상품 이미지
+=======
+	public List<Map<String, Object>> selectProdOption(String productId) throws DataAccessException;
+	
+	public ProductVO2 viewProdDetail(String productId) throws DataAccessException;
+	
+	public Map<String, Object> selectProdDetail(Map<String, Object> map) throws DataAccessException;
+	
+>>>>>>> branch 'hw' of https://github.com/ahyeon-lee07/GreenTest.git
 	public List<Map<String, Object>> selectProdImg(String productId) throws DataAccessException;
 	
 }
