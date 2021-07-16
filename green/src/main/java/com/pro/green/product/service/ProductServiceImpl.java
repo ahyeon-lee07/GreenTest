@@ -27,11 +27,14 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	// 상품 상세페이지
+	
+	// 상품 옵션
 	@Override
 	public List<Map<String, Object>> selectProdOption(String productId) throws DataAccessException {
 		return productDAO.selectProdOption(productId);
 	}
-
+	
+	// 상품명&가격
 	@Override
 	public ProductVO2 viewProdDetail(String productId) throws DataAccessException {
 		return productDAO.viewProdDetail(productId);
@@ -42,6 +45,7 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectProdDetail(map);
 	}
 
+	// 상품 이미지
 	@Override
 	public List<Map<String, Object>> selectProdImg(String productId) throws DataAccessException {
 		return productDAO.selectProdImg(productId);

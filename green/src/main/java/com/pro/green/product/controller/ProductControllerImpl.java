@@ -68,13 +68,13 @@ public class ProductControllerImpl implements ProductController {
 		ModelAndView mav = new ModelAndView();
 		ProductVO2 prodList = new ProductVO2();
 		prodList = productService.viewProdDetail(productId);
-		List<Map<String, Object>> option = productService.selectProdOption(productId);
+		List<Map<String, Object>> prodOption = productService.selectProdOption(productId);
 		List<Map<String, Object>> img = productService.selectProdImg(productId);
 		
 		mav.setViewName("prodDetail");
 
-		mav.addObject("ProductVO", prodList);
-		mav.addObject("option", option);
+		mav.addObject("prodList", prodList);
+		mav.addObject("prodOption", prodOption);
 		mav.addObject("product_M", img.get(0).get("imgURL"));
 		mav.addObject("product_S", img.get(1).get("imgURL"));
 
