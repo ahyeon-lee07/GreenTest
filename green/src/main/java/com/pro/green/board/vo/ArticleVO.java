@@ -9,15 +9,42 @@ import org.springframework.stereotype.Component;
 
 @Component("articleVO")
 public class ArticleVO {
-	private int  noticeNum;
+
+	// 공지사항
+	private int noticeNum;
 	private String id;
 	private String noticeTitle;
 	private String noticeContent;
-	private Date  noticeDate;
-	
-	
+	private Date noticeDate;
+
+	// 이벤트
+	private int eventNum;
+	private String eventTitle;
+	private String eventContent;
+	private Date eventDate;
+
+	// QnA
+	private int questionNum;
+	private String productId;
+	private String questionTitle;
+	private String questionContent;
+	private int questionHits;
+	private int commentCount;
+	private String questionPw;
+	private String questionYN;
+	private Date questionDate;
+
+	// Review
+	private int reviewNum;
+	private String reviewTitle;
+	private String reviewContent;
+	private int reviewHits;
+	private Date reviewDate;
+
+	private String imageFileName;
+
 	public ArticleVO() {
-		System.out.println("ArticleVO 생성자");
+		System.out.println("articleVO 생성자");
 	}
 
 	public int getNoticeNum() {
@@ -43,7 +70,7 @@ public class ArticleVO {
 	public void setNoticeTitle(String noticeTitle) {
 		this.noticeTitle = noticeTitle;
 	}
-	
+
 	public String getNoticeContent() {
 		return noticeContent;
 	}
@@ -51,6 +78,7 @@ public class ArticleVO {
 	public void setNoticeContent(String noticeContent) {
 		this.noticeContent = noticeContent;
 	}
+
 	public Date getNoticeDate() {
 		return noticeDate;
 	}
@@ -58,5 +86,161 @@ public class ArticleVO {
 	public void setNoticeDate(Date noticeDate) {
 		this.noticeDate = noticeDate;
 	}
-		
+
+	// 이벤트
+	public int getEventNum() {
+		return eventNum;
+	}
+
+	public void setEventNum(int eventNum) {
+		this.eventNum = eventNum;
+	}
+
+	public String getEventTitle() {
+		return eventTitle;
+	}
+
+	public void setEventTitle(String eventTitle) {
+		this.eventTitle = eventTitle;
+	}
+
+	public String getEventContent() {
+		return eventContent;
+	}
+
+	public void setEventContent(String eventContent) {
+		this.eventContent = eventContent;
+	}
+
+	public Date getEventDate() {
+		return eventDate;
+	}
+
+	public void setEventDate(Date eventDate) {
+		this.eventDate = eventDate;
+	}
+
+	// QnA
+	public int getQuestionNum() {
+		return questionNum;
+	}
+
+	public void setQuestionNum(int questionNum) {
+		this.questionNum = questionNum;
+	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	public String getQuestionTitle() {
+		return questionTitle;
+	}
+
+	public void setQuestionTitle(String questionTitle) {
+		this.questionTitle = questionTitle;
+	}
+
+	public String getQuestionContent() {
+		return questionContent;
+	}
+
+	public void setQuestionContent(String questionContent) {
+		this.questionContent = questionContent;
+	}
+
+	public int getQuestionHits() {
+		return questionHits;
+	}
+
+	public void setQuestionHits(int questionHits) {
+		this.questionHits = questionHits;
+	}
+	
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+
+	public String getQuestionPw() {
+		return questionPw;
+	}
+
+	public void setQuestionPw(String questionPw) {
+		this.questionPw = questionPw;
+	}
+	
+	public String getQuestionYN() {
+		return questionYN;
+	}
+
+	public void setQuestionYN(String questionYN) {
+		this.questionYN = questionYN;
+	}
+
+	public Date getQuestionDate() {
+		return questionDate;
+	}
+
+	public void setQuestionDate(Date questionDate) {
+		this.questionDate = questionDate;
+	}
+
+	// review
+	public int getReviewNum() {
+		return reviewNum;
+	}
+
+	public void setReviewNum(int reviewNum) {
+		this.reviewNum = reviewNum;
+	}
+
+	public String getReviewTitle() {
+		return reviewTitle;
+	}
+
+	public void setReviewTitle(String reviewTitle) {
+		this.reviewTitle = reviewTitle;
+	}
+
+	public String getReviewContent() {
+		return reviewContent;
+	}
+
+	public void setReviewContent(String reviewContent) {
+		this.reviewContent = reviewContent;
+	}
+
+	public int getReviewHits() {
+		return reviewHits;
+	}
+
+	public void setReviewHits(int reviewHits) {
+		this.reviewHits = reviewHits;
+	}
+
+	public Date getReviewDate() {
+		return reviewDate;
+	}
+
+	public void setReviewDate(Date reviewDate) {
+		this.reviewDate = reviewDate;
+	}
+
+	// 이미지
+	public String getImageFileName() {
+		return imageFileName;
+	}
+
+	public void setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
+	}
+
 }

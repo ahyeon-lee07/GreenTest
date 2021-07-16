@@ -6,13 +6,30 @@ import java.util.Map;
 import com.pro.green.board.vo.ArticleVO;
 
 public interface BoardService {
-	public List<ArticleVO> notice() throws Exception;
+	// 공지사항
+	public List<ArticleVO> listNotice() throws Exception;
+	public ArticleVO viewNotice(int noticeNum) throws Exception;
+	public void removeNotice(int noticeNum) throws Exception;
+	public int addNewNotice(Map articleMap) throws Exception;
+	public void modNotice(Map articleMap) throws Exception;
 	
-	public ArticleVO viewArticle(int articleNO) throws Exception;
-	/*
-	public Map viewArticle(int articleNO) throws Exception;
+	// 이벤트
+	public List<ArticleVO> listEvent() throws Exception;
+	public ArticleVO viewEvent(int eventNum) throws Exception;
+	public void removeEvent(int eventNum) throws Exception;
+	public int addNewEvent(Map articleMap) throws Exception;
+	public void modEvent(Map articleMap) throws Exception;
 	
-	public void modArticle(Map articleMap) throws Exception;
-	public void removeArticle(int articleNO) throws Exception;
-	*/
+	
+	// QnA
+	public List<ArticleVO> listQnA() throws Exception;
+	public ArticleVO viewQnA(int questionNum) throws Exception;
+	
+	// 리뷰
+	public List<ArticleVO> listReview() throws Exception;
+	public ArticleVO viewReview(int reviewNum) throws Exception;
+	public void removeReview(int reviewNum) throws Exception;
+	public int addNewReview(Map articleMap) throws Exception;
+	public void modReview(Map articleMap) throws Exception;
+	
 }
