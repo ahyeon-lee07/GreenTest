@@ -182,10 +182,10 @@ public class HomeController {
 	*/
 	
 	// 마이페이지
-	@RequestMapping(value = "/myPage.do", method = RequestMethod.GET)
-	public String myPage(Locale locale, Model model) {
-		return "myPage";
-	}
+	//@RequestMapping(value = "/myPage.do", method = RequestMethod.GET)
+	//public String myPage(Locale locale, Model model) {
+	//	return "myPage";
+	//}
 	
 
 	
@@ -203,10 +203,10 @@ public class HomeController {
 	
 	//게시판 쪽 주소 다시 고민 해 봐야 할 것 같음
 	//Q&A
-	@RequestMapping(value = "/product.do", method = RequestMethod.GET)
-	public String product(Locale locale, Model model) {
-		return "product";
-	}
+//	@RequestMapping(value = "/listQnA.do", method = RequestMethod.GET)
+//	public String product(Locale locale, Model model) {
+//		return "product";
+//	}
 	
 	//Q&A 상세
 	@RequestMapping(value = "/product_in.do", method = RequestMethod.GET)

@@ -11,13 +11,13 @@ request.setCharacterEncoding("UTF-8");
 
 <!-- 메인 -->
 <main class="mainH">
-	<div class="container">
+	<div class="container py-1">
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
-				<h4>주문서 작성</h4>
+				<h4 class="page_title">주문서 작성</h4>
 			</div>
-			<div class="bd-highlight">
+			<div class="bd-highlight page_subtitle">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb p-0 bg bg-transparent">
 						<li class="breadcrumb-item"><a href="${contextPath }/main.do">홈</a></li>
@@ -28,7 +28,7 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 
 		<!-- 국내 배송상품 주문내역 -->
-        <div class="row my-4" style="padding: 0 15px">
+        <div class="row mt-1" style="padding: 0 15px">
             <div class="col">
                 <div class="row">
                     <div class="col-2 border bg-light text-center">
@@ -49,11 +49,13 @@ request.setCharacterEncoding("UTF-8");
         </div>
 
         <!-- 국내 배송상품 주문내역 -->
+        <div class="row mt-5">
+			<div class="col">
+				<h6 class="font-weight-bold">국내 배송상품 주문내역</h6>
+			</div>
+		</div>
         <table class="table table-hover border-top m-0">
-            <div class="bd-highlight my-3">
-                <h6 class="font-weight-bold">국내 배송상품 주문내역</h6>
-            </div>
-            <thead class=" border-bottom-0">
+            <thead class=" border-bottom-0 bg-light">
                 <tr>
                     <th class="text-center border-bottom-0 align-middle border-top-0 px-1" style="width: 28px">
                         <div style="height: 14px;">
@@ -93,12 +95,8 @@ request.setCharacterEncoding("UTF-8");
                         <div class="d-flex flex-column bd-highlight px-2">
                             <div class="bd-highlight d-flex">
                                 <div class="flex-grow bd-highlight pr-3">
-                                <input type="number" class="form-control" id="inputnumber" step="1" value="1" min="1" max="99">
+                               		<input type="number" class="form-control" id="inputnumber" step="1" value="1" min="1" max="99">
                                 </div>
-                                </div>
-                            </div>
-                            <div class="bd-highlight mt-1"><button type="button"
-                                    class="btn btn-outline-secondary btn-sm" style="font-size: .6rem">변경</button>
                             </div>
                         </div>
                     </td>
@@ -121,7 +119,7 @@ request.setCharacterEncoding("UTF-8");
             </div>
         </div>
 
-        <div class="row mt-4 mb-5">
+        <div class="row mt-2">
             <div class="col">
                 <div class="d-flex bd-highlight align-items-center">
                     <div class="bd-highlight font-weight-bold mr-1 align-items-center">선택 상품을</div>
@@ -145,7 +143,7 @@ request.setCharacterEncoding("UTF-8");
         </div>
 
         <!-- 배송주문 -->
-        <div class="d-flex justify-content-between mb-2">
+        <div class="d-flex justify-content-between mt-5">
             <div class="bd-highlight">
                 <h6 class="font-weight-bold">배송 정보</h6>
             </div>
@@ -164,15 +162,13 @@ request.setCharacterEncoding("UTF-8");
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions"
                                     id="inlineRadio1" value="option1">
-                                <label class="form-check-label" for="inlineRadio1">회원정보와 동일</label>
+                                <label class="form-check-label" for="inlineRadio1" checked="checked">회원정보와 동일</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions"
                                     id="inlineRadio2" value="option2">
                                 <label class="form-check-label" for="inlineRadio2">새로운 배송지</label>
                             </div>
-                            <button type="button" class="btn btn-secondary btn-sm" style="font-size: .6rem">주소록
-                                보기</button>
                         </div>
                     </div>
 

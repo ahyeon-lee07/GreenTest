@@ -33,48 +33,56 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.pro.green.board.vo.ArticleVO;
 import com.pro.green.product.service.ProductService;
 import com.pro.green.product_M.vo.ProductVO2;
 
 @Controller("productController")
 public class ProductControllerImpl implements ProductController {
-	private static final String PRODUCT_IMAGE_REPO = "C:\\product\\product_image";
 	@Autowired
 	private ProductService productService;
 	@Autowired
 	private ProductVO2 productVO;
 
-	/* log4j¿€æ˜ */
-	// private static final Logger logger =
-	// LoggerFactory.getLogger(ProductControllerImpl.class);
 
-	// ªÛ«∞ ∏Ò∑œ
+	// ÏÉÅÌíà Î™©Î°ù
 	@Override
-	@RequestMapping(value = "/list.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/prodList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView listProduct(@RequestParam("p_group") String p_group, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
 		List<ProductVO2> productsList = productService.listProduct(p_group);
-		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("list");
+		mav.setViewName("prodList");
 		mav.addObject("productsList", productsList);
 		return mav;
 
 	}
 
-	// ªÛ«∞ ªÛºº∆‰¿Ã¡ˆ
-	@RequestMapping(value = "/list/listDetail.do", method = RequestMethod.GET)
+
+	// ÏÉÅÌíà ÏÉÅÏÑ∏ÌéòÏù¥ÏßÄ
+	@Override
+	@RequestMapping(value = "/prodList/prodDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView viewProduct(@RequestParam("productId") String productId, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		productVO = productService.viewProduct(productId);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("listDetail");
-		mav.addObject("viewProduct", productVO);
-		return mav;
+		ProductVO2 prodList = new ProductVO2();
 
+		prodList = productService.viewProdDetail(productId);
+		List<Map<String, Object>> prodOption = productService.selectProdOption(productId);
+		List<Map<String, Object>> img = productService.selectProdImg(productId);
+		
+		mav.setViewName("prodDetail");
+
+
+		mav.addObject("prodList", prodList);
+		mav.addObject("prodOption", prodOption);
+		mav.addObject("product_M", img.get(0).get("imgURL"));
+		mav.addObject("product_S", img.get(1).get("imgURL"));
+
+		mav.addObject("options", request.getParameter("options"));
+
+		return mav;
 	}
 
 }

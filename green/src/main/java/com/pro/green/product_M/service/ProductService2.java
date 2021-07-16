@@ -22,7 +22,7 @@ public interface ProductService2 {
 	public int countBoardListTotal() throws DataAccessException;
 	public int filterCountBoardListTotal(String options) throws DataAccessException;
 	
-	public List<Map<String,Object>> selectOptionLIst(String productId) throws DataAccessException;
+	public List<Map<String,Object>> selectOptionList(String productId) throws DataAccessException;
 	
 	public ProductVO2 viewProductDetail(String productId) throws DataAccessException;
 	public List<Map<String,Object>> selectProductImg(String productId) throws DataAccessException;

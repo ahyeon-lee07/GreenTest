@@ -72,13 +72,13 @@ public class ProductDAOImpl2 implements ProductDAO2 {
 	}
 
 	// 包府磊 惑前 府胶飘 可记 炼雀
-	public List<Map<String, Object>> selectOptionLIst(String productId) throws DataAccessException {
-		List<Map<String, Object>> result = sqlSession.selectList("mapper.product.selectOptionLIst", productId);
+	public List<Map<String, Object>> selectOptionList(String productId) throws DataAccessException {
+		List<Map<String, Object>> result = sqlSession.selectList("mapper.product.selectOptionList", productId);
 		return result;
 	}
 
 	public ProductVO2 viewProductDetail(String productId) throws DataAccessException {
-		ProductVO2 result = sqlSession.selectOne("mapper.product.selectProduct_M", productId);
+		ProductVO2 result = sqlSession.selectOne("mapper.product.selectProduct", productId);
 		return result;
 	}
 

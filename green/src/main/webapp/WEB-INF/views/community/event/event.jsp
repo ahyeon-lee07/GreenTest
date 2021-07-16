@@ -8,6 +8,16 @@
 request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<script>
+	function fn_articleForm(isLogOn, addNewEvent, login) {
+		if (isLogOn != '' && isLogOn != 'false') {
+			location.href = addNewEvent;
+		} else {
+			alert("로그인 후 글쓰기가 가능합니다.")
+			location.href = login + '?action=/addNewEvent.do';
+		}
+	}
+</script>
 
 <!-- 메인 -->
 <main class="mainH">
@@ -28,64 +38,80 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 
 		<table class="table table-hover">
-            <thead class="table-primary border-bottom-0">
-                <tr>
-                    <th class="text-center border-bottom-0" style="width: 68px">번호</th>
-                    <th class="text-center border-bottom-0" style="width: auto">제목</th>
-                    <th class="text-center border-bottom-0" style="width: 100px">작성자</th>
-                    <th class="text-center border-bottom-0" style="width: 116px">작성일</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="border-bottom ">
-                    <th class="text-center align-middle">1</th>
-                    <td class="text-center align-middle">
-                    	<a class="" href="${contextPath }/event_in.do">Otto</a>
-					</td>
-                    <td class="text-center align-middle">관리자</td>
-                    <td class="text-center align-middle">2020-00-00</td>
-                </tr>
-            </tbody>
-        </table>
+			<thead class="table-primary border-bottom-0">
+				<tr>
+					<th class="text-center border-bottom-0" style="width: 68px">번호</th>
+					<th class="text-center border-bottom-0" style="width: auto">제목</th>
+					<th class="text-center border-bottom-0" style="width: 100px">작성자</th>
+					<th class="text-center border-bottom-0" style="width: 116px">작성일</th>
 
-        <div class="row justify-content-between px-4">
-            <div class="">
-                <div class="btn-group">
-                    <form action="#">
-                        <div class="form-row">
-                            <div class="form-group d-flex justify-content-start ">
-                                <select id="inputState" class="form-control form-control-sm" style="width: 90px;">
-                                    <option selected>제목</option>
-                                    <option selected>내용</option>
-                                    <option selected>글쓰기</option>
-                                </select>
-                                <input class="form-control form-control-sm mx-2" type="text" placeholder="">
-                                <button type="submit" class="btn btn-secondary btn-sm col-2">검색</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+				</tr>
+			</thead>
+			<tbody>
+				<c:choose>
+					<c:when test="${listEvent ==null }">
+						<tr height="10">
+							<td colspan="4">
+								<p align="center">
+									<b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b>
+								</p>
+							</td>
+						</tr>
+					</c:when>
+					<c:when test="${listEvent !=null }">
+						<c:forEach var="listEvent" items="${listEvent}">	
+							<tr class="border-bottom ">
+								<th class="text-center align-middle">${listEvent.eventNum}</th>
+								<td class="text-center align-middle">
+								<a href="${contextPath }/viewEvent.do?eventNum=${listEvent.eventNum}">${listEvent.eventTitle }</a></td>
+								<td class="text-center align-middle">${listEvent.id }</td>
+								<td class="text-center align-middle">${listEvent.eventDate}</td>
+							</tr>
+						</c:forEach>
+					</c:when>
+				</c:choose>
+			</tbody>
+		</table>
+		<div class="row justify-content-between px-4">
+			<div class="">
+				<div class="btn-group">
+					<form action="#">
+						<div class="form-row">
+							<div class="form-group d-flex justify-content-start ">
+								<select id="inputState" class="form-control form-control-sm"
+									style="width: 90px;">
+									<option selected>제목</option>
+									<option selected>내용</option>
+									<option selected>글쓰기</option>
+								</select> <input class="form-control form-control-sm mx-2" type="text"
+									placeholder="">
+								<button type="submit" class="btn btn-secondary btn-sm col-2">검색</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			 <div class="">
+            	<a class=""
+					href="javascript:fn_articleForm('${isLogOn}','${contextPath}/addNewEvent.do', 
+                                                    '${contextPath}/login.do')"><button
+						type="button" class="btn btn-primary btn-sm">글쓰기</button></a>
+			</div>
         </div>
 
-        <nav aria-label="Page navigation example row">
-            <ul class="pagination d-flex justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+		</div>
 
-	</div>
+		<nav aria-label="Page navigation example row">
+			<ul class="pagination d-flex justify-content-center">
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+				</a></li>
+				<li class="page-item"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item"><a class="page-link" href="#"
+					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				</a></li>
+			</ul>
+		</nav>
 </main>

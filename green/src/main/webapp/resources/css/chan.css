@@ -74,3 +74,38 @@ a:hover {
 	-o-transition: .3s all ease-out;
 	transition: .3s all ease-out;
 }
+
+.productImgBox {
+	width: 100%;
+    display: block;
+    overflow: hidden;
+    height: 180px;
+}
+
+/*--------------------------------------------------------------------*/
+
+@media screen and (min-width: 1200px) {
+	.prodList {
+		width: 20%;
+	}
+}
+@media screen and (max-width: 1200px) {
+	.prodList {
+		width: 25%;
+	}
+}
+@media screen and (max-width: 992px) {
+	.prodList {
+		width: 33%;
+	}
+}
+@media screen and (max-width: 768px) {
+	.prodList {
+		width: 50%;
+	}
+}
+@media screen and (max-width: 576px) {
+	.prodList {
+		
+	}
+}

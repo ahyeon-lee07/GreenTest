@@ -53,10 +53,10 @@ request.setCharacterEncoding("UTF-8");
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> 커뮤니티 </a>
 							<div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="${contextPath }/product.do">Q&A</a>
-								<a class="dropdown-item" href="${contextPath }/notice.do">공지사항</a>
-								<a class="dropdown-item" href="${contextPath }/event.do">이벤트
-									게시판</a> <a class="dropdown-item" href="${contextPath }/review.do">리뷰</a>
+								<a class="dropdown-item" href="${contextPath }/listQnA.do">Q&A</a>
+								<a class="dropdown-item" href="${contextPath }/listNotice.do">공지사항</a>
+								<a class="dropdown-item" href="${contextPath }/listEvent.do">이벤트
+									게시판</a> <a class="dropdown-item" href="${contextPath }/listReview.do">리뷰</a>
 							</div></li>
 						<c:choose>
 							<c:when test="${member.masterYN == 'M' }">
@@ -128,38 +128,38 @@ request.setCharacterEncoding("UTF-8");
 										class="d-flex justify-content-start flex-wrap px-3 pt-3 pb-0">
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/list.do?p_group=hard">하드
+												href="${contextPath }/prodList.do?p_group=hard">하드
 												케이스</a>
 										</div>
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/list.do?p_group=gel">젤
+												href="${contextPath }/prodList.do?p_group=gel">젤
 												케이스</a>
 										</div>
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/list.do?p_group=card">카드
+												href="${contextPath }/prodList.do?p_group=card">카드
 												케이스</a>
 										</div>
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/list.do?p_group=airPods">에어팟
+												href="${contextPath }/prodList.do?p_group=airPods">에어팟
 												케이스</a>
 										</div>
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/list.do?p_group=buds">버즈
+												href="${contextPath }/prodList.do?p_group=buds">버즈
 												케이스</a>
 										</div>
 										<div class="bd-highlight btn_menu_L_W">
 											<a class="nav-link font-weight-bold text-dark p-3"
-												href="${contextPath }/list.do?p_group=${listProduct.p_group}">액세서리</a>
+												href="${contextPath }/prodList.do?p_group=${listProduct.p_group}">액세서리</a>
 											<a class="dropdown-item py-1 text-black-50"
 												style="text-align: left;"
-												href="${contextPath }/list.do?p_group=keyRing">키링</a>
+												href="${contextPath }/prodList.do?p_group=keyRing">키링</a>
 											<a class="dropdown-item py-1 text-black-50"
 												style="text-align: left;"
-												href="${contextPath }/list.do?p_group=smart">스마트톡</a>
+												href="${contextPath }/prodList.do?p_group=smart">스마트톡</a>
 										</div>
 									</div>
 								</div>
@@ -172,11 +172,11 @@ request.setCharacterEncoding("UTF-8");
 													class="bd-highlight border-bottom font-weight-bold py-2">커뮤니티
 												</div>
 												<a class="py-1 text-black-50"
-													href="${contextPath }/product.do">Q&A</a> <a
-													class="pb-1 text-black-50" href="${contextPath }/notice.do">공지사항</a>
+													href="${contextPath }/listQnA.do">Q&A</a> <a
+													class="pb-1 text-black-50" href="${contextPath }/listNotice.do">공지사항</a>
 												<a class="pb-1 text-black-50"
-													href="${contextPath }/event.do">이벤트게시판</a> <a
-													class="pb-1 text-black-50" href="${contextPath }/review.do">리뷰</a>
+													href="${contextPath }/listEvent.do">이벤트게시판</a> <a
+													class="pb-1 text-black-50" href="${contextPath }/listReview.do">리뷰</a>
 											</div>
 										</div>
 										<div class="bd-highlight">
@@ -198,23 +198,23 @@ request.setCharacterEncoding("UTF-8");
 						</div></li>
 					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
 						class="nav-link text-secondary"
-						href="${contextPath }/list.do?p_group=hard">하드
+						href="${contextPath }/prodList.do?p_group=hard">하드
 							케이스</a></li>
 					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
 						class="nav-link text-secondary"
-						href="${contextPath }/list.do?p_group=gel">젤
+						href="${contextPath }/prodList.do?p_group=gel">젤
 							케이스</a></li>
 					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
 						class="nav-link text-secondary"
-						href="${contextPath }/list.do?p_group=card">카드
+						href="${contextPath }/prodList.do?p_group=card">카드
 							케이스</a></li>
 					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
 						class="nav-link text-secondary"
-						href="${contextPath }/list.do?p_group=airPods">에어팟
+						href="${contextPath }/prodList.do?p_group=airPods">에어팟
 							케이스</a></li>
 					<li class="nav-item mr-4 mx-auto font-weight-bold"><a
 						class="nav-link text-secondary"
-						href="${contextPath }/list.do?p_group=buds">버즈
+						href="${contextPath }/prodList.do?p_group=buds">버즈
 							케이스</a></li>
 					<li class="nav-item dropdown mr-4 mx-auto"><a
 						class="nav-link text-secondary font-weight-bold" href="#"
@@ -222,9 +222,9 @@ request.setCharacterEncoding("UTF-8");
 						aria-haspopup="true" aria-expanded="false"> 액세서리</a>
 						<div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item"
-								href="${contextPath }/HardCase.do?p_group=keyRing">키링</a>
+								href="${contextPath }/prodList.do?p_group=keyRing">키링</a>
 							<a class="dropdown-item"
-								href="${contextPath }/HardCase.do?p_group=smart">스마트톡</a>
+								href="${contextPath }/prodList.do?p_group=smart">스마트톡</a>
 						</div></li>
 				</ul>
 			</div>
@@ -246,8 +246,7 @@ request.setCharacterEncoding("UTF-8");
 	
 	document.addEventListener('scroll', function(){
 		var Y = window.pageYOffset;
-		console.log(Y);
-
+		
 			if (Y > 226) {
 				if ( !document.getElementById('header').classList.contains('scrolled') ) {
 					document.getElementById('header').classList.add('scrolled');
