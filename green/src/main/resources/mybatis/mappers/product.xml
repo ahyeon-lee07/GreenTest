@@ -32,7 +32,8 @@
     <![CDATA[
 		select p.*, i.* from product p 
 		inner join image i on p.productId=i.productId 
-		where p.p_group = #{p_group} and imgType = "product_M";
+		where p.p_group = #{p_group} and imgType = "product_M"
+		order by productDate DESC;
     ]]>
 	</select>
 	
