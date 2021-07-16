@@ -33,8 +33,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+<<<<<<< HEAD
 
+=======
+import com.pro.green.member.vo.MemberVO;
+>>>>>>> branch 'hw' of https://github.com/ahyeon-lee07/GreenTest.git
 import com.pro.green.product.service.ProductService;
+import com.pro.green.product_M.vo.Criteria;
+import com.pro.green.product_M.vo.PageMaker;
 import com.pro.green.product_M.vo.ProductVO2;
 
 @Controller("productController")
@@ -59,7 +65,11 @@ public class ProductControllerImpl implements ProductController {
 
 	}
 
+<<<<<<< HEAD
 	// ìƒí’ˆ ìƒì„¸íŽ˜ì´ì§€
+=======
+	// »óÇ° »ó¼¼ÆäÀÌÁö
+>>>>>>> branch 'hw' of https://github.com/ahyeon-lee07/GreenTest.git
 	@Override
 	@RequestMapping(value = "/prodList/prodDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView viewProduct(@RequestParam("productId") String productId, HttpServletRequest request,
@@ -67,14 +77,26 @@ public class ProductControllerImpl implements ProductController {
 
 		ModelAndView mav = new ModelAndView();
 		ProductVO2 prodList = new ProductVO2();
+<<<<<<< HEAD
 		prodList = productService.viewProdDetail(productId);
 		List<Map<String, Object>> prodOption = productService.selectProdOption(productId);
+=======
+		// »óÇ° Á¤º¸ °¡Á®¿À±â
+		prodList = productService.viewProdDetail(productId);
+		// »óÇ° ¿É¼Ç °¡Á®¿À±â
+		List<Map<String, Object>> option = productService.selectProdOption(productId);
+>>>>>>> branch 'hw' of https://github.com/ahyeon-lee07/GreenTest.git
 		List<Map<String, Object>> img = productService.selectProdImg(productId);
 		
 		mav.setViewName("prodDetail");
 
+<<<<<<< HEAD
 		mav.addObject("prodList", prodList);
 		mav.addObject("prodOption", prodOption);
+=======
+		mav.addObject("ProductVO", prodList);
+		mav.addObject("option", option);
+>>>>>>> branch 'hw' of https://github.com/ahyeon-lee07/GreenTest.git
 		mav.addObject("product_M", img.get(0).get("imgURL"));
 		mav.addObject("product_S", img.get(1).get("imgURL"));
 
