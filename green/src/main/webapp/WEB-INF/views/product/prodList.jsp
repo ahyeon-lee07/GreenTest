@@ -23,22 +23,39 @@
 								</div>
 							</div>
 
-							<div class="d-flex flex-row-reverse bd-highlight border-bottom">
-								<div class="p-2 bd-highlight">
-									<a href="#">높은가격</a>
+							<div class="d-flex justify-content-between bd-highlight border-bottom">
+								<div class="d-flex bd-highlight">
+									<div class="p-2 bd-highlight">
+										<a class="btn_array" href="#" onclick="btn_array('popular')">인기순</a>
+									</div>
+									<div class="p-2 bd-highlight">
+										<a class="btn_array" href="#" onclick="btn_array('newProd')">신상품</a>
+									</div>
+									<div class="p-2 bd-highlight">
+										<a class="btn_array" href="#" onclick="btn_array('lowPrice')">낮은가격</a>
+									</div>
+									<div class="p-2 bd-highlight">
+										<a class="btn_array" href="#" onclick="btn_array('highPrice')">높은가격</a>
+									</div>
 								</div>
-								<div class="p-2 bd-highlight">
-									<a href="#">낮은가격</a>
-								</div>
-								<div class="p-2 bd-highlight">
-									<a href="#">신상품</a>
-								</div>
-								<div class="p-2 bd-highlight">
-									<a href="#">인기순</a>
+								<div class="d-flex bd-highlight">
+									<form action="${contextPath }/prodList/search.do" method="GET" name="searchBox">
+										<div class="form-row">
+											<div class="form-group d-flex justify-content-start ">
+												<select id="inputState" class="form-control form-control-sm" name="searchKeyWordOption"
+													style="width: 98px;">
+													<option value="productName" selected>상품명</option>
+												</select>
+												<input class="form-control form-control-sm mx-2" type="text" placeholder="" name="keyWord">
+												<button type="submit" class="btn btn-secondary btn-sm col-2" onclick="return search()">검색</button>
+											</div>
+										</div>
+										<input type="text" name="searchOptions" value="${options }" style="display:none">
+									</form>
 								</div>
 							</div>
 
-							<div class="d-flex flex-wrap mb-2">
+							<div class="d-flex flex-wrap mb-2" id="chan">
 								<c:forEach var="product" items="${productsList}">
 									<div class="bd-highlight prodList">
 										<a class="d-flex flex-column mx-3 my-2 p-3 text-center prodbox"
@@ -105,3 +122,76 @@
 
 						</div>
 					</main>
+
+					<script>
+						function btn_array(keyWord){
+							// url p_group 값 가져오디
+							var p_group = getParameterByName('p_group');
+
+							//window.location.href = '${contextPath}/prodList.do?p_group='+ p_group + '&keyWord='+ keyWord;
+							$.ajax({
+								type: "POST",
+								async: true,
+								url: "${contextPath}/productList/array.do",
+								dataType: "json",
+								data: { p_group: p_group, keyWord: keyWord },
+								success: function (result) {						
+									var str = '';
+									for(var i=0; i<result.length; i++){
+							
+										var price = result[i]['price'].toLocaleString('ko-KR');
+										var discount = result[i]['discount'].toLocaleString('ko-KR');
+										
+										str += '<div class="bd-highlight prodList" >';
+										str += '<a class="d-flex flex-column mx-3 my-2 p-3 text-center prodbox" href="${contextPath}/prodList/prodDetail.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }productId='+result[i]['productId']+'">';
+										str += '<div class="bd-highlight productImgBox">';
+										str += '<img class="card-img-top" src="${contextPath }/resources/img/' + result[i]['p_group'] +'/' + result[i]['imgURL'] +'" alt="' + result[i]['productName'] +'" style="object-fit: cover; height:180px;">';
+										str += '</div>';
+										str += '<div class="bd-highlight font-weight-bold text-secondary text-left productListTitle mt-2">';
+										str += '<p class="ell">' + result[i]['productName'] +'</p>';
+										str += '</div>';
+										str += '<div class="d-flex bd-highlight flex-column text-left my-3" style="height: 46px;">';
+
+										if(result[i]['discountYN'] == 'Y'){
+											str += '<div class="bd-highlight text-black-50 discountBox" style="font-size:.9rem; width: 50%;">';
+											str +=  price + '<span>원</span>';
+											str += '</div>';
+											str += '<div class="bd-highlight text-danger font-weight-bold">';
+											str += discount + '<span>원</span>';
+											str += '</div>';
+										}else {
+											str += '<div class="bd-highlight text-danger font-weight-bold">';
+											str += price + '<span>원</span>';
+											str += '</div >';
+										}
+										str += '</div >';
+										str += '<div class="d-flex justify-content-center mt-2">';
+										str += '<div class="bd-highlight btn btn-sm btn-outline-secondary mr-1 btn_product" href="${contextPath}/wist_list.do">바로구매</div>';
+										str += '<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product" href="${contextPath}/orderList.do">관심상품</div>';
+										str += '</div>';
+										str += '</a >';
+										str += '</div >';
+									}
+									
+
+									document.getElementById('chan').innerHTML = str;
+									
+								},
+								error: function (data, textStatus) {
+
+								},
+								complete: function (data, textStatus) {
+
+								}
+							});
+						};
+
+						// url 에서 파라미터 가져 오기
+						function getParameterByName(name) {
+							name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+							var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+								results = regex.exec(location.search);
+							return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+						}
+
+					</script>

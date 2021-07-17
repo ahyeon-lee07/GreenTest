@@ -47,45 +47,72 @@ public class ProductControllerImpl implements ProductController {
 
 
 	// 상품 목록
-	@Override
-	@RequestMapping(value = "/prodList.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView listProduct(@RequestParam("p_group") String p_group, HttpServletRequest request,
-			HttpServletResponse response, Criteria cri) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		
-		if(p_group.equals("hard")) {
-			mav.addObject("pageTitle", "하드케이스");
-		}else if(p_group.equals("gel")) {
-			mav.addObject("pageTitle", "젤케이스");
-		}else if(p_group.equals("card")) {
-			mav.addObject("pageTitle", "카드케이스");
-		}else if(p_group.equals("airPods")) {
-			mav.addObject("pageTitle", "에어팟케이스");
-		}else if(p_group.equals("buds")) {
-			mav.addObject("pageTitle", "버즈케이스");
-		}else if(p_group.equals("keyRing")) {
-			mav.addObject("pageTitle", "키링");
-		}else if(p_group.equals("smart")) {
-			mav.addObject("pageTitle", "스마트톡");
-		}else {
-			mav.addObject("pageTitle", "상품");
+	// 상품 목록
+		@Override
+		@RequestMapping(value = "/prodList.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView listProduct(@RequestParam("p_group") String p_group,
+				HttpServletRequest request, HttpServletResponse response, Criteria cri) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			
+			if(p_group.equals("hard")) {
+				mav.addObject("pageTitle", "하드케이스");
+			}else if(p_group.equals("gel")) {
+				mav.addObject("pageTitle", "젤케이스");
+			}else if(p_group.equals("card")) {
+				mav.addObject("pageTitle", "카드케이스");
+			}else if(p_group.equals("airPods")) {
+				mav.addObject("pageTitle", "에어팟케이스");
+			}else if(p_group.equals("buds")) {
+				mav.addObject("pageTitle", "버즈케이스");
+			}else if(p_group.equals("keyRing")) {
+				mav.addObject("pageTitle", "키링");
+			}else if(p_group.equals("smart")) {
+				mav.addObject("pageTitle", "스마트톡");
+			}else {
+				mav.addObject("pageTitle", "상품");
+			}
+			
+			PageMaker pageMaker = new PageMaker();
+
+			//int pageTotal = 0;
+
+			List<ProductVO2> productsList = productService.listProduct(p_group);
+			
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(productsList.size());
+			
+			mav.setViewName("prodList");
+			mav.addObject("pageMaker", pageMaker);
+			mav.addObject("productsList", productsList);
+			return mav;
+
 		}
 		
-		PageMaker pageMaker = new PageMaker();
-
-		//int pageTotal = 0;
-
-		List<ProductVO2> productsList = productService.listProduct(p_group);
-		
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(productsList.size());
-		
-		mav.setViewName("prodList");
-		mav.addObject("pageMaker", pageMaker);
-		mav.addObject("productsList", productsList);
-		return mav;
-
-	}
+		//상품 정렬
+		@RequestMapping(value = "/productList/array.do", method = RequestMethod.POST)
+		public ResponseEntity prodArray(@RequestParam(value = "p_group") String p_group,
+				@RequestParam(value = "keyWord") String keyWord, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			
+			ResponseEntity resEntity = null;
+			
+			Map<String, Object> prodArray = new HashMap<String, Object>();
+			prodArray.put("p_group", p_group);
+			
+			if(keyWord.equals("popular")) {
+				prodArray.put("keyWord", "salesSum DESC");
+			}else if(keyWord.equals("newProd")) {
+				prodArray.put("keyWord", "productDate DESC");
+			}else if(keyWord.equals("lowPrice")) {
+				prodArray.put("keyWord", "price");
+			}else if(keyWord.equals("highPrice")) {
+				prodArray.put("keyWord", "price DESC");
+			}
+			
+			List<ProductVO2> result = productService.prodArray(prodArray);
+			
+			resEntity = new ResponseEntity(result, HttpStatus.OK);
+			return resEntity;
+		}
 
 
 	// 상품 상세페이지

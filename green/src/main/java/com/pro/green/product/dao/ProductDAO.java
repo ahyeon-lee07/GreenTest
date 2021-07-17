@@ -27,5 +27,8 @@ public interface ProductDAO {
 	// 상품 이미지
 	public List<Map<String, Object>> selectProdImg(String productId) throws DataAccessException;
 
+	//상품정렬
+	public List<ProductVO2> prodArray(Map<String, Object> prodArray) throws DataAccessException;
+
 
 }

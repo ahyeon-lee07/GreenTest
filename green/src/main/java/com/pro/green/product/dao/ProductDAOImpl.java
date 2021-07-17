@@ -55,6 +55,11 @@ public class ProductDAOImpl implements ProductDAO {
 		List<Map<String, Object>> prodImg = sqlSession.selectList("mapper.product.selectProductImg", productId);
 		return prodImg;
 	}
+	//상품정렬
+	public List<ProductVO2> prodArray(Map<String, Object> prodArray) throws DataAccessException{
+		List<ProductVO2> productsList = sqlSession.selectList("mapper.product.prodArray", prodArray);
+		return productsList;
+	}
 
 }
 

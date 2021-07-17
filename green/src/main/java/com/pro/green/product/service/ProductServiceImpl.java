@@ -18,7 +18,7 @@ import com.pro.green.product_M.vo.ProductVO2;
 public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductDAO productDAO;
-	
+
 	// 상품 목록
 	@Override
 	public List<ProductVO2> listProduct(String p_group) throws Exception {
@@ -27,13 +27,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	// 상품 상세페이지
-	
+
 	// 상품 옵션
 	@Override
 	public List<Map<String, Object>> selectProdOption(String productId) throws DataAccessException {
 		return productDAO.selectProdOption(productId);
 	}
-	
+
 	// 상품명&가격
 
 	@Override
@@ -51,5 +51,10 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Map<String, Object>> selectProdImg(String productId) throws DataAccessException {
 		return productDAO.selectProdImg(productId);
+	}
+
+	// 상품정렬
+	public List<ProductVO2> prodArray(Map<String, Object> prodArray) throws DataAccessException {
+		return productDAO.prodArray(prodArray);
 	}
 }

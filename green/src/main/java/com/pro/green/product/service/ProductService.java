@@ -22,5 +22,9 @@ public interface ProductService {
 	public Map<String, Object> selectProdDetail(Map<String, Object> map) throws DataAccessException;
 	
 	public List<Map<String, Object>> selectProdImg(String productId) throws DataAccessException;
+
+
+	//상품정렬
+	public List<ProductVO2> prodArray(Map<String, Object> prodArray) throws DataAccessException;
 	
 }
