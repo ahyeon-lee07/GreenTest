@@ -143,6 +143,11 @@
 										</form>
 									</div>
 								</div>
+								<div class="">
+									<a class="" href="${contextPath }/couponList/add.do">
+										<button type="button" class="btn btn-primary">쿠폰 등록</button>
+									</a>
+								</div>
 							</div>
 							
 							<!-- 페이징 영역 -->

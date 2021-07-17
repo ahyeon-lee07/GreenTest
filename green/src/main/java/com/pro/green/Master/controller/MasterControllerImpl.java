@@ -2,6 +2,7 @@ package com.pro.green.Master.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +25,7 @@ import com.pro.green.product_M.vo.PageMaker;
 
 @Controller("masterController")
 public class MasterControllerImpl implements MasterController {
-	
+
 	@Autowired
 	private MasterService masterService;
 
@@ -39,23 +41,28 @@ public class MasterControllerImpl implements MasterController {
 
 		// 관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
 		sessionChk(mav, sessinLogin, "redirect:/couponList.do");
-		
+
 		PageMaker pageMaker = new PageMaker();
 		int pageTotal = 0;
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-		
-		pageMaker.setCri(cri);
-		
-		list = masterService.selectCouponList(cri);
-		
-		pageMaker.setTotalCount(list.size());
 
+		pageMaker.setCri(cri);
+
+		list = masterService.selectCouponList(cri);
+
+		pageMaker.setTotalCount(list.size());
 
 		pageMaker.setCri(cri);
 		mav.addObject("pageMaker", pageMaker);
 		mav.addObject("couponList", list);
 
 		return mav;
+	}
+
+	// 쿠폰등록 화면
+	@RequestMapping(value = "/couponList/add.do", method = RequestMethod.GET)
+	public String join(Locale locale, Model model) {
+		return "couponAdd";
 	}
 
 	// 관리자 세션 체크 (ModelAndView, 세션정보, 접속할 화면 )

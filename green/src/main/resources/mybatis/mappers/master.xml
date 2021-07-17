@@ -11,6 +11,7 @@
 		<result property="couponPay" column="couponPay" />
 		<result property="couponPeroid_start" column="couponPeroid_start" />
 		<result property="couponPeroid_end" column="couponPeroid_end" />
+		<result property="useYN" column="useYN" />
 
 	</resultMap>
 

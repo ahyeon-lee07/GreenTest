@@ -23,7 +23,14 @@ public class MemberVO {
 	private String masterYN;
 	private Date joinDate;
 	private Integer orderPriceSum;
+	private String useYN;
 	
+	public String getUseYN() {
+		return useYN;
+	}
+	public void setUseYN(String useYN) {
+		this.useYN = useYN;
+	}
 	public Integer getOrderPriceSum() {
 		return orderPriceSum;
 	}
