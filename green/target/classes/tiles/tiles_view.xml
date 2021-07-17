@@ -275,4 +275,9 @@
 		<put-attribute name="main" value="/WEB-INF/views/master/memberDetail.jsp" />
 	</definition>
 	
+	<!-- 쿠폰관리 -->
+	<definition name="couponList" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰리스트" />
+		<put-attribute name="main" value="/WEB-INF/views/master/couponList.jsp" />
+	</definition>
 </tiles-definitions>
