@@ -61,8 +61,18 @@ public class MasterControllerImpl implements MasterController {
 
 	// 쿠폰등록 화면
 	@RequestMapping(value = "/couponList/add.do", method = RequestMethod.GET)
-	public String join(Locale locale, Model model) {
-		return "couponAdd";
+	public ModelAndView join(HttpServletRequest request) throws Exception {
+		
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+
+		MemberVO member = new MemberVO();
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+
+		// 관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
+		sessionChk(mav, sessinLogin, "redirect:/couponAdd.do");
+		
+		return mav;
 	}
 
 	// 관리자 세션 체크 (ModelAndView, 세션정보, 접속할 화면 )

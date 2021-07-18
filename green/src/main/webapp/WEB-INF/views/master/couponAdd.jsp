@@ -42,7 +42,7 @@ request.setCharacterEncoding("UTF-8");
 										<div class="custom-control custom-switch pt-2">
 											<input type="checkbox" class="custom-control-input YNChk" id="inputUseYN" value="Y" checked>
 											<input id="useYN_V" class="input_V" type="text" name="useYN" value="Y" style="display: none;">
-											<label id="inputShowYNLabel" class="custom-control-label" for="inputUseYN" style="width: 70px;">활성화</label>
+											<label id="inputUseYNLabel" class="custom-control-label" for="inputUseYN" style="width: 70px;">활성화</label>
 										</div>
 									</div>
 								</div>
@@ -53,8 +53,8 @@ request.setCharacterEncoding("UTF-8");
 							<div class="d-flex bd-highlight">
 								<label for="inputMasterYN" class="bd-highlight col-form-label pl-2" style="width: 140px;">쿠폰 사용기간</label>
 								<div class="d-flex flex-row bd-highlight pr-2">
-									<input class="mr-2 form-control" type='date' name='couponPeroid_start' value=''/> ~
-									<input class="ml-2 form-control"  type='date' name='couponPeroid_end' value=''/>
+									<input id="couponPeroid_start" class="mr-2 form-control" type='date' name='couponPeroid_start' value=''/> ~
+									<input id="couponPeroid_end" class="ml-2 form-control"  type='date' name='couponPeroid_end' value=''/>
 								</div>
 							</div>
 						</div>
@@ -86,7 +86,7 @@ request.setCharacterEncoding("UTF-8");
 								<div class="d-flex flex-row bd-highlight pr-2">
 									<select id="inputState" class="form-control mr-2" name="discountType" style="width: 98px;">
 										<option value="discountType" selected>가격</option>
-										<option value="percent" selected>퍼센트</option>
+										<option value="percent" >퍼센트</option>
 									</select>
 									<input type="number" class="form-control" id="inputCouponPay" name="couponPay" value="">
 									
@@ -114,4 +114,25 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 	</div>
 </main>
+<script>
+
+	// 활성화 여부
+	var showYN = document.getElementById('inputUseYN');
+	showYN.addEventListener('click', function () {
+		var showYN_V = showYN.value;
+		var Label = document.getElementById('inputUseYNLabel');
+		var V = document.getElementById('useYN_V');
+
+		if (showYN_V != "N") {
+			showYN.value = "N";
+			V.value = "N";
+			Label.innerHTML = "비활성화";
+		} else {
+			showYN.value = "Y";
+			V.value = "Y";
+			Label.innerHTML = "활성화";
+		}
+	});
+
+</script>
 
