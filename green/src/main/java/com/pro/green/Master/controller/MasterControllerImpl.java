@@ -1,6 +1,7 @@
 package com.pro.green.Master.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,9 +36,9 @@ public class MasterControllerImpl implements MasterController {
 
 	// 쿠폰관리
 	@Override
-	@RequestMapping(value = "/master/couponList.do", method = RequestMethod.GET)
-	public ModelAndView couponList(@ModelAttribute("member") MemberVO memberInf, HttpServletResponse response, HttpServletRequest request,
-			Criteria cri) throws Exception {
+	@RequestMapping(value = "/couponList.do", method = RequestMethod.GET)
+	public ModelAndView couponList(@ModelAttribute("member") MemberVO memberInf, HttpServletResponse response,
+			HttpServletRequest request, Criteria cri) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 
@@ -43,17 +46,18 @@ public class MasterControllerImpl implements MasterController {
 		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
 
 		// 관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
-		sessionChk(mav, sessinLogin, "redirect:/couponList.do");
+		sessionChk(mav, sessinLogin, "couponList");
 
 		PageMaker pageMaker = new PageMaker();
 		int pageTotal = 0;
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
+		pageTotal = masterService.listCount();
 		pageMaker.setCri(cri);
 
 		list = masterService.selectCouponList(cri);
 
-		pageMaker.setTotalCount(list.size());
+		pageMaker.setTotalCount(pageTotal);
 
 		pageMaker.setCri(cri);
 		mav.addObject("pageMaker", pageMaker);
@@ -81,25 +85,42 @@ public class MasterControllerImpl implements MasterController {
 	// 쿠폰등록
 	@Override
 	@RequestMapping(value = "/couponList/couponAdd.do", method = RequestMethod.POST)
-	public ModelAndView couponAdd(@ModelAttribute("coupon") CouponVO coupon, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView couponAdd(@ModelAttribute("coupon") CouponVO coupon, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
-		
+
 		int result = 0;
 		ModelAndView mav = new ModelAndView();
-		
+
 		result = masterService.couponAdd(coupon);
-		
+
 		if (result == 0) {
 			mav.addObject("addMsg", "쿠폰등록에 실패 했습니다. 다시 시도해 주세요.");
 		} else {
-			mav.addObject("addMsg", "쿠폰이 등록되었습니다..");
+			mav.addObject("addMsg", "쿠폰이 등록되었습니다.");
 		}
-			
-		mav.setViewName("redirect:/master/couponList.do");
+
+		mav.setViewName("redirect:/couponList.do");
 
 		return mav;
+	}
+
+	// 관리자 쿠폰 사용 여부 변경
+	@RequestMapping(value = "/couponList/useYNChk.do", method = RequestMethod.POST)
+	public ResponseEntity overlapped(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ResponseEntity resEntity = null;
+		String id = request.getParameter("id");
+		String value = request.getParameter("value");
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("id", id);
+		paramMap.put("value", value);
+
+		int result = masterService.useYNChk(paramMap);
+		resEntity = new ResponseEntity(result, HttpStatus.OK);
+		return resEntity;
 	}
 
 	// 관리자 세션 체크 (ModelAndView, 세션정보, 접속할 화면 )

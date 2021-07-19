@@ -16,16 +16,26 @@ import com.pro.green.product_M.vo.Criteria;
 @Service("masterService")
 @Transactional(propagation = Propagation.REQUIRED)
 public class MasterServiceImpl implements MasterService {
-	
+
 	@Autowired
 	private MasterDAO masterDAO;
-	
-	public List<Map<String, Object>> selectCouponList(Criteria cri) throws DataAccessException{
+
+	public List<Map<String, Object>> selectCouponList(Criteria cri) throws DataAccessException {
 		return masterDAO.selectCouponList(cri);
 	}
-	
-	//쿠폰등록
+
+	// 쿠폰등록
 	public int couponAdd(CouponVO coupon) throws DataAccessException {
 		return masterDAO.couponAdd(coupon);
+	}
+
+	// 리스트 개수
+	public int listCount() throws DataAccessException {
+		return masterDAO.listCount();
+	}
+
+	// 쿠폰 사용여부 변경
+	public int useYNChk(Map<String, Object> paramMap) throws DataAccessException {
+		return masterDAO.useYNChk(paramMap);
 	}
 }

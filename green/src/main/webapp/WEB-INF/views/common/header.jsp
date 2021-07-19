@@ -67,7 +67,7 @@ request.setCharacterEncoding("UTF-8");
 									<div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
 										<a class="dropdown-item" href="${contextPath }/memberList.do">회원관리</a>
 										<a class="dropdown-item" href="${contextPath }/productList.do?options=">상품등록</a>
-										<a class="dropdown-item" href="${contextPath }/master/couponList.do">쿠폰관리</a>
+										<a class="dropdown-item" href="${contextPath }/couponList.do">쿠폰관리</a>
 									</div>
 								</li>
 							</c:when>
