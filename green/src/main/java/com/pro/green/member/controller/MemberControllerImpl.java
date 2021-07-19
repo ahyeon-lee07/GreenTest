@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,6 +36,9 @@ public class MemberControllerImpl implements MemberController {
 	private MemberService memberService;
 	@Autowired
 	private MemberVO memberVO;
+	
+	@Autowired
+	BCryptPasswordEncoder passEncoder;
 
 	// 회원가입
 	@RequestMapping(value = "/join.do", method = RequestMethod.GET)
@@ -183,6 +187,11 @@ public class MemberControllerImpl implements MemberController {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
 		ModelAndView mav = new ModelAndView();
+		
+		//암호화
+		String inputPass = member.getPw();
+		String pass = passEncoder.encode(inputPass);
+		member.setPw(pass);
 
 		int result = 0;
 		result = memberService.addMember(member);
@@ -204,10 +213,14 @@ public class MemberControllerImpl implements MemberController {
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		ModelAndView mav = new ModelAndView();
-		memberVO = memberService.login(member); // login() 메서드를 호출하면서 로그인 정보를 전달한다.
-		if (memberVO != null) {
+
+		MemberVO login = memberService.login(member); // login() 메서드를 호출하면서 로그인 정보를 전달한다.
+		
+		boolean passMatch = passEncoder.matches(member.getPw(), login.getPw());
+		
+		if (login != null && passMatch) {
 			HttpSession session = request.getSession();
-			session.setAttribute("member", memberVO); // 세션에 회원 정보를 저장
+			session.setAttribute("member", login); // 세션에 회원 정보를 저장
 			session.setAttribute("isLogOn", true); // 세션에 로그인 상태를 true로 설정
 			String action = (String)session.getAttribute("action"); // 로그인 성공 시 세션에 저장된 action 값을 가져온다.
 			session.removeAttribute("action"); // 게시물 등록

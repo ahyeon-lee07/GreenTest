@@ -32,6 +32,7 @@ public class MasterControllerImpl implements MasterController {
 	private MasterService masterService;
 
 	// 쿠폰관리
+	@Override
 	@RequestMapping(value = "/master/couponList.do", method = RequestMethod.GET)
 	public ModelAndView couponList(@ModelAttribute("member") MemberVO memberInf, HttpServletResponse response, HttpServletRequest request,
 			Criteria cri) throws Exception {
@@ -92,10 +93,8 @@ public class MasterControllerImpl implements MasterController {
 		
 		if (result == 0) {
 			mav.addObject("addMsg", "쿠폰등록에 실패 했습니다. 다시 시도해 주세요.");
-			mav.addObject("joinMas", "회원 정보 수정이 완료 되었습니다.");
 		} else {
 			mav.addObject("addMsg", "쿠폰이 등록되었습니다..");
-			mav.addObject("joinMas", "회원 정보 수정이 완료 되었습니다.");
 		}
 			
 		mav.setViewName("redirect:/master/couponList.do");

@@ -20,13 +20,13 @@ request.setCharacterEncoding("UTF-8");
 			<div class="bd-highlight page_subtitle">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb p-0 bg bg-transparent">
-						<li class="breadcrumb-item"><a href="${contextPath }/main.do">홈</a></li>
-						<li class="breadcrumb-item active" aria-current="page">쿠폰 목록</li>
+						<li class="breadcrumb-item"><a href="${contextPath }/main.do">홈 ${addMsg }</a></li>
+						<li class="breadcrumb-item active" aria-current="page">쿠폰 목록 ${couponList}</li>
 					</ol>
 				</nav>
 			</div>
 		</div>
-
+	
 		<%-- 날짜로 검색하는게 있으면 좋을듯  --%>
 		<table class="table table-hover m-0">
 			<thead class=" border-bottom border-top bg-light">
@@ -51,7 +51,7 @@ request.setCharacterEncoding("UTF-8");
 				</tr>
 			</thead>
 			<tbody class="border-bottom">
-				<c:forEach items="${list }" var="list">
+				<c:forEach items="${couponList }" var="list">
 					<tr id="${list.id }" class="">
 						<td class="text-center align-middle align-middle px-1"><c:choose>
 								<c:when test="${list.masterYN == 'M'}">
