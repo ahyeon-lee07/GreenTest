@@ -119,7 +119,7 @@ public class ProductControllerImpl implements ProductController {
 	@Override
 	@RequestMapping(value = "/prodList/prodDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView viewProduct(@RequestParam("productId") String productId, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+			HttpServletResponse response, Criteria cri) throws Exception {
 
 		ModelAndView mav = new ModelAndView();
 		ProductVO2 prodList = new ProductVO2();
@@ -130,15 +130,48 @@ public class ProductControllerImpl implements ProductController {
 		
 		mav.setViewName("prodDetail");
 
-
 		mav.addObject("prodList", prodList);
 		mav.addObject("prodOption", prodOption);
 		mav.addObject("product_M", img.get(0).get("imgURL"));
 		mav.addObject("product_S", img.get(1).get("imgURL"));
 
 		mav.addObject("options", request.getParameter("options"));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		mav.addObject("page", cri.getPage());
+		mav.addObject("pageMaker", pageMaker);
 
 		return mav;
+		
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

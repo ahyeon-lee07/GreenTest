@@ -59,7 +59,7 @@
 								<c:forEach var="product" items="${productsList}">
 									<div class="bd-highlight prodList">
 										<a class="d-flex flex-column mx-3 my-2 p-3 text-center prodbox"
-											href="${contextPath}/prodList/prodDetail.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }productId=${product.productId}">
+											href="${contextPath}/prodList/prodDetail.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${product.productId}">
 											<div class="bd-highlight productImgBox">
 												<!-- Product image-->
 												<img class="card-img-top" src="${contextPath }/resources/img/${product.p_group}/${product.imgURL}" alt="${product.productName}"
@@ -143,7 +143,7 @@
 										var discount = result[i]['discount'].toLocaleString('ko-KR');
 										
 										str += '<div class="bd-highlight prodList" >';
-										str += '<a class="d-flex flex-column mx-3 my-2 p-3 text-center prodbox" href="${contextPath}/prodList/prodDetail.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }productId='+result[i]['productId']+'">';
+										str += '<a class="d-flex flex-column mx-3 my-2 p-3 text-center prodbox" href="${contextPath}/prodList/prodDetail.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId='+result[i]['productId']+'">';
 										str += '<div class="bd-highlight productImgBox">';
 										str += '<img class="card-img-top" src="${contextPath }/resources/img/' + result[i]['p_group'] +'/' + result[i]['imgURL'] +'" alt="' + result[i]['productName'] +'" style="object-fit: cover; height:180px;">';
 										str += '</div>';

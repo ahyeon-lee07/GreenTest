@@ -20,6 +20,6 @@ public interface ProductController {
 
 	// 상품 상세페이지
 	public ModelAndView viewProduct(@RequestParam("productId") String productId,
-			HttpServletRequest request, HttpServletResponse response) throws Exception;
+			HttpServletRequest request, HttpServletResponse response, Criteria cri) throws Exception;
 	
 }
