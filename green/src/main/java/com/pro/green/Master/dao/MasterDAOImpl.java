@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.pro.green.Master.vo.CouponVO;
 import com.pro.green.product_M.vo.Criteria;
 
 @Repository("masterDAO")
@@ -15,9 +16,15 @@ public class MasterDAOImpl implements MasterDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
-	public List<Map<String, Object>> selectCouponList(Criteria cri) throws DataAccessException{
+
+	public List<Map<String, Object>> selectCouponList(Criteria cri) throws DataAccessException {
 		List<Map<String, Object>> result = sqlSession.selectList("mapper.master.selectCouponList", cri);
+		return result;
+	}
+
+	// ÄíÆùµî·Ï
+	public int couponAdd(CouponVO coupon) throws DataAccessException {
+		int result = sqlSession.insert("mapper.master.couponAdd", coupon);
 		return result;
 	}
 }

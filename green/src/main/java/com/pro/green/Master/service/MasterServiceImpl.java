@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pro.green.Master.dao.MasterDAO;
+import com.pro.green.Master.vo.CouponVO;
 import com.pro.green.product_M.vo.Criteria;
 
 @Service("masterService")
@@ -21,5 +22,10 @@ public class MasterServiceImpl implements MasterService {
 	
 	public List<Map<String, Object>> selectCouponList(Criteria cri) throws DataAccessException{
 		return masterDAO.selectCouponList(cri);
+	}
+	
+	//ÄíÆùµî·Ï
+	public int couponAdd(CouponVO coupon) throws DataAccessException {
+		return masterDAO.couponAdd(coupon);
 	}
 }

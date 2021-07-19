@@ -3,8 +3,8 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mapper.master">
-	<resultMap id="couponResult" type="CouponVO">
+<mapper namespace="mapper.master"> 
+	<resultMap id="couponResult" type="couponVO">
 		<result property="couponId" column="couponId" />
 		<result property="couponName" column="couponName" />
 		<result property="couponContent" column="couponContent" />
@@ -12,12 +12,20 @@
 		<result property="couponPeroid_start" column="couponPeroid_start" />
 		<result property="couponPeroid_end" column="couponPeroid_end" />
 		<result property="useYN" column="useYN" />
+		<result property="discountType" column="discountType" />
+		<result property="couponDate" column="couponDate" />
 
 	</resultMap>
 
 
 	<!-- 등록========================================================================================== -->
 
+	<!-- 쿠폰등록 (쿠폰명, 쿠폰혜택, 할인타입, 할인가, 할인시작일, 하일종료일, 사용여부) -->
+	<insert id="couponAdd" parameterType="couponVO">
+		<![CDATA[
+		 CALL couponAdd_PRO(#{couponName}, #{couponContent}, #{discountType}, #{couponPay}, #{couponPeroid_start}, #{couponPeroid_end}, #{useYN});
+		]]>
+	</insert>
 
 	<!-- /등록========================================================================================== -->
 	<!-- 조회========================================================================================== -->

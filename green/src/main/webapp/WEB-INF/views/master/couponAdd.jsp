@@ -33,7 +33,7 @@ request.setCharacterEncoding("UTF-8");
 		<div class="row border-bottom pm-2"></div>
 		<div class="row mb-4">
 			<div class="col-12">
-				<form name="memberEdit" method="POST">
+				<form name="couponAdd" method="POST">
 				<div class="row border-bottom py-2">
 							<div class="col p-0">
 								<div class="d-flex bd-highlight">
@@ -53,8 +53,11 @@ request.setCharacterEncoding("UTF-8");
 							<div class="d-flex bd-highlight">
 								<label for="inputMasterYN" class="bd-highlight col-form-label pl-2" style="width: 140px;">쿠폰 사용기간</label>
 								<div class="d-flex flex-row bd-highlight pr-2">
-									<input id="couponPeroid_start" class="mr-2 form-control" type='date' name='couponPeroid_start' value=''/> ~
-									<input id="couponPeroid_end" class="ml-2 form-control"  type='date' name='couponPeroid_end' value=''/>
+									<input id="couponPeroid_start" class="mr-2 form-control" type='date' value=''/>
+									<input id="couponPeroid_start_V" type='text' name='couponPeroid_start' value='0000-00-00' style="display:none"/>
+									 ~
+									<input id="couponPeroid_end" class="ml-2 form-control"  type='date' value=''/>
+									<input id="couponPeroid_end_V" type='text' name='couponPeroid_end' value='0000-00-00' style="display:none"/>
 								</div>
 							</div>
 						</div>
@@ -85,11 +88,11 @@ request.setCharacterEncoding("UTF-8");
 								<label for="inputCouponPay" class="bd-highlight col-form-label pl-2" style="width: 140px;"><img src="${contextPath }/resources/img/require.png">쿠폰 할인금액</label>
 								<div class="d-flex flex-row bd-highlight pr-2">
 									<select id="inputState" class="form-control mr-2" name="discountType" style="width: 98px;">
-										<option value="discountType" selected>가격</option>
+										<option value="normal" selected>가격</option>
 										<option value="percent" >퍼센트</option>
 									</select>
-									<input type="number" class="form-control" id="inputCouponPay" name="couponPay" value="">
-									
+									<input type="number" class="form-control" id="inputCouponPay" name="couponPay" min="0" max="" value="" style="width:120px">
+									<span style="padding:6px">원</span>
 								</div>
 							</div>
 						</div>
@@ -99,13 +102,13 @@ request.setCharacterEncoding("UTF-8");
 					<div class="row py-2 mt-3">
 						<div class="d-flex flex-fill justify-content-between">
 							<div class="bd-highlight">
-								<a href="${contextPath }/memberList.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&options=${options }"><button type="button"
+								<a href="${contextPath }/master/couponList.do"><button type="button"
 										class="btn btn-outline-secondary">취소</button></a>
 							</div>
 							<div class="d-highlight">
 								
-								<button id="btn_memberEdit" type="button"
-									class="btn btn-success ml-2">쿠폰등록</button>
+								<button id="btn_memberEdit" type="submit"
+									class="btn btn-success ml-2" onclick="return checkAdd()">쿠폰등록</button>
 							</div>
 						</div>
 					</div>
@@ -133,6 +136,80 @@ request.setCharacterEncoding("UTF-8");
 			Label.innerHTML = "활성화";
 		}
 	});
+
+	//할인 금액 타입 체크
+	var inputState = document.getElementById('inputState');
+	inputState.addEventListener('change', function(){
+
+		var Type = inputState.value;
+		
+		document.getElementById('inputCouponPay').value = '';
+
+		if(Type == 'normal'){
+			document.getElementById('inputCouponPay').max = '';
+			document.getElementById('inputCouponPay').nextSibling.nextSibling.innerText = '원';
+		
+		}else if(Type == 'percent') {
+			document.getElementById('inputCouponPay').max = '100';
+			document.getElementById('inputCouponPay').nextSibling.nextSibling.innerText = '%';
+		}
+	});
+
+	//날짜 번경에 따른 input값 변경
+	function inputValueChk(VALUE) {
+		var input_N = document.getElementById(VALUE);
+		var input_V = document.getElementById(VALUE+"_V");
+
+		input_N.addEventListener('change', function(){
+			input_V.value = input_N.value;
+
+			if(input_N.value == ''){
+				input_V.value.value ='0000-00-00';
+			}
+		});
+	}
+	inputValueChk('couponPeroid_start');
+	inputValueChk('couponPeroid_end');
+
+	//쿠폰 유효성검사
+	function checkAdd(){
+		var form = document.couponAdd;
+		var Type = inputState.value;
+		form.action = "${contextPath }/couponList/couponAdd.do";
+
+		var couponPeroidStart = document.getElementById('couponPeroid_start');
+		var couponPeroidEnd = document.getElementById('couponPeroid_end');
+
+		if(couponPeroidStart.value == "" && couponPeroidEnd.value == "" || couponPeroidStart.value != "" && couponPeroidEnd.value != ""){
+			
+			if(form.couponName.value == ""){
+				alert("쿠폰명을 입력해 주세요.");
+				return false;
+			}else if(form.couponPay.value == ""){
+				alert("할인 금액을 입력해 주세요.");
+				return false;
+			}else if(Type == "normal"){
+				if(form.couponPay.value < 0){
+					alert("양수로 입력해 주세요.");
+					return false;
+				}else{
+				form.submit();
+			}
+			}else if(Type == "percent"){
+				if(form.couponPay.value > 100){
+					alert("퍼센트는 100보다 작게 입력해야 합니다.");
+					return false;
+				}else{
+				form.submit();
+				}
+			}
+		}else {
+			alert("시작일과 종료일중 하나만 입력 하실수 없습니다.");
+            return false;
+		}
+
+		
+	}
 
 </script>
 
