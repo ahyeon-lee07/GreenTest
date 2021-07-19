@@ -15,4 +15,10 @@ public interface MasterService {
 	//쿠폰등록
 	public int couponAdd(CouponVO coupon) throws DataAccessException;
 
+	//리스트 개수
+	public int listCount() throws DataAccessException;
+
+	//쿠폰 사용여부 변경
+	public int useYNChk(Map<String, Object> paramMap) throws DataAccessException;
+
 }

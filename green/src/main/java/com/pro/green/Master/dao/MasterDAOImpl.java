@@ -27,4 +27,16 @@ public class MasterDAOImpl implements MasterDAO {
 		int result = sqlSession.insert("mapper.master.couponAdd", coupon);
 		return result;
 	}
+
+	// 리스트 개수
+	public int listCount() throws DataAccessException {
+		int result = sqlSession.selectOne("mapper.master.listCount");
+		return result;
+	}
+
+	// 쿠폰 사용여부 변경
+	public int useYNChk(Map<String, Object> paramMap) throws DataAccessException {
+		int result = sqlSession.update("mapper.master.useYNChk", paramMap);
+		return result;
+	}
 }

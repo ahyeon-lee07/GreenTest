@@ -67,9 +67,6 @@ request.setCharacterEncoding("UTF-8");
 	href="${contextPath }/resources/css/greenStyle.css">
 
 <link rel="stylesheet" href="${contextPath }/resources/css/chan.css">
-<link rel="stylesheet" href="${contextPath }/resources/css/yeon.css">
-<link rel="stylesheet" href="${contextPath }/resources/css/jin.css">
-<link rel="stylesheet" href="${contextPath }/resources/css/won.css">
 
 <title><tiles:insertAttribute name="title" /></title>
 </head>
@@ -88,10 +85,7 @@ request.setCharacterEncoding("UTF-8");
 
 	<script src="${contextPath }/resources/js/greenJs.js"></script>
 
-	<script src="${contextPath }/resources/js/chan.js"></script>
-	<script src="${contextPath }/resources/js/yeon.js"></script>
-	<script src="${contextPath }/resources/js/jin.js"></script>
-	<script src="${contextPath }/resources/js/won.js"></script>
+
 </body>
 
 </html>

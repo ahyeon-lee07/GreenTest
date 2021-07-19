@@ -61,7 +61,7 @@ request.setCharacterEncoding("UTF-8");
 								</c:otherwise>
 							</c:choose></td>
 						<td class="text-center align-middle px-2"><c:choose>
-								<c:when test="${list.pw == 'SNSJoin'}">
+								<c:when test="${list.pw == '$2a$10$/1H.vjB3Wl9GtF5YfTDoF.4/SuH/Vty7.g.7cXnLhqZjCwYT8tnSq'}">
 									<div class="text-black-50">SNS 가입 회원</div>
 								</c:when>
 								<c:otherwise>
