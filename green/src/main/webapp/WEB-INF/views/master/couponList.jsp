@@ -110,7 +110,7 @@ request.setCharacterEncoding("UTF-8");
 						<td class="text-center align-middle px-2">
 							<div class="bd-highlight">
 								<a
-									href="${contextPath }/couponList/couponEdit.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${list.couponId }">
+									href="${contextPath }/couponList/couponDetail.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&couponId=${list.couponId }">
 									<button type="button" class="btn btn-outline-secondary btn-sm"
 										style="font-size: 0.7rem; width: 100%; display: block;">상세정보</button>
 								</a>

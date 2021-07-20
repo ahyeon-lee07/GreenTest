@@ -286,4 +286,10 @@
 		<put-attribute name="title" value="쿠폰등록" />
 		<put-attribute name="main" value="/WEB-INF/views/master/couponAdd.jsp" />
 	</definition>
+	
+	<!-- 쿠폰상세 -->
+	<definition name="couponDetail" extends="baseLayout">
+		<put-attribute name="title" value="쿠폰상세" />
+		<put-attribute name="main" value="/WEB-INF/views/master/couponDetail.jsp" />
+	</definition>
 </tiles-definitions>

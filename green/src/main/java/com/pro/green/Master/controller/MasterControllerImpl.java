@@ -33,6 +33,9 @@ public class MasterControllerImpl implements MasterController {
 
 	@Autowired
 	private MasterService masterService;
+	
+	@Autowired
+	private CouponVO couponVO;
 
 	// 쿠폰관리
 	@Override
@@ -149,6 +152,36 @@ public class MasterControllerImpl implements MasterController {
 		mav.addObject("pageMaker", pageMaker);
 		mav.setViewName("couponList");
 
+		return mav;
+	}
+
+	// 쿠폰상세
+	@RequestMapping(value = "/couponList/couponDetail.do", method = RequestMethod.GET)
+	public ModelAndView couponDetail(@RequestParam("couponId") String couponId , HttpServletRequest request, Criteria cri) throws Exception {
+
+		ModelAndView mav = new ModelAndView();
+		PageMaker pageMaker = new PageMaker();
+		HttpSession session = request.getSession();
+		
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+
+		// 관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
+		sessionChk(mav, sessinLogin, "couponDetail");
+		
+		//쿠폰정보
+		CouponVO couponInf = new CouponVO();
+		couponInf = masterService.selectCoupon(couponId);
+		
+		List<Map<String, Object>> memberList = masterService.memberList();
+		List<Map<String, Object>> hasCoupon = masterService.hasCouponList(couponId);
+		
+		
+
+		pageMaker.setCri(cri);
+		mav.addObject("page", cri.getPage());
+		mav.addObject("couponInf", couponInf);
+		mav.addObject("memberList", memberList);
+	
 		return mav;
 	}
 
