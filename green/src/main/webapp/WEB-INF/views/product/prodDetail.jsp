@@ -42,79 +42,81 @@ request.setCharacterEncoding("UTF-8");
 						<!-- 상품명 -->
 						<div class="row">
 							<div class="col-md-3">상품명 :</div>
-							<div class="col-md-9">${prodList.productName}</div>
+							<div class="col-md-9" id="prodName">${prodList.productName}</div>
 						</div>
 						<br>
 						<!-- 상품가격-->
 						<div class="row">
 							<div class="col-md-3">상품가격 :</div>
-							<div class="col-md-9">${prodList.price}</div>
+							<div class="col-md-9" id="price">
+								<fmt:formatNumber value="${prodList.price}" pattern="#,###" />
+								원
+							</div>
 						</div>
 						<br>
 						<!-- 배송비 -->
 						<div class="row">
 							<div class="col-md-3">배송비 :</div>
-							<div class="col-md-9">2500원</div>
+							<div class="col-md-9">2,500원</div>
 						</div>
 						<hr>
 						<!-- 색상/기종 -->
-						<form name="frm">
+						<div id="item_option">
 							<table width="500" align="center">
 								<tr>
 									<td align="left" width="120">색상/기종</td>
-									<td width="400"><select name="prodOption" id="prodOption"
-										class='total_cartAdd' style="width: 350px;">
-											<option value="">(필수)옵션 선택</option>
-											<c:forEach var="prodOption" items="${prodOption}" varStatus="index">
-												<option value="${prodOption}">${prodOption.p_option}</option>
+									<td width="400"><select name="p_option" id="p_option">
+											<option value="">=== (필수)옵션 : 색상/기종 선택 ===</option>
+											<c:forEach var="prodOption" items="${prodOption}"
+												varStatus="index">
+												<option value="${prodOption.p_option}">${prodOption.p_option}</option>
 											</c:forEach>
 									</select></td>
 								</tr>
 							</table>
-						</form>
-						<hr>
-						<!-- 선택한 상품-->
-						<div class="row">
-							<div class="col-md-5">선택된 상품명</div>
-							<div class="col-md-4">선택된 상품의 수량</div>
-							<div class="col-md-3">금액</div>
-						</div>
+							<hr>
+							<!-- 선택한 상품-->
+							<form id="frm" name="frm" method="post">
+								<div>
+									<table width="100%" id="dynamicTable" border=1>
+										<thead align="center">
+											<tr>
+												<td>색상/기종</td>
+												<td>수량</td>
+												<td>가격</td>
+											</tr>
+										</thead>
+										<tbody align="center" id="dynamicTbody">
+										</tbody>
+									</table>
+								</div>
+							</form>
+							<!-- 총 가격-->
+							<div class="totals-item totals-item-total"
+								style="float: left; margin-left: 400px;">
+								<label class="total_price">총상품금액</label>&nbsp;&nbsp;
+								<div class="total_price" style="float: right;">원</div>
+								<div class="totals-value" id="cart-total" style="float: right;">0</div>
+							</div>
+							<br>
+							<!-- 바로구매/장바구니/관심상품 버튼-->
+							<table>
+								<tr>
+									<td><hr style="border-top: 1px solid #bbb;" width=670px>
+									<td>
+								</tr>
+							</table>
 
-						<form id="frm" name="frm" method="post">
-							<div>
-								<table style="border: 1px;" id="dynamicTable">
-									<thead>
-									</thead>
-									<tbody id="dynamicTbody">
-									</tbody>
-								</table>
-							</div>
-						</form>
-
-						<!-- 총 가격-->
-						<hr>
-						<div class="row">
-							<div class="col-md-4"></div>
-							<div class="col-md-2"></div>
-							<div class="col-md-3">총 가격 :</div>
-							<div class="col-md-3">10000원</div>
-						</div>
-						<br>
-						<!-- 바로구매/장바구니/관심상품 버튼-->
-						<div class="d-flex justify-content-around">
-							<div class="p-2 bd-highlight">
-								<a href="${contextPath}/orderList.do"
-									class="btn btn-lg btn-outline-success"> 바로구매</a>
-							</div>
-							<div class="p-2 bd-highlight">
-								<a href="${contextPath}/cart.do"
-									class="btn btn-lg btn-outline-success"
-									onclick="cart_checkform()">장바구니</a>
-							</div>
-							<div class="p-2 bd-highlight">
-								<a href="${contextPath}/wist_list.do"
-									class="btn btn-lg btn-outline-success"> 관심상품</a>
-							</div>
+							<button style="width: 150px; height: 58px;"
+								class="btn btn-outline-success" id="insertLike"
+								onclick="fn_InsertLike()">관심상품</button>
+							<button style="width: 150px; height: 58px;"
+								class="btn btn-outline-success" id="insertBasket"
+								onclick="fn_InsertBasket()">장바구니</button>
+							<button style="width: 150px; height: 58px;"
+								class="btn btn-outline-success" id="goodsOrder"
+								onclick="fn_GoodsOrder()">바로구매</button>
+							<br>
 						</div>
 					</div>
 				</div>
@@ -163,14 +165,6 @@ request.setCharacterEncoding("UTF-8");
 							<div class="text-center">
 								<!-- Product name-->
 								<h5 class="fw-bolder">곰귤 케이스</h5>
-								<!-- Product reviews-->
-								<!-- <div class="d-flex justify-content-center small text-warning mb-2">
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
-								</div> -->
 								<!-- Product price-->
 								12000원
 							</div>
@@ -218,15 +212,6 @@ request.setCharacterEncoding("UTF-8");
 							<div class="text-center">
 								<!-- Product name-->
 								<h5 class="fw-bolder">곰귤 케이스</h5>
-								<!-- Product reviews-->
-								<!-- <div
-									class="d-flex justify-content-center small text-warning mb-2">
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
-								</div> -->
 								<!-- Product price-->
 								12000원
 							</div>
@@ -332,8 +317,231 @@ request.setCharacterEncoding("UTF-8");
 
 <!-- 장바구니 -->
 <script type="text/javascript">
-<<<<<<< HEAD
 	function cart_checkform() {
 		alert("해당 상품을 장바구니에 담았습니다!");
 	}
+	
+	<!-- 옵션 js -->
+	$('#prodOption').change(function() {
+		
+		var html = "";
+		var option = document.getElementById('prodOption').value;
+		var cnt = 1;
+		var price = ${prodList.price};
+
+		html += '<tr>';
+		html += '<td>'+option+'</td>'
+		html += '<td>'+cnt+'</td>';
+		html += '<td>'+price+'</td>';
+		html += '</tr>';
+
+		$("#dynamicTable").append(html);
+			
+		$("#cnt").val('');
+
+	}
+	)
+
+var cnt = $('#dynamicTable table').length+1;
+$('#prodOption').change(function() {
+	
+	var optionList = document.getElementById('prodOption').value;
+	if(optionList != ''){
+	alert("색상/옵션을 선택하세요.");
+	return false;
+	}else{
+		var html = "";
+		var option = document.getElementById('prodOption').value;
+		var price = $("#price").val();
+		
+		var totalCount = ${optionCnt};
+		
+		for(var i=1; i<=totalCount+30; i++) {
+	    	if(color == $("#nOption"+i+"").text()) {
+	    		document.getElementById('prodOption').value = null;
+	     	    alert("이미 선택된 옵션입니다.");
+	            return false;
+	    	}
+		}	
+		html = " <table class='total_cartAdd' style='border:1px solid #bdbebd; width:600px; height:100px; margin-top:0px;' class='fieldx"+cnt+"'> "
+			 + " <tr>"
+			 + " <td width='70px'>상품명 : </td>"
+			 + " <td> "
+			 + $("#goodsName").text()
+		     + " </td> "
+		     + " <td> "   
+	 		 + " <div id='field"+cnt+"' class='field"+cnt+"'> " 
+	 		 + " <div class='shopping-cart'> "
+	 		 + " <div class='product'> "
+		     + " <div class='product-quantity'> "
+		     + " <input name='BASKET_GOODS_AMOUNT' type='number' value='1' min='1' style='width:50px; text-align:center; margin-left:250px; float:left;'> </div> "
+		     + " <div class='product-removal"+cnt+"'> "
+		     + " </div> "
+		     + " <div class='product-line-price' style='float:left; margin-left:10px;' id='price_sell' price_sell='"+${list.GOODS_SELL_PRICE}+"' >"+numberWithCommas(${list.GOODS_SELL_PRICE})+"</div> "
+		     + " <div class='product-removal"+cnt+"'> "
+		     + " <button class='remove-product' style='float:left; margin-left:10px;'> "
+		     + " X "
+		     + " </button>"
+		     + " </div> "
+		     + " </div> " 
+		     + " </td> "
+		     + " </tr> "
+		     + " <tr> "
+		     + " <td>색상 :</td> "
+		     + " <td id='nColor"+cnt+"'>"+color+"</td> "
+		     + " <td></td> "
+		     + " </tr> "
+		     + " <tr> "
+		     + " <td>사이즈 : </td> "
+		     + " <td id='nSize"+cnt+"'>"+size+"</td> "
+		     + " <td></td> "
+		     + " </tr> "
+			 + " <input type='hidden' name='ORDER_COLOR' id='ORDER_COLOR' value='"+color+"'> "
+			 + " <input type='hidden' name='ORDER_SIZE' id='ORDER_SIZE' value='"+size+"'> "
+			 + " <input type='hidden' name='IDX' id='IDX' value='"+${list.GOODS_NO}+"'> "
+			 + " </table> ";
+			 	
+		$("#dynamicTable").append(html);
+		
+		if($('#field'+cnt+'')) {
+			recalculateCart();
+			var hap = ${list.GOODS_SELL_PRICE}*cnt;
+			var num = numberWithCommas(hap);
+			$('.totals-value').text(num);
+		}
+		
+		$("#ColorList").val('');
+		$("#SizeList").val('');
+		$('.product-removal'+cnt+' button').click( function() {
+			  //removeItem(this);
+			  $(this).parent().parent().parent().parent().parent().parent().parent().parent().remove();
+			  recalculateCart();
+		});
+		
+		cnt++;
+		
+	 } 
+		/* Set rates + misc */
+		var fadeTime = 300;
+		/* Assign actions */
+		$('.product-quantity input').change( function() {
+		  updateQuantity(this);
+		});
+		
+		/* Recalculate cart */
+		function recalculateCart()
+		{
+		  var subtotal = 0;
+		  $('.product').each(function () {
+		    subtotal += parseInt($(this).children('.product-line-price').text().replace(',',''));
+		  });
+		  
+		  /* Calculate totals */
+		  var total = subtotal;
+		  
+		  /* Update totals display */
+		  $('.totals-value').fadeOut(fadeTime, function() {
+		    $('#cart-total').html(numberWithCommas(total));
+		    if(total == 0){
+		      $('.checkout').fadeOut(fadeTime);
+		    }else{
+		      $('.checkout').fadeIn(fadeTime);
+		    }
+		    $('.totals-value').fadeIn(fadeTime);
+		  });
+		}
+		/* Update quantity */
+		function updateQuantity(quantityInput) {
+			
+		  /* Calculate line price */
+		  var productRow = $(quantityInput).parent().parent();
+		  var price = ${list.GOODS_SELL_PRICE};
+		  var quantity = $(quantityInput).val();
+		  var linePrice = price * quantity;
+		  
+		  /* Update line price display and recalc cart totals */
+		  productRow.children('.product-line-price').each(function () {
+		    $(this).fadeOut(fadeTime, function() {
+		      $(this).text(numberWithCommas(linePrice));
+		      recalculateCart();
+		      $(this).fadeIn(fadeTime);
+		    });
+		  });
+		}
+	
+}); 
+	/* 수량 체인지 */
+$('.add').click(function () {
+	if ($(this).prev().val() < 3) {
+	$(this).prev().val(+$(this).prev().val() + 1);
+	}
+});
+$('.sub').click(function () {
+	if ($(this).next().val() > 1) {
+	if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
+	}
+});
+
+
+<!--
+function fn_InsertLike() { // 좋아요
+if(${SESSION_NO ne null}){
+	var comSubmit = new ComSubmit();
+	comSubmit.setUrl("<c:url value='/shop/goodsLike.do'/>");
+	comSubmit.addParam("GOODS_NO", ${list.GOODS_NO});
+	comSubmit.submit();
+}else {
+	alert("로그인 후 이용해주세요.");
+	location.href = "/stu/loginForm.do";
+}
+
+
+}
+function fn_GoodsOrder() { // 구매하기
+if(doubleSubmitCheck()) return; // 중복클릭 방지
+if(${SESSION_NO ne null}){
+	var arraycode = document.getElementsByName("BASKET_GOODS_AMOUNT");
+	var len = arraycode.length;
+	if(len==0){
+		alert("상품을 추가해 주세요.");
+	}else{
+		var comSubmit = new ComSubmit("frm");
+		comSubmit.setUrl("<c:url value='/shop/goodsOrder.do'/>");
+		comSubmit.submit();
+	}
+}else {
+	alert("로그인 후 이용해주세요.");
+	location.href = "/stu/loginForm.do";
+}
+
+}
+function fn_InsertBasket() { // 장바구니
+
+if(doubleSubmitCheck()) return; // 중복클릭 방지
+if(${SESSION_NO ne null}){
+	var arraycode = document.getElementsByName("BASKET_GOODS_AMOUNT");
+	var len = arraycode.length;
+	if(len==0){
+		alert("상품을 추가해 주세요.");
+	}else{
+		var url = "/stu/shop/basketPopUp.do";
+		var name = "popup";
+		var option = "width=382, height=227, top=500, left=800, location=no";
+		
+	    var comSubmit = new ComSubmit("frm");
+		comSubmit.setUrl("<c:url value='/shop/insertBasket.do'/>");
+		window.open(url,name,option);
+		comSubmit.submit();
+	}
+}else {
+	alert("로그인 후 이용해주세요.");
+	location.href = "/stu/loginForm.do";
+}
+
+}
+-->
+
+	
+	
+	
 </script>
