@@ -45,13 +45,13 @@ request.setCharacterEncoding("UTF-8");
 					</th>
 					<th
 						class="text-center border-bottom-0 align-middle border-top-0 px-1"
-						style="width: 230px">쿠폰아이디</th>
+						style="width: 200px">쿠폰아이디</th>
 					<th class="text-center border-bottom-0 border-top-0 px-2"
 						style="width: auto">쿠폰명</th>
 					<th class="text-center border-bottom-0 border-top-0 px-2"
-						style="width: 150px">할일금액</th>
+						style="width: 100px">할일금액</th>
 					<th class="text-center border-bottom-0 border-top-0 px-2"
-						style="width: 200px">사용기간</th>
+						style="width: 160px">사용기간</th>
 					<th class="text-center border-bottom-0 border-top-0 px-2"
 						style="width: 150px">등록날짜</th>
 					<th class="text-center border-bottom-0 border-top-0 px-2"
@@ -110,7 +110,7 @@ request.setCharacterEncoding("UTF-8");
 						<td class="text-center align-middle px-2">
 							<div class="bd-highlight">
 								<a
-									href="${contextPath }/memberList/memberEdit.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${list.couponId }">
+									href="${contextPath }/couponList/couponEdit.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${list.couponId }">
 									<button type="button" class="btn btn-outline-secondary btn-sm"
 										style="font-size: 0.7rem; width: 100%; display: block;">상세정보</button>
 								</a>

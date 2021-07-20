@@ -102,7 +102,7 @@ request.setCharacterEncoding("UTF-8");
 					<div class="row py-2 mt-3">
 						<div class="d-flex flex-fill justify-content-between">
 							<div class="bd-highlight">
-								<a href="${contextPath }/master/couponList.do"><button type="button"
+								<a href="${contextPath }/couponList.do"><button type="button"
 										class="btn btn-outline-secondary">취소</button></a>
 							</div>
 							<div class="d-highlight">
