@@ -15,7 +15,7 @@ request.setCharacterEncoding("UTF-8");
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
-				<h4 class="page_title">쿠폰등록</h4>
+				<h4 class="page_title">쿠폰상세</h4>
 			</div>
 			<div class="bd-highlight page_subtitle">
 				<nav aria-label="breadcrumb">
