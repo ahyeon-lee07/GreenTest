@@ -38,4 +38,9 @@ public class MasterServiceImpl implements MasterService {
 	public int useYNChk(Map<String, Object> paramMap) throws DataAccessException {
 		return masterDAO.useYNChk(paramMap);
 	}
+
+	// ÄíÆù °Ë»ö
+	public List<Map<String, Object>> searchCouponList(Map<String, Object> searchOption) throws DataAccessException{
+		return masterDAO.searchCouponList(searchOption);
+	}
 }

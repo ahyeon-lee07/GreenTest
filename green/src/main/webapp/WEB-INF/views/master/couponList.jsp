@@ -126,22 +126,20 @@ request.setCharacterEncoding("UTF-8");
 		<div class="row justify-content-between px-3 mt-3">
 			<div class="">
 				<div class="btn-group">
-					<form action="${contextPath }/memberList/search.do" method="GET"
+					<form action="${contextPath }/couponList/search.do" method="GET"
 						name="searchBox">
 						<div class="form-row">
 							<div class="form-group d-flex justify-content-start ">
 								<select id="inputState" class="form-control form-control-sm"
 									name="searchKeyWordOption" style="width: 98px;">
-									<option value="name" selected>이름</option>
-									<option value="id">아이디</option>
+									<option value="couponName" selected>쿠폰명</option>
+									<option value="couponId">쿠폰아이디</option>
 								</select> <input class="form-control form-control-sm mx-2" type="text"
 									placeholder="" name="keyWord">
 								<button type="submit" class="btn btn-secondary btn-sm col-2"
 									onclick="return search()">검색</button>
 							</div>
 						</div>
-						<input type="text" name="searchOptions" value="${options }"
-							style="display: none">
 					</form>
 				</div>
 			</div>

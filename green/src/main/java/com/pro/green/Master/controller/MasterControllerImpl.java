@@ -123,6 +123,35 @@ public class MasterControllerImpl implements MasterController {
 		return resEntity;
 	}
 
+	// 쿠폰리스트 검색 검색
+	@RequestMapping(value = "/couponList/search.do", method = RequestMethod.GET)
+	public ModelAndView couponListSearch(@RequestParam(value = "searchKeyWordOption") String searchKeyWordOption,
+			@RequestParam(value = "keyWord") String keyWord, HttpServletRequest request, Criteria cri)
+			throws Exception {
+
+		ModelAndView mav = new ModelAndView();
+		PageMaker pageMaker = new PageMaker();
+
+		int pageTotal = 0;
+
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(pageTotal);
+
+		Map<String, Object> searchOption = new HashMap<String, Object>();
+		searchOption.put("cri", cri);
+		searchOption.put("searchKeyWordOption", searchKeyWordOption);
+		searchOption.put("keyWord", keyWord);
+
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		list = masterService.searchCouponList(searchOption);
+
+		mav.addObject("couponList", list);
+		mav.addObject("pageMaker", pageMaker);
+		mav.setViewName("couponList");
+
+		return mav;
+	}
+
 	// 관리자 세션 체크 (ModelAndView, 세션정보, 접속할 화면 )
 	private ModelAndView sessionChk(ModelAndView mav, MemberVO sessinLogin, String view) throws Exception {
 		if (sessinLogin != null) {

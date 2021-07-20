@@ -39,4 +39,10 @@ public class MasterDAOImpl implements MasterDAO {
 		int result = sqlSession.update("mapper.master.useYNChk", paramMap);
 		return result;
 	}
+
+	// ÄíÆù °Ë»ö
+	public List<Map<String, Object>> searchCouponList(Map<String, Object> searchOption) throws DataAccessException{
+		List<Map<String, Object>> result = sqlSession.selectList("mapper.master.searchCouponList", searchOption);
+		return result;
+	}
 }
