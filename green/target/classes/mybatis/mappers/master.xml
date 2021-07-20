@@ -106,6 +106,25 @@
 			coupon.couponId = #{id};
 	 	]]>
 	</update>
+	
+	
+	<!-- 쿠폰 수정 -->
+	<update id="couponUpdate" parameterType="couponVO">
+    <![CDATA[
+       UPDATE
+			coupon
+		SET
+			couponName = #{couponName}, 
+		    couponContent = #{couponContent}, 
+		    discountType = #{discountType}, 
+		    couponPay = #{couponPay}, 
+		    couponPeroid_start = #{couponPeroid_start}, 
+		    couponPeroid_end = #{couponPeroid_end},  
+		    useYN = #{useYN}
+		WHERE
+			couponId = #{couponId}
+    ]]>
+	</update>
 
 	<!-- /수정========================================================================================== -->
 

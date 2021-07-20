@@ -33,7 +33,7 @@ request.setCharacterEncoding("UTF-8");
 		<div class="row border-bottom pm-2"></div>
 		<div class="row mb-4">
 			<div class="col-12">
-				<form action="${contextPath }/couponList/couponUpdate.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&couponId=${list.couponId }" name="couponAdd" method="POST">
+				<form action="${contextPath }/couponList/couponUpdate.do?couponId=${couponInf.couponId }" name="couponAdd" method="POST">
 				<div class="row border-bottom py-2">
 							<div class="col p-0">
 								<div class="d-flex bd-highlight">
@@ -228,7 +228,6 @@ request.setCharacterEncoding("UTF-8");
 			
 			var form = document.couponAdd;
 			var Type = inputState.value;
-			form.action = "";
 
 			var couponPeroidStart = document.getElementById('couponPeroid_start');
 			var couponPeroidEnd = document.getElementById('couponPeroid_end');

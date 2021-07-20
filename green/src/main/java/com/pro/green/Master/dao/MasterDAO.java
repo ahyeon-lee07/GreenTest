@@ -33,4 +33,7 @@ public interface MasterDAO {
 
 	// 쿠폰 보유 리스트 조회
 	public List<Map<String, Object>> hasCouponList(String couponId) throws DataAccessException;
+
+	// 쿠폰 내용 수정
+	public int couponUpdate(CouponVO coupon) throws DataAccessException;
 }

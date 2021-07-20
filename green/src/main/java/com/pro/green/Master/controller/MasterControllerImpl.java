@@ -33,7 +33,7 @@ public class MasterControllerImpl implements MasterController {
 
 	@Autowired
 	private MasterService masterService;
-	
+
 	@Autowired
 	private CouponVO couponVO;
 
@@ -157,33 +157,54 @@ public class MasterControllerImpl implements MasterController {
 
 	// 쿠폰상세
 	@RequestMapping(value = "/couponList/couponDetail.do", method = RequestMethod.GET)
-	public ModelAndView couponDetail(@RequestParam("couponId") String couponId , HttpServletRequest request, Criteria cri) throws Exception {
+	public ModelAndView couponDetail(@RequestParam("couponId") String couponId, HttpServletRequest request,
+			Criteria cri) throws Exception {
 
 		ModelAndView mav = new ModelAndView();
 		PageMaker pageMaker = new PageMaker();
 		HttpSession session = request.getSession();
-		
+
 		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
 
 		// 관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
 		sessionChk(mav, sessinLogin, "couponDetail");
-		
-		//쿠폰정보
+
+		// 쿠폰정보
 		CouponVO couponInf = new CouponVO();
 		couponInf = masterService.selectCoupon(couponId);
-		
+
 		List<Map<String, Object>> memberList = masterService.memberList();
 		List<Map<String, Object>> hasCoupon = masterService.hasCouponList(couponId);
-		
-		
 
 		pageMaker.setCri(cri);
 		mav.addObject("page", cri.getPage());
 		mav.addObject("couponInf", couponInf);
 		mav.addObject("memberList", memberList);
-	
+		mav.addObject("hasCoupon", hasCoupon);
+
 		return mav;
 	}
+
+	// 쿠폰내용 수정
+	@RequestMapping(value = "/couponList/couponUpdate.do", method = RequestMethod.POST)
+	public ModelAndView couponUpdate(@RequestParam(value = "couponId") String couponId, @ModelAttribute("coupon") CouponVO coupon, HttpServletRequest request) throws Exception {
+
+		ModelAndView mav = new ModelAndView();
+		PageMaker pageMaker = new PageMaker();
+		HttpSession session = request.getSession();
+
+		MemberVO sessinLogin = (MemberVO) session.getAttribute("member");
+
+		// 관리자 세션 체크 (ModelAndView, 세션정보, "접속화면이름")
+		sessionChk(mav, sessinLogin, "redirect:/couponList.do");
+
+		// 수정
+		int result = masterService.couponUpdate(coupon);
+
+		return mav;
+	}
+	
+	
 
 	// 관리자 세션 체크 (ModelAndView, 세션정보, 접속할 화면 )
 	private ModelAndView sessionChk(ModelAndView mav, MemberVO sessinLogin, String view) throws Exception {

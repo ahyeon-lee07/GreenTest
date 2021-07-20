@@ -59,4 +59,9 @@ public class MasterServiceImpl implements MasterService {
 	public List<Map<String, Object>> hasCouponList(String couponId) throws DataAccessException {
 		return masterDAO.hasCouponList(couponId);
 	}
+
+	// 쿠폰 내용 수정
+	public int couponUpdate(CouponVO coupon) throws DataAccessException {
+		return masterDAO.couponUpdate(coupon);
+	}
 }

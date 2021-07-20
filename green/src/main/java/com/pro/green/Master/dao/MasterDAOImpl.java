@@ -64,4 +64,10 @@ public class MasterDAOImpl implements MasterDAO {
 		List<Map<String, Object>> result = sqlSession.selectList("mapper.master.hasCouponList", couponId);
 		return result;
 	}
+	
+	// 쿠폰 내용 수정
+	public int couponUpdate(CouponVO coupon) throws DataAccessException {
+		int result = sqlSession.update("mapper.master.couponUpdate", coupon);
+		return result;
+	}
 }
