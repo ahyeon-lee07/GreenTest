@@ -65,6 +65,31 @@
 		ORDER BY couponDate DESC LIMIT #{cri.pageStart}, #{cri.perPageNum};
     ]]>
 	</select>
+	
+	<!-- 쿠폰정보 조회 -->
+	<select id="selectCoupon" resultType="couponVO" parameterType="String">
+    <![CDATA[
+       SELECT 
+			*
+		FROM 
+			coupon
+		WHERE
+			coupon.couponId = #{couponId};
+    ]]>
+	</select>
+	
+	<!-- 쿠폰보유회원 조회 -->
+	<select id="hasCouponList" resultType="hashmap" parameterType="String">
+    <![CDATA[
+       SELECT
+			*
+		FROM
+			member_has_coupon
+		WHERE
+			couponId = #{couponId};
+    ]]>
+	</select>
+	
 
 	<!-- /조회========================================================================================== -->
 

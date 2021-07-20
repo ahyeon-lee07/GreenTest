@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pro.green.Master.dao.MasterDAO;
 import com.pro.green.Master.vo.CouponVO;
+import com.pro.green.member.vo.MemberVO;
 import com.pro.green.product_M.vo.Criteria;
 
 @Service("masterService")
@@ -40,7 +41,22 @@ public class MasterServiceImpl implements MasterService {
 	}
 
 	// 쿠폰 검색
-	public List<Map<String, Object>> searchCouponList(Map<String, Object> searchOption) throws DataAccessException{
+	public List<Map<String, Object>> searchCouponList(Map<String, Object> searchOption) throws DataAccessException {
 		return masterDAO.searchCouponList(searchOption);
+	}
+
+	// 쿠폰정보 조회
+	public CouponVO selectCoupon(String productId) throws DataAccessException {
+		return masterDAO.selectCoupon(productId);
+	}
+
+	// 회원 리스트
+	public List<Map<String, Object>> memberList() throws DataAccessException {
+		return masterDAO.memberList();
+	}
+
+	// 쿠폰 보유 리스트 조회
+	public List<Map<String, Object>> hasCouponList(String couponId) throws DataAccessException {
+		return masterDAO.hasCouponList(couponId);
 	}
 }
