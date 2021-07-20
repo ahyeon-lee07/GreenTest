@@ -3,7 +3,7 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mapper.master">
+<mapper namespace="mapper.master"> 
 	<resultMap id="couponResult" type="couponVO">
 		<result property="couponId" column="couponId" />
 		<result property="couponName" column="couponName" />
@@ -49,6 +49,20 @@
 			COUNT(*)
 		FROM 
 			coupon
+    ]]>
+	</select>
+	
+	<!-- 쿠폰리스트 검색 -->
+	<select id="searchCouponList" resultType="hashmap"
+		parameterType="hashmap">
+    <![CDATA[
+        SELECT 
+			*
+		FROM 
+			coupon
+		WHERE
+			${searchKeyWordOption} LIKE CONCAT('%', #{keyWord}, '%')
+		ORDER BY couponDate DESC LIMIT #{cri.pageStart}, #{cri.perPageNum};
     ]]>
 	</select>
 

@@ -409,7 +409,6 @@ public class MemberControllerImpl implements MemberController {
 		ModelAndView mav = new ModelAndView();
 		PageMaker pageMaker = new PageMaker();
 
-		// int pageTotal = productService.countBoardListTotal();
 		int pageTotal = 0;
 
 		pageMaker.setCri(cri);

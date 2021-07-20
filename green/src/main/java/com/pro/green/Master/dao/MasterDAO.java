@@ -21,4 +21,7 @@ public interface MasterDAO {
 	// 쿠폰 사용여부 변경
 	public int useYNChk(Map<String, Object> paramMap) throws DataAccessException;
 
+	// 쿠폰 검색
+	public List<Map<String, Object>> searchCouponList(Map<String, Object> searchOption) throws DataAccessException;
+
 }
