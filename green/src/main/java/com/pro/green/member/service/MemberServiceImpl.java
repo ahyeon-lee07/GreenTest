@@ -1,10 +1,13 @@
 package com.pro.green.member.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,29 +69,63 @@ public class MemberServiceImpl implements MemberService {
 	public int memeberDelete(MemberVO member) throws Exception {
 		return memberDAO.memberDelete(member);
 	}
-	
-	//회원수 조회
+
+	// 회원수 조회
 	public int memberCount() throws Exception {
 		return memberDAO.memberCount();
 	}
-	
-	//회원 조회
+
+	// 회원 조회
 	public List<Map<String, Object>> selectMemberList(Criteria cri) throws Exception {
 		return memberDAO.selectMemberList(cri);
 	}
-	
-	//회원 검색
+
+	// 회원 검색
 	public List<Map<String, Object>> searchMemberList(Map<String, Object> searchOption) throws Exception {
 		return memberDAO.searchMemberList(searchOption);
 	}
-	
-	//회원상세내용
-	public MemberVO memberDetail(String productId) throws Exception{
+
+	// 회원상세내용
+	public MemberVO memberDetail(String productId) throws Exception {
 		return memberDAO.memberDetail(productId);
 	}
-	
-	//회원관리 수정
+
+	// 회원관리 수정
 	public int editMember_master(MemberVO memberInf) throws Exception {
 		return memberDAO.editMember_master(memberInf);
+	}
+
+	
+	
+	
+	// 배치프로그램 테스트
+	@Scheduled(cron = "0 0 1 * *")
+	public void scheduleRun() {
+
+		String batchResult = "성공";
+
+		try {
+
+			List<MemberVO> selectRetireUsers = memberDAO.selectRetireUsers();
+
+			if (selectRetireUsers != null) {
+
+				for (int i = 0; i < selectRetireUsers.size(); i++) {
+					MemberVO memberVO = selectRetireUsers.get(i);
+
+					int chan = memberDAO.addMember(memberVO);
+				}
+
+			}
+
+		} catch (Exception e) {
+			batchResult = "실패";
+		}
+
+		Calendar calendar = Calendar.getInstance();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		System.out.println("스케줄 싱행: [" + batchResult + "] " + dateFormat.format(calendar.getTime()));
+
 	}
 }

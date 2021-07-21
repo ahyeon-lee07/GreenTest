@@ -156,4 +156,28 @@
 			member
     ]]>
 	</select>
+	
+	
+	<!--  배치프로그램 테스트  -->
+	<select id="selectRetireUsers" resultType="memberVO">
+    <![CDATA[
+        SELECT 
+			id
+		FROM
+			member
+		WHERE
+			DATE_FORMAT(joinDate, '%Y-%m-%d') < DATE_FORMAT(CURDATE(), '%Y-%m-%d');
+    ]]>
+    
+	</select>
+	<insert id="addMember"  parameterType="memberVO">
+		<![CDATA[
+		UPDATE 
+			member
+		SET 
+			mileage = mileage + 1
+		WHERE
+			member.id = #{id};
+		]]>      
+	</insert>
 </mapper>

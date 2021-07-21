@@ -3,6 +3,7 @@ package com.pro.green.member.service;
 import static org.junit.Assert.*;
 
 import org.apache.ibatis.session.SqlSession;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -56,6 +57,16 @@ public class MemberServiceTest {
 		String chan = memberDAO.selectOverlappedID(id);
 		
 		return chan;
+	}
+    
+    @Before
+	public void beforeClass() {
+		System.out.println("-----테스트 시작-----");
+	}
+	
+	@After
+	public void afterClass() {
+		System.out.println("-----테스트 종료-----");
 	}
 
 	@Test
