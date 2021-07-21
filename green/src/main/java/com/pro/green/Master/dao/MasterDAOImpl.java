@@ -64,10 +64,23 @@ public class MasterDAOImpl implements MasterDAO {
 		List<Map<String, Object>> result = sqlSession.selectList("mapper.master.hasCouponList", couponId);
 		return result;
 	}
-	
+
 	// 쿠폰 내용 수정
 	public int couponUpdate(CouponVO coupon) throws DataAccessException {
 		int result = sqlSession.update("mapper.master.couponUpdate", coupon);
 		return result;
 	}
+
+	// member_has_coupon 테이블 등록
+	public int hasCouponAdd(Map<String, Object> paramMap) throws DataAccessException {
+		int result = sqlSession.insert("mapper.master.hasCouponAdd", paramMap);
+		return result;
+	}
+
+	// member_has_coupon 테이블 삭제
+	public int hasCouponDelete(Map<String, Object> paramMap) throws DataAccessException {
+		int result = sqlSession.delete("mapper.master.hasCouponDelete", paramMap);
+		return result;
+	}
+
 }

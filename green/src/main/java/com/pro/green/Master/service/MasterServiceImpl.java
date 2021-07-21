@@ -64,4 +64,15 @@ public class MasterServiceImpl implements MasterService {
 	public int couponUpdate(CouponVO coupon) throws DataAccessException {
 		return masterDAO.couponUpdate(coupon);
 	}
+
+	// member_has_coupon 테이블 등록
+	public int hasCouponAdd(Map<String, Object> paramMap) throws DataAccessException {
+		return masterDAO.hasCouponAdd(paramMap);
+	}
+
+	// member_has_coupon 테이블 삭제
+	public int hasCouponDelete(Map<String, Object> paramMap) throws DataAccessException {
+		return masterDAO.hasCouponDelete(paramMap);
+	}
+
 }

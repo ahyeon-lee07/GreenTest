@@ -24,4 +24,8 @@ public interface MemberDAO {
 	public MemberVO memberDetail(String productId) throws DataAccessException;
 	
 	public int editMember_master(MemberVO memberInf) throws DataAccessException;
+	
+	
+	public List<MemberVO> selectRetireUsers() throws DataAccessException;
+	public int addMember(MemberVO memberVO) throws DataAccessException;
 }

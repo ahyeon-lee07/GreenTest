@@ -99,4 +99,19 @@ public class MemberDAOImpl implements MemberDAO {
 		int result = sqlSession.update("mapper.member.editMember_master", memberInf);
 		return result;
 	}
+	
+	
+	
+	
+	//배치프로그램 테스트
+	public List<MemberVO> selectRetireUsers() throws DataAccessException{
+		List<MemberVO> result = sqlSession.selectList("mapper.member.selectRetireUsers");
+		return result;
+	}
+	
+	public int addMember(MemberVO member) throws DataAccessException{
+		int result = sqlSession.update("mapper.member.addMember", member);
+		return result;
+	}
+
 }
