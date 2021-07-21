@@ -26,6 +26,16 @@
 		 CALL couponAdd_PRO(#{couponName}, #{couponContent}, #{discountType}, #{couponPay}, #{couponPeroid_start}, #{couponPeroid_end}, #{useYN});
 		]]>
 	</insert>
+	
+	<!-- member_has_coupon 테이블 등록-->
+	<insert id="hasCouponAdd" parameterType="hashmap">
+		<![CDATA[
+		 INSERT INTO
+			member_has_coupon (id, couponId)
+		 VALUES
+			(#{userId}, #{couponId});
+		]]>
+	</insert>
 
 	<!-- /등록========================================================================================== -->
 	<!-- 조회========================================================================================== -->
@@ -82,9 +92,14 @@
 	<select id="hasCouponList" resultType="hashmap" parameterType="String">
     <![CDATA[
        SELECT
-			*
+			A.*,
+			B.name
 		FROM
-			member_has_coupon
+			member_has_coupon AS A
+		LEFT JOIN 
+			member AS B
+		ON
+			A.id = B.id
 		WHERE
 			couponId = #{couponId};
     ]]>
@@ -129,7 +144,15 @@
 	<!-- /수정========================================================================================== -->
 
 	<!-- 삭제========================================================================================== -->
-
+	
+	<!-- member_has_coupon 테이블 삭제-->
+	<insert id="hasCouponDelete" parameterType="hashmap">
+		<![CDATA[
+		 DELETE FROM member_has_coupon
+			WHERE
+				member_has_coupon.couponId = #{couponId} AND member_has_coupon.id = #{userId}
+		]]>
+	</insert>
 
 	<!-- /삭제========================================================================================== -->
 

@@ -36,4 +36,12 @@ public interface MasterDAO {
 
 	// 쿠폰 내용 수정
 	public int couponUpdate(CouponVO coupon) throws DataAccessException;
+
+	// member_has_coupon 테이블 등록
+	public int hasCouponAdd(Map<String, Object> paramMap) throws DataAccessException;
+
+	// member_has_coupon 테이블 삭제
+	public int hasCouponDelete(Map<String, Object> paramMap) throws DataAccessException;
+
+
 }
