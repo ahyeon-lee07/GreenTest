@@ -186,30 +186,88 @@ public class BoardControllerImpl implements BoardController {
 		return resEnt;
 	}
 
-	// 이벤트 목록
+	// 이벤트 글 목록
 	@Override
-	@RequestMapping(value = "/listEvent.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView listEvent(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		List<ArticleVO> listEvent = boardService.listEvent();
+	@RequestMapping(value = "/eventList.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView event(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		List eventList = boardService.eventList(); // 모든 글 정보 조회
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("listEvent", listEvent);
+		mav.addObject("eventList", eventList);
 		return mav;
+
 	}
 
 	// 이벤트 상세페이지
-	@RequestMapping(value = "/viewEvent.do", method = RequestMethod.GET)
-	public ModelAndView viewEvent(@RequestParam("eventNum") int eventNum, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		articleVO = boardService.viewEvent(eventNum);
+	@RequestMapping(value = "/eventPage.do", method = RequestMethod.GET)
+	public ModelAndView eventPage(@RequestParam("eventNum") int eventNum,
+				 HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		Map articleMap = boardService.eventPage(eventNum);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
-		mav.addObject("viewEvent", articleVO);
+		mav.addObject("articleMap", articleMap);
+		return mav;
+	}
+		
+	// 이벤트 글쓰기 창
+	@RequestMapping(value = "/eventWrite.do", method = RequestMethod.GET)
+	public ModelAndView eventWrite(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
 		return mav;
 	}
 
-	// 이벤트 삭제하기
+	// 이벤트 글 추가
+	@Override
+	@RequestMapping(value = "/addNewEvent.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity addNewEvent(MultipartHttpServletRequest multipartRequest,
+			HttpServletResponse response) throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+		Map<String, Object> articleMap = new HashMap<String, Object>();
+		Enumeration enu = multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+				String value = multipartRequest.getParameter(name);
+				articleMap.put(name,value);
+		}
+
+		HttpSession session = multipartRequest.getSession(); 
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String id = memberVO.getId();
+		articleMap.put("eventNum", 0);
+		articleMap.put("id", id);
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			int eventNum = boardService.addNewEvent(articleMap);
+			message = "<script>";
+			message += "alert('새 글을 추가했습니다.');";
+			message += "location.href='"
+						+multipartRequest.getContextPath()+"/eventList.do';";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+				
+		}catch (Exception e) {
+			message = "<script>";
+			message += "alert('오류가 발생했습니다. 다시 시도해 주세요.');');";
+			message += "location.href='"
+						+multipartRequest.getContextPath()+"/eventWrite.do';";
+			message +="</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+			return resEnt;
+	}
+
+	// 이벤트 글 수정
+
+		
+	// 이벤트 글 삭제
 	@Override
 	@RequestMapping(value = "/removeEvent.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -224,98 +282,17 @@ public class BoardControllerImpl implements BoardController {
 			boardService.removeEvent(eventNum);
 			message = "<script>";
 			message += " alert('글을 삭제했습니다.');";
-			message += " location.href='" + request.getContextPath() + "/listEvent.do';";
+			message += " location.href='" + request.getContextPath() + "/eventList.do';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 
 		} catch (Exception e) {
 			message = "<script>";
 			message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
-			message += " location.href='" + request.getContextPath() + "/viewEvent.do?eventNum=" + eventNum + "';";
+			message += " location.href='" + request.getContextPath() + "/eventPage.do?eventNum=" + eventNum + "';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
-		}
-		return resEnt;
-	}
-
-	// 이벤트 글쓰기
-	@Override
-	@RequestMapping(value = "/addNewEvent.do", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity addNewEvent(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
-			throws Exception {
-		multipartRequest.setCharacterEncoding("utf-8");
-		Map<String, Object> articleMap = new HashMap<String, Object>();
-		Enumeration enu = multipartRequest.getParameterNames();
-		while (enu.hasMoreElements()) {
-			String name = (String) enu.nextElement();
-			String value = multipartRequest.getParameter(name);
-			articleMap.put(name, value);
-		}
-		HttpSession session = multipartRequest.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("member");
-		String id = memberVO.getId();
-		articleMap.put("eventNum", 0);
-		articleMap.put("id", id);
-		String message;
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		try {
-			int eventNum = boardService.addNewEvent(articleMap);
-			message = "<script>";
-			message += " alert('새글을 추가했습니다.');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/listEvent.do'; ";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		} catch (Exception e) {
-			message = " <script>";
-			message += " alert('오류가 발생했습니다. 다시 시도해 주세요');');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/addNewEvent.do'; ";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-			e.printStackTrace();
-		}
-		return resEnt;
-	}
-
-	// 이벤트 수정
-	@RequestMapping(value = "/modEvent.do", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity modEvent(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
-			throws Exception {
-		multipartRequest.setCharacterEncoding("utf-8");
-		Map<String, Object> articleMap = new HashMap<String, Object>();
-		Enumeration enu = multipartRequest.getParameterNames();
-		while (enu.hasMoreElements()) {
-			String name = (String) enu.nextElement();
-			String value = multipartRequest.getParameter(name);
-			articleMap.put(name, value);
-		}
-
-		String eventNum = (String) articleMap.get("eventNum");
-		articleMap.put("eventNum", eventNum);
-		String message;
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		try {
-			boardService.modEvent(articleMap);
-
-			message = "<script>";
-			message += " alert('글을 수정했습니다.');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/viewEvent.do?eventNum=" + eventNum
-					+ "';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		} catch (Exception e) {
-			message = "<script>";
-			message += " alert('오류가 발생했습니다.다시 수정해주세요');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/board/viewArticle.do?eventNum="
-					+ eventNum + "';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		}
 		return resEnt;
 	}

@@ -14,12 +14,11 @@ public interface BoardService {
 	public void modNotice(Map articleMap) throws Exception;
 	
 	// 이벤트
-	public List<ArticleVO> listEvent() throws Exception;
-	public ArticleVO viewEvent(int eventNum) throws Exception;
-	public void removeEvent(int eventNum) throws Exception;
-	public int addNewEvent(Map articleMap) throws Exception;
-	public void modEvent(Map articleMap) throws Exception;
-	
+	public List<ArticleVO> eventList() throws Exception; // 글 목록
+	public Map eventPage(int eventNum) throws Exception; // 글 상세
+	public int addNewEvent(Map articleMap) throws Exception; // 글 추가
+	// 글 수정
+	public void removeEvent(int eventNum) throws Exception; // 글 삭제
 	
 	// QnA
 	public List<ArticleVO> listQnA() throws Exception;

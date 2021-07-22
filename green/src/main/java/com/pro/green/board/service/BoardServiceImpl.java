@@ -50,35 +50,34 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.updateNotice(articleMap);
 	}
 
-	// 이벤트 목록
-	public List<ArticleVO> listEvent() throws Exception {
-		List<ArticleVO> listEvent = boardDAO.selectAllEventList();
-		return listEvent;
+	// 이벤트 글 목록
+	public List<ArticleVO> eventList() throws Exception {
+		List<ArticleVO> eventList = boardDAO.selectAllEventList();
+		return eventList;
 	}
 
 	// 이벤트 상세페이지
 	@Override
-	public ArticleVO viewEvent(int eventNum) throws Exception {
+	public Map eventPage(int eventNum) throws Exception {
+		Map articleMap = new HashMap();
 		ArticleVO articleVO = boardDAO.selectEvent(eventNum);
-		return articleVO;
+		articleMap.put("article", articleVO);
+		return articleMap;
 	}
+		
+	// 이벤트 글 추가
+	@Override
+	public int addNewEvent(Map articleMap) throws Exception{
+		return boardDAO.insertNewEvent(articleMap);
+	}
+		
+	// 이벤트 글 수정
 
-	// 이벤트 삭제하기
+
+	// 이벤트 글 삭제
 	@Override
 	public void removeEvent(int eventNum) throws Exception {
 		boardDAO.deleteEvent(eventNum);
-	}
-
-	// 이벤트 글쓰기
-	@Override
-	public int addNewEvent(Map articleMap) throws Exception {
-		return boardDAO.insertNewEvent(articleMap);
-	}
-
-	// 이벤트 수정하기
-	@Override
-	public void modEvent(Map articleMap) throws Exception {
-		boardDAO.updateEvent(articleMap);
 	}
 
 	// QnA 목록

@@ -244,6 +244,7 @@ public class HomeController {
 		return "notice_in";
 	}
 	*/
+	/*
 	//¿Ã∫•∆Æ
 	@RequestMapping(value = "/event.do", method = RequestMethod.GET)
 	public String event(Locale locale, Model model) {
@@ -254,7 +255,7 @@ public class HomeController {
 	public String event_in(Locale locale, Model model) {
 		return "event_in";
 	}
-	
+	*/
 	//∏Æ∫‰
 	@RequestMapping(value = "/review.do", method = RequestMethod.GET)
 	public String review(Locale locale, Model model) {
