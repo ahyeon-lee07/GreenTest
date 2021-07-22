@@ -118,16 +118,21 @@ public class MemberControllerImpl implements MemberController {
 	public ModelAndView memberPwChk(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr,
 			HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		String result = memberService.memberPwChk(member);
-		if (result != null) {
+		
+		MemberVO login = memberService.login(member); // login() 메서드를 호출하면서 로그인 정보를 전달한다.
+		
+		boolean passMatch = passEncoder.matches(member.getPw(), login.getPw());
+		
+		if (login != null && passMatch) {
 			HttpSession session = request.getSession();
 			session.setAttribute("joinOk", "sessinChk");
 			mav.setViewName("redirect:/memberEdit.do");
-
-		} else {
-			rAttr.addAttribute("msg", "joinNo");
-			mav.setViewName("redirect:/memberEditChk.do");
-		}
+			
+			} else {
+				rAttr.addAttribute("msg", "joinNo");
+				mav.setViewName("redirect:/memberEditChk.do");
+			}
+		
 		return mav;
 	}
 
