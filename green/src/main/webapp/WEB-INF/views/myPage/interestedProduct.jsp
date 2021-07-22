@@ -56,7 +56,7 @@ request.setCharacterEncoding("UTF-8");
 			</thead>
 			<tbody class="border-bottom">
 				<c:forEach items="${wishList }" var="wishList">
-					<tr id="${wishList.productId }" class="">
+					<tr id="${wishList.productId }" class="wishList">
 			          <th class="text-center align-middle align-middle px-1">
 			            <div style="height: 14px;">
 			                <input type='checkbox' name='Choice' value='Choice1' onclick='checkSelectAll()'/>
@@ -115,7 +115,7 @@ request.setCharacterEncoding("UTF-8");
       <div class="col-12">
         <div class="d-flex justify-content-start">
           <div class="bd-highlight mr-2">
-            <button type="button" class="btn btn-sm btn-outline-danger">삭제하기</button></a>
+            <button type="button" class="btn btn-sm btn-outline-danger" onclick="chan()">삭제하기</button></a>
           </div>
           <div class="bd-highlight">
             <button type="button" class="btn btn-sm btn-outline-danger">관심상품 비우기</button>
@@ -154,5 +154,12 @@ function checkSelectAll()  {
 	  checkboxes.forEach((checkbox) => {
 	    checkbox.checked = selectAll.checked
 	  })
+	}
+
+	function chan(){
+		var wishList = document.getElementsByClassName('wishList');
+		var id = document.getElementsByClassName('wishList')[0].id;
+		var checkYN = document.getElementsByClassName('wishList')[0].childNodes[1].childNodes[1].childNodes[1].checked;
+		console.log(wishList);
 	}
 </script>
