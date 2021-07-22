@@ -58,7 +58,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 	// 이벤트 글 목록
 	@Override
-	public List selectAllEventList() throws DataAccessException {
+	public List<ArticleVO> selectAllEventList() throws DataAccessException {
 	List<ArticleVO> eventList = sqlSession.selectList("mapper.board.selectAllEventList");
 		return eventList;
 	}
@@ -72,8 +72,8 @@ public class BoardDAOImpl implements BoardDAO {
 	// 이벤트 글 추가
 	@Override
 	public int insertNewEvent(Map articleMap) throws DataAccessException {
-		int eventNum = selectNewEventNum(); // 새 글에 대한 글 번호 가져옴
-		articleMap.put("eventNum", eventNum); // 글 번호를 보드맵에 저장
+		int eventNum = selectNewEventNum(); // 새 글에 대한 글 번호 가져오기
+		articleMap.put("eventNum", eventNum); // 글 번호를 articleMap에 저장
 		sqlSession.insert("mapper.board.insertNewEvent", articleMap); // id에 대한 insert문을 호출하면서 articleMap을 전달
 		return eventNum;
 	}
@@ -84,7 +84,10 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 		
 	// 이벤트 글 수정
-
+	@Override
+	public void updateEvent(Map articleMap) throws DataAccessException {
+		sqlSession.update("mapper.board.updateEvent", articleMap);
+	}
 
 	// 이벤트 글 삭제
 	@Override

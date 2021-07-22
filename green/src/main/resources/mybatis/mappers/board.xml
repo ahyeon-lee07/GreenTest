@@ -130,9 +130,19 @@
 	<!-- 이벤트 추가하는 새 글에 대한 글 번호 --> <!-- nvl = IFNULL -->
 	<select id="selectNewEventNum" resultType="int">
 		<![CDATA[
-	 		SELECT IFNULL(max(eventNum), 0)+1 from event
+	 		SELECT max(eventNum)+1 from event
 		]]>
 	</select>
+	
+	<!-- 이벤트 글 수정 -->
+	<update id="updateEvent" parameterType="java.util.Map">
+		update event
+		set
+		eventTitle = #{eventTitle},
+		eventContent = #{eventContent}
+		where
+		eventNum = #{eventNum}
+	</update>
 	
 	<!-- 이벤트 글 삭제 -->
 	<delete id = "deleteEvent" parameterType = "int">

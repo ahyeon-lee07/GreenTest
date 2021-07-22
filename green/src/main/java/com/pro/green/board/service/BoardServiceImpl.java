@@ -58,7 +58,7 @@ public class BoardServiceImpl implements BoardService {
 
 	// 이벤트 상세페이지
 	@Override
-	public Map eventPage(int eventNum) throws Exception {
+	public Map eventView(int eventNum) throws Exception {
 		Map articleMap = new HashMap();
 		ArticleVO articleVO = boardDAO.selectEvent(eventNum);
 		articleMap.put("article", articleVO);
@@ -72,7 +72,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 		
 	// 이벤트 글 수정
-
+	@Override
+	public void modEvent(Map articleMap) throws Exception {
+		boardDAO.updateEvent(articleMap);
+	}
 
 	// 이벤트 글 삭제
 	@Override

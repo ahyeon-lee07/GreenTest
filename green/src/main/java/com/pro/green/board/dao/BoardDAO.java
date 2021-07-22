@@ -17,10 +17,10 @@ public interface BoardDAO {
 	public void updateNotice(Map articleMap) throws DataAccessException;
 	
 	// 이벤트
-	public List selectAllEventList() throws DataAccessException; // 글 목록
+	public List<ArticleVO> selectAllEventList() throws DataAccessException; // 글 목록
 	public ArticleVO selectEvent(int eventNum) throws DataAccessException; // 글 상세
 	public int insertNewEvent(Map articleMap) throws DataAccessException; // 글 추가
-	// 글 수정
+	public void updateEvent(Map articleMap) throws DataAccessException; // 글 수정
 	public void deleteEvent(int eventNum) throws DataAccessException; // 글 삭제
 	
 	// QnA
