@@ -23,7 +23,7 @@ request.setCharacterEncoding("UTF-8");
 			}
 		</script>
 	</c:when>
-	<c:when test="${param.joinMag != null }">
+	<c:when test="${param.joinMas != null }">
 		<script>
 			window.onload = function () {
 				alert("${param.joinMas}" );

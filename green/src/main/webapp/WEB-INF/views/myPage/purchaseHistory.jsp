@@ -13,11 +13,11 @@ request.setCharacterEncoding("UTF-8");
 <main class="mainH">
 	<div class="container py-1">
 		<!-- 페이지 타이틀 부분 -->
-		<div class="d-flex justify-content-between mt-5">
+        <div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
-				<h4>구매내역조회</h4>
+				<h4 class="page_title">구매내역조회</h4>
 			</div>
-			<div class="bd-highlight">
+			<div class="bd-highlight page_subtitle">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb p-0 bg bg-transparent">
 						<li class="breadcrumb-item"><a href="${contextPath }/main.do">홈</a></li>
