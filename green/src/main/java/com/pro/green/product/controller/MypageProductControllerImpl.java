@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,26 +34,69 @@ public class MypageProductControllerImpl implements MypageProductController {
 
 	@Autowired
 	private CartVO cartVO;
-	
+
 	@Autowired
 	private ProductService2 productService;
-	
 
 	// 관심상품 리스트
 	@RequestMapping(value = "/wish_list.do", method = RequestMethod.GET)
 	public ModelAndView productList(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
+
+		HttpSession session = request.getSession();
+		MemberVO user = (MemberVO) session.getAttribute("member");
+
+		String userId = user.getId();
+
+		List<Map<String, Object>> wishList = new ArrayList<Map<String, Object>>();
+		Map<String, Object> selectOption = new HashMap<String, Object>();
+		selectOption.put("userId", userId);
+		selectOption.put("type", "wish");
+
+		wishList = mypageProductService.wishList(selectOption);
+
+		List optionList = new ArrayList();
+
+		for (int i = 0; i < wishList.size(); i++) {
+			String productId = (String) wishList.get(i).get("productId");
+			List<Map<String, Object>> option = productService.selectOptionList(productId);
+			optionList.add(option);
+		}
+
+		mav.addObject("wishCount", wishList.size());
+		mav.addObject("wishList", wishList);
+		mav.addObject("optionList", optionList);
+
+		mav.setViewName("wishList");
+		return mav;
+	}
+
+	// 관심상품에서 삭제
+	
+	@RequestMapping(value = "/wish_list/delete.do", method = RequestMethod.POST)
+	public ResponseEntity wishDelete(@RequestParam(value="productIdList[]")List<String> productIdList, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ResponseEntity resEntity = null;
 		
 		HttpSession session = request.getSession();
 		MemberVO user = (MemberVO) session.getAttribute("member");
-		
+
 		String userId = user.getId();
-		
+
 		List<Map<String, Object>> wishList = new ArrayList<Map<String, Object>>();
 		Map<String, Object> selectOption = new HashMap<String, Object>();
 		selectOption.put("userId", userId);
 		selectOption.put("type", "wish");
 		
+		int result = 0;
+		
+		for(int i=0; i<productIdList.size(); i ++) {
+			String productId = productIdList.get(i);
+			result = mypageProductService.wishDelete(productId);
+			
+			if(result == 0) {
+				break;
+			}
+		}
 		wishList = mypageProductService.wishList(selectOption);
 		
 		List optionList = new ArrayList();
@@ -60,12 +106,14 @@ public class MypageProductControllerImpl implements MypageProductController {
 			List<Map<String, Object>> option = productService.selectOptionList(productId);
 			optionList.add(option);
 		}
-		
-		mav.addObject("wishCount", wishList.size());
-		mav.addObject("wishList", wishList);
-		mav.addObject("optionList", optionList);
-		
-		mav.setViewName("wishList");
-		return mav;
+
+		Map<String, Object> list = new HashMap();
+		list.put("wishCount", wishList.size());
+		list.put("wishList", wishList);
+		list.put("optionList", optionList);
+
+		resEntity = new ResponseEntity(list, HttpStatus.OK);
+		return resEntity;
 	}
+
 }

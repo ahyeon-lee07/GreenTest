@@ -12,4 +12,7 @@ public interface MypageProductService {
 	//관심상품 리스트
 	public List<Map<String, Object>> wishList(Map<String, Object> selectOption) throws DataAccessException;
 
+	//관심상품 삭제
+	public int wishDelete(String productId) throws DataAccessException;
+
 }

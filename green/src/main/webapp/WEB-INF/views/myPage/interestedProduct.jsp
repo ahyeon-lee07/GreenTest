@@ -32,10 +32,10 @@ request.setCharacterEncoding("UTF-8");
         <div class="col bg-light border rounded p-2">
         	<c:choose>
         		<c:when test="${wishCount != '' }">
-        			일반 상품 (<span>${wishCount }</span>)
+        			일반 상품 (<span id="wishCount">${wishCount }</span>)
         		</c:when>
         		<c:otherwise>
-        			일반 상품 (<span>0</span>)
+        			일반 상품 (<span id="wishCount">0</span>)
         		</c:otherwise>
         	</c:choose>
         </div>
@@ -54,7 +54,7 @@ request.setCharacterEncoding("UTF-8");
 					<th class="text-center border-bottom-0 border-top-0 px-2" style="width: 90px">상세정보</th>
 				</tr>
 			</thead>
-			<tbody class="border-bottom">
+			<tbody class="border-bottom" id="wishListBox">
 				<c:forEach items="${wishList }" var="wishList">
 					<tr id="${wishList.productId }" class="wishList">
 			          <th class="text-center align-middle align-middle px-1">
@@ -84,14 +84,14 @@ request.setCharacterEncoding("UTF-8");
 							<c:choose>
 								<c:when test="${wishList.discountYN =='Y'}">
 									<div class="discountBox">
-										<fmt:formatNumber value="${wishList.price }" pattern="#,###" />
+										<fmt:formatNumber value="${wishList.price }" pattern="#,###" /><span>원</span>
 										<span class="discountBox text-danger"> <fmt:formatNumber
-												value="${wishList.discount }" pattern="#,###" />
+												value="${wishList.discount }" pattern="#,###" /><span>원</span>
 										</span>
 									</div>
 								</c:when>
 								<c:otherwise>
-									<fmt:formatNumber value="${wishList.price }" pattern="#,###" />
+									<fmt:formatNumber value="${wishList.price }" pattern="#,###" /><span>원</span>
 								</c:otherwise>
 							</c:choose>
 						</td>
@@ -105,7 +105,6 @@ request.setCharacterEncoding("UTF-8");
 							</div>
 						</td>
 			        </tr>
-				
 				</c:forEach>
 				
 			</tbody>
@@ -115,11 +114,11 @@ request.setCharacterEncoding("UTF-8");
       <div class="col-12">
         <div class="d-flex justify-content-start">
           <div class="bd-highlight mr-2">
-            <button type="button" class="btn btn-sm btn-outline-danger" onclick="chan()">삭제하기</button></a>
+            <button type="button" class="btn btn-sm btn-outline-danger" onclick="btn_wishDelete()">삭제하기</button></a>
           </div>
-          <div class="bd-highlight">
+          <!-- <div class="bd-highlight">
             <button type="button" class="btn btn-sm btn-outline-danger">관심상품 비우기</button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -156,10 +155,86 @@ function checkSelectAll()  {
 	  })
 	}
 
-	function chan(){
+	//관심상품 삭제
+	function btn_wishDelete(){
 		var wishList = document.getElementsByClassName('wishList');
-		var id = document.getElementsByClassName('wishList')[0].id;
-		var checkYN = document.getElementsByClassName('wishList')[0].childNodes[1].childNodes[1].childNodes[1].checked;
-		console.log(wishList);
+
+		var productIdList = [];
+
+		for(var i=0; i< wishList.length; i++){
+			var checkYN = document.getElementsByClassName('wishList')[i].getElementsByTagName('input')[0].checked
+;
+			
+			if(checkYN == true){
+				var id = wishList[i].id;
+				productIdList.push(id);		
+			}
+		}
+		wishDelete(productIdList);
+	}
+
+	function wishDelete(productIdList){
+		$.ajax({
+			type: "POST",
+			async: true,
+			url: "${contextPath }/wish_list/delete.do",
+			dataType: "json",
+			data: {
+				productIdList: productIdList
+			},
+			success: function (list) {
+				document.getElementById('wishCount').innerText = list['wishCount'];
+
+				var str = '';
+				var wishList = list['wishList'];
+				var optionList = list['optionList'];
+				
+
+				for(var i=0; i< list['wishList'].length; i ++){
+
+					var price = wishList[i]['price'].toLocaleString('ko-KR');
+					var discount = wishList[i]['discount'].toLocaleString('ko-KR');
+
+					str += '<tr id="'+ wishList[i]["productId"] +'" class="wishList">';
+					str += '<th class="text-center align-middle align-middle px-1"><div style="height: 14px;"><input type="checkbox" name="Choice" value="Choice1" onclick="checkSelectAll()" /></div></th>';
+					str += '<td class="text-center align-middle px-2"><img src="${contextPath}/resources/img/' + wishList[i]["p_group"] +'/' + wishList[i]["imgURL"] +'" class="img-thumbnail" alt="#"></td>';
+					str += '<td class="align-middle align-middle px-2 "><div class="font-weight-bold pb-1 bd-highlight">' + wishList[i]["productName"] +'</div>';
+					
+					for(var j=0; j< optionList.length; j++){
+						for (var k = 0; k < optionList[j].length; k++) {
+							if(wishList[i]["productId"] == optionList[j][k]["productId"]){
+								str += '<div class="bd-highlight">'+(k+1)+'. '+ optionList[j][k]["p_option"]+'</div>';
+							}
+						}
+					}
+					str += '</td >';
+					str += '<td class="text-center align-middle px-2">';
+						if(wishList[i]["discountYN"] == 'Y'){
+							str += '<div class="discountBox">';
+							str += price + '<span>원</span>';
+							str += '<span class="discountBox text-danger">';
+							str += discount + '<span>원</span>'; 
+							str += '</span> </div>';
+						}else{
+							str += price + '<span>원</span>';
+						}
+					str += '</td>';
+
+					str += '<td class="text-center align-middle px-2">';
+					str += '<div class="bd-highlight">';
+					str += '<a href="${contextPath }/prodList/prodDetail.do?productId=' + wishList[i]["productId"] +'">';
+					str += '<button type="button" class="btn btn-outline-secondary btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">상세정보</button>';
+					str += '</a></div></td></tr >';
+				}
+				document.getElementById('wishListBox').innerHTML = str;
+				document.querySelector('input[name="selectall"]').checked = false;
+			},
+			error: function (data, textStatus) {
+
+			},
+			complete: function (data, textStatus) {
+
+			}
+		});
 	}
 </script>

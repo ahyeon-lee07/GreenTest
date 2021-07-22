@@ -25,4 +25,10 @@ public class MypageProductServiceImpl implements MypageProductService {
 		return mypageProductDAO.wishList(selectOption);
 	}
 
+	// 관심상품 삭제
+	@Override
+	public int wishDelete(String productId) throws DataAccessException {
+		return mypageProductDAO.wishDelete(productId);
+	}
+
 }
