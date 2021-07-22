@@ -185,22 +185,22 @@
 		<put-attribute name="main" value="/WEB-INF/views/community/notice/writeNotice.jsp" />
 	</definition>
 	
-	<!-- 이벤트게시판 -->
-	<definition name="listEvent" extends="baseLayout">
-		<put-attribute name="title" value="이벤트게시판" />
+	<!-- 이벤트 게시판 -->
+	<definition name="eventList" extends="baseLayout">
+		<put-attribute name="title" value="이벤트 게시판" />
 		<put-attribute name="main" value="/WEB-INF/views/community/event/event.jsp" />
 	</definition>
 	
-	<!-- 이벤트게시판 상세 -->
-	<definition name="viewEvent" extends="baseLayout">
-		<put-attribute name="title" value="이벤트게시판 상세" />
+	<!-- 이벤트 게시판 상세 -->
+	<definition name="eventPage" extends="baseLayout">
+		<put-attribute name="title" value="이벤트 게시판 상세" />
 		<put-attribute name="main" value="/WEB-INF/views/community/event/eventPage.jsp" />
 	</definition>
 	
-	<!-- 이벤트게시판 글쓰기 -->
-	<definition name="addNewEvent" extends="baseLayout">
-		<put-attribute name="title" value="공지사항 글쓰기" />
-		<put-attribute name="main" value="/WEB-INF/views/community/event/writeEvent.jsp" />
+	<!-- 이벤트 게시판 글쓰기 -->
+	<definition name="eventWrite" extends="baseLayout">
+		<put-attribute name="title" value="이벤트 게시판 글쓰기" />
+		<put-attribute name="main" value="/WEB-INF/views/community/event/eventWrite.jsp" />
 	</definition>
 	
 	<!-- 리뷰 -->

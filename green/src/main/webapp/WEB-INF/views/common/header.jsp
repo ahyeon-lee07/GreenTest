@@ -55,7 +55,7 @@ request.setCharacterEncoding("UTF-8");
 							<div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="${contextPath }/listQnA.do">Q&A</a>
 								<a class="dropdown-item" href="${contextPath }/listNotice.do">공지사항</a>
-								<a class="dropdown-item" href="${contextPath }/listEvent.do">이벤트
+								<a class="dropdown-item" href="${contextPath }/eventList.do">이벤트
 									게시판</a> <a class="dropdown-item" href="${contextPath }/listReview.do">리뷰</a>
 							</div></li>
 						<c:choose>
@@ -176,7 +176,7 @@ request.setCharacterEncoding("UTF-8");
 													href="${contextPath }/listQnA.do">Q&A</a> <a
 													class="pb-1 text-black-50" href="${contextPath }/listNotice.do">공지사항</a>
 												<a class="pb-1 text-black-50"
-													href="${contextPath }/listEvent.do">이벤트게시판</a> <a
+													href="${contextPath }/eventList.do">이벤트게시판</a> <a
 													class="pb-1 text-black-50" href="${contextPath }/listReview.do">리뷰</a>
 											</div>
 										</div>

@@ -56,43 +56,40 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.update("mapper.board.updateNotice", articleMap);
 	}
 
-	// 이벤트 목록
+	// 이벤트 글 목록
 	@Override
-	public List<ArticleVO> selectAllEventList() throws DataAccessException {
-		List<ArticleVO> listEvent = sqlSession.selectList("mapper.board.selectAllEventList");
-		return listEvent;
+	public List selectAllEventList() throws DataAccessException {
+	List<ArticleVO> eventList = sqlSession.selectList("mapper.board.selectAllEventList");
+		return eventList;
 	}
 
-	// 이벤트 상세페이지
+	// 이벤트 글 상세페이지
 	@Override
 	public ArticleVO selectEvent(int eventNum) throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectEvent", eventNum);
 	}
-
-	// 이벤트 삭제
-	@Override
-	public void deleteEvent(int eventNum) throws DataAccessException {
-		sqlSession.delete("mapper.board.deleteEvent", eventNum);
-
-	}
-
-	// 이벤트 글쓰기
+		
+	// 이벤트 글 추가
 	@Override
 	public int insertNewEvent(Map articleMap) throws DataAccessException {
-		int eventNum = selectNewEventNum();
-		articleMap.put("eventNum", eventNum);
-		sqlSession.insert("mapper.board.insertNewEvent", articleMap);
+		int eventNum = selectNewEventNum(); // 새 글에 대한 글 번호 가져옴
+		articleMap.put("eventNum", eventNum); // 글 번호를 보드맵에 저장
+		sqlSession.insert("mapper.board.insertNewEvent", articleMap); // id에 대한 insert문을 호출하면서 articleMap을 전달
 		return eventNum;
 	}
-
+		
+	// 새 글 번호 가져오기
 	private int selectNewEventNum() throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectNewEventNum");
 	}
+		
+	// 이벤트 글 수정
 
-	// 이벤트 수정
+
+	// 이벤트 글 삭제
 	@Override
-	public void updateEvent(Map articleMap) throws DataAccessException {
-		sqlSession.update("mapper.board.updateEvent", articleMap);
+	public void deleteEvent(int eventNum) throws DataAccessException {
+		sqlSession.delete("mapper.board.deleteEvent", eventNum);
 	}
 
 	// QnA 목록
