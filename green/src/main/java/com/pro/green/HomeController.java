@@ -196,10 +196,10 @@ public class HomeController {
 	}
 	
 	//관심상품 내역조회
-	@RequestMapping(value = "/wist_list.do", method = RequestMethod.GET)
-	public String wist_list(Locale locale, Model model) {
-		return "wist_list";
-	}
+//	@RequestMapping(value = "/wist_list.do", method = RequestMethod.GET)
+//	public String wist_list(Locale locale, Model model) {
+//		return "wist_list";
+//	}
 	
 	//게시판 쪽 주소 다시 고민 해 봐야 할 것 같음
 	//Q&A
