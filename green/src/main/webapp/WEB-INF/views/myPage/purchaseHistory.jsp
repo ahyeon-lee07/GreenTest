@@ -33,7 +33,7 @@ request.setCharacterEncoding("UTF-8");
                 <div class="d-flex flex-row bd-highlight">
                     <div class="bd-highlight mr-2">
                         <select id="orderStatus" class="form-control"
-                            style="width: 140px;" name="email2">
+                            style="width: 150px;" name="email2">
                             <option value="" selected>주문처리상태</option>
                             <option value="1">입금전</option>
                             <option value="2">상품준비중</option>
