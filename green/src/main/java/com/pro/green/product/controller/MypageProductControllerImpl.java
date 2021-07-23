@@ -65,6 +65,7 @@ public class MypageProductControllerImpl implements MypageProductController {
 
 		mav.addObject("wishCount", wishList.size());
 		mav.addObject("wishList", wishList);
+		mav.addObject("userId", userId);
 		mav.addObject("optionList", optionList);
 
 		mav.setViewName("wishList");
@@ -72,11 +73,11 @@ public class MypageProductControllerImpl implements MypageProductController {
 	}
 
 	// 관심상품에서 삭제
-	
 	@RequestMapping(value = "/wish_list/delete.do", method = RequestMethod.POST)
-	public ResponseEntity wishDelete(@RequestParam(value="productIdList[]")List<String> productIdList, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ResponseEntity wishDelete(@RequestParam(value = "productIdList[]") List<String> productIdList,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ResponseEntity resEntity = null;
-		
+
 		HttpSession session = request.getSession();
 		MemberVO user = (MemberVO) session.getAttribute("member");
 
@@ -86,19 +87,22 @@ public class MypageProductControllerImpl implements MypageProductController {
 		Map<String, Object> selectOption = new HashMap<String, Object>();
 		selectOption.put("userId", userId);
 		selectOption.put("type", "wish");
-		
+
 		int result = 0;
-		
-		for(int i=0; i<productIdList.size(); i ++) {
+
+		for (int i = 0; i < productIdList.size(); i++) {
 			String productId = productIdList.get(i);
-			result = mypageProductService.wishDelete(productId);
-			
-			if(result == 0) {
+
+			selectOption.put("productId", productId);
+			result = mypageProductService.wishDelete(selectOption);
+			selectOption.remove("productId");
+
+			if (result == 0) {
 				break;
 			}
 		}
 		wishList = mypageProductService.wishList(selectOption);
-		
+
 		List optionList = new ArrayList();
 
 		for (int i = 0; i < wishList.size(); i++) {
@@ -113,6 +117,31 @@ public class MypageProductControllerImpl implements MypageProductController {
 		list.put("optionList", optionList);
 
 		resEntity = new ResponseEntity(list, HttpStatus.OK);
+		return resEntity;
+	}
+
+	// 관심상품에서 등록
+	@RequestMapping(value = "/wish_list/wishAdd.do", method = RequestMethod.POST)
+	public ResponseEntity wishAdd(@RequestParam("productId") String productId, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		ResponseEntity resEntity = null;
+
+		HttpSession session = request.getSession();
+		MemberVO user = (MemberVO) session.getAttribute("member");
+
+		String userId = user.getId();
+
+		Map<String, Object> addOption = new HashMap<String, Object>();
+		addOption.put("userId", userId);
+		addOption.put("productId", productId);
+		addOption.put("type", "wish");
+
+		int result = 0;
+
+		// 관심테이블에 등록 여부
+		result = mypageProductService.wishYN(addOption);
+
+		resEntity = new ResponseEntity(result, HttpStatus.OK);
 		return resEntity;
 	}
 

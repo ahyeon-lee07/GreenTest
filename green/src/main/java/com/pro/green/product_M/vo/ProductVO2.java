@@ -30,6 +30,16 @@ public class ProductVO2 {
 	private String imgType;
 	private String imgURL;
 	
+	private String cartType;
+	
+	public String getCartType() {
+		return cartType;
+	}
+
+	public void setCartType(String cartType) {
+		this.cartType = cartType;
+	}
+
 	private List<ProductVO2> productVOList;
 	
 

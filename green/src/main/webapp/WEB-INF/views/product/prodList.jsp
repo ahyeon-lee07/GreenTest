@@ -58,44 +58,60 @@
 							<div class="d-flex flex-wrap mb-2" id="chan">
 								<c:forEach var="product" items="${productsList}">
 									<div class="bd-highlight prodList">
-										<a class="d-flex flex-column mx-3 my-2 p-3 text-center prodbox"
-											href="${contextPath}/prodList/prodDetail.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${product.productId}">
-											<div class="bd-highlight productImgBox">
-												<!-- Product image-->
-												<img class="card-img-top" src="${contextPath }/resources/img/${product.p_group}/${product.imgURL}" alt="${product.productName}"
-													style="object-fit: cover; height:180px;">
-											</div>
-											<div class="bd-highlight font-weight-bold text-secondary text-left productListTitle mt-2">
-												<p class="ell">${product.productName}</p>
-											</div>
-											<div class="d-flex bd-highlight flex-column text-left my-3" style="height: 46px;">
-												<c:choose>
-													<c:when test="${product.discountYN == 'Y'}">
-														<div class="bd-highlight text-black-50 discountBox" style="font-size:.9rem; width: 50%;">
-															<fmt:formatNumber value="${product.price}" pattern="##,###" /><span>원</span>		
-														</div>
-														<div class="bd-highlight text-danger font-weight-bold">
-															<fmt:formatNumber value="${product.discount}" pattern="##,###" /><span>원</span>		
-														</div>
-													</c:when>
-													<c:otherwise>
-														<div class="bd-highlight text-danger font-weight-bold">
-															<fmt:formatNumber value="${product.price}" pattern="##,###" /><span>원</span>		
-														</div>
-													</c:otherwise>
-												</c:choose>
-											</div>
+										<div class="d-flex flex-column mx-3 my-2 p-3 text-center prodbox">
+											<a href="${contextPath}/prodList/prodDetail.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${product.productId}">
+												<div class="bd-highlight productImgBox">
+													<!-- Product image-->
+													<img class="card-img-top" src="${contextPath }/resources/img/${product.p_group}/${product.imgURL}" alt="${product.productName}"
+														style="object-fit: cover; height:180px;">
+												</div>
+												<div class="bd-highlight font-weight-bold text-secondary text-left productListTitle mt-2">
+													<p class="ell">${product.productName}</p>
+												</div>
+												<div class="d-flex bd-highlight flex-column text-left my-3" style="height: 46px;">
+													<c:choose>
+														<c:when test="${product.discountYN == 'Y'}">
+															<div class="bd-highlight text-black-50 discountBox" style="font-size:.9rem; width: 50%;">
+																<fmt:formatNumber value="${product.price}" pattern="##,###" /><span>원</span>		
+															</div>
+															<div class="bd-highlight text-danger font-weight-bold">
+																<fmt:formatNumber value="${product.discount}" pattern="##,###" /><span>원</span>		
+															</div>
+														</c:when>
+														<c:otherwise>
+															<div class="bd-highlight text-danger font-weight-bold">
+																<fmt:formatNumber value="${product.price}" pattern="##,###" /><span>원</span>		
+															</div>
+														</c:otherwise>
+													</c:choose>
+												</div>
+											</a>
 											<div class="d-flex justify-content-center mt-2">
-												<div class="bd-highlight btn btn-sm btn-outline-secondary mr-1 btn_product"
-													href="${contextPath}/wist_list.do">바로구매</div>
-												<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product"
-													href="${contextPath}/orderList.do">관심상품</div>
+												<div class="bd-highlight flex-grow-1 btn btn-sm btn-outline-secondary mr-1 btn_product" href="${contextPath}/wist_list.do">바로구매</div>
+												
+												<c:choose>
+													<c:when test="${wishList != 'N' }">
+														<c:choose>
+															<c:when test="${product.cartType == 'wish'}">
+																<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN('${product.productId}')" style="width: 40px;">
+																	<img class="icon_wish" data-value="Y" src="${contextPath }/resources/img/heart-fill.svg" alt="">
+																</div>
+															</c:when>
+															<c:otherwise>
+																<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN('${product.productId}')" style="width: 40px;">
+																	<img class="icon_wish" data-value="N" src="${contextPath }/resources/img/heart.svg" alt="">
+																</div>
+															</c:otherwise>
+														</c:choose>
+													</c:when>
+												</c:choose>
+												
 											</div>
-										</a>
+										</div>	
 									</div>
+									
 								</c:forEach>
 							</div>
-							
 							<!-- 페이징 영역 -->
 							<nav aria-label="Page navigation example row">
 								<ul class="pagination d-flex justify-content-center">
@@ -135,15 +151,23 @@
 								url: "${contextPath}/productList/array.do",
 								dataType: "json",
 								data: { p_group: p_group, keyWord: keyWord },
-								success: function (result) {						
+								success: function (result) {
+									console.log(result);
+
+									var wishList = result["wishList"];
+									var result = result['result'];
+									
 									var str = '';
 									for(var i=0; i<result.length; i++){
 							
 										var price = result[i]['price'].toLocaleString('ko-KR');
 										var discount = result[i]['discount'].toLocaleString('ko-KR');
+										var productId = result[i]['productId'];
 										
-										str += '<div class="bd-highlight prodList" >';
-										str += '<a class="d-flex flex-column mx-3 my-2 p-3 text-center prodbox" href="${contextPath}/prodList/prodDetail.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId='+result[i]['productId']+'">';
+										
+										str += '<div class="bd-highlight prodList">';
+										str += '<div class="d-flex flex-column mx-3 my-2 p-3 text-center prodbox">';
+										str += '<a href="${contextPath}/prodList/prodDetail.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId='+result[i]['productId']+'">';
 										str += '<div class="bd-highlight productImgBox">';
 										str += '<img class="card-img-top" src="${contextPath }/resources/img/' + result[i]['p_group'] +'/' + result[i]['imgURL'] +'" alt="' + result[i]['productName'] +'" style="object-fit: cover; height:180px;">';
 										str += '</div>';
@@ -165,14 +189,25 @@
 											str += '</div >';
 										}
 										str += '</div >';
-										str += '<div class="d-flex justify-content-center mt-2">';
-										str += '<div class="bd-highlight btn btn-sm btn-outline-secondary mr-1 btn_product" href="${contextPath}/wist_list.do">바로구매</div>';
-										str += '<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product" href="${contextPath}/orderList.do">관심상품</div>';
-										str += '</div>';
+										
 										str += '</a >';
-										str += '</div >';
+										str += '<div class="d-flex justify-content-center mt-2">';
+										str += '<div class="bd-highlight flex-grow-1 btn btn-sm btn-outline-secondary mr-1 btn_product" href="${contextPath}/wist_list.do">바로구매</div>';
+							
+										if(wishList != 'N'){
+											if(result[i]['cartType'] == 'wish'){
+												str += '<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN(\''+productId+'\')" style="width: 40px;">';
+												str += '<img class="icon_wish" data-value="Y" src="${contextPath }/resources/img/heart-fill.svg" alt="">';
+												str += '</div>';
+											}else {
+												str += '<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN(\''+productId+'\')" style="width: 40px;">';
+												str += '<img class="icon_wish" data-value="N" src="${contextPath }/resources/img/heart.svg" alt="">';
+												str += '</div>';
+											}
+										}
+
+										str += '</div></div ></div >';
 									}
-									
 
 									document.getElementById('chan').innerHTML = str;
 									
@@ -192,6 +227,40 @@
 							var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
 								results = regex.exec(location.search);
 							return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+						}
+
+						//관심 상품 등록
+						function btn_wishYN(productId){
+	
+							var tarGetImg = event.currentTarget.firstElementChild;
+							var tarGet_V = tarGetImg.dataset['value'];
+							
+							$.ajax({
+								type: "POST",
+								async: true,
+								url: "${contextPath}/wish_list/wishAdd.do",
+								dataType: "text",
+								data: { productId: productId },
+								success: function (result) {						
+									if(result == 0){
+										alert("죄송합니다. 잠시후 다시 시도해 주세요.");
+									}else if(result == 1){
+										if(tarGet_V == 'Y'){
+											tarGetImg.dataset.value = 'N';
+											tarGetImg.src = "${contextPath }/resources/img/heart.svg";
+										}else {
+											tarGetImg.dataset.value  = 'Y';
+											tarGetImg.src = "${contextPath }/resources/img/heart-fill.svg";
+										}
+									}
+								},
+								error: function (data, textStatus) {
+
+								},
+								complete: function (data, textStatus) {
+
+								}
+							});
 						}
 
 					</script>
