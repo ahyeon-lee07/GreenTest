@@ -192,13 +192,13 @@
 	</definition>
 	
 	<!-- 이벤트 게시판 상세 -->
-	<definition name="eventPage" extends="baseLayout">
+	<definition name="eventView" extends="baseLayout">
 		<put-attribute name="title" value="이벤트 게시판 상세" />
 		<put-attribute name="main" value="/WEB-INF/views/community/event/eventPage.jsp" />
 	</definition>
 	
 	<!-- 이벤트 게시판 글쓰기 -->
-	<definition name="eventWrite" extends="baseLayout">
+	<definition name="addNewEvent" extends="baseLayout">
 		<put-attribute name="title" value="이벤트 게시판 글쓰기" />
 		<put-attribute name="main" value="/WEB-INF/views/community/event/eventWrite.jsp" />
 	</definition>
