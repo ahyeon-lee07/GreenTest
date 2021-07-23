@@ -75,22 +75,22 @@ request.setCharacterEncoding("UTF-8");
                 </form>
             </div>
         </div>
-            <div class="">
+ 			<div class="">
             	<a class="" href="${contextPath}/eventList.do">
             		<button type="button" class="btn btn-secondary btn-sm">목록</button>
             	</a>
             </div>
             <div id="tr_btn_modify" align="center">
-            	<input type=button class="btn btn-sm btn-outline-success" value="수정" onClick="fn_modify_event(frmEvent)">
-            	<input type=button class="btn btn-sm btn-outline-danger" value="취소" onClick="backToList(frmEvent)">
+            	<input type=button class="btn btn-sm btn-outline-success" value="수정" onClick="fn_modify_article(frmArticle)">
+            	<input type=button class="btn btn-sm btn-outline-danger" value="취소" onClick="backToList(frmArticle)">
             </div>
-            <div id="tr_btn">
+            <div id="tr_btn" align="center">
 				<div class="row justify-content-between my-3">
 					<div class="">
-					<c:if test="${member.id == eventList.id}">
+					<c:if test="${member.id == article.id}">
 					<button type="button" class="btn btn-sm btn-outline-success" onClick="fn_enable(this.form)">수정</button>
 					<button type="button" class="btn btn-sm btn-outline-danger"
-					onClick="fn_remove_event('${contextPath}/removeEvent.do', ${eventList.eventNum})">삭제</button>
+					onClick="fn_remove_event('${contextPath}/removeEvent.do', ${article.eventNum})">삭제</button>
 					</c:if>
             		</div>
         		</div>
@@ -122,7 +122,7 @@ request.setCharacterEncoding("UTF-8");
 	
 	// 수정(완료) 버튼
 	function fn_modify_article(obj) {
-		obj.action="${contextPath}/modEvent.do?eventNum=${eventView.eventNum}";
+		obj.action="${contextPath}/modEvent.do?eventNum=${article.eventNum}";
 		obj.submit();
 	}
 	
@@ -130,12 +130,12 @@ request.setCharacterEncoding("UTF-8");
 		var form = document.createElement("form");
 		form.setAttribute("method", "post");
 		form.setAttribute("action", url);
-		var eventNumInput = document.createElement("input");
-		eventNumInput.setAttribute("type", "hidden");
-		eventNumInput.setAttribute("name", "eventNum");
-		eventNumInput.setAttribute("value", eventNum);
+		var articleNOInput = document.createElement("input");
+		articleNOInput.setAttribute("type", "hidden");
+		articleNOInput.setAttribute("name", "eventNum");
+		articleNOInput.setAttribute("value", eventNum);
 		
-		form.appendChild(eventNumInput);
+		form.appendChild(articleNOInput);
 		document.body.appendChild(form);
 		form.submit();
 	}

@@ -120,10 +120,6 @@ public class BoardDAOImpl implements BoardDAO {
 	public void updateQnA(Map articleMap) throws DataAccessException {
 		sqlSession.update("mapper.board.updateQnA", articleMap);
 	}
-	
-	public void updateQnAHits(int questionNum) throws DataAccessException {
-		sqlSession.update("mapper.board.QnAHits");
-	}
 
 	// review 목록
 	@Override

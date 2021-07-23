@@ -96,13 +96,6 @@ public class BoardServiceImpl implements BoardService {
 		return articleVO;
 	}
 
-	// 조회수 올리기
-	@Override
-	public void updateQnAHits(int questionNum) {
-			boardDAO.updateQnAHits(questionNum);
-		}
-	
-		
 	// QnA 삭제하기
 	@Override
 	public void removeQnA(int questionNum) throws Exception {
@@ -146,6 +139,5 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.updateReview(articleMap);
 	}
 
-	
 
 }

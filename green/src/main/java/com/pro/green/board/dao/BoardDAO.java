@@ -28,7 +28,6 @@ public interface BoardDAO {
 	public ArticleVO selectQnA(int questionNum) throws DataAccessException;
 	public void deleteQnA(int questionNum) throws DataAccessException;
 	public void updateQnA(Map articleMap) throws DataAccessException;
-	public void updateQnAHits(int questionNum) throws DataAccessException;
 	
 	// ¸®ºä
 	public List<ArticleVO> selectAllReviewList() throws DataAccessException;

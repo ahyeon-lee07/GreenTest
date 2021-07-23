@@ -272,16 +272,19 @@ public class BoardControllerImpl implements BoardController {
 	public ResponseEntity modEvent(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
-		Map<String, Object> articleMap = new HashMap<String, Object>();
+		Map<String,Object> articleMap = new HashMap<String, Object>();
 		Enumeration enu = multipartRequest.getParameterNames();
 		while (enu.hasMoreElements()) {
-			String name = (String) enu.nextElement();
+			String name = (String)enu.nextElement();
 			String value = multipartRequest.getParameter(name);
-			articleMap.put(name, value);
+			articleMap.put(name,value);
 		}
-
+		
+		HttpSession session = multipartRequest.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String id = memberVO.getId();
+		articleMap.put("id", id);
 		String eventNum = (String) articleMap.get("eventNum");
-		articleMap.put("eventNum", eventNum);
 		String message;
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -291,7 +294,7 @@ public class BoardControllerImpl implements BoardController {
 
 			message = "<script>";
 			message += " alert('글을 수정했습니다.');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/eventView.do?eventNum=" + eventNum
+			message += " location.href='" + multipartRequest.getContextPath() + "/eventList.do?eventNum=" + eventNum
 					+ "';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
@@ -328,7 +331,7 @@ public class BoardControllerImpl implements BoardController {
 		} catch (Exception e) {
 			message = "<script>";
 			message += " alert('작업중 오류가 발생했습니다. 다시 시도해 주세요.');";
-			message += " location.href='" + request.getContextPath() + "/eventPage.do?eventNum=" + eventNum + "';";
+			message += " location.href='" + request.getContextPath() + "/eventView.do?eventNum=" + eventNum + "';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
@@ -484,17 +487,16 @@ public class BoardControllerImpl implements BoardController {
 	}
 
 	// QnA 상세페이지
-	@RequestMapping(value = "/viewQnA.do", method = RequestMethod.GET)
-	public ModelAndView viewQnA(@RequestParam("questionNum") int questionNum, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		boardService.updateQnAHits(questionNum);
-		String viewName = (String) request.getAttribute("viewName");
-		articleVO = boardService.viewQnA(questionNum);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		mav.addObject("viewQnA", articleVO);
-		return mav;
-	}
+    @RequestMapping(value = "/viewQnA.do", method = RequestMethod.GET)
+    public ModelAndView viewQnA(@RequestParam("questionNum") int questionNum, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        String viewName = (String) request.getAttribute("viewName");
+        articleVO = boardService.viewQnA(questionNum);
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName(viewName);
+        mav.addObject("viewQnA", articleVO);
+        return mav;
+    }
 
 	// QnA 삭제하기
 	@Override

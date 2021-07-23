@@ -29,7 +29,6 @@ public class ArticleVO {
 	private String productId;
 	private String questionTitle;
 	private String questionContent;
-	private int questionHits;
 	private int commentCount;
 	private String questionPw;
 	private String questionYN;
@@ -162,14 +161,6 @@ public class ArticleVO {
 		this.questionContent = questionContent;
 	}
 
-	public int getQuestionHits() {
-		return questionHits;
-	}
-
-	public void setQuestionHits(int questionHits) {
-		this.questionHits = questionHits;
-	}
-	
 	public int getCommentCount() {
 		return commentCount;
 	}
