@@ -112,7 +112,6 @@
 									
 								</c:forEach>
 							</div>
-							
 							<!-- 페이징 영역 -->
 							<nav aria-label="Page navigation example row">
 								<ul class="pagination d-flex justify-content-center">
