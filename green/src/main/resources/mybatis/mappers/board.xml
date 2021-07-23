@@ -28,7 +28,6 @@
 		<result property="productId" column="productId" />
 		<result property="questionTitle" column="questionTitle" />
 		<result property="questionContent" column="questionContent" />
-		<result property="questionHits" column="questionHits" />
 		<result property="commentCount" column="commentCount" />
 		<result property="questionPw" column="questionPw" />
 		<result property="questionYN" column="questionYN" />

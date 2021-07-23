@@ -32,6 +32,5 @@ public interface BoardService {
 	public void removeReview(int reviewNum) throws Exception;
 	public int addNewReview(Map articleMap) throws Exception;
 	public void modReview(Map articleMap) throws Exception;
-	public void updateQnAHits(int questionNum);
 	
 }
