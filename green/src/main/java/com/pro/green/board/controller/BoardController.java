@@ -22,18 +22,19 @@ public interface BoardController {
 	
 	// 이벤트
 	// 글 목록
-	public ModelAndView event(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView eventList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	// 글 상세
-	public ModelAndView eventPage(@RequestParam("eventNum") int eventNum, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
+	public ModelAndView eventView(@RequestParam("eventNum") int eventNum, HttpServletRequest request,
+										HttpServletResponse response) throws Exception;
 	// 글 추가
 	public ResponseEntity addNewEvent(MultipartHttpServletRequest multipartRequest,
-			HttpServletResponse response) throws Exception;
+										HttpServletResponse response) throws Exception;
 	// 글 수정
-		
+	public ResponseEntity modEvent(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
+	
 	// 글 삭제
 	public ResponseEntity removeEvent(@RequestParam("eventNum") int eventNum, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;
+										HttpServletResponse response) throws Exception;
 	
 
 	// QnA

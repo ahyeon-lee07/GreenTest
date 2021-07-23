@@ -8,15 +8,16 @@
 request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<!-- 보류
 <c:set var="event" value="${articleMap.event}" />
 <c:set var="totEvent" value="${articleMap.totEvent}" />
 <c:set var="section" value="${articleMap.section}" />
 <c:set var="pageNum" value="${articleMap.pageNum}" />
+-->
 
 <!-- 메인 -->
 <main class="mainH">
-	<div class="container">
+	<div class="container py-1">
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
@@ -57,9 +58,9 @@ request.setCharacterEncoding("UTF-8");
 							<tr class="border-bottom">
 								<th class="text-center align-middle">${eventList.eventNum}</th>
 								<td class="text-center align-middle">
-								<a href="${contextPath}/eventPage.do?eventNum=${eventList.eventNum}">${eventList.eventTitle}</a></td>
+								<a href="${contextPath}/eventView.do?eventNum=${eventList.eventNum}">${eventList.eventTitle}</a></td>
 								<td class="text-center align-middle">${eventList.id}</td>
-								<td class="text-center align-middle"><fmt:formatDate value="${eventList.eventDate}" /></td>
+								<td class="text-center align-middle">${eventList.eventDate}</td>
 							</tr>
 						</c:forEach>
 					</c:when>
@@ -85,9 +86,11 @@ request.setCharacterEncoding("UTF-8");
                     </form>
                 </div>
             </div>
-            <a href="javascript:fn_eventWrite('${isLogOn}','${contextPath}/eventWrite.do', 
-                                                    '${contextPath}/member.do')">
+            <div class="">
+            <a class="" href="javascript:fn_articleForm('${isLogOn}','${contextPath}/addNewEvent.do', 
+                                                    '${contextPath}/login.do')">
             <button class="btn btn-outline-success btn-sm">글쓰기</button></a>
+        </div>
         </div>
 
         <nav aria-label="Page navigation example row">
@@ -106,18 +109,18 @@ request.setCharacterEncoding("UTF-8");
                 </a>
               </li>
             </ul>
-          </nav>
+        </nav>
 	</div>
 </main>
 
 <!-- 로그인 후 글쓰기 -->
 <script>
-	function fn_eventWrite(isLogOn, eventWrite, member){
+	function fn_articleForm(isLogOn, addNewEvent, login){
 	  if(isLogOn != '' && isLogOn != 'false'){
-	    location.href = eventWrite;
+	    location.href = addNewEvent;
 	  }else{
 	    alert("로그인 후 글쓰기가 가능합니다.")
-	    location.href=member+'?action=/eventWrite.do';
+	    location.href=login+'?action=/addNewEvent.do';
 	  }
 }
 </script>

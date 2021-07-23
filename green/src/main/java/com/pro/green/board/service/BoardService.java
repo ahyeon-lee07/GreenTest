@@ -15,9 +15,9 @@ public interface BoardService {
 	
 	// 이벤트
 	public List<ArticleVO> eventList() throws Exception; // 글 목록
-	public Map eventPage(int eventNum) throws Exception; // 글 상세
+	public Map eventView(int eventNum) throws Exception; // 글 상세
 	public int addNewEvent(Map articleMap) throws Exception; // 글 추가
-	// 글 수정
+	public void modEvent(Map articleMap) throws Exception; // 글 수정
 	public void removeEvent(int eventNum) throws Exception; // 글 삭제
 	
 	// QnA

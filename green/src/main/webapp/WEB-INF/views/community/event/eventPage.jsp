@@ -8,20 +8,13 @@
 request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<!-- 보류
 <c:set var="article" value="${articleMap.article}" />
-
-<head>
-	<meta charset="UTF-8">
-	<style>
-	#tr_btn_modify {
-		display:none;
-	}
-	</style>
-</head>
+-->
 
 <!-- 메인 -->
 <main class="mainH">
-	<div class="container">
+	<div class="container py-1">
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
@@ -39,14 +32,14 @@ request.setCharacterEncoding("UTF-8");
 		
 		<div class="row mb-4">
             <div class="col-12">
-                <form action="#">
+                <form name="frmArticle" method="post" action="${contextPath}" enctype="multipart/form-data">
                     <div class="row border-bottom border-top d-flex bd-highlight py-2">
                         <label for="inputTitle" class="bd-highlight col-form-label pl-2"
                             style="width: 100px;">제목</label>
                         <div class="flex-grow-1 bd-highlight pr-2">
                             <input type="text" name="eventTitle" value="${article.eventTitle}"
                                 id="eventTitle" class="
-                                form-control" readonly>
+                                form-control" disabled />
                         </div>
                     </div>
                     <div class="row border-bottom py-2">
@@ -57,7 +50,7 @@ request.setCharacterEncoding("UTF-8");
                                 <div class="flex-grow-1 bd-highlight pr-2">
                                     <input type="text" name="id" value="${article.id}"
                                         id="id" class="
-                                        form-control" readonly>
+                                        form-control" disabled />
 
                                 </div>
                             </div>
@@ -67,9 +60,9 @@ request.setCharacterEncoding("UTF-8");
                                 <label for="inputDay" class="bd-highlight col-form-label pl-2"
                                     style="width: 100px;">작성일</label>
                                 <div class="flex-grow-1 bd-highlight pr-2">
-                                    <input type="text" name="eventDate" value="${article.eventDate}"
-                                        id="eventDate" class="
-                                        form-control" readonly>
+                                    <input type="text" value="<fmt:formatDate value="${article.eventDate}" />"
+                                     class="
+                                        form-control" disabled />
                                 </div>
                             </div>
                         </div>
@@ -77,37 +70,39 @@ request.setCharacterEncoding("UTF-8");
                     </div>
                     <div class="row border-bottom p-2">
                         <textarea class="form-control" name="eventContent" id="eventContent"
-                            rows="14" readonly>${article.eventContent}</textarea>
+                            rows="14" disabled>${article.eventContent}</textarea>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="row justify-content-between mb-5">
             <div class="">
             	<a class="" href="${contextPath}/eventList.do">
-            		<input type="button" class="btn btn-secondary btn-sm" value="목록" onClick="backToList(this.form)">
+            		<button type="button" class="btn btn-secondary btn-sm">목록</button>
             	</a>
             </div>
-            <div>
-            <tr id="tr_btn_modify" align="center">
-            <td colspan="2">
+            <div id="tr_btn_modify" align="center">
             	<input type=button class="btn btn-sm btn-outline-success" value="수정" onClick="fn_modify_event(frmEvent)">
             	<input type=button class="btn btn-sm btn-outline-danger" value="취소" onClick="backToList(frmEvent)">
-            </td>
-            </tr>
-            <tr id="tr_btn">
-			<td colspan="2" align="center">
-				<c:if test="${member.id == article.id}">
-					<input type=button class="btn btn-sm btn-outline-success" value="수정" onClick="fn_enable(this.form)">
-					<input type=button class="btn btn-sm btn-outline-danger" value="삭제" 
-					onClick="fn_remove_event('${contextPath}/removeEvent.do', ${article.eventNum})">
-				</c:if>
-			</td>
-			</tr>
             </div>
-        </div>
+            <div id="tr_btn">
+				<div class="row justify-content-between my-3">
+					<div class="">
+					<c:if test="${member.id == eventList.id}">
+					<button type="button" class="btn btn-sm btn-outline-success" onClick="fn_enable(this.form)">수정</button>
+					<button type="button" class="btn btn-sm btn-outline-danger"
+					onClick="fn_remove_event('${contextPath}/removeEvent.do', ${eventList.eventNum})">삭제</button>
+					</c:if>
+            		</div>
+        		</div>
+			</div>
 	</div>
 </main>
+
+<style>
+#tr_btn_modify {
+	display:none;
+}
+</style>
 
 <!-- 버튼 기능 -->
 <script src = "http://code.jquery.com/jquery-latest.min.js"></script>
@@ -117,6 +112,7 @@ request.setCharacterEncoding("UTF-8");
 		obj.submit();
 	}
 	
+	// 수정(진행) 버튼
 	function fn_enable(obj) {
 		document.getElementById("eventTitle").disabled=false;
 		document.getElementById("eventContent").disabled=false;
@@ -124,8 +120,9 @@ request.setCharacterEncoding("UTF-8");
 		document.getElementById("tr_btn").style.display="none";
 	}
 	
-	function fn_modify_event(obj) {
-		obj.action="${contextPath}/modEvent.do?eventNum=${eventList.eventNum}";
+	// 수정(완료) 버튼
+	function fn_modify_article(obj) {
+		obj.action="${contextPath}/modEvent.do?eventNum=${eventView.eventNum}";
 		obj.submit();
 	}
 	
