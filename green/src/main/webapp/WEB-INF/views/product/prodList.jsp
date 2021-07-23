@@ -88,12 +88,28 @@
 											</a>
 											<div class="d-flex justify-content-center mt-2">
 												<div class="bd-highlight flex-grow-1 btn btn-sm btn-outline-secondary mr-1 btn_product" href="${contextPath}/wist_list.do">바로구매</div>
-												<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN('${product.productId}')" style="width: 50px;">
-													<img class="icon_wish" data-value="N" src="${contextPath }/resources/img/heart.svg" alt="">
-												</div>
+												
+												<c:choose>
+													<c:when test="${wishList != 'N' }">
+														<c:choose>
+															<c:when test="${product.cartType == 'wish'}">
+																<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN('${product.productId}')" style="width: 40px;">
+																	<img class="icon_wish" data-value="Y" src="${contextPath }/resources/img/heart-fill.svg" alt="">
+																</div>
+															</c:when>
+															<c:otherwise>
+																<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN('${product.productId}')" style="width: 40px;">
+																	<img class="icon_wish" data-value="N" src="${contextPath }/resources/img/heart.svg" alt="">
+																</div>
+															</c:otherwise>
+														</c:choose>
+													</c:when>
+												</c:choose>
+												
 											</div>
 										</div>	
 									</div>
+									
 								</c:forEach>
 							</div>
 							
@@ -136,7 +152,12 @@
 								url: "${contextPath}/productList/array.do",
 								dataType: "json",
 								data: { p_group: p_group, keyWord: keyWord },
-								success: function (result) {						
+								success: function (result) {
+									console.log(result);
+
+									var wishList = result["wishList"];
+									var result = result['result'];
+									
 									var str = '';
 									for(var i=0; i<result.length; i++){
 							
@@ -172,11 +193,22 @@
 										str += '</a >';
 										str += '<div class="d-flex justify-content-center mt-2">';
 										str += '<div class="bd-highlight flex-grow-1 btn btn-sm btn-outline-secondary mr-1 btn_product" href="${contextPath}/wist_list.do">바로구매</div>';
-										str += '<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN('+result[i]['productId']+')" style="width: 50px;">';
-										str += '<img class="icon_wish" data-value="N" src="${contextPath }/resources/img/heart.svg" alt="">';
-										str += '</div></div></div ></div >';
+							
+										if(wishList != 'N'){
+											if(result[i]['cartType'] == 'wish'){
+												str += '<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN('+result[i]['productId']+')" style="width: 40px;">';
+												str += '<img class="icon_wish" data-value="Y" src="${contextPath }/resources/img/heart-fill.svg" alt="">';
+												str += '</div>';
+											}else {
+												str += '<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN('+result[i]['productId']+')" style="width: 40px;">';
+												str += '<img class="icon_wish" data-value="Y" src="${contextPath }/resources/img/heart.svg" alt="">';
+												str += '</div>';
+											}
+										}
+
+										str += '</div></div ></div >';
 									}
-						
+
 									document.getElementById('chan').innerHTML = str;
 									
 								},

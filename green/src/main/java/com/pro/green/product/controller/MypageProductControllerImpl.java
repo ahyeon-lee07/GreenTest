@@ -65,6 +65,7 @@ public class MypageProductControllerImpl implements MypageProductController {
 
 		mav.addObject("wishCount", wishList.size());
 		mav.addObject("wishList", wishList);
+		mav.addObject("userId", userId);
 		mav.addObject("optionList", optionList);
 
 		mav.setViewName("wishList");
