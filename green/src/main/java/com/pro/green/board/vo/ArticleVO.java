@@ -22,6 +22,7 @@ public class ArticleVO {
 	private String eventTitle;
 	private String eventContent;
 	private Date eventDate;
+	private int eventHits;
 
 	// QnA
 	private int questionNum;
@@ -118,6 +119,14 @@ public class ArticleVO {
 
 	public void setEventDate(Date eventDate) {
 		this.eventDate = eventDate;
+	}
+	
+	public int getEventHits() {
+		return eventHits;
+	}
+
+	public void setEventHits(int eventHits) {
+		this.eventHits = eventHits;
 	}
 
 	// QnA

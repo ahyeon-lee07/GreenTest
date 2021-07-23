@@ -40,6 +40,7 @@ request.setCharacterEncoding("UTF-8");
                     <th class="text-center border-bottom-0" style="width: auto">제목</th>
                     <th class="text-center border-bottom-0" style="width: 100px">작성자</th>
                     <th class="text-center border-bottom-0" style="width: 116px">작성일</th>
+                    <th class="text-center border-bottom-0" style="width: 100px">조회수</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,6 +62,7 @@ request.setCharacterEncoding("UTF-8");
 								<a href="${contextPath}/eventView.do?eventNum=${eventList.eventNum}">${eventList.eventTitle}</a></td>
 								<td class="text-center align-middle">${eventList.id}</td>
 								<td class="text-center align-middle">${eventList.eventDate}</td>
+								<td class="text-center align-middle">${eventList.eventHits}</td>
 							</tr>
 						</c:forEach>
 					</c:when>

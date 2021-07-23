@@ -18,6 +18,7 @@
 		<result property="eventTitle" column="eventTitle" />
 		<result property="eventContent" column="eventContent" />
 		<result property="eventDate" column="eventDate" />
+		<result property="eventHits" column="eventHits" />
 	</resultMap>
 
 	<!-- QnA -->
@@ -151,6 +152,14 @@
 			where eventNum = #{eventNum}
 		]]>
 	</delete>
+	
+	<!-- 이벤트 조회수 -->
+	<update id="increaseeventHits">
+    <![CDATA[
+			update event set eventHits = eventHits + 1
+			where eventNum = #{eventNum}	
+		]]>
+	</update>
 
 
 
