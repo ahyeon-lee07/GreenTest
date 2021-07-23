@@ -25,8 +25,22 @@ public class MypageProductDAOImpl implements MypageProductDAO {
 
 	// 관심상품 삭제
 	@Override
-	public int wishDelete(String productId) throws DataAccessException {
-		int wishList = sqlSession.delete("mapper.mypageProduct.wishDelete", productId);
+	public int wishDelete(Map<String, Object> selectOption) throws DataAccessException {
+		int wishList = sqlSession.delete("mapper.mypageProduct.wishDelete", selectOption);
 		return wishList;
+	}
+
+	// 관심테이블에 등록 여부
+	public int wishYN(Map<String, Object> addOption) throws DataAccessException {
+		int result = 0;
+		
+		int wishchk = sqlSession.selectOne("mapper.mypageProduct.wishchk", addOption);
+		
+		if(wishchk == 0) {
+			result = sqlSession.insert("mapper.mypageProduct.wishAdd", addOption);
+		}else if(wishchk > 0) {
+			result = sqlSession.delete("mapper.mypageProduct.wishDelete", addOption);
+		}
+		return result;
 	}
 }
