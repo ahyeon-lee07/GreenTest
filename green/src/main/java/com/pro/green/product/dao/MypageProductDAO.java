@@ -13,6 +13,9 @@ public interface MypageProductDAO {
 	public List<Map<String, Object>> wishList(Map<String, Object> selectOption) throws DataAccessException;
 
 	// 관심상품 삭제
-	public int wishDelete(String productId) throws DataAccessException;
+	public int wishDelete(Map<String, Object> selectOption) throws DataAccessException;
+
+	// 관심테이블에 등록 여부
+	public int wishYN(Map<String, Object> addOption) throws DataAccessException;
 
 }

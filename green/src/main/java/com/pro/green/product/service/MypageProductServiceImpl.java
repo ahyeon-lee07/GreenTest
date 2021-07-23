@@ -27,8 +27,13 @@ public class MypageProductServiceImpl implements MypageProductService {
 
 	// 관심상품 삭제
 	@Override
-	public int wishDelete(String productId) throws DataAccessException {
-		return mypageProductDAO.wishDelete(productId);
+	public int wishDelete(Map<String, Object> selectOption) throws DataAccessException {
+		return mypageProductDAO.wishDelete(selectOption);
+	}
+
+	// 관심테이블에 등록 여부
+	public int wishYN(Map<String, Object> addOption) throws DataAccessException {
+		return mypageProductDAO.wishYN(addOption);
 	}
 
 }
