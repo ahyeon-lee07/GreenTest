@@ -79,13 +79,11 @@ request.setCharacterEncoding("UTF-8");
             	<a class="" href="${contextPath}/eventList.do">
             		<button type="button" class="btn btn-secondary btn-sm">목록</button>
             	</a>
-            </div>
-            <div id="tr_btn_modify" align="center">
+            <div id="tr_btn_modify" style='float: right;'>
             	<input type=button class="btn btn-sm btn-outline-success" value="수정" onClick="fn_modify_article(frmArticle)">
             	<input type=button class="btn btn-sm btn-outline-danger" value="취소" onClick="backToList(frmArticle)">
             </div>
-            <div id="tr_btn" align="center">
-				<div class="row justify-content-between my-3">
+            <div id="tr_btn" style='float: right;'>
 					<div class="">
 					<c:if test="${member.id == article.id}">
 					<button type="button" class="btn btn-sm btn-outline-success" onClick="fn_enable(this.form)">수정</button>
@@ -93,7 +91,8 @@ request.setCharacterEncoding("UTF-8");
 					onClick="fn_remove_event('${contextPath}/removeEvent.do', ${article.eventNum})">삭제</button>
 					</c:if>
             		</div>
-        		</div>
+        	</div>
+			</div>
 			</div>
 	</div>
 </main>
