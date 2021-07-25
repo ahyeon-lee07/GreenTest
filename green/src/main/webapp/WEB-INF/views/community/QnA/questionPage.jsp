@@ -42,38 +42,29 @@ request.setCharacterEncoding("UTF-8");
 						</div>
 					</div>
 					<div class="row border-bottom py-2">
-						<div class="col p-0">
-							<div class="d-flex bd-highlight">
-								<label for="inputUser" class="bd-highlight col-form-label pl-2"
-									style="width: 100px;">작성자</label>
-								<div class="flex-grow-1 bd-highlight pr-2">
-									<input type=text value="${viewQnA.id }" class="form-control"
-										name="id" disabled />
-								</div>
-							</div>
-						</div>
-						<div class="col p-0">
-							<div class="d-flex bd-highlight">
-								<label for="inputDay" class="bd-highlight col-form-label pl-2"
-									style="width: 100px;">작성일</label>
-								<div class="flex-grow-1 bd-highlight pr-2">
-									<input type=text
-										value="<fmt:formatDate value="${viewQnA.questionDate}" />"
-										class="form-control" disabled />
-								</div>
-							</div>
-						</div>
-						<div class="col p-0">
-							<div class="d-flex bd-highlight">
-								<label for="inputDay" class="bd-highlight col-form-label pl-2"
-									style="width: 100px;">조회수</label>
-								<div class="flex-grow-1 bd-highlight pr-2">
-										<input type=text value="${viewQnA.questionHits }"
-										class="form-control" name="questionHits" disabled />
-								</div>
-							</div>
-						</div>
-					</div>
+                        <div class="col p-0">
+                            <div class="d-flex bd-highlight">
+                                <label for="inputUser" class="bd-highlight col-form-label pl-2"
+                                    style="width: 100px;">작성자</label>
+                                <div class="flex-grow-1 bd-highlight pr-2">
+                                    <input type="text" name="id" value="${viewQnA.id}"
+                                        id="id" class="
+                                        form-control" disabled />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col p-0">
+                            <div class="d-flex bd-highlight">
+                                <label for="inputDay" class="bd-highlight col-form-label pl-2"
+                                    style="width: 100px;">작성일</label>
+                                <div class="flex-grow-1 bd-highlight pr-2">
+                                    <input type="text" value="<fmt:formatDate value="${viewQnA.questionDate}" />"
+                                     class="
+                                        form-control" disabled />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 					<div class="row border-bottom p-2">
 						<textarea class="form-control" rows="14" name="questionContent"
 							id="questionContent" disabled>${viewQnA.questionContent }</textarea>
@@ -84,7 +75,6 @@ request.setCharacterEncoding("UTF-8");
 							type=button class="btn btn-success btn-sm" value="취소"
 							onClick="backToList(frmArticle)">
 					</div>
-
 					<div id="tr_btn">
 						<div class="row justify-content-between my-3">
 							<div class="">

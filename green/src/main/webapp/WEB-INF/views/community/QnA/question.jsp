@@ -44,7 +44,6 @@ request.setCharacterEncoding("UTF-8");
 					<th class="text-center border-bottom-0" style="width: auto">제목</th>
 					<th class="text-center border-bottom-0" style="width: 100px">작성자</th>
 					<th class="text-center border-bottom-0" style="width: 116px">작성일</th>
-					<th class="text-center border-bottom-0" style="width: 100px">조회수</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -66,7 +65,6 @@ request.setCharacterEncoding("UTF-8");
 								<td class="text-center align-middle"><a href="${contextPath }/viewQnA.do?questionNum=${listQnA.questionNum}">${listQnA.questionTitle }</a></td>
 								<td class="text-center align-middle">${listQnA.id}</td>
 								<td class="text-center align-middle">${listQnA.questionDate}</td>
-								<td class="text-center align-middle">${listQnA.questionHits}</td>
 							</tr>
 						</c:forEach>
 					</c:when>
