@@ -57,7 +57,19 @@ request.setCharacterEncoding("UTF-8");
 								<a class="dropdown-item" href="${contextPath }/listNotice.do">공지사항</a>
 								<a class="dropdown-item" href="${contextPath }/eventList.do">이벤트
 									게시판</a> <a class="dropdown-item" href="${contextPath }/listReview.do">리뷰</a>
-							</div></li>
+							</div>
+						</li>
+						<li class="nav-item dropdown mr-3"><a
+							class="nav-link text-secondary" href="#" id="navbarDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> 커뮤니티2 </a>
+							<div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="${contextPath }/community.do?communityType=qna">Q&A</a>
+								<a class="dropdown-item" href="${contextPath }/community.do?communityType=notice">공지사항</a>
+								<a class="dropdown-item" href="${contextPath }/community.do?communityType=event">이벤트
+									게시판</a> <a class="dropdown-item" href="${contextPath }/community.do?communityType=review">리뷰</a>
+							</div>
+						</li>
 						<c:choose>
 							<c:when test="${member.masterYN == 'M' }">
 								<li class="nav-item dropdown mr-3"><a

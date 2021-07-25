@@ -118,6 +118,12 @@
 		<put-attribute name="main" value="/WEB-INF/views/myPage/userPwChk.jsp" />
 	</definition>
 	
+	<!-- 게시물 비번 체크 -->
+	<definition name="communityChk" extends="baseLayout">
+		<put-attribute name="title" value="게시물 비번 체크" />
+		<put-attribute name="main" value="/WEB-INF/views/myPage/userPwChk.jsp" />
+	</definition>
+	
 	<!-- 회원정보수정/탈퇴 -->
 	<definition name="memberEdit" extends="baseLayout">
 		<put-attribute name="title" value="회원정보수정/탈퇴" />
@@ -291,5 +297,30 @@
 	<definition name="couponDetail" extends="baseLayout">
 		<put-attribute name="title" value="쿠폰상세" />
 		<put-attribute name="main" value="/WEB-INF/views/master/couponDetail.jsp" />
+	</definition>
+	
+	<!-- 커뮤니티2 -->
+	<definition name="communityList" extends="baseLayout">
+		<put-attribute name="title" value="커뮤니티" />
+		<put-attribute name="main" value="/WEB-INF/views/community/communityList.jsp" />
+	</definition>
+	
+	<!-- 커뮤니티 등록 -->
+	<definition name="communityAdd" extends="baseLayout">
+		<put-attribute name="title" value="커뮤니티등록" />
+		<put-attribute name="main" value="/WEB-INF/views/community/communityAdd.jsp" />
+	</definition>
+	
+	<definition name="communityDerail" extends="baseLayout">
+		<put-attribute name="title" value="커뮤니티등록" />
+		<put-attribute name="main" value="/WEB-INF/views/community/communityDerail.jsp" />
+	</definition>
+	
+	<!-- 상품 검색 -->
+	<definition name="productSearch" extends="baseLayout">
+		<put-attribute name="header" value="" />
+		<put-attribute name="footer" value="" />
+		<put-attribute name="title" value="상품검색" />
+		<put-attribute name="main" value="/WEB-INF/views/community/productSearch.jsp" />
 	</definition>
 </tiles-definitions>
