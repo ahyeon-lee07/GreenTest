@@ -95,17 +95,23 @@ public class BoardServiceImpl implements BoardService {
 		ArticleVO articleVO = boardDAO.selectQnA(questionNum);
 		return articleVO;
 	}
-
-	// QnA 삭제하기
+	
+	// QnA 글 추가
 	@Override
-	public void removeQnA(int questionNum) throws Exception {
-		boardDAO.deleteQnA(questionNum);
+	public int addNewQnA(Map articleMap) throws Exception{
+		return boardDAO.insertNewQnA(articleMap);
 	}
 
 	// QnA 수정하기
 	@Override
 	public void modQnA(Map articleMap) throws Exception {
 		boardDAO.updateQnA(articleMap);
+	}
+	
+	// QnA 삭제하기
+	@Override
+	public void removeQnA(int questionNum) throws Exception {
+		boardDAO.deleteQnA(questionNum);
 	}
 
 	// review 목록

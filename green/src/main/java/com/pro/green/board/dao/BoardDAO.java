@@ -24,10 +24,11 @@ public interface BoardDAO {
 	public void deleteEvent(int eventNum) throws DataAccessException; // 글 삭제
 	
 	// QnA
-	public List<ArticleVO> selectAllQnAList() throws DataAccessException;
-	public ArticleVO selectQnA(int questionNum) throws DataAccessException;
-	public void deleteQnA(int questionNum) throws DataAccessException;
-	public void updateQnA(Map articleMap) throws DataAccessException;
+	public List<ArticleVO> selectAllQnAList() throws DataAccessException; // 글 목록
+	public ArticleVO selectQnA(int questionNum) throws DataAccessException; // 글 상세
+	public int insertNewQnA(Map articleMap) throws DataAccessException; // 글 추가
+	public void updateQnA(Map articleMap) throws DataAccessException; // 글 수정
+	public void deleteQnA(int questionNum) throws DataAccessException; // 글 삭제
 	
 	// 리뷰
 	public List<ArticleVO> selectAllReviewList() throws DataAccessException;

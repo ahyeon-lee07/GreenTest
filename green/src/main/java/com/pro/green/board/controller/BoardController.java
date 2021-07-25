@@ -38,9 +38,18 @@ public interface BoardController {
 	
 
 	// QnA
+	// 글 목록
 	public ModelAndView listQnA(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	// 글 상세
 	public ModelAndView viewQnA(@RequestParam("questionNum") int questionNum, HttpServletRequest request,
-			HttpServletResponse response) throws Exception;	
+			HttpServletResponse response) throws Exception;
+	// 글 추가
+	public ResponseEntity addNewQnA(MultipartHttpServletRequest multipartRequest,
+											HttpServletResponse response) throws Exception;
+	// 글 수정
+	public ResponseEntity modQnA(MultipartHttpServletRequest multipartRequest,
+			HttpServletResponse response) throws Exception;
+	// 글 삭제
 	public ResponseEntity removeQnA(@RequestParam("questionNum") int questionNum,
             HttpServletRequest request, HttpServletResponse response) throws Exception;
 	

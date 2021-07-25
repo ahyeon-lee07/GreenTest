@@ -107,18 +107,32 @@ public class BoardDAOImpl implements BoardDAO {
 	public ArticleVO selectQnA(int questionNum) throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectQnA", questionNum);
 	}
+	
+	// QnA 글 추가
+	@Override
+	public int insertNewQnA(Map articleMap) throws DataAccessException {
+		int questionNum = selectNewQnANum(); // 새 글에 대한 글 번호 가져오기
+		articleMap.put("questionNum", questionNum); // 글 번호를 articleMap에 저장
+		sqlSession.insert("mapper.board.insertNewQnA", articleMap); // id에 대한 insert문을 호출하면서 articleMap을 전달
+		return questionNum;
+	}
+			
+	// 새 글 번호 가져오기
+	private int selectNewQnANum() throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectNewQnANum");
+	}
+	
+	// QnA 수정
+	@Override
+	public void updateQnA(Map articleMap) throws DataAccessException {
+		sqlSession.update("mapper.board.updateQnA", articleMap);
+	}
 
 	// QnA 삭제
 	@Override
 	public void deleteQnA(int questionNum) throws DataAccessException {
 		sqlSession.delete("mapper.board.deleteQnA", questionNum);
 
-	}
-
-	// QnA 수정
-	@Override
-	public void updateQnA(Map articleMap) throws DataAccessException {
-		sqlSession.update("mapper.board.updateQnA", articleMap);
 	}
 
 	// review 목록

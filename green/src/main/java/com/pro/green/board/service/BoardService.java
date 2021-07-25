@@ -21,10 +21,11 @@ public interface BoardService {
 	public void removeEvent(int eventNum) throws Exception; // 글 삭제
 	
 	// QnA
-	public List<ArticleVO> listQnA() throws Exception;
-	public ArticleVO viewQnA(int questionNum) throws Exception;
-	public void removeQnA(int questionNum) throws Exception;
-	public void modQnA(Map articleMap) throws Exception;
+	public List<ArticleVO> listQnA() throws Exception; // 글 목록
+	public ArticleVO viewQnA(int questionNum) throws Exception; // 글 상세
+	public int addNewQnA(Map articleMap) throws Exception; // 글 추가
+	public void modQnA(Map articleMap) throws Exception; // 글 수정
+	public void removeQnA(int questionNum) throws Exception; // 글 삭제
 	
 	// 리뷰
 	public List<ArticleVO> listReview() throws Exception;

@@ -338,6 +338,146 @@ public class BoardControllerImpl implements BoardController {
 		}
 		return resEnt;
 	}
+	
+	// QnA 목록
+	@Override
+	@RequestMapping(value = "/listQnA.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView listQnA(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		List<ArticleVO> listQnA = boardService.listQnA();
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.setViewName("listQnA");
+		mav.addObject("listQnA", listQnA);
+		System.out.println(listQnA);
+		return mav;
+	}
+
+	// QnA 상세페이지
+	@RequestMapping(value = "/viewQnA.do", method = RequestMethod.GET)
+	public ModelAndView viewQnA(@RequestParam("questionNum") int questionNum, HttpServletRequest request,
+	        HttpServletResponse response) throws Exception {
+	    String viewName = (String) request.getAttribute("viewName");
+	    articleVO = boardService.viewQnA(questionNum);
+	    ModelAndView mav = new ModelAndView();
+	    mav.setViewName(viewName);
+	    mav.addObject("viewQnA", articleVO);
+	    return mav;
+	}
+	
+	// QnA 글 추가
+	@Override
+	@RequestMapping(value = "/addNewQnA.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity addNewQnA(MultipartHttpServletRequest multipartRequest,
+			HttpServletResponse response) throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+			
+		Map<String, Object> articleMap = new HashMap<String, Object>();
+		Enumeration enu = multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+			String value = multipartRequest.getParameter(name);
+			articleMap.put(name,value);
+		}
+
+		HttpSession session = multipartRequest.getSession(); // 로그인 시 세션에 저장된 회원 정보에서 글쓴이 아이디를 얻어와서 Map에 저장합니다.
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String id = memberVO.getId();
+		articleMap.put("id",id);
+		articleMap.put("questionNum", 0);
+			
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			int eventNum = boardService.addNewQnA(articleMap);
+			message = "<script>";
+			message += "alert('새 글을 추가했습니다.');";
+			message += "location.href='"+multipartRequest.getContextPath()+"/listQnA.do';";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+					
+		}catch(Exception e) {
+			message = "<script>";
+			message += "alert('오류가 발생했습니다. 다시 시도해 주세요.');');";
+			message += "location.href='"+multipartRequest.getContextPath()+"/addNewQnA.do';";
+			message +="</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+			return resEnt;
+	}
+
+	// QnA 수정
+	@RequestMapping(value = "/modQnA.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity modQnA(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+			throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+		Map<String, Object> articleMap = new HashMap<String, Object>();
+		Enumeration enu = multipartRequest.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String value = multipartRequest.getParameter(name);
+			articleMap.put(name, value);
+		}
+
+		String questionNum = (String) articleMap.get("questionNum");
+		articleMap.put("questionNum", questionNum);
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			boardService.modQnA(articleMap);
+
+			message = "<script>";
+			message += " alert('글을 수정했습니다.');";
+			message += " location.href='" + multipartRequest.getContextPath() + "/viewQnA.do?questionNum=" + questionNum
+					+ "';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		} catch (Exception e) {
+			message = "<script>";
+			message += " alert('오류가 발생했습니다.다시 수정해주세요');";
+			message += " location.href='" + multipartRequest.getContextPath() + "/viewQnA.do?questionNum="
+					+ questionNum + "';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		}
+		return resEnt;
+	}
+		
+	// QnA 삭제하기
+	@Override
+	@RequestMapping(value = "/removeQnA.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity removeQnA(@RequestParam("questionNum") int questionNum, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			boardService.removeQnA(questionNum);
+			message = "<script>";
+			message += " alert('글을 삭제했습니다.');";
+			message += " location.href='" + request.getContextPath() + "/listQnA.do';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+
+		} catch (Exception e) {
+			message = "<script>";
+			message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
+			message += " location.href='" + request.getContextPath() + "/viewQnA.do?questionNum=" + questionNum + "';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		return resEnt;
+	}
 
 	// review 목록
 	@Override
@@ -434,7 +574,7 @@ public class BoardControllerImpl implements BoardController {
 		return resEnt;
 	}
 
-	// 리뷰 수정
+	// review 수정
 	@RequestMapping(value = "/modReview.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity modReview(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
@@ -467,101 +607,6 @@ public class BoardControllerImpl implements BoardController {
 			message += " location.href='" + multipartRequest.getContextPath() + "/viewReview.do?reviewNum=" + reviewNum
 					+ "';";
 
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		}
-		return resEnt;
-	}
-
-	// QnA 목록
-	@Override
-	@RequestMapping(value = "/listQnA.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView listQnA(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		List<ArticleVO> listQnA = boardService.listQnA();
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.setViewName("listQnA");
-		mav.addObject("listQnA", listQnA);
-		System.out.println(listQnA);
-		return mav;
-	}
-
-	// QnA 상세페이지
-    @RequestMapping(value = "/viewQnA.do", method = RequestMethod.GET)
-    public ModelAndView viewQnA(@RequestParam("questionNum") int questionNum, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        String viewName = (String) request.getAttribute("viewName");
-        articleVO = boardService.viewQnA(questionNum);
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName(viewName);
-        mav.addObject("viewQnA", articleVO);
-        return mav;
-    }
-
-	// QnA 삭제하기
-	@Override
-	@RequestMapping(value = "/removeQnA.do", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity removeQnA(@RequestParam("questionNum") int questionNum, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		response.setContentType("text/html; charset=UTF-8");
-		String message;
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		try {
-			boardService.removeQnA(questionNum);
-			message = "<script>";
-			message += " alert('글을 삭제했습니다.');";
-			message += " location.href='" + request.getContextPath() + "/listQnA.do';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-
-		} catch (Exception e) {
-			message = "<script>";
-			message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
-			message += " location.href='" + request.getContextPath() + "/viewQnA.do?questionNum=" + questionNum + "';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-			e.printStackTrace();
-		}
-		return resEnt;
-	}
-
-	// QnA 수정
-	@RequestMapping(value = "/modQnA.do", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity modQnA(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
-			throws Exception {
-		multipartRequest.setCharacterEncoding("utf-8");
-		Map<String, Object> articleMap = new HashMap<String, Object>();
-		Enumeration enu = multipartRequest.getParameterNames();
-		while (enu.hasMoreElements()) {
-			String name = (String) enu.nextElement();
-			String value = multipartRequest.getParameter(name);
-			articleMap.put(name, value);
-		}
-
-		String questionNum = (String) articleMap.get("questionNum");
-		articleMap.put("questionNum", questionNum);
-		String message;
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		try {
-			boardService.modQnA(articleMap);
-
-			message = "<script>";
-			message += " alert('글을 수정했습니다.');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/viewQnA.do?questionNum=" + questionNum
-					+ "';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		} catch (Exception e) {
-			message = "<script>";
-			message += " alert('오류가 발생했습니다.다시 수정해주세요');";
-			message += " location.href='" + multipartRequest.getContextPath() + "/viewQnA.do?questionNum="
-					+ questionNum + "';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		}
