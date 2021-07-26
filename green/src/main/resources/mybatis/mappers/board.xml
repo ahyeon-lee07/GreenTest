@@ -68,14 +68,6 @@
     ]]>
 	</select>
 
-	<!-- 공지사항 삭제 -->
-	<delete id="deleteNotice" parameterType="int">
-    <![CDATA[
-      delete from notice 
-      where noticeNum = #{noticeNum}
-    ]]>
-	</delete>
-
 	<!-- 공지사항 등록 -->
 	<insert id="insertNewNotice" parameterType="java.util.Map">
 		<![CDATA[
@@ -83,6 +75,8 @@
 			VALUES(#{noticeNum},#{noticeTitle},	#{id}, #{noticeContent})
 		]]>
 	</insert>
+	
+	<!-- 공지사항 새 글 번호 -->
 	<select id="selectNewNoticeNum" resultType="int">
 		<![CDATA[
 			SELECT max(noticeNum)+ 1 from notice	
@@ -98,6 +92,14 @@
 		where
 		noticeNum=#{noticeNum}
 	</update>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="deleteNotice" parameterType="int">
+    <![CDATA[
+      delete from notice 
+      where noticeNum = #{noticeNum}
+    ]]>
+	</delete>
 
 
 
@@ -127,7 +129,7 @@
    		]]>
 	</insert>
 
-	<!-- 이벤트 추가하는 새 글에 대한 글 번호 --> <!-- nvl = IFNULL -->
+	<!-- 이벤트 추가하는 새 글에 대한 글 번호 -->
 	<select id="selectNewEventNum" resultType="int">
 		<![CDATA[
 	 		SELECT max(eventNum)+1 from event
@@ -189,7 +191,7 @@
    		]]>
 	</insert>
 
-	<!-- QnA 추가하는 새 글에 대한 글 번호 --> <!-- nvl = IFNULL -->
+	<!-- QnA 추가하는 새 글에 대한 글 번호 -->
 	<select id="selectNewQnANum" resultType="int">
 		<![CDATA[
 	 		SELECT max(questionNum)+1 from qna
@@ -233,14 +235,22 @@
     ]]>
 	</select>
 
-	<!-- review 조회수 -->
-	<update id="increasereviewHits">
-    <![CDATA[
-			update review set reviewHits = reviewHits + 1
-			where reviewNum = #{reviewNum}	
+	<!-- review 추가 -->
+	<insert id="insertNewReview" parameterType="java.util.Map"> <!-- 글 정보를 Map으로 전달합니다. -->
+   		<![CDATA[
+      		insert into review(reviewNum, reviewTitle, id, reviewContent)
+      		values (#{reviewNum}, #{reviewTitle}, #{id}, #{reviewContent})
+   		]]>
+	</insert>
+	
+	
+	<!-- review 추가하는 새 글에 대한 글 번호 -->
+	<select id="selectNewReviewNum" resultType="int">
+		<![CDATA[
+	 		SELECT max(reviewNum)+1 from review
 		]]>
-	</update>
-
+	</select>
+	
 	<!-- review 수정 -->
 	<update id="updateReview" parameterType="java.util.Map">
 		update review
@@ -258,5 +268,13 @@
       where reviewNum = #{reviewNum}
     ]]>
 	</delete>
+	
+	<!-- review 조회수 -->
+	<update id="increasereviewHits">
+    <![CDATA[
+			update review set reviewHits = reviewHits + 1
+			where reviewNum = #{reviewNum}	
+		]]>
+	</update>
 
 </mapper>

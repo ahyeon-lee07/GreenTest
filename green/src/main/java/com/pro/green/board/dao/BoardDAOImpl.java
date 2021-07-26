@@ -30,22 +30,14 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne("mapper.board.selectNotice", noticeNum);
 	}
 
-	// 공지사항 삭제
-	@Override
-	public void deleteNotice(int noticeNum) throws DataAccessException {
-		sqlSession.delete("mapper.board.deleteNotice", noticeNum);
-
-	}
-
 	// 공지사항 글쓰기
 	@Override
-	public int insertNewNotice(Map articleMap) throws DataAccessException {
-		int noticeNum = selectNewNoticeNum();
-		articleMap.put("noticeNum", noticeNum);
-		sqlSession.insert("mapper.board.insertNewNotice", articleMap);
-		return noticeNum;
-	}
-
+    public int insertNewNotice(Map articleMap) throws DataAccessException {
+        int result = sqlSession.insert("mapper.board.insertNewNotice", articleMap);
+        return result;
+    }
+	
+	// 공지사항 새 글 번호
 	private int selectNewNoticeNum() throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectNewNoticeNum");
 	}
@@ -54,6 +46,12 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void updateNotice(Map articleMap) throws DataAccessException {
 		sqlSession.update("mapper.board.updateNotice", articleMap);
+	}
+	
+	// 공지사항 삭제
+	@Override
+	public void deleteNotice(int noticeNum) throws DataAccessException {
+		sqlSession.delete("mapper.board.deleteNotice", noticeNum);
 	}
 
 	// 이벤트 글 목록
@@ -71,12 +69,10 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	// 이벤트 글 추가
 	@Override
-	public int insertNewEvent(Map articleMap) throws DataAccessException {
-		int eventNum = selectNewEventNum(); // 새 글에 대한 글 번호 가져오기
-		articleMap.put("eventNum", eventNum); // 글 번호를 articleMap에 저장
-		sqlSession.insert("mapper.board.insertNewEvent", articleMap); // id에 대한 insert문을 호출하면서 articleMap을 전달
-		return eventNum;
-	}
+    public int insertNewEvent(Map articleMap) throws DataAccessException {
+        int result = sqlSession.insert("mapper.board.insertNewEvent", articleMap);
+        return result;
+    }
 		
 	// 새 글 번호 가져오기
 	private int selectNewEventNum() throws DataAccessException {
@@ -110,12 +106,10 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	// QnA 글 추가
 	@Override
-	public int insertNewQnA(Map articleMap) throws DataAccessException {
-		int questionNum = selectNewQnANum(); // 새 글에 대한 글 번호 가져오기
-		articleMap.put("questionNum", questionNum); // 글 번호를 articleMap에 저장
-		sqlSession.insert("mapper.board.insertNewQnA", articleMap); // id에 대한 insert문을 호출하면서 articleMap을 전달
-		return questionNum;
-	}
+    public int insertNewQnA(Map articleMap) throws DataAccessException {
+        int result = sqlSession.insert("mapper.board.insertNewQnA", articleMap);
+        return result;
+    }
 			
 	// 새 글 번호 가져오기
 	private int selectNewQnANum() throws DataAccessException {
@@ -148,22 +142,14 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne("mapper.board.selectReview", reviewNum);
 	}
 
-	// review 삭제
-	@Override
-	public void deleteReview(int reviewNum) throws DataAccessException {
-		sqlSession.delete("mapper.board.deleteReview", reviewNum);
-
-	}
-
 	// review 글쓰기
 	@Override
-	public int insertNewReview(Map articleMap) throws DataAccessException {
-		int reviewNum = selectNewReviewNum();
-		articleMap.put("reviewNum", reviewNum);
-		sqlSession.insert("mapper.board.insertNewReview", articleMap);
-		return reviewNum;
-	}
-
+    public int insertNewReview(Map articleMap) throws DataAccessException {
+        int result = sqlSession.insert("mapper.board.insertNewReview", articleMap);
+        return result;
+    }
+	
+	// 새 글 번호
 	private int selectNewReviewNum() throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectNewReviewNum");
 	}
@@ -172,6 +158,12 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void updateReview(Map articleMap) throws DataAccessException {
 		sqlSession.update("mapper.board.updateReview", articleMap);
+	}
+	
+	// review 삭제
+	@Override
+	public void deleteReview(int reviewNum) throws DataAccessException {
+		sqlSession.delete("mapper.board.deleteReview", reviewNum);
 	}
 
 }
