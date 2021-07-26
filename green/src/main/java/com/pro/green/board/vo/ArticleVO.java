@@ -17,14 +17,14 @@ public class ArticleVO {
 	private String noticeContent;
 	private Date noticeDate;
 
-	// 이벤트
+	// 이벤트 게시판
 	private int eventNum;
 	private String eventTitle;
 	private String eventContent;
 	private Date eventDate;
 	private int eventHits;
 
-	// QnA
+	// Q&A
 	private int questionNum;
 	private String productId;
 	private String questionTitle;
@@ -36,17 +36,16 @@ public class ArticleVO {
 
 	// Review
 	private int reviewNum;
+	private String imageFileName;
 	private String reviewTitle;
 	private String reviewContent;
-	private int reviewHits;
 	private Date reviewDate;
-
-	private String imageFileName;
 
 	public ArticleVO() {
 		System.out.println("articleVO 생성자");
 	}
 
+	// 공지사항
 	public int getNoticeNum() {
 		return noticeNum;
 	}
@@ -87,7 +86,7 @@ public class ArticleVO {
 		this.noticeDate = noticeDate;
 	}
 
-	// 이벤트
+	// 이벤트 게시판
 	public int getEventNum() {
 		return eventNum;
 	}
@@ -128,7 +127,7 @@ public class ArticleVO {
 		this.eventHits = eventHits;
 	}
 
-	// QnA
+	// Q&A
 	public int getQuestionNum() {
 		return questionNum;
 	}
@@ -193,7 +192,7 @@ public class ArticleVO {
 		this.questionDate = questionDate;
 	}
 
-	// review
+	// Review
 	public int getReviewNum() {
 		return reviewNum;
 	}
@@ -216,14 +215,6 @@ public class ArticleVO {
 
 	public void setReviewContent(String reviewContent) {
 		this.reviewContent = reviewContent;
-	}
-
-	public int getReviewHits() {
-		return reviewHits;
-	}
-
-	public void setReviewHits(int reviewHits) {
-		this.reviewHits = reviewHits;
 	}
 
 	public Date getReviewDate() {

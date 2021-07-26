@@ -32,12 +32,6 @@ public class BoardServiceImpl implements BoardService {
 		return articleVO;
 	}
 
-	// 공지사항 삭제하기
-	@Override
-	public void removeNotice(int noticeNum) throws Exception {
-		boardDAO.deleteNotice(noticeNum);
-	}
-
 	// 공지사항 글쓰기
 	@Override
 	public int addNewNotice(Map articleMap) throws Exception {
@@ -48,6 +42,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void modNotice(Map articleMap) throws Exception {
 		boardDAO.updateNotice(articleMap);
+	}
+	
+	// 공지사항 삭제하기
+	@Override
+	public void removeNotice(int noticeNum) throws Exception {
+		boardDAO.deleteNotice(noticeNum);
 	}
 
 	// 이벤트 글 목록
@@ -127,12 +127,6 @@ public class BoardServiceImpl implements BoardService {
 		return articleVO;
 	}
 
-	// review 삭제하기
-	@Override
-	public void removeReview(int reviewNum) throws Exception {
-		boardDAO.deleteReview(reviewNum);
-	}
-
 	// review 글쓰기
 	@Override
 	public int addNewReview(Map articleMap) throws Exception {
@@ -144,6 +138,11 @@ public class BoardServiceImpl implements BoardService {
 	public void modReview(Map articleMap) throws Exception {
 		boardDAO.updateReview(articleMap);
 	}
-
+	
+	// review 삭제하기
+	@Override
+	public void removeReview(int reviewNum) throws Exception {
+		boardDAO.deleteReview(reviewNum);
+	}
 
 }

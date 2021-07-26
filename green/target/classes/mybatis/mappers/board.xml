@@ -243,7 +243,6 @@
    		]]>
 	</insert>
 	
-	
 	<!-- review 추가하는 새 글에 대한 글 번호 -->
 	<select id="selectNewReviewNum" resultType="int">
 		<![CDATA[
@@ -268,13 +267,5 @@
       where reviewNum = #{reviewNum}
     ]]>
 	</delete>
-	
-	<!-- review 조회수 -->
-	<update id="increasereviewHits">
-    <![CDATA[
-			update review set reviewHits = reviewHits + 1
-			where reviewNum = #{reviewNum}	
-		]]>
-	</update>
 
 </mapper>

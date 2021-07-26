@@ -11,16 +11,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface BoardController {
 	// 공지사항
+	// 글 목록
 	public ModelAndView listNotice(HttpServletRequest request, HttpServletResponse response) throws Exception;
-
+	// 글 상세
 	public ModelAndView viewNotice(@RequestParam("noticeNum") int noticeNum, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
+	// 글 추가
+	public ResponseEntity addNewNotice(MultipartHttpServletRequest multipartRequest,HttpServletResponse response) throws Exception;
+	// 글 수정
+	public ResponseEntity modNotice(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
+	// 글 삭제
 	public ResponseEntity removeNotice(@RequestParam("noticeNum") int noticeNum,
             HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ResponseEntity addNewNotice(MultipartHttpServletRequest multipartRequest,HttpServletResponse response) throws Exception;
 	
 	
-	// 이벤트
+	// 이벤트 게시판
 	// 글 목록
 	public ModelAndView eventList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	// 글 상세
@@ -37,7 +42,7 @@ public interface BoardController {
 										HttpServletResponse response) throws Exception;
 	
 
-	// QnA
+	// Q&A
 	// 글 목록
 	public ModelAndView listQnA(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	// 글 상세
@@ -53,13 +58,17 @@ public interface BoardController {
 	public ResponseEntity removeQnA(@RequestParam("questionNum") int questionNum,
             HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	// 리뷰
+	// Review
+	// 글 목록
 	public ModelAndView listReview(HttpServletRequest request, HttpServletResponse response) throws Exception;
-
+	// 글 상세
 	public ModelAndView viewReview(@RequestParam("reviewNum") int reviewNum, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
+	// 글 추가
+	public ResponseEntity addNewReview(MultipartHttpServletRequest multipartRequest,HttpServletResponse response) throws Exception;
+	// 글 수정
+	public ResponseEntity modReview(MultipartHttpServletRequest multipartRequest,  HttpServletResponse response) throws Exception;
+	// 글 삭제
 	public ResponseEntity removeReview(@RequestParam("reviewNum") int reviewNum,
             HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ResponseEntity addNewReview(MultipartHttpServletRequest multipartRequest,HttpServletResponse response) throws Exception;
-	public ResponseEntity modReview(MultipartHttpServletRequest multipartRequest,  HttpServletResponse response) throws Exception;
 }

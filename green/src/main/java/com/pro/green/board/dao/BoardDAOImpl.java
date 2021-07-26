@@ -17,7 +17,7 @@ public class BoardDAOImpl implements BoardDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
-	// 공지사항 목록
+	// 공지사항 글 목록
 	@Override
 	public List<ArticleVO> selectAllNoticeList() throws DataAccessException {
 		List<ArticleVO> listNotice = sqlSession.selectList("mapper.board.selectAllNoticeList");
@@ -54,113 +54,113 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.delete("mapper.board.deleteNotice", noticeNum);
 	}
 
-	// 이벤트 글 목록
+	// 이벤트 게시판 글 목록
 	@Override
 	public List<ArticleVO> selectAllEventList() throws DataAccessException {
 	List<ArticleVO> eventList = sqlSession.selectList("mapper.board.selectAllEventList");
 		return eventList;
 	}
 
-	// 이벤트 글 상세페이지
+	// 이벤트 게시판 글 상세페이지
 	@Override
 	public ArticleVO selectEvent(int eventNum) throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectEvent", eventNum);
 	}
 		
-	// 이벤트 글 추가
+	// 이벤트 게시판 글 추가
 	@Override
     public int insertNewEvent(Map articleMap) throws DataAccessException {
         int result = sqlSession.insert("mapper.board.insertNewEvent", articleMap);
         return result;
     }
 		
-	// 새 글 번호 가져오기
+	// 이벤트 게시판 새 글 번호
 	private int selectNewEventNum() throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectNewEventNum");
 	}
 		
-	// 이벤트 글 수정
+	// 이벤트 게시판 글 수정
 	@Override
 	public void updateEvent(Map articleMap) throws DataAccessException {
 		sqlSession.update("mapper.board.updateEvent", articleMap);
 	}
 
-	// 이벤트 글 삭제
+	// 이벤트 게시판 글 삭제
 	@Override
 	public void deleteEvent(int eventNum) throws DataAccessException {
 		sqlSession.delete("mapper.board.deleteEvent", eventNum);
 	}
 
-	// QnA 목록
+	// Q&A 글 목록
 	@Override
 	public List<ArticleVO> selectAllQnAList() throws DataAccessException {
 		List<ArticleVO> listQnA = sqlSession.selectList("mapper.board.selectAllQnAList");
 		return listQnA;
 	}
 
-	// QnA 상세페이지
+	// Q&A 상세페이지
 	@Override
 	public ArticleVO selectQnA(int questionNum) throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectQnA", questionNum);
 	}
 	
-	// QnA 글 추가
+	// Q&A 글 추가
 	@Override
     public int insertNewQnA(Map articleMap) throws DataAccessException {
         int result = sqlSession.insert("mapper.board.insertNewQnA", articleMap);
         return result;
     }
 			
-	// 새 글 번호 가져오기
+	// Q&A 새 글 번호
 	private int selectNewQnANum() throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectNewQnANum");
 	}
 	
-	// QnA 수정
+	// Q&A 수정
 	@Override
 	public void updateQnA(Map articleMap) throws DataAccessException {
 		sqlSession.update("mapper.board.updateQnA", articleMap);
 	}
 
-	// QnA 삭제
+	// Q&A 삭제
 	@Override
 	public void deleteQnA(int questionNum) throws DataAccessException {
 		sqlSession.delete("mapper.board.deleteQnA", questionNum);
 
 	}
 
-	// review 목록
+	// Review 글 목록
 	@Override
 	public List<ArticleVO> selectAllReviewList() throws DataAccessException {
 		List<ArticleVO> listReview = sqlSession.selectList("mapper.board.selectAllReviewList");
 		return listReview;
 	}
 
-	// review 상세페이지
+	// Review 상세페이지
 	@Override
 	public ArticleVO selectReview(int reviewNum) throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectReview", reviewNum);
 	}
 
-	// review 글쓰기
+	// Review 글쓰기
 	@Override
     public int insertNewReview(Map articleMap) throws DataAccessException {
         int result = sqlSession.insert("mapper.board.insertNewReview", articleMap);
         return result;
     }
 	
-	// 새 글 번호
+	// Review 새 글 번호
 	private int selectNewReviewNum() throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectNewReviewNum");
 	}
 
-	// review 수정
+	// Review 수정
 	@Override
 	public void updateReview(Map articleMap) throws DataAccessException {
 		sqlSession.update("mapper.board.updateReview", articleMap);
 	}
 	
-	// review 삭제
+	// Review 삭제
 	@Override
 	public void deleteReview(int reviewNum) throws DataAccessException {
 		sqlSession.delete("mapper.board.deleteReview", reviewNum);

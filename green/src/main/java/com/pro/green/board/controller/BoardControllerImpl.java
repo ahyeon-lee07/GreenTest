@@ -63,36 +63,6 @@ public class BoardControllerImpl implements BoardController {
 		return mav;
 	}
 
-	// 공지사항 삭제하기
-	@Override
-	@RequestMapping(value = "/removeNotice.do", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity removeNotice(@RequestParam("noticeNum") int noticeNum, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		response.setContentType("text/html; charset=UTF-8");
-		String message;
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		try {
-			boardService.removeNotice(noticeNum);
-			message = "<script>";
-			message += " alert('글을 삭제했습니다.');";
-			message += " location.href='" + request.getContextPath() + "/listNotice.do';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-
-		} catch (Exception e) {
-			message = "<script>";
-			message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
-			message += " location.href='" + request.getContextPath() + "/viewNotice.do?noticeNum=" + noticeNum + "';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-			e.printStackTrace();
-		}
-		return resEnt;
-	}
-
 	// 공지사항 글쓰기
 	@Override
 	@RequestMapping(value = "/addNewNotice.do", method = RequestMethod.POST)
@@ -185,8 +155,38 @@ public class BoardControllerImpl implements BoardController {
 		}
 		return resEnt;
 	}
+	
+	// 공지사항 삭제
+	@Override
+	@RequestMapping(value = "/removeNotice.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity removeNotice(@RequestParam("noticeNum") int noticeNum, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			boardService.removeNotice(noticeNum);
+			message = "<script>";
+			message += " alert('글을 삭제했습니다.');";
+			message += " location.href='" + request.getContextPath() + "/listNotice.do';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 
-	// 이벤트 글 목록
+		} catch (Exception e) {
+			message = "<script>";
+			message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
+			message += " location.href='" + request.getContextPath() + "/viewNotice.do?noticeNum=" + noticeNum + "';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		return resEnt;
+	}
+
+	// 이벤트 게시판 글 목록
 	@Override
 	@RequestMapping(value = "/eventList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView eventList(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -198,7 +198,7 @@ public class BoardControllerImpl implements BoardController {
 
 	}
 
-	// 이벤트 상세페이지
+	// 이벤트 게시판 글 상세페이지
 	@RequestMapping(value = "/eventView.do", method = RequestMethod.GET)
 	public ModelAndView eventView(@RequestParam("eventNum") int eventNum,
 				 HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -211,7 +211,7 @@ public class BoardControllerImpl implements BoardController {
 	}
 	
 	
-	// 이벤트 글쓰기 창
+	// 이벤트 게시판 글쓰기 창
 	@RequestMapping(value = "/eventWrite.do", method = RequestMethod.GET)
 	public ModelAndView eventWrite(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
@@ -221,7 +221,7 @@ public class BoardControllerImpl implements BoardController {
 	}
 	
 	
-	// 이벤트 글 추가
+	// 이벤트 게시판 글 추가
 	@Override
 	@RequestMapping(value = "/addNewEvent.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -266,7 +266,7 @@ public class BoardControllerImpl implements BoardController {
 			return resEnt;
 	}
 
-	// 이벤트 글 수정
+	// 이벤트 게시판 글 수정
 	@RequestMapping(value = "/modEvent.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity modEvent(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
@@ -309,7 +309,7 @@ public class BoardControllerImpl implements BoardController {
 		return resEnt;
 	}
 		
-	// 이벤트 글 삭제
+	// 이벤트 게시판 글 삭제
 	@Override
 	@RequestMapping(value = "/removeEvent.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -339,7 +339,7 @@ public class BoardControllerImpl implements BoardController {
 		return resEnt;
 	}
 	
-	// QnA 목록
+	// Q&A 목록
 	@Override
 	@RequestMapping(value = "/listQnA.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView listQnA(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -352,7 +352,7 @@ public class BoardControllerImpl implements BoardController {
 		return mav;
 	}
 
-	// QnA 상세페이지
+	// Q&A 상세페이지
 	@RequestMapping(value = "/viewQnA.do", method = RequestMethod.GET)
 	public ModelAndView viewQnA(@RequestParam("questionNum") int questionNum, HttpServletRequest request,
 	        HttpServletResponse response) throws Exception {
@@ -364,7 +364,7 @@ public class BoardControllerImpl implements BoardController {
 	    return mav;
 	}
 	
-	// QnA 글 추가
+	// Q&A 글 추가
 	@Override
 	@RequestMapping(value = "/addNewQnA.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -409,7 +409,7 @@ public class BoardControllerImpl implements BoardController {
 			return resEnt;
 	}
 
-	// QnA 수정
+	// Q&A 수정
 	@RequestMapping(value = "/modQnA.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity modQnA(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
@@ -449,7 +449,7 @@ public class BoardControllerImpl implements BoardController {
 		return resEnt;
 	}
 		
-	// QnA 삭제하기
+	// Q&A 삭제
 	@Override
 	@RequestMapping(value = "/removeQnA.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -479,7 +479,7 @@ public class BoardControllerImpl implements BoardController {
 		return resEnt;
 	}
 
-	// review 목록
+	// Review 목록
 	@Override
 	@RequestMapping(value = "/listReview.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView listReview(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -491,7 +491,7 @@ public class BoardControllerImpl implements BoardController {
 		return mav;
 	}
 
-	// review 상세페이지
+	// Review 상세페이지
 	@RequestMapping(value = "/viewReview.do", method = RequestMethod.GET)
 	public ModelAndView viewReview(@RequestParam("reviewNum") int reviewNum, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -503,37 +503,7 @@ public class BoardControllerImpl implements BoardController {
 		return mav;
 	}
 
-	// review 삭제하기
-	@Override
-	@RequestMapping(value = "/removeReview.do", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity removeReview(@RequestParam("reviewNum") int reviewNum, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		response.setContentType("text/html; charset=UTF-8");
-		String message;
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		try {
-			boardService.removeReview(reviewNum);
-			message = "<script>";
-			message += " alert('글을 삭제했습니다.');";
-			message += " location.href='" + request.getContextPath() + "/listReview.do';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-
-		} catch (Exception e) {
-			message = "<script>";
-			message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
-			message += " location.href='" + request.getContextPath() + "/viewReview.do?reviewNum=" + reviewNum + "';";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-			e.printStackTrace();
-		}
-		return resEnt;
-	}
-
-	// review 글쓰기
+	// Review 글쓰기
 	@Override
 	@RequestMapping(value = "/addNewReview.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -574,7 +544,7 @@ public class BoardControllerImpl implements BoardController {
 		return resEnt;
 	}
 
-	// review 수정
+	// Review 수정
 	@RequestMapping(value = "/modReview.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity modReview(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
@@ -609,6 +579,36 @@ public class BoardControllerImpl implements BoardController {
 
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		}
+		return resEnt;
+	}
+	
+	// Review 삭제
+	@Override
+	@RequestMapping(value = "/removeReview.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity removeReview(@RequestParam("reviewNum") int reviewNum, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		response.setContentType("text/html; charset=UTF-8");
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			boardService.removeReview(reviewNum);
+			message = "<script>";
+			message += " alert('글을 삭제했습니다.');";
+			message += " location.href='" + request.getContextPath() + "/listReview.do';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+
+		} catch (Exception e) {
+			message = "<script>";
+			message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
+			message += " location.href='" + request.getContextPath() + "/viewReview.do?reviewNum=" + reviewNum + "';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
 		}
 		return resEnt;
 	}
