@@ -29,7 +29,6 @@ request.setCharacterEncoding("UTF-8");
 			<div class="bd-highlight">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb p-0 bg bg-transparent">
-						<li class="breadcrumb-item"><a href="${contextPath }/main.do">홈</a></li>
 						<li class="breadcrumb-item active" aria-current="page">공지사항</li>
 					</ol>
 				</nav>
@@ -83,7 +82,7 @@ request.setCharacterEncoding("UTF-8");
 									<option selected>내용</option>
 								</select> <input class="form-control form-control-sm mx-2" type="text"
 									placeholder="">
-								<button type="submit" class="btn btn-secondary btn-sm col-2">검색</button>
+								<button type="submit" class="btn btn-outline-secondary btn-sm col-2">검색</button>
 							</div>
 						</div>
 					</form>
@@ -93,7 +92,7 @@ request.setCharacterEncoding("UTF-8");
 				<a class=""
 					href="javascript:fn_articleForm('${isLogOn}','${contextPath}/addNewNotice.do', 
                                                     '${contextPath}/login.do')"><button
-						type="button" class="btn btn-primary btn-sm">글쓰기</button></a>
+						type="button" class="btn btn-outline-success btn-sm">글쓰기</button></a>
 			</div>
 		</div>
 	</div>
