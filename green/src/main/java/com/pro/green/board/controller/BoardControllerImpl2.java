@@ -256,6 +256,7 @@ public class BoardControllerImpl2 implements BoardController2 {
 		ArticleVO2 community = new ArticleVO2();
 		Map<String, Object> selectOption = new HashMap<String, Object>();
 		selectOption.put("type", communityType);
+		List<Map<String, Object>> commentList = new ArrayList<Map<String,Object>>();
 
 		if (communityType.equals("qna")) {
 			selectOption.put("communityNum", "questionNum='" + communityNum + "'");
@@ -264,14 +265,19 @@ public class BoardControllerImpl2 implements BoardController2 {
 					"questionNum AS num, id AS id, productId AS productId, questionTitle AS title, questionContent AS content, questionHits AS hits, questionPw AS questionPw, pwYN AS pwYN");
 
 			community = boardService.selectCommunity(selectOption);
-
+			
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+			
 			if (community.getPwYN().equals("Y")) {
 				mav.setViewName(
 						"redirect:/communityChk.do?communityNum=" + communityNum + "&communityType=" + communityType);
-				// mav.setViewName("redirect:/communityChk.do");
 
 			} else {
 				mav.addObject("pageTitle", "QnA");
+				
+				paramMap.put("qnANum", communityNum);
+				commentList = boardService.selectComment(paramMap);
+				
 				mav.setViewName("communityDerail");
 			}
 
@@ -311,6 +317,7 @@ public class BoardControllerImpl2 implements BoardController2 {
 		mav.addObject("communityType", communityType);
 		mav.addObject("community", community);
 		mav.addObject("member", member);
+		mav.addObject("commentList", commentList);
 		return mav;
 	}
 
@@ -463,6 +470,8 @@ public class BoardControllerImpl2 implements BoardController2 {
 		community = boardService.selectCommunity(selectOption);
 		
 		String communitypw = community.getQuestionPw();
+		List<Map<String, Object>> commentList = new ArrayList<Map<String,Object>>();
+		Map<String, Object> paramMap = new HashMap<String, Object>();
 		
 		if(communitypw.equals(pw)) {
 			mav.addObject("community", community);
@@ -471,6 +480,9 @@ public class BoardControllerImpl2 implements BoardController2 {
 			mav.addObject("pageTitle", "QnA");
 			mav.setViewName("communityDerail");
 			
+			paramMap.put("qnANum", communityNum);
+			commentList = boardService.selectComment(paramMap);
+			
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
 			mav.addObject("pageMaker", pageMaker);
@@ -478,6 +490,8 @@ public class BoardControllerImpl2 implements BoardController2 {
 			mav.addObject("communityType", communityType);
 			mav.addObject("community", community);
 			mav.addObject("member", member);
+			mav.addObject("commentList", commentList);
+			
 			
 		}else {
 			mav.addObject("joinMas", "비밀번호가 틀렸습니다.");
@@ -488,20 +502,27 @@ public class BoardControllerImpl2 implements BoardController2 {
 		return mav;
 	}
 
-	@RequestMapping(value = "/communityChk/joinOK.do", method = RequestMethod.POST)
-	public ModelAndView communityChkJoinOK(@RequestParam(value = "communityNum") String communityNum,
-			@RequestParam(value = "communityType") String communityType, HttpServletRequest request,
-			HttpServletResponse response, Criteria cri) throws Exception {
+	//댓글 추가
+	@RequestMapping(value = "/communityDerail/commentAdd.do", method = RequestMethod.POST)
+	public ResponseEntity commentAdd(@RequestParam(value = "id") String id,
+			@RequestParam(value = "qnANum") String qnANum, @RequestParam(value = "commentContent") String commentContent, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 
-		ModelAndView mav = new ModelAndView();
-
+		ResponseEntity resEntity = null;
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("member");
 
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		mav.addObject("page", cri.getPage());
-		return mav;
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("id", id);
+		paramMap.put("qnANum", qnANum);
+		paramMap.put("commentContent", commentContent);
+		
+		List<Map<String, Object>> commentList = new ArrayList<Map<String,Object>>();
+	
+		commentList = boardService.commentList(paramMap);
+		
+		resEntity = new ResponseEntity(commentList, HttpStatus.OK);
+		return resEntity;
 	}
 
 	// 로그인 상테 체크 (ModelAndView, 세션정보, 접속할 화면 )

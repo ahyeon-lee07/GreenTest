@@ -47,4 +47,14 @@ public class BoardServiceImpl2 implements BoardService2 {
 		return boardDAO.deleteArticle(selectOption);
 	}
 
+	// ´ñ±Û
+	public List<Map<String, Object>> commentList(Map<String, Object> paramMap) throws Exception {
+		return boardDAO.commentList(paramMap);
+	}
+
+	// ´ñ±Û Á¶È¸
+	public List<Map<String, Object>> selectComment(Map<String, Object> paramMap) throws Exception {
+		return boardDAO.selectComment(paramMap);
+	}
+
 }

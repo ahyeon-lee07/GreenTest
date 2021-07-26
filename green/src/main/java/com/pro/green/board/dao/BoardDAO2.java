@@ -28,5 +28,11 @@ public interface BoardDAO2 {
 	// ±€ ªË¡¶
 	public int deleteArticle(Map<String, Object> selectOption) throws DataAccessException;
 
+	// ¥Ò±€
+	public List<Map<String, Object>> commentList(Map<String, Object> paramMap) throws DataAccessException;
+
+	// ¥Ò±€ ¡∂»∏
+	public List<Map<String, Object>> selectComment(Map<String, Object> paramMap) throws DataAccessException;
+
 	
 }

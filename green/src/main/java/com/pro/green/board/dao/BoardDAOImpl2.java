@@ -64,10 +64,10 @@ public class BoardDAOImpl2 implements BoardDAO2 {
 			String productName = sqlSession.selectOne("mapper.board2.selectProductName", name);
 			result.setProductName(productName);
 		}
-		
+
 		String hitNo = (String) selectOption.get("hitsChk");
-		
-		if(hitNo == null) {
+
+		if (hitNo == null) {
 			int hitsUp = sqlSession.update("mapper.board2.hitsUp", selectOption);
 		}
 
@@ -84,6 +84,21 @@ public class BoardDAOImpl2 implements BoardDAO2 {
 	// 글 삭제
 	public int deleteArticle(Map<String, Object> selectOption) throws DataAccessException {
 		int result = sqlSession.delete("mapper.board2.deleteArticle", selectOption);
+		return result;
+	}
+
+	// 댓글
+	public List<Map<String, Object>> commentList(Map<String, Object> paramMap) throws DataAccessException {
+
+		int insert = sqlSession.insert("mapper.board2.insertComment", paramMap);
+
+		List<Map<String, Object>> result = sqlSession.selectList("mapper.board2.selectComment", paramMap);
+		return result;
+	}
+
+	// 댓글 조회
+	public List<Map<String, Object>> selectComment(Map<String, Object> paramMap) throws DataAccessException {
+		List<Map<String, Object>> result = sqlSession.selectList("mapper.board2.selectComment", paramMap);
 		return result;
 	}
 

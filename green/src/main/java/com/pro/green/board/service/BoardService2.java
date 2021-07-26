@@ -25,5 +25,11 @@ public interface BoardService2 {
 	//±€ ªË¡¶
 	public int deleteArticle(Map<String, Object> selectOption) throws Exception;
 
+	//¥Ò±€
+	public List<Map<String, Object>> commentList(Map<String, Object> paramMap) throws Exception;
+
+	//¥Ò±€ ¡∂»∏
+	public List<Map<String, Object>> selectComment(Map<String, Object> paramMap) throws Exception;
+
 	
 }

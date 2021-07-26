@@ -137,28 +137,61 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 		</div>
 		
+		<div class="row mb-4">
+			<div  id="commentBox" class="col-12 p-0">
+				<c:forEach items="${commentList }" var="commentList">
+					<div class="d-flex justify-content-between border-top border-dark py-2 mt-3">
+						<div class="d-flex bd-highlight">
+							<label for="commentId" class="bd-highlight col-form-label pl-2" style="width: 100px;">작성자</label>
+							<div class="d-flex flex-row bd-highlight pr-2">
+								<input type="text" class="form-control inputBoxReadonly" id="commentId" name="commentId" value="${commentList.id }" style="width: 160px;" readonly> <span class="pt-2" style="font-size: .8rem">${commentList.commentDate }</span>
+							</div>
+						</div>
+						<div class="d-flex bd-highlight">
+							<c:if test="${commentList.id == member.id}">
+								<button type="button" class="btn btn-outline-danger ml-3" onclick="commentAdd('${commentList.commentNum}')">삭제</button>
+							</c:if>
+						</div>
+					</div>
+					<div class="border-bottom border-top d-flex bd-highlight py-2">
+						<label for="commentContent" class="bd-highlight col-form-label pl-2" style="width: 100px;">내용</label>
+						<div class="flex-grow-1 bd-highlight pr-2">
+							<textarea class="form-control ${inputBoxReadonly }" id="commentContent" name="commentContent" rows="2" ${readonly }>${commentList.commentContent}</textarea>
+						</div>
+					</div>
+				</c:forEach>
+
+			</div>
+		</div>
+		
 		<div class="row justify-content-between mb-5">
 			<div class="">
 				<a class="" href="${contextPath }/community.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&communityType=${communityType}">
 					<button type="button" class="btn btn-secondary">목록</button>
 				</a>
 			</div>
-			<c:if test="${community.id == member.id}">
-				<div class="text-center d-flex justify-content-end">
-					<a href="#" onclick="communityDelete()">
-						<button type="button" class="btn bg-danger text-white" >삭제 </button>
-					</a>
-								   	
-					<button type="submit" class="btn btn-success ml-3" onclick="return checkEdit()">수정</button>
-				</div>
-			</c:if>
+			<div class="text-center d-flex justify-content-end">
+				<c:choose>
+					<c:when test="${community.id == member.id}">
+						<a href="#" onclick="communityDelete()">
+							<button type="button" class="btn bg-danger text-white" >삭제 </button>
+						</a>
+						<button type="submit" class="btn btn-success ml-3" onclick="return checkEdit()">수정</button>
+						<button type="button" class="btn btn-secondary ml-3" onclick="commentEdit()">댓글</button>
+					</c:when>
+					<c:when test="${member.id != null}">
+						<button type="button" class="btn btn-secondary ml-3" onclick="return commentEdit()">댓글</button>
+	`				</c:when>
+				</c:choose>
+			</div>
 		</div>
 	</div>
+	
 </main>
 
 
 <script>
-
+	//글 삭제
 	function communityDelete(){
 			if(confirm("정말 삭제 하시겠습니까?") == true){
 				location.href = "${contextPath }/community/delete.do?communityType=${communityType}&communityNum=${community.num }";
@@ -166,7 +199,114 @@ request.setCharacterEncoding("UTF-8");
 			}else {
 				return false;
 			}
+		};
+
+	//댓글 폼
+	function commentEdit(){
+		var newComment = document.getElementById("newComment");
+		var str = '';
+
+		if(newComment == null){
+			var plusUl = document.createElement('div');
+             plusUl.id = "newComment";
+             plusUl.setAttribute('class', 'd-flex flex-column bd-highlight border-top border-dark mt-3');
+
+
+			str += '<div class="d-flex justify-content-between border-bottom py-2">';
+			str += '<div class="d-flex bd-highlight">';
+			str += '<label for="commentId" class="bd-highlight col-form-label pl-2" style="width: 100px;">작성자</label>';
+			str += '<div class="bd-highlight pr-2">';
+			str += '<input type="text" class="form-control inputBoxReadonly" id="commentId" name="commentId" value="${member.id}" readonly>';
+			str += '</div></div>';
+			str += '<div class="d-flex bd-highlight">';
+			str += '<button type="button" class="btn btn-primary ml-3" onclick="commentAdd()">등록</button>';
+			str += '<button type="button" class="btn btn-secondary ml-3" onclick="commentClose()">닫기</button>';
+			str += '</div></div>';
+			str += '<div class="border-bottom d-flex bd-highlight py-2">';
+			str += '<label for="commentContent" class="bd-highlight col-form-label pl-2" style="width: 100px;">내용</label>';
+			str += '<div class="flex-grow-1 bd-highlight pr-2">';
+			str += '<textarea class="form-control ${inputBoxReadonly }" id="commentContent" name="commentContent" rows="2" ${readonly }></textarea>';
+			str += '</div></div>';
+
+			plusUl.innerHTML = str;
+
+			document.getElementById("commentBox").append(plusUl);
+
+		}else{
+			return false;
 		}
+	};
+
+	function commentClose(){
+		document.getElementById('newComment').remove();
+	}
+
+	//댓글
+	function commentAdd(){
+		var id = document.getElementById('commentId').value;
+		var qnANum = "'"+${community.num}+"'";
+		var commentContent = document.getElementById('commentContent').value;
+
+		$.ajax({
+			type : "POST",
+			async : true,
+			url : "${contextPath}/communityDerail/commentAdd.do",
+			dataType : "json",
+			data : {
+				id : id,
+				qnANum : qnANum,
+				commentContent : commentContent
+			},
+			success : function(commentList) {
+
+				
+				var str = '';
+				var memberId = '${member.id}';
+			
+				for(var i=0; i<commentList.length; i ++){
+
+
+				var timestamp = commentList[i]["commentDate"];
+				var date = new Date(timestamp);
+				var dateTime = (date.getFullYear()+ "-"+(date.getMonth()+1)+  "-"+date.getDate()+  " "+date.getHours()+ ":"+date.getMinutes()+  ":"+date.getSeconds());
+
+
+					str += '<div class="d-flex justify-content-between border-top border-dark py-2 mt-3">';
+					str += '<div class="d-flex bd-highlight">';
+					str += '<label for="commentId" class="bd-highlight col-form-label pl-2" style="width: 100px;">작성자</label>';
+					str += '<div class="d-flex flex-row bd-highlight pr-2">';
+					str += '<input type="text" class="form-control inputBoxReadonly" id="commentId" name="commentId" style="width: 160px;" value="'+commentList[i]["id"]+'" readonly><span class="pt-2" style="font-size: .8rem">'+dateTime+'</span>';
+					str += '</div></div>';
+					str += '<div class="d-flex bd-highlight">';
+
+					if(commentList[i]["id"] == memberId){
+						str += '<button type="button" class="btn btn-outline-danger ml-3" onclick="commentAdd(\''+commentList[i]["commentNum"]+'\')">삭제</button>';
+					}
+					str += '</div></div>';
+					str += '<div class="border-bottom border-top d-flex bd-highlight py-2">';
+					str += '<label for="commentContent" class="bd-highlight col-form-label pl-2" style="width: 100px;">내용</label>';
+					str += '<div class="flex-grow-1 bd-highlight pr-2">';
+
+					if(commentList[i]["id"] == memberId){
+						str += '<textarea class="form-control ${inputBoxReadonly }" id="commentContent" name="commentContent" rows="2" ${readonly }>'+commentList[i]["commentContent"]+'</textarea>';
+					}else{
+						str += '<textarea class="form-control ${inputBoxReadonly } inputBoxReadonly" id="commentContent" name="commentContent" rows="2" ${readonly } readonly>'+commentList[i]["commentContent"]+'</textarea>';
+					}
+					
+					str += '</div></div>';
+				}
+
+				document.getElementById("commentBox").innerHTML = str;
+			},
+			error : function(data, textStatus) {
+
+			},
+			complete : function(data, textStatus) {
+
+			}
+		});
+
+	};
 
 	<c:if test="${communityType == 'qna' }">
 		//Qna 구분

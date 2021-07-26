@@ -137,5 +137,29 @@
 			${communityNum};
     ]]>
 	</delete>
+	
+	<!-- 댓글등록  -->
+	<insert id="insertComment" parameterType="hashmap">
+    <![CDATA[
+		INSERT INTO
+			comment(QnANum, id, commentContent)
+		VALUES
+			(${qnANum}, #{id}, #{commentContent});
+    ]]>
+	</insert>
+	
+	<!-- 댓글조회 -->
+	<select id="selectComment" resultType="hashmap" parameterType="hashmap">
+    <![CDATA[
+		SELECT
+			*
+		FROM
+			comment
+		WHERE
+			QnANum = ${qnANum}
+		ORDER BY 
+			commentDate DESC;
+    ]]>
+	</select>
 
 </mapper>
