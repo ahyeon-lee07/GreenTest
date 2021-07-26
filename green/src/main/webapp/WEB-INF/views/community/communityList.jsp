@@ -94,7 +94,7 @@ request.setCharacterEncoding("UTF-8");
 							${list.date }
 						</td>
 						<td class="text-center align-middle px-2" style="font-size: .8rem">
-							${list.commentCount }
+							${list.hits }
 						</td>
 					</tr>
 				</c:forEach>

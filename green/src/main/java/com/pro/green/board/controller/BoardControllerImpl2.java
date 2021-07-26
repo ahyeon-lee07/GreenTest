@@ -72,18 +72,24 @@ public class BoardControllerImpl2 implements BoardController2 {
 			selectOption.put("selectOption",
 					"questionNum AS num, id AS id,productId AS productId,questionTitle AS title,questionContent AS content,questionHits AS hits,commentCount AS commentCount,questionPw AS questionPw,pwYN AS pwYN,questionDate AS createDate");
 
-			list = boardService.selectList(selectOption);
-
 		} else if (communityType.equals("notice")) {
 			mav.addObject("pageTitle", "공지사항");
+			selectOption.put("selectOption",
+					"noticeNum AS num, id AS id,noticeTitle AS title,noticeContent AS content,noticeHits AS hits, noticeDate AS createDate");
 
 		} else if (communityType.equals("event")) {
 			mav.addObject("pageTitle", "이벤트");
+			selectOption.put("selectOption",
+					"eventNum AS num, id AS id,eventTitle AS title,eventContent AS content,eventHits AS hits, eventDate AS createDate");
 
 		} else if (communityType.equals("review")) {
 			mav.addObject("pageTitle", "리뷰");
+			selectOption.put("selectOption",
+					"reviewNum AS num, id AS id,productId AS productId,reviewTitle AS title,reviewContent AS content,reviewHits AS hits,reviewDate AS createDate");
 
 		}
+
+		list = boardService.selectList(selectOption);
 
 		pageMaker.setCri(cri);
 
@@ -191,10 +197,19 @@ public class BoardControllerImpl2 implements BoardController2 {
 			}
 
 		} else if (communityType.equals("notice")) {
+			selectOption.put("selectOption", "id, noticeTitle, noticeContent");
+			selectOption.put("value",
+					"'" + articleVO.getId() + "','" + articleVO.getTitle() + "','" + articleVO.getContent() + "'");
 
 		} else if (communityType.equals("event")) {
+			selectOption.put("selectOption", "id, eventTitle, eventContent");
+			selectOption.put("value",
+					"'" + articleVO.getId() + "','" + articleVO.getTitle() + "','" + articleVO.getContent() + "'");
 
 		} else if (communityType.equals("review")) {
+			selectOption.put("selectOption", "id, productId, reviewTitle, reviewContent");
+			selectOption.put("value", "'" + articleVO.getId() + "','" + articleVO.getProductId() + "','"
+					+ articleVO.getTitle() + "','" + articleVO.getContent() + "'");
 
 		}
 
@@ -230,36 +245,64 @@ public class BoardControllerImpl2 implements BoardController2 {
 	// 페이지상세
 	@RequestMapping(value = "/communityDerail/derailPage.do", method = RequestMethod.GET)
 	public ModelAndView communityDerail(@RequestParam(value = "communityNum") String communityNum,
-										@RequestParam(value = "communityType") String communityType,
-			HttpServletRequest request, HttpServletResponse response, Criteria cri) throws Exception {
-		
-		ModelAndView mav = new ModelAndView(); 
-		
+			@RequestParam(value = "communityType") String communityType, HttpServletRequest request,
+			HttpServletResponse response, Criteria cri) throws Exception {
+
+		ModelAndView mav = new ModelAndView();
+
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		
+
 		ArticleVO2 community = new ArticleVO2();
 		Map<String, Object> selectOption = new HashMap<String, Object>();
 		selectOption.put("type", communityType);
-		selectOption.put("communityNum", "questionNum='"+ communityNum +"'" );
-		
-		if(communityType.equals("qna")) {
-			selectOption.put("value", "questionNum AS num, id AS id, productId AS productId, questionTitle AS title, questionContent AS content, questionHits AS hits, questionPw AS questionPw, pwYN AS pwYN");
-			
+
+		if (communityType.equals("qna")) {
+			selectOption.put("communityNum", "questionNum='" + communityNum + "'");
+			selectOption.put("hits", "questionHits = questionHits + 1");
+			selectOption.put("value",
+					"questionNum AS num, id AS id, productId AS productId, questionTitle AS title, questionContent AS content, questionHits AS hits, questionPw AS questionPw, pwYN AS pwYN");
+
 			community = boardService.selectCommunity(selectOption);
-			
-			if(community.getPwYN().equals("Y")) {
-				mav.setViewName("redirect:/communityChk.do?communityNum=" +communityNum+"&communityType="+communityType);
-			}else {
+
+			if (community.getPwYN().equals("Y")) {
+				mav.setViewName(
+						"redirect:/communityChk.do?communityNum=" + communityNum + "&communityType=" + communityType);
+				// mav.setViewName("redirect:/communityChk.do");
+
+			} else {
 				mav.addObject("pageTitle", "QnA");
 				mav.setViewName("communityDerail");
 			}
-			
-		}else {
+
+		} else if (communityType.equals("notice")) {
+			selectOption.put("communityNum", "noticeNum='" + communityNum + "'");
+			selectOption.put("hits", "noticeHits = noticeHits + 1");
+			selectOption.put("value",
+					"noticeNum AS num, id AS id, noticeTitle AS title, noticeContent AS content, noticeHits AS hits");
+
+			community = boardService.selectCommunity(selectOption);
+
+			mav.setViewName("communityDerail");
+		} else if (communityType.equals("event")) {
+			selectOption.put("communityNum", "eventNum='" + communityNum + "'");
+			selectOption.put("hits", "eventHits = eventHits + 1");
+			selectOption.put("value",
+					"eventNum AS num, id AS id, eventTitle AS title, eventContent AS content, eventHits AS hits");
+
+			community = boardService.selectCommunity(selectOption);
+
+			mav.setViewName("communityDerail");
+		} else if (communityType.equals("review")) {
+			selectOption.put("communityNum", "reviewNum='" + communityNum + "'");
+			selectOption.put("hits", "reviewHits = reviewHits + 1");
+			selectOption.put("value",
+					"reviewNum AS num, id AS id, productId AS productId, reviewTitle AS title, reviewContent AS content, reviewHits AS hits");
+
+			community = boardService.selectCommunity(selectOption);
+
 			mav.setViewName("communityDerail");
 		}
-		
-		community = boardService.selectCommunity(selectOption);
 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
@@ -270,18 +313,191 @@ public class BoardControllerImpl2 implements BoardController2 {
 		mav.addObject("member", member);
 		return mav;
 	}
-	
-	// 게시물 비번체크
-	@RequestMapping(value = "/communityChk.do", method = RequestMethod.GET)
-	public ModelAndView communityChk(@RequestParam(value = "communityNum") String communityNum,
-										@RequestParam(value = "communityType") String communityType,
-			HttpServletRequest request, HttpServletResponse response, Criteria cri) throws Exception {
-		
+
+	// 커뮤니티 수정
+	@RequestMapping(value = "/community/edit.do", method = RequestMethod.POST)
+	public ModelAndView communityEdit(@RequestParam(value = "communityType") String communityType,
+			@RequestParam(value = "communityNum") String communityNum,
+			@ModelAttribute("community") ArticleVO2 articleVO, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
 		ModelAndView mav = new ModelAndView();
-		
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("member");
+
+		PageMaker pageMaker = new PageMaker();
+		int result = 0;
+
+		Map<String, Object> selectOption = new HashMap<String, Object>();
+		selectOption.put("type", communityType);
+
+		if (communityType.equals("qna")) {
+
+			String productId = articleVO.getProductId();
+			String pwYN = articleVO.getPwYN();
+
+			selectOption.put("communityNum", "questionNum='" + communityNum + "'");
+			if (!productId.equals("") && pwYN.equals("Y")) {
+				selectOption.put("value", "id='" + articleVO.getId() + "',productId='" + articleVO.getProductId()
+						+ "',questionTitle='" + articleVO.getTitle() + "',questionContent='" + articleVO.getContent()
+						+ "',questionPw=''" + articleVO.getQuestionPw() + "',pwYN='" + articleVO.getPwYN() + "'");
+
+			} else if (!productId.equals("") && pwYN.equals("N")) {
+				selectOption.put("value",
+						"id='" + articleVO.getId() + "',productId='" + articleVO.getProductId() + "',questionTitle='"
+								+ articleVO.getTitle() + "',questionContent='" + articleVO.getContent() + "',pwYN='"
+								+ articleVO.getPwYN() + "'");
+
+			} else if (productId.equals("") && pwYN.equals("Y")) {
+				selectOption.put("value",
+						"id='" + articleVO.getId() + "',questionTitle='" + articleVO.getTitle() + "',questionContent='"
+								+ articleVO.getContent() + "',questionPw='" + articleVO.getQuestionPw() + "',pwYN='"
+								+ articleVO.getPwYN() + "'");
+
+			} else if (productId.equals("") && pwYN.equals("N")) {
+				selectOption.put("value", "id='" + articleVO.getId() + "',questionTitle='" + articleVO.getTitle()
+						+ "',questionTitle='" + articleVO.getContent() + "',pwYN='" + articleVO.getPwYN() + "'");
+			}
+
+		} else if (communityType.equals("notice")) {
+			selectOption.put("communityNum", "noticeNum='" + communityNum + "'");
+			selectOption.put("value", "id='" + articleVO.getId() + "',noticeTitle='" + articleVO.getTitle()
+					+ "',noticeContent='" + articleVO.getContent() + "'");
+
+		} else if (communityType.equals("event")) {
+			selectOption.put("communityNum", "eventNum='" + communityNum + "'");
+			selectOption.put("value", "id='" + articleVO.getId() + "',eventTitle='" + articleVO.getTitle()
+					+ "',eventContent='" + articleVO.getContent() + "'");
+
+		} else if (communityType.equals("review")) {
+			selectOption.put("communityNum", "reviewNum='" + communityNum + "'");
+			selectOption.put("value", "id='" + articleVO.getId() + "',productId='" + articleVO.getProductId()
+					+ "',reviewTitle='" + articleVO.getTitle() + "',reviewContent='" + articleVO.getContent() + "'");
+
+		}
+
+		result = boardService.updateArticle(selectOption);
+
+		if (result == 0) {
+			mav.addObject("joinMas", "실패 하였습니다. 잠시후에 시도해 주시면 감사하겠습니다.");
+		} else {
+			mav.addObject("joinMas", "수정되었습니다.");
+		}
+
+		mav.addObject("member", member);
+		mav.addObject("communityType", communityType);
+		mav.setViewName("redirect:/community.do");
+
+		return mav;
+	}
+
+	// 커뮤니티 삭제
+	@RequestMapping(value = "/community/delete.do", method = RequestMethod.GET)
+	public ModelAndView communityDelete(@RequestParam(value = "communityType") String communityType,
+			@RequestParam(value = "communityNum") String communityNum, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+
+		PageMaker pageMaker = new PageMaker();
+		int result = 0;
+
+		Map<String, Object> selectOption = new HashMap<String, Object>();
+		selectOption.put("type", communityType);
+
+		if (communityType.equals("qna")) {
+
+			selectOption.put("communityNum", "questionNum='" + communityNum + "'");
+
+		} else if (communityType.equals("notice")) {
+
+			selectOption.put("communityNum", "noticeNum='" + communityNum + "'");
+
+		} else if (communityType.equals("event")) {
+
+			selectOption.put("communityNum", "eventNum='" + communityNum + "'");
+
+		} else if (communityType.equals("review")) {
+
+			selectOption.put("communityNum", "reviewNum='" + communityNum + "'");
+
+		}
+
+		result = boardService.deleteArticle(selectOption);
+
+		if (result == 0) {
+			mav.addObject("joinMas", "실패 하였습니다. 잠시후에 시도해 주시면 감사하겠습니다.");
+		} else {
+			mav.addObject("joinMas", "삭제되었습니다.");
+		}
+
+		mav.addObject("member", member);
+		mav.addObject("communityType", communityType);
+		mav.setViewName("redirect:/community.do");
+
+		return mav;
+	}
+
+	// 게시물 비번체크
+	@RequestMapping(value = "/communityChk.do", method = RequestMethod.POST)
+	public ModelAndView communityChk(@RequestParam(value = "communityNum") String communityNum,
+			@RequestParam(value = "communityType") String communityType, @RequestParam(value = "pw") String pw,
+			HttpServletRequest request, HttpServletResponse response, Criteria cri) throws Exception {
+
+		ModelAndView mav = new ModelAndView();
+
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+
+		Map<String, Object> selectOption = new HashMap<String, Object>();
+		selectOption.put("type", communityType);
+		ArticleVO2 community = new ArticleVO2();
+
+		selectOption.put("communityNum", "questionNum='" + communityNum + "'");
+		selectOption.put("value",
+				"questionNum AS num, id AS id, productId AS productId, questionTitle AS title, questionContent AS content, questionHits AS hits, questionPw AS questionPw, pwYN AS pwYN");
+
+		selectOption.put("hitsChk", "hitsChk");
+		community = boardService.selectCommunity(selectOption);
 		
+		String communitypw = community.getQuestionPw();
+		
+		if(communitypw.equals(pw)) {
+			mav.addObject("community", community);
+			mav.setViewName("communityDerail");
+			
+			mav.addObject("pageTitle", "QnA");
+			mav.setViewName("communityDerail");
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			mav.addObject("pageMaker", pageMaker);
+			mav.addObject("page", cri.getPage());
+			mav.addObject("communityType", communityType);
+			mav.addObject("community", community);
+			mav.addObject("member", member);
+			
+		}else {
+			mav.addObject("joinMas", "비밀번호가 틀렸습니다.");
+			mav.setViewName("redirect:/community.do?communityType="+communityType);
+		}
+
+		
+		return mav;
+	}
+
+	@RequestMapping(value = "/communityChk/joinOK.do", method = RequestMethod.POST)
+	public ModelAndView communityChkJoinOK(@RequestParam(value = "communityNum") String communityNum,
+			@RequestParam(value = "communityType") String communityType, HttpServletRequest request,
+			HttpServletResponse response, Criteria cri) throws Exception {
+
+		ModelAndView mav = new ModelAndView();
+
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		mav.addObject("page", cri.getPage());

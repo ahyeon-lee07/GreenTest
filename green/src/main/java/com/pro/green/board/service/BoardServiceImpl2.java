@@ -37,4 +37,14 @@ public class BoardServiceImpl2 implements BoardService2 {
 		return boardDAO.selectCommunity(selectOption);
 	}
 
+	// 글 수정
+	public int updateArticle(Map<String, Object> selectOption) throws Exception {
+		return boardDAO.updateArticle(selectOption);
+	}
+
+	// 글 삭제
+	public int deleteArticle(Map<String, Object> selectOption) throws Exception {
+		return boardDAO.deleteArticle(selectOption);
+	}
+
 }

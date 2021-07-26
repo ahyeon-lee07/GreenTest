@@ -27,12 +27,12 @@ public class BoardDAOImpl2 implements BoardDAO2 {
 			for (int i = 0; i < result.size(); i++) {
 				String productId = result.get(i).getProductId();
 
-				if(productId != null) {
+				if (productId != null) {
 					images = sqlSession.selectList("mapper.board2.selectImge", productId);
-	
+
 					String imgURL = (String) images.get(0).get("imgURL");
 					String p_group = (String) images.get(0).get("p_group");
-	
+
 					result.get(i).setImgURL(imgURL);
 					result.get(i).setP_group(p_group);
 				}
@@ -52,20 +52,39 @@ public class BoardDAOImpl2 implements BoardDAO2 {
 		int result = sqlSession.insert("mapper.board2.insertArticle", selectOption);
 		return result;
 	}
-	
+
 	// 글조회
-		public ArticleVO2 selectCommunity(Map<String, Object> selectOption) throws DataAccessException{
-			ArticleVO2 result = sqlSession.selectOne("mapper.board2.selectCommunity", selectOption);
-			
-			String name = result.getProductId();
-			
-			if(name != null) {
-				
-				String productName = sqlSession.selectOne("mapper.board2.selectProductName", name);
-				result.setProductName(productName);
-			}
-			
-			return result;
+	public ArticleVO2 selectCommunity(Map<String, Object> selectOption) throws DataAccessException {
+		ArticleVO2 result = sqlSession.selectOne("mapper.board2.selectCommunity", selectOption);
+
+		String name = result.getProductId();
+
+		if (name != null) {
+
+			String productName = sqlSession.selectOne("mapper.board2.selectProductName", name);
+			result.setProductName(productName);
 		}
+		
+		String hitNo = (String) selectOption.get("hitsChk");
+		
+		if(hitNo == null) {
+			int hitsUp = sqlSession.update("mapper.board2.hitsUp", selectOption);
+		}
+
+		return result;
+	}
+
+	// 글 수정
+	public int updateArticle(Map<String, Object> selectOption) throws DataAccessException {
+		int result = sqlSession.update("mapper.board2.updateArticle", selectOption);
+
+		return result;
+	}
+
+	// 글 삭제
+	public int deleteArticle(Map<String, Object> selectOption) throws DataAccessException {
+		int result = sqlSession.delete("mapper.board2.deleteArticle", selectOption);
+		return result;
+	}
 
 }

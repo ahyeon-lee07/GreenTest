@@ -39,7 +39,7 @@ request.setCharacterEncoding("UTF-8");
 			<div class="col-12">
 				<c:choose>
 					<c:when test="${community.id == member.id}">
-						<form action="${contextPath }/community/edit.do?communityType=${communityType}" name="community" method="POST">
+						<form action="${contextPath }/community/edit.do?communityType=${communityType}&communityNum=${community.num }" name="community" method="POST">
 					</c:when>
 					<c:otherwise>
 						<form action="" name="community" method="POST">
@@ -68,7 +68,7 @@ request.setCharacterEncoding("UTF-8");
 										<option value="product" >상품관련</option>
 									</select>
 									<c:if test="${community.id == member.id}">
-										<button id="btn_product" type="button" class="btn btn-secondary mr-2" onclick="productSearch()" style="display: block">상품검색</button>
+										<button id="btn_product" type="button" class="btn btn-secondary mr-2" onclick="productSearch()" style="display: none">상품검색</button>
 									</c:if>
 									<input id="product_Input_name"  type="text" class="form-control" value="" style="display: none; width: 50%;" readonly>
 									<input id="product_Input_id" type="text" class="form-control" name="productId" value="" style="display: none;">
@@ -145,7 +145,7 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 			<c:if test="${community.id == member.id}">
 				<div class="text-center d-flex justify-content-end">
-					<a href="#" onclick="productDelete()">
+					<a href="#" onclick="communityDelete()">
 						<button type="button" class="btn bg-danger text-white" >삭제 </button>
 					</a>
 								   	
@@ -158,96 +158,128 @@ request.setCharacterEncoding("UTF-8");
 
 
 <script>
-	//Qna 구분
-	var inputState = document.getElementById('inputState');
-	inputState.addEventListener('change', function(){
-		
-		var inputState_V = inputState.value;
-		var btn_product = document.getElementById('btn_product');
-		var product_Input = document.getElementById('product_Input_name');
-		
-		if(inputState_V == "nomal") {
-			btn_product.value = '';
-			product_Input.value = '';
+
+	function communityDelete(){
+			if(confirm("정말 삭제 하시겠습니까?") == true){
+				location.href = "${contextPath }/community/delete.do?communityType=${communityType}&communityNum=${community.num }";
+				return true;
+			}else {
+				return false;
+			}
+		}
+
+	<c:if test="${communityType == 'qna' }">
+		//Qna 구분
+		var inputState = document.getElementById('inputState');
+		inputState.addEventListener('change', function(){
 			
-			btn_product.style.display = "none";
-			product_Input.style.display = "none";
-		}else if(inputState_V == "product"){
-			btn_product.style.display = "block";
-			product_Input.style.display = "block";
+			var inputState_V = inputState.value;
+			var btn_product = document.getElementById('btn_product');
+			var product_Input = document.getElementById('product_Input_name');
+			
+			if(inputState_V == "nomal") {
+				btn_product.value = '';
+				product_Input.value = '';
+				
+				btn_product.style.display = "none";
+				product_Input.style.display = "none";
+			}else if(inputState_V == "product"){
+				btn_product.style.display = "block";
+				product_Input.style.display = "block";
+			}
+		});
+		
+		//상품 검색
+		function productSearch(){
+			window.open("${contextPath }/productSearch.do", "productSearch", "width=800px, height=500px, left=100, top=50");
 		}
-	});
+		
+		//로딩시 스위치 YN 체크
+		window.onload = function() {
+			var YNChk = document.getElementsByClassName('YNChk');
+			var input_V = document.getElementsByClassName('input_V');
 
-	//상품 검색
-	function productSearch(){
-		window.open("${contextPath }/productSearch.do", "productSearch", "width=800px, height=500px, left=100, top=50");
-	}
+			for (var i = 0; i <= YNChk.length; i++) {
+				var Chk = YNChk[i];
+				var IV = input_V[i];
 
-	function check_add() {
+				if (YNChk.value == "Y") {
+					YNChk.value = "Y"
+					IV.value = "Y"
+				} else {
+					YNChk.value = "N"
+					YNChk.value = "N"
+				}
+			}
+		};
+		// 비밀글 여부 pwBox
+		if(showYN != null){
+			var showYN = document.getElementById('inputPwYN');
+			showYN.addEventListener('click', function() {
+				var showYN_V = showYN.value;
+				var Label = document.getElementById('inputPwYNLabel');
+				var V = document.getElementById('pwYN_V');
+				var pwBox = document.getElementById('pwBox');
+
+				if (showYN_V != "N") {
+					showYN.value = "N";
+					V.value = "N";
+					Label.innerHTML = "공개글";
+					pwBox.childNodes[1].value = '';
+					pwBox.style.display = "none";
+				} else {
+					showYN.value = "Y";
+					V.value = "Y";
+					Label.innerHTML = "비밀글";
+					pwBox.style.display = "block";
+				}
+			});
+		}
+	</c:if>
+	
+
+	
+
+	function checkEdit() {
 		var form = document.community;
-		//영문 소문자/숫자, 4~16자
-		var pwExp = form.questionPw.value.search(/^[0-9]*$/);
-
-		var inputState = document.getElementById('inputState').value;
-		var product_Input_id = document.getElementById('product_Input_id').value;
-		var pwYN_V = document.getElementById('pwYN_V').value;
-
-		if(inputState == 'product' && product_Input_id.value == ''){
-			alert('상품을 선택해 주세요.');
-			return false;
-		}
+		
+		<c:if test="${communityType == 'qna' }">
+		
+			//숫자, 4~16자
+			var pwExp = form.questionPw.value.search(/^[0-9]*$/);
+			
+			var inputState = document.getElementById('inputState').value;
+			var product_Input_id = document.getElementById('product_Input_id').value;
+			var pwYN_V = document.getElementById('pwYN_V').value;
+	
+			
+			if(inputState == 'product' && product_Input_id.value == ''){
+				alert('상품을 선택해 주세요.');
+				return false;
+			}
+		</c:if>
+		
 		 
 		if (form.title.value == "") {
 			alert("제목을 입력해 주세요.");
 			return false;
-		} else if (pwYN_V == "Y" && form.questionPw.value == '') {
+		} 
+
+		<c:if test="${communityType == 'qna' }">
+		else if (pwYN_V == "Y" && form.questionPw.value == '') {
 			alert("비밀번호를 입력해주세요.");
 			return false;
-		} else if (form.content.value == "") {
+		} else if (pwExp) {
+			alert("비밀번호는 숫자만 입력 가능 합니다.");
+			return false;
+		} 
+		</c:if>
+
+		else if (form.content.value == "") {
 			alert("내용을 입력해 주세요.");
 			return false;
 		}else {
 			form.submit();
 		}
 	};
-
-	//로딩시 스위치 YN 체크
-	window.onload = function() {
-		var YNChk = document.getElementsByClassName('YNChk');
-		var input_V = document.getElementsByClassName('input_V');
-
-		for (var i = 0; i <= YNChk.length; i++) {
-			var Chk = YNChk[i];
-			var IV = input_V[i];
-
-			if (YNChk.value == "Y") {
-				YNChk.value = "Y"
-				IV.value = "Y"
-			} else {
-				YNChk.value = "N"
-				YNChk.value = "N"
-			}
-		}
-	};
-	// 비밀글 여부 pwBox
-	var showYN = document.getElementById('inputPwYN');
-	showYN.addEventListener('click', function() {
-		var showYN_V = showYN.value;
-		var Label = document.getElementById('inputPwYNLabel');
-		var V = document.getElementById('pwYN_V');
-		var pwBox = document.getElementById('pwBox');
-
-		if (showYN_V != "N") {
-			showYN.value = "N";
-			V.value = "N";
-			Label.innerHTML = "공개글";
-			pwBox.childNodes[1].value = '';
-			pwBox.style.display = "none";
-		} else {
-			showYN.value = "Y";
-			V.value = "Y";
-			Label.innerHTML = "비밀글";
-			pwBox.style.display = "block";
-		}
-	});
 </script>

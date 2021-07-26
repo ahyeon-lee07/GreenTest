@@ -70,7 +70,7 @@
 	</select>
 	
 	
-	<!-- 글등록 "id, productId, questionTitle, questionContent, questionPw, pwYN" -->
+	<!-- 글등록  -->
 	<insert id="insertArticle" parameterType="hashmap">
     <![CDATA[
 		INSERT INTO
@@ -103,5 +103,39 @@
 			productId = #{name};
     ]]>
 	</select>
+	
+	<!-- 글 조회수 증가  -->
+	<update id="hitsUp" parameterType="hashmap">
+    <![CDATA[
+		UPDATE 
+			${type}
+		SET 
+			${hits}
+		WHERE 
+			${communityNum};
+    ]]>
+	</update>
+	
+	<!-- 글 수정  -->
+	<update id="updateArticle" parameterType="hashmap">
+    <![CDATA[
+		UPDATE 
+			${type}
+		SET 
+			${value}
+		WHERE 
+			${communityNum};
+    ]]>
+	</update>
+	
+	<!-- 글 삭제  -->
+	<delete id="deleteArticle" parameterType="hashmap">
+    <![CDATA[
+		DELETE FROM
+			${type}
+		WHERE
+			${communityNum};
+    ]]>
+	</delete>
 
 </mapper>

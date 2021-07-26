@@ -22,5 +22,11 @@ public interface BoardDAO2 {
 	// 글조회
 	public ArticleVO2 selectCommunity(Map<String, Object> selectOption) throws DataAccessException;
 
+	// 글 수정
+	public int updateArticle(Map<String, Object> selectOption) throws DataAccessException;
+
+	// 글 삭제
+	public int deleteArticle(Map<String, Object> selectOption) throws DataAccessException;
+
 	
 }

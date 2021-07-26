@@ -19,5 +19,11 @@ public interface BoardService2 {
 	//글조회
 	public ArticleVO2 selectCommunity(Map<String, Object> selectOption) throws Exception;
 
+	//글 수정
+	public int updateArticle(Map<String, Object> selectOption) throws Exception;
+
+	//글 삭제
+	public int deleteArticle(Map<String, Object> selectOption) throws Exception;
+
 	
 }
