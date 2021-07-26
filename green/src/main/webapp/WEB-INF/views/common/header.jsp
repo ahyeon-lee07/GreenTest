@@ -53,10 +53,10 @@ request.setCharacterEncoding("UTF-8");
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> 커뮤니티 </a>
 							<div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="${contextPath }/listQnA.do">Q&A</a>
 								<a class="dropdown-item" href="${contextPath }/listNotice.do">공지사항</a>
-								<a class="dropdown-item" href="${contextPath }/eventList.do">이벤트
-									게시판</a> <a class="dropdown-item" href="${contextPath }/listReview.do">리뷰</a>
+								<a class="dropdown-item" href="${contextPath }/eventList.do">이벤트 게시판</a>
+								<a class="dropdown-item" href="${contextPath }/listQnA.do">Q&A</a>
+								<a class="dropdown-item" href="${contextPath }/listReview.do">Review</a>
 							</div></li>
 						<c:choose>
 							<c:when test="${member.masterYN == 'M' }">
@@ -172,12 +172,10 @@ request.setCharacterEncoding("UTF-8");
 												<div
 													class="bd-highlight border-bottom font-weight-bold py-2">커뮤니티
 												</div>
-												<a class="py-1 text-black-50"
-													href="${contextPath }/listQnA.do">Q&A</a> <a
-													class="pb-1 text-black-50" href="${contextPath }/listNotice.do">공지사항</a>
-												<a class="pb-1 text-black-50"
-													href="${contextPath }/eventList.do">이벤트게시판</a> <a
-													class="pb-1 text-black-50" href="${contextPath }/listReview.do">리뷰</a>
+												<a class="pb-1 text-black-50" href="${contextPath }/listNotice.do">공지사항</a>
+												<a class="pb-1 text-black-50" href="${contextPath }/eventList.do">이벤트게시판</a>
+												<a class="py-1 text-black-50" href="${contextPath }/listQnA.do">Q&A</a>
+												<a class="pb-1 text-black-50" href="${contextPath }/listReview.do">Review</a>
 											</div>
 										</div>
 										<div class="bd-highlight">
