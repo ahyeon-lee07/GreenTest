@@ -23,7 +23,7 @@ request.setCharacterEncoding("UTF-8");
 			<div class="bd-highlight">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb p-0 bg bg-transparent">
-						<li class="breadcrumb-item"><a href="${contextPath}/main.do">홈</a></li>
+						<li class="breadcrumb-item"><a href="${contextPath}/eventList.do">이벤트 게시판</a></li>
 						<li class="breadcrumb-item active" aria-current="page">이벤트 게시판 상세</li>
 					</ol>
 				</nav>
@@ -77,7 +77,7 @@ request.setCharacterEncoding("UTF-8");
         </div>
  			<div class="">
             	<a class="" href="${contextPath}/eventList.do">
-            		<button type="button" class="btn btn-secondary btn-sm">목록</button>
+            		<button type="button" class="btn btn-outline-secondary btn-sm">목록</button>
             	</a>
             <div id="tr_btn_modify" style='float: right;'>
             	<input type=button class="btn btn-sm btn-outline-success" value="수정" onClick="fn_modify_article(frmArticle)">

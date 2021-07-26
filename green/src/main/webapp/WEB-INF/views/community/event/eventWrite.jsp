@@ -20,7 +20,7 @@ request.setCharacterEncoding("UTF-8");
 			<div class="bd-highlight">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb p-0 bg bg-transparent">
-						<li class="breadcrumb-item"><a href="${contextPath}/main.do">홈</a></li>
+						<li class="breadcrumb-item"><a href="${contextPath}/eventList.do">이벤트 게시판</a></li>
 						<li class="breadcrumb-item active" aria-current="page">이벤트 게시판 글쓰기</li>
 					</ol>
 				</nav>
