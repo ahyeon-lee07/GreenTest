@@ -15,13 +15,13 @@ request.setCharacterEncoding("UTF-8");
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
-				<h4>Q&A글쓰기</h4>
+				<h4>Q&A 글쓰기</h4>
 			</div>
 			<div class="bd-highlight">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb p-0 bg bg-transparent">
-						<li class="breadcrumb-item"><a href="${contextPath }/main.do">홈</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Q&A글쓰기</li>
+						<li class="breadcrumb-item"><a href="${contextPath }/listQnA.do">Q&A</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Q&A 글쓰기</li>
 					</ol>
 				</nav>
 			</div>
@@ -119,12 +119,12 @@ request.setCharacterEncoding("UTF-8");
 		<div class="row justify-content-between mb-5">
 			<div class="">
 				<a class="" href="${contextPath }/listQnA.do">
-					<button type="button" class="btn btn-secondary btn-sm">목록</button>
+					<button type="button" class="btn btn-outline-secondary btn-sm">목록</button>
 				</a>
 			</div>
 			<div class="">
 				<div class="text-center">
-					<button type="submit" class="btn btn-success"
+					<button type="submit" class="btn btn-outline-success btn-sm"
 						onclick="return check_add()">등록</button>
 				</div>
 			</div>
