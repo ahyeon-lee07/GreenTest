@@ -24,13 +24,12 @@ request.setCharacterEncoding("UTF-8");
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
-				<h4>QnA</h4>
+				<h4>Q&A</h4>
 			</div>
 			<div class="bd-highlight">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb p-0 bg bg-transparent">
-						<li class="breadcrumb-item"><a href="${contextPath }/main.do">홈</a></li>
-						<li class="breadcrumb-item active" aria-current="page">QnA</li>
+						<li class="breadcrumb-item active" aria-current="page">Q&A</li>
 					</ol>
 				</nav>
 			</div>
@@ -84,7 +83,7 @@ request.setCharacterEncoding("UTF-8");
 									<option selected>내용</option>
 								</select> <input class="form-control form-control-sm mx-2" type="text"
 									placeholder="">
-								<button type="submit" class="btn btn-secondary btn-sm col-2">검색</button>
+								<button type="submit" class="btn btn-outline-secondary btn-sm col-2">검색</button>
 							</div>
 						</div>
 					</form>
@@ -94,7 +93,7 @@ request.setCharacterEncoding("UTF-8");
 				<a class=""
 					href="javascript:fn_articleForm('${isLogOn}','${contextPath}/addNewQnA.do', 
                                                     '${contextPath}/login.do')"><button
-						type="button" class="btn btn-primary btn-sm">글쓰기</button></a>
+						type="button" class="btn btn-outline-success btn-sm">글쓰기</button></a>
 			</div>
 		</div>
 

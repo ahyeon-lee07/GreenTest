@@ -15,15 +15,14 @@ request.setCharacterEncoding("UTF-8");
 		<!-- 페이지 타이틀 부분 -->
 		<div class="d-flex justify-content-between mt-5">
 			<div class="bd-highlight">
-				<h4>Q&A상세</h4>
+				<h4>Q&A 상세</h4>
 			</div>
 			<div class="bd-highlight">
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb p-0 bg bg-transparent">
-						<li class="breadcrumb-item"><a href="${contextPath }/main.do">홈</a></li>
-						<li class="breadcrumb-item"><a
-							href="${contextPath }/listQnA.do">Q&A 목록</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Q&A상세</li>
+						<li class="breadcrumb-item">
+						<a href="${contextPath }/listQnA.do">Q&A</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Q&A 상세</li>
 					</ol>
 				</nav>
 			</div>
@@ -70,23 +69,23 @@ request.setCharacterEncoding("UTF-8");
 							id="questionContent" disabled>${viewQnA.questionContent }</textarea>
 					</div>
 					<div id="tr_btn_modify" align="center">
-						<input type=button class="btn btn-success btn-sm" value="수정반영하기"
+						<input type=button class="btn btn-outline-success btn-sm" value="수정"
 							onClick="fn_modify_article(frmArticle)"> <input
-							type=button class="btn btn-success btn-sm" value="취소"
+							type=button class="btn btn-outline-danger btn-sm" value="취소"
 							onClick="backToList(frmArticle)">
 					</div>
 					<div id="tr_btn">
 						<div class="row justify-content-between my-3">
 							<div class="">
 								<c:if test="${member.id == viewQnA.id }">
-									<button type="button" class="btn btn-success btn-sm"
-										onClick="fn_enable(this.form)">수정하기</button>
-									<button type="button" class="btn btn-success btn-sm"
+									<button type="button" class="btn btn-outline-success btn-sm"
+										onClick="fn_enable(this.form)">수정</button>
+									<button type="button" class="btn btn-outline-danger btn-sm"
 										onClick="fn_remove_article('${contextPath}/removeQnA.do', ${viewQnA.questionNum})">삭제</button>
 								</c:if>
 								<a class="" href="${contextPath }/listQnA.do">
-									<button type="button" class="btn btn-secondary btn-sm">목록</button>
-									<input type=button value="답글쓰기"
+									<button type="button" class="btn btn-outline-secondary btn-sm">목록</button>
+									<input type="button" class="btn btn-outline-success btn-sm" value="답글쓰기"
 									onClick="fn_reply_form('${isLogOn}','${contextPath }/QnA_reWrite.do', ${viewQnA.questionNum})">
 								</a>
 							</div>
