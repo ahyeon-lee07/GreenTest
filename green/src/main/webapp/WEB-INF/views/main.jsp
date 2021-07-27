@@ -66,7 +66,7 @@ request.setCharacterEncoding("UTF-8");
 				<div class="p-0 bd-highlight">
 					<ul class="list-group">
 						<c:forEach items="${noticeList}" var="noticeList">
-							<a href="${contextPath}/communityDerail/derailPage.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&communityNum=${noticeList.num }&communityType=${communityType }"> 
+							<a href="${contextPath}/communityDerail/derailPage.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&communityNum=${noticeList.num }&communityType=notice"> 
 								<li class="list-group-item list-group-item-action p-0 pb-1 border-0 noticeOver">
 									${noticeList.title } 
 								</li>

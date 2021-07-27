@@ -66,25 +66,30 @@ public class HomeController {
 		
 		PageMaker pageMaker = new PageMaker();
 
-		List<ArticleVO2> noticeList = new ArrayList<ArticleVO2>();
+		List<ArticleVO2> noticeListAll = new ArrayList<ArticleVO2>();
 		Map<String, Object> selectOption = new HashMap<String, Object>();
 		
 		selectOption.put("selectOption", "noticeNum AS num, id AS id,noticeTitle AS title,noticeContent AS content,noticeHits AS hits, noticeDate AS createDate");
 		int pageTotal = 0;
 		
-		noticeList = boardService.mainSeletNotice(selectOption);
+		noticeListAll = boardService.mainSeletNotice(selectOption);
 
 		pageMaker.setCri(cri);
 
-		pageMaker.setTotalCount(noticeList.size());
+		pageMaker.setTotalCount(noticeListAll.size());
 		
-		for(int i=0; i <noticeList.size(); i++) {
+		List<ArticleVO2> noticeList = new ArrayList<ArticleVO2>();
+		
+		//공지사항
+		for(int i=0; i <noticeListAll.size(); i++) {
 			
-			if(i>4) {
-				noticeList.remove(i);
+			if(i<5) {
+				noticeList.add(noticeListAll.get(i));
 			}
 		}
 		
+		
+
 		mav.addObject("member", member);
 		mav.addObject("noticeList", noticeList);
 		mav.addObject("communityType", "notice");

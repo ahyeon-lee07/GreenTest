@@ -344,6 +344,7 @@ public class BoardControllerImpl2 implements BoardController2 {
 		List<Map<String, Object>> commentList = new ArrayList<Map<String, Object>>();
 
 		if (communityType.equals("qna")) {
+			mav.addObject("pageTitle", "QnA");
 			selectOption.put("communityNum", "questionNum='" + communityNum + "'");
 			selectOption.put("hits", "questionHits = questionHits + 1");
 			selectOption.put("value",
@@ -367,6 +368,7 @@ public class BoardControllerImpl2 implements BoardController2 {
 			}
 
 		} else if (communityType.equals("notice")) {
+			mav.addObject("pageTitle", "공지사항");
 			selectOption.put("communityNum", "noticeNum='" + communityNum + "'");
 			selectOption.put("hits", "noticeHits = noticeHits + 1");
 			selectOption.put("value",
@@ -376,6 +378,7 @@ public class BoardControllerImpl2 implements BoardController2 {
 
 			mav.setViewName("communityDerail");
 		} else if (communityType.equals("event")) {
+			mav.addObject("pageTitle", "이벤트");
 			selectOption.put("communityNum", "eventNum='" + communityNum + "'");
 			selectOption.put("hits", "eventHits = eventHits + 1");
 			selectOption.put("value",
@@ -385,6 +388,7 @@ public class BoardControllerImpl2 implements BoardController2 {
 
 			mav.setViewName("communityDerail");
 		} else if (communityType.equals("review")) {
+			mav.addObject("pageTitle", "리뷰");
 			selectOption.put("communityNum", "reviewNum='" + communityNum + "'");
 			selectOption.put("hits", "reviewHits = reviewHits + 1");
 			selectOption.put("value",
