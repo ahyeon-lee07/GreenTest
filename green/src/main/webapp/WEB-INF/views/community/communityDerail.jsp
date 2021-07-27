@@ -100,12 +100,12 @@ request.setCharacterEncoding("UTF-8");
 											<c:choose>
 												<c:when test="${community.pwYN == 'Y' }">
 													<div class="custom-control custom-switch pt-2">
-														<input type="checkbox" class="custom-control-input YNChk" id="inputPwYN" value="Y" > 
+														<input type="checkbox" class="custom-control-input YNChk" id="inputPwYN" value="Y" checked> 
 														<input id="pwYN_V" class="input_V" type="text" name="pwYN" value="Y" style=" display: none;"> 
 														<label id="inputPwYNLabel" class="custom-control-label" for="inputPwYN" style="width: 70px;">비밀글</label>
 													</div>
 													<div class="bd-highlight pr-2" id="pwBox" style="display: block;">
-														<input type="password" class="form-control" id="exampleInputPassword1" name="questionPw" maxlength="4" value="${community.questionPw}">
+														<input type="text" class="form-control" id="exampleInputPassword1" name="questionPw" maxlength="4" value="${community.questionPw}">
 													</div>
 												</c:when>
 												<c:otherwise>
@@ -115,7 +115,7 @@ request.setCharacterEncoding("UTF-8");
 														<label id="inputPwYNLabel" class="custom-control-label" for="inputPwYN" style="width: 70px;">공개글</label>
 													</div>
 													<div class="bd-highlight pr-2" id="pwBox" style="display: none;">
-														<input type="password" class="form-control" id="exampleInputPassword1" name="questionPw" maxlength="4">
+														<input type="text" class="form-control" id="exampleInputPassword1" name="questionPw" maxlength="4">
 													</div>
 												</c:otherwise>
 											</c:choose>
@@ -406,8 +406,9 @@ request.setCharacterEncoding("UTF-8");
 			}
 		};
 		// 비밀글 여부 pwBox
+		var showYN = document.getElementById('inputPwYN');
 		if(showYN != null){
-			var showYN = document.getElementById('inputPwYN');
+			
 			showYN.addEventListener('click', function() {
 				var showYN_V = showYN.value;
 				var Label = document.getElementById('inputPwYNLabel');
