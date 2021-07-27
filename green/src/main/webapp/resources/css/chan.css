@@ -106,6 +106,16 @@ a:hover {
 .prodbox:hover {
 	    box-shadow: 0 0 4px 4px rgba(0,0,0,.1);
 }
+.inputBoxReadonly[readonly] {
+	border: 0 none;
+    border-left: 1px solid #ced4da;
+    background: transparent;
+    border-radius: 0;
+    pointer-events: none;
+}
+label {
+	font-weight: bold;
+}
 /*--------------------------------------------------------------------*/
 
 @media screen and (min-width: 1200px) {

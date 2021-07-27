@@ -34,7 +34,16 @@ request.setCharacterEncoding("UTF-8");
 				</nav>
 			</div>
 		</div>
-		<form action="${contextPath}/member/pwChk.do" name="loginForm" method="POST">
+		${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }
+		<c:choose>
+			<c:when test="${param.communityType == 'qna' }">
+				<form action="${contextPath}/communityChk.do?communityType=${param.communityType}&communityNum=${param.communityNum}" name="loginForm" method="POST">
+			</c:when>
+			<c:otherwise>
+				<form action="${contextPath}/member/pwChk.do" name="loginForm" method="POST">
+			</c:otherwise>
+		</c:choose>
+		
             <div class="d-flex justify-content-center mt-5">
                 <div class="bd-highlight rounded border" style="width: 480px;">
                     <div class="d-flex flex-row bd-highlight py-3 px-5"  >
