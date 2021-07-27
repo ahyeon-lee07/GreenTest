@@ -38,7 +38,21 @@ request.setCharacterEncoding("UTF-8");
 								<option value="nomal" selected>기타문의</option>
 								<option value="product" >상품관련</option>
 							</select>
-							<button id="btn_product" type="button" class="btn btn-secondary mx-2" onclick="productSearch()" style="display: none">상품검색</button>
+							<button id="btn_product" type="button" class="btn btn-outline-secondary mx-2" onclick="productSearch()" style="display: none">상품검색</button>
+							<input id="product_Input_name"  type="text" class="form-control" value="" style="display: none; width: 72%;" readonly>
+							<input id="product_Input_id" type="text" class="form-control" name="productId" value="" style="display: none;">
+						</div>
+					</c:if>
+					
+					<c:if test="${communityType == 'review' }">
+						<div class="row border-bottom border-top border-bottom-0 d-flex bd-highlight py-2">
+							<label for="inputTitle" class="bd-highlight col-form-label pl-2"
+								style="width: 100px;">상품 정보</label>
+							<select id="inputState" class="form-control form-control-sm"  style="width: 100px; height: 38px" >
+								<option value="nomal" selected>-- 선택 --</option>
+								<option value="product" >상품 검색</option>
+							</select>
+							<button id="btn_product" type="button" class="btn btn-outline-secondary mx-2" onclick="productSearch()" style="display: none">상품 검색</button>
 							<input id="product_Input_name"  type="text" class="form-control" value="" style="display: none; width: 72%;" readonly>
 							<input id="product_Input_id" type="text" class="form-control" name="productId" value="" style="display: none;">
 						</div>
@@ -87,12 +101,12 @@ request.setCharacterEncoding("UTF-8");
 		<div class="row justify-content-between mb-5">
 			<div class="">
 				<a class="" href="${contextPath }/community.do?communityType=${communityType}">
-					<button type="button" class="btn btn-secondary">목록</button>
+					<button type="button" class="btn btn-outline-secondary">목록</button>
 				</a>
 			</div>
 			<div class="">
 				<div class="text-center">
-					<button type="submit" class="btn btn-success" onclick="return check_add()">등록</button>
+					<button type="submit" class="btn btn-outline-success" onclick="return check_add()">등록</button>
 				</div>
 			</div>
 		</div>
@@ -168,15 +182,38 @@ request.setCharacterEncoding("UTF-8");
 		});
 	</c:if>
 	
-
+	<c:if test="${communityType == 'review' }">
+	// 상품 선택
+	var inputState = document.getElementById('inputState');
+	inputState.addEventListener('change', function(){
+		
+		var inputState_V = inputState.value;
+		var btn_product = document.getElementById('btn_product');
+		var product_Input = document.getElementById('product_Input_name');
+		
+		if(inputState_V == "nomal") {
+			btn_product.value = '';
+			product_Input.value = '';
+			
+			btn_product.style.display = "none";
+			product_Input.style.display = "none";
+		}else if(inputState_V == "product"){
+			btn_product.style.display = "block";
+			product_Input.style.display = "block";
+		}
+	});
 	
-
+	// 상품 검색
+	function productSearch(){
+		window.open("${contextPath }/productSearch.do", "productSearch", "width=800px, height=500px, left=100, top=50");
+	}
+	</c:if>
+	
 	function check_add() {
 		var form = document.community;
 		
 
 		<c:if test="${communityType == 'qna' }">
-		
 			//숫자, 4~16자
 			var pwExp = form.questionPw.value.search(/^[0-9]*$/);
 			
@@ -188,6 +225,13 @@ request.setCharacterEncoding("UTF-8");
 			if(inputState == 'product' && product_Input_id.value == ''){
 				alert('상품을 선택해 주세요.');
 				return false;
+			}
+		</c:if>
+		
+		<c:if test="${communityType == 'review' }">
+			if(inputState == 'product' && product_Input_id.value == ''){
+				alert('상품을 선택해 주세요.');
+					return false;
 			}
 		</c:if>
 		
@@ -212,6 +256,5 @@ request.setCharacterEncoding("UTF-8");
 			form.submit();
 		}
 	};
-
 	
 </script>
