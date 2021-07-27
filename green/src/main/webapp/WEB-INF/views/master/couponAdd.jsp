@@ -58,7 +58,7 @@ request.setCharacterEncoding("UTF-8");
 									 ~
 									<input id="couponPeroid_end" class="ml-2 form-control"  type='date' value='' style="width: 170px;"/>
 									<input id="couponPeroid_end_V" type='text' name='couponPeroid_end' value='0000-00-00' style="display:none"/>
-									<button id="" type="button" class="btn btn-outline-primary ml-2" onclick="btn_resset()" style="width: 80px;">초기화</button>
+									<button id="" type="button" class="btn btn-primary ml-2" onclick="btn_resset()" style="width: 80px;">초기화</button>
 								</div>
 							</div>
 						</div>
@@ -104,7 +104,7 @@ request.setCharacterEncoding("UTF-8");
 						<div class="d-flex flex-fill justify-content-between">
 							<div class="bd-highlight">
 								<a href="${contextPath }/couponList.do"><button type="button"
-										class="btn btn-outline-secondary">취소</button></a>
+										class="btn btn-secondary">취소</button></a>
 							</div>
 							<div class="d-highlight">
 								

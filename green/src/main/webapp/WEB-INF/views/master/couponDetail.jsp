@@ -78,7 +78,7 @@ request.setCharacterEncoding("UTF-8");
 											<input id="couponPeroid_end_V" type='text' name='couponPeroid_end' value='0000-00-00' style="display:none"/>
 										</c:otherwise>
 									</c:choose>
-									<button id="" type="button" class="btn btn-outline-primary ml-2" onclick="btn_resset()" style="width: 80px;">초기화</button>
+									<button id="" type="button" class="btn btn-primary ml-2" onclick="btn_resset()" style="width: 80px;">초기화</button>
 								</div>
 							</div>
 						</div>

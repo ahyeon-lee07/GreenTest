@@ -32,27 +32,27 @@ request.setCharacterEncoding("UTF-8");
 			<div class="d-flex justify-content-start border-bottom mt-2">
 				<div class="bd-highlight btn-group btn-group-toggle mb-2"
 					data-toggle="buttons" onclick="listFilter()">
-					<label class="btn btn-outline-secondary"> <input
+					<label class="btn btn-secondary"> <input
 						type="radio" name="options" id="option1" value="" checked>
 						All
-					</label> <label class="btn btn-outline-secondary"> <input
+					</label> <label class="btn btn-secondary"> <input
 						type="radio" name="options" id="option2" value="hard">
 						hard
-					</label> <label class="btn btn-outline-secondary"> <input
+					</label> <label class="btn btn-secondary"> <input
 						type="radio" name="options" id="option3" value="gel"> gel
-					</label> <label class="btn btn-outline-secondary"> <input
+					</label> <label class="btn btn-secondary"> <input
 						type="radio" name="options" id="option4" value="card">
 						card
-					</label> <label class="btn btn-outline-secondary"> <input
+					</label> <label class="btn btn-secondary"> <input
 						type="radio" name="options" id="option5" value="airPods">
 						airPods
-					</label> <label class="btn btn-outline-secondary"> <input
+					</label> <label class="btn btn-secondary"> <input
 						type="radio" name="options" id="option6" value="buds">
 						buds
-					</label> <label class="btn btn-outline-secondary"> <input
+					</label> <label class="btn btn-secondary"> <input
 						type="radio" name="options" id="option7" value="keyring">
 						keyring
-					</label> <label class="btn btn-outline-secondary"> <input
+					</label> <label class="btn btn-secondary"> <input
 						type="radio" name="options" id="option8" value="smart">
 						smart
 					</label>
@@ -146,7 +146,7 @@ request.setCharacterEncoding("UTF-8");
 							<div class="bd-highlight">
 								<a
 									href="${contextPath }/productList/productDetail_M.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${list.productId }&options=${options }">
-									<button type="button" class="btn btn-outline-secondary btn-sm"
+									<button type="button" class="btn btn-secondary btn-sm"
 										style="font-size: 0.7rem; width: 100%; display: block;">상세정보</button>
 								</a>
 							</div>
@@ -217,10 +217,10 @@ request.setCharacterEncoding("UTF-8");
 
 		for (var i = 0; i < optins.length; i++) {
 			var optin = optins[i];
-			optin.parentNode.setAttribute('class', 'btn btn-outline-secondary');
+			optin.parentNode.setAttribute('class', 'btn btn-secondary');
 			if (optin.value == filterV) {
 				optin.parentNode.setAttribute('class',
-						'btn btn-outline-secondary active');
+						'btn btn-secondary active');
 				optin.checked = true;
 			}
 		}

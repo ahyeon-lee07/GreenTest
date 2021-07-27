@@ -99,7 +99,7 @@ request.setCharacterEncoding("UTF-8");
 							<div class="bd-highlight">
 								<a
 									href="${contextPath }/prodList/prodDetail.do?productId=${wishList.productId }">
-									<button type="button" class="btn btn-outline-secondary btn-sm"
+									<button type="button" class="btn btn-secondary btn-sm"
 										style="font-size: 0.7rem; width: 100%; display: block;">상세정보</button>
 								</a>
 							</div>
@@ -114,10 +114,10 @@ request.setCharacterEncoding("UTF-8");
       <div class="col-12">
         <div class="d-flex justify-content-start">
           <div class="bd-highlight mr-2">
-            <button type="button" class="btn btn-sm btn-outline-danger" onclick="btn_wishDelete()">삭제하기</button></a>
+            <button type="button" class="btn btn-sm btn-danger" onclick="btn_wishDelete()">삭제하기</button></a>
           </div>
           <!-- <div class="bd-highlight">
-            <button type="button" class="btn btn-sm btn-outline-danger">관심상품 비우기</button>
+            <button type="button" class="btn btn-sm btn-danger">관심상품 비우기</button>
           </div> -->
         </div>
       </div>
@@ -223,7 +223,7 @@ function checkSelectAll()  {
 					str += '<td class="text-center align-middle px-2">';
 					str += '<div class="bd-highlight">';
 					str += '<a href="${contextPath }/prodList/prodDetail.do?productId=' + wishList[i]["productId"] +'">';
-					str += '<button type="button" class="btn btn-outline-secondary btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">상세정보</button>';
+					str += '<button type="button" class="btn btn-secondary btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">상세정보</button>';
 					str += '</a></div></td></tr >';
 				}
 				document.getElementById('wishListBox').innerHTML = str;

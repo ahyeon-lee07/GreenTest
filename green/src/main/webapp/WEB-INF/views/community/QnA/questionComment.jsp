@@ -84,11 +84,11 @@ request.setCharacterEncoding("UTF-8");
         <div class="row justify-content-between mb-5">
             <div class="">
             	<a class="" href="${contextPath }/product.do">
-            		<button type="button" class="btn btn-outline-secondary btn-sm">목록</button>
+            		<button type="button" class="btn btn-secondary btn-sm">목록</button>
             	</a>	
             </div>
             <!-- Button trigger modal -->
-				<button type="button" class="btn btn-outline-success btn-sm"
+				<button type="button" class="btn btn-success btn-sm"
 					data-toggle="modal" data-target="#complete">등록</button>
 
 				<!-- Modal -->
@@ -109,8 +109,8 @@ request.setCharacterEncoding("UTF-8");
 								확인을 누르면 등록이 완료됩니다.<br> 글을 수정하려면 취소를 눌러주세요.
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-outline-success btn-sm">확인</button>
-								<button type="button" class="btn btn-outline-danger btn-sm"
+								<button type="button" class="btn btn-success btn-sm">확인</button>
+								<button type="button" class="btn btn-danger btn-sm"
 									data-dismiss="modal">취소</button>
 							</div>
 						</div>

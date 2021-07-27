@@ -60,8 +60,8 @@ request.setCharacterEncoding("UTF-8");
 							</div>
 						</div>
 						<div class="col-md-5">
-							<a href="http://localhost:8080/green/memberEdit.do" class="btn btn-outline-success btn-sm">회원정보 수정</a> <a
-								href="#" class="btn btn-outline-success btn-sm">배송주소록 관리</a>
+							<a href="http://localhost:8080/green/memberEdit.do" class="btn btn-success btn-sm">회원정보 수정</a> <a
+								href="#" class="btn btn-success btn-sm">배송주소록 관리</a>
 						</div>
 					</div>
 					<div class="row bg-light ">
@@ -74,7 +74,7 @@ request.setCharacterEncoding("UTF-8");
 							<div class="row">가용 적립금</div>
 							<br>
 							<div class="row">
-								1000원 <a href="#" class="btn btn-outline-success btn-sm">조회</a>
+								1000원 <a href="#" class="btn btn-success btn-sm">조회</a>
 							</div>
 						</div>
 						<div class="col-md-3 border">

@@ -240,11 +240,11 @@ request.setCharacterEncoding("UTF-8");
 						<div class="d-flex flex-fill justify-content-between">
 							<div class="bd-highlight">
 								<button id="btn_memberDelete" type="button"
-									class="btn btn-outline-danger">회원 탈퇴</button>
+									class="btn btn-danger">회원 탈퇴</button>
 							</div>
 							<div class="d-highlight">
 								<a href="${contextPath}/main.do"><button type="button"
-										class="btn btn-outline-secondary">취소</button></a>
+										class="btn btn-secondary">취소</button></a>
 								<button id="btn_memberEdit" type="button"
 									class="btn btn-success ml-2">회원정보 수정</button>
 							</div>

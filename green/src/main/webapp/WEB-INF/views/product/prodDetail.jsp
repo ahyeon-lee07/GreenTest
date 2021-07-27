@@ -108,13 +108,13 @@ request.setCharacterEncoding("UTF-8");
 							</table>
 
 							<button style="width: 150px; height: 58px;"
-								class="btn btn-outline-success" id="insertWish"
+								class="btn btn-success" id="insertWish"
 								onclick="fn_InsertWish()">관심상품</button>
 							<button style="width: 150px; height: 58px;"
-								class="btn btn-outline-success" id="insertCart"
+								class="btn btn-success" id="insertCart"
 								onclick="fn_InsertCart()">장바구니</button>
 							<button style="width: 150px; height: 58px;"
-								class="btn btn-outline-success" id="prodOrder"
+								class="btn btn-success" id="prodOrder"
 								onclick="fn_ProdOrder()">바로구매</button>
 							<br>
 						</div>
@@ -147,7 +147,7 @@ request.setCharacterEncoding("UTF-8");
 						<!-- Product actions-->
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center">
-								<a class="btn btn-outline-success mt-auto" href="#">자세히보기</a>
+								<a class="btn btn-success mt-auto" href="#">자세히보기</a>
 							</div>
 						</div>
 					</div>
@@ -172,7 +172,7 @@ request.setCharacterEncoding("UTF-8");
 						<!-- Product actions-->
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center">
-								<a class="btn btn-outline-success mt-auto" href="#">자세히보기</a>
+								<a class="btn btn-success mt-auto" href="#">자세히보기</a>
 							</div>
 						</div>
 					</div>
@@ -197,7 +197,7 @@ request.setCharacterEncoding("UTF-8");
 						<!-- Product actions-->
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center">
-								<a class="btn btn-outline-success mt-auto" href="#">자세히보기</a>
+								<a class="btn btn-success mt-auto" href="#">자세히보기</a>
 							</div>
 						</div>
 					</div>
@@ -219,7 +219,7 @@ request.setCharacterEncoding("UTF-8");
 						<!-- Product actions-->
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center">
-								<a class="btn btn-outline-success mt-auto" href="#">자세히보기</a>
+								<a class="btn btn-success mt-auto" href="#">자세히보기</a>
 							</div>
 						</div>
 					</div>

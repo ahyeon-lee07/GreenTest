@@ -70,9 +70,9 @@ request.setCharacterEncoding("UTF-8");
 					</div>
 
 					<div id="tr_btn_modify" align="center">
-						<input type=button class="btn btn-outline-success btn-sm" value="수정"
+						<input type=button class="btn btn-success btn-sm" value="수정"
 							onClick="fn_modify_article(frmArticle)"> <input
-							type=button class="btn btn-outline-danger btn-sm" value="취소"
+							type=button class="btn btn-danger btn-sm" value="취소"
 							onClick="backToList(frmArticle)">
 					</div>
 
@@ -80,13 +80,13 @@ request.setCharacterEncoding("UTF-8");
 						<div class="row justify-content-between my-3">
 							<div class="">
 								<c:if test="${member.id == viewNotice.id }">
-									<button type="button" class="btn btn-outline-success btn-sm"
+									<button type="button" class="btn btn-success btn-sm"
 										onClick="fn_enable(this.form)">수정</button>
-									<button type="button" class="btn btn-outline-danger btn-sm"
+									<button type="button" class="btn btn-danger btn-sm"
 										onClick="fn_remove_article('${contextPath}/removeNotice.do', ${viewNotice.noticeNum})">삭제</button>
 								</c:if>
 								<a class="" href="${contextPath }/listNotice.do">
-									<button type="button" class="btn btn-outline-secondary btn-sm">목록</button>
+									<button type="button" class="btn btn-secondary btn-sm">목록</button>
 								</a>
 							</div>
 						</div>

@@ -69,23 +69,23 @@ request.setCharacterEncoding("UTF-8");
 							id="questionContent" disabled>${viewQnA.questionContent }</textarea>
 					</div>
 					<div id="tr_btn_modify" align="center">
-						<input type=button class="btn btn-outline-success btn-sm" value="수정"
+						<input type=button class="btn btn-success btn-sm" value="수정"
 							onClick="fn_modify_article(frmArticle)"> <input
-							type=button class="btn btn-outline-danger btn-sm" value="취소"
+							type=button class="btn btn-danger btn-sm" value="취소"
 							onClick="backToList(frmArticle)">
 					</div>
 					<div id="tr_btn">
 						<div class="row justify-content-between my-3">
 							<div class="">
 								<c:if test="${member.id == viewQnA.id }">
-									<button type="button" class="btn btn-outline-success btn-sm"
+									<button type="button" class="btn btn-success btn-sm"
 										onClick="fn_enable(this.form)">수정</button>
-									<button type="button" class="btn btn-outline-danger btn-sm"
+									<button type="button" class="btn btn-danger btn-sm"
 										onClick="fn_remove_article('${contextPath}/removeQnA.do', ${viewQnA.questionNum})">삭제</button>
 								</c:if>
 								<a class="" href="${contextPath }/listQnA.do">
-									<button type="button" class="btn btn-outline-secondary btn-sm">목록</button>
-									<input type="button" class="btn btn-outline-success btn-sm" value="답글쓰기"
+									<button type="button" class="btn btn-secondary btn-sm">목록</button>
+									<input type="button" class="btn btn-success btn-sm" value="답글쓰기"
 									onClick="fn_reply_form('${isLogOn}','${contextPath }/QnA_reWrite.do', ${viewQnA.questionNum})">
 								</a>
 							</div>

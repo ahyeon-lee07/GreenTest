@@ -80,7 +80,7 @@ request.setCharacterEncoding("UTF-8");
                                 <input type="number" class="form-control" id="inputnumber" step="1" value="1" min="1" max="99">
                                 </div>
                             </div>
-                            <div class="bd-highlight mt-1"><button type="button" class="btn btn-outline-secondary btn-sm" style="font-size: .6rem">변경</button></div>
+                            <div class="bd-highlight mt-1"><button type="button" class="btn btn-secondary btn-sm" style="font-size: .6rem">변경</button></div>
                           </div>
                     </td>
                     <td class="text-center align-middle px-2" style="font-size: .8rem;">150</td>
@@ -89,16 +89,16 @@ request.setCharacterEncoding("UTF-8");
                     <td class="text-center align-middle px-2">11,000원</td>
                     <td class="text-center align-middle px-2 d-flex flex-column">
                         <div class="bd-highlight">
-                        	<a class="btn btn-sm btn-outline-success" href="${contextPath}/orderList.do"
+                        	<a class="btn btn-sm btn-success" href="${contextPath}/orderList.do"
                             style="font-size: 0.7rem; width: 100%; display: block;">주문하기</a>
                         </div>
                         <div class="bd-highlight my-1">
                         	<a href="${contextPath}/wist_list.do">
-                            <button type="button" class="btn btn-outline-success btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">관심상품 등록</button></a>
+                            <button type="button" class="btn btn-success btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">관심상품 등록</button></a>
                         </div>
                         <div class="bd-highlight">
                         	<a href="${contextPath}/cart.do">
-                            <button type="button" class="btn btn-outline-danger btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">삭제</button></a>
+                            <button type="button" class="btn btn-danger btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">삭제</button></a>
                         </div>
                     </td>
                 </tr>
@@ -141,7 +141,7 @@ request.setCharacterEncoding("UTF-8");
                     <div class="col-3 border border-left-0">
                         <div class="row text-center bg-light p-3 border-bottom" style="height: 57px;">
                             <div class="col">총 할인금액
-                                <button type="button" class="btn btn-outline-secondary btn-sm ml-1">내역 보기</button>
+                                <button type="button" class="btn btn-secondary btn-sm ml-1">내역 보기</button>
                             </div>
                          </div>
                          <div class="row text-center font-weight-bold p-4">
@@ -168,13 +168,13 @@ request.setCharacterEncoding("UTF-8");
             <div class="col">
                 <div class="d-flex flex-row-reverse bd-highlight">
                     <div class=" bd-highlight">
-                        <a class="" href="${contextPath }/orderList.do"><button type="button" class="btn btn-outline-success">전체 상품주문</button></a>
+                        <a class="" href="${contextPath }/orderList.do"><button type="button" class="btn btn-success">전체 상품주문</button></a>
                     </div>
                     <div class="px-3 bd-highlight">
-                         <a class="" href="${contextPath }/orderList.do"><button type="button" class="btn btn-outline-success">선택 상품주문</button></a>
+                         <a class="" href="${contextPath }/orderList.do"><button type="button" class="btn btn-success">선택 상품주문</button></a>
                     </div>
                     <div class=" bd-highlight">
-                        <a class="" href="${contextPath }/main.do"><button type="button" class="btn btn-outline-secondary">쇼핑 계속하기</button></a>
+                        <a class="" href="${contextPath }/main.do"><button type="button" class="btn btn-secondary">쇼핑 계속하기</button></a>
                     </div>
                 </div>
             </div>

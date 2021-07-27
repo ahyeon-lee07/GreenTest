@@ -491,8 +491,8 @@ o 로그 기록
 										확인을 누르면 회원가입이 완료됩니다.<br> 수정하시려면 취소를 눌러주세요.
 									</div>
 									<div class="modal-footer">
-										<input type="submit" class="btn btn-outline-success" value="확인">
-										<button type="button" class="btn btn-outline-success"
+										<input type="submit" class="btn btn-success" value="확인">
+										<button type="button" class="btn btn-success"
 											data-dismiss="modal">취소</button>
 									</div>
 								</div>

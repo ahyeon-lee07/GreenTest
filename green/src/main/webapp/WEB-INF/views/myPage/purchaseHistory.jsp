@@ -42,23 +42,23 @@ request.setCharacterEncoding("UTF-8");
                         </select>
                     </div>
                     <div class="bd-highlight btn-group btn-group-toggle mb-2" data-toggle="buttons" onclick="listFilter()">
-                        <label class="btn btn-outline-secondary active"> 
+                        <label class="btn btn-secondary active"> 
                             <input type="radio" name="options" value="today" checked>
                             오늘
                         </label> 
-                        <label class="btn btn-outline-secondary">
+                        <label class="btn btn-secondary">
                             <input type="radio" name="options" value="week">
                             일주일
                         </label> 
-                        <label class="btn btn-outline-secondary"> 
+                        <label class="btn btn-secondary"> 
                             <input type="radio" name="options" value="one-month">
                             1개월
                         </label> 
-                        <label class="btn btn-outline-secondary"> 
+                        <label class="btn btn-secondary"> 
                             <input  type="radio" name="options" value="three-month">
                             3개월
                         </label> 
-                        <label class="btn btn-outline-secondary">
+                        <label class="btn btn-secondary">
                             <input type="radio" name="options" value="six-month">
                             6개월
                         </label>
@@ -70,7 +70,7 @@ request.setCharacterEncoding("UTF-8");
 					 ~
 					<input id="couponPeroid_end" class="ml-2 form-control"  type='date' value=''  style="width: 164px;"/>
 					<input id="couponPeroid_end_V" type='text' name='couponPeroid_end' value='0000-00-00' style="display:none"/>
-                    <button id="" type="button" class="btn btn-outline-primary ml-2" onclick="btn_resset()" style="width: 80px; height: 38px;">초기화</button>
+                    <button id="" type="button" class="btn btn-primary ml-2" onclick="btn_resset()" style="width: 80px; height: 38px;">초기화</button>
                 </div>
             </div>
         </form>
@@ -123,13 +123,13 @@ request.setCharacterEncoding("UTF-8");
                     </td>
                     <td class="text-center align-middle px-2">
                         <div class="d-flex justify-content-cente">
-                            <button type="button" class="btn btn-outline-danger btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">
+                            <button type="button" class="btn btn-danger btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">
                                 취소
                             </button>
-                            <button type="button" class="btn btn-outline-secondary btn-sm mx-2" style="font-size: 0.7rem; width: 100%; display: block;">
+                            <button type="button" class="btn btn-secondary btn-sm mx-2" style="font-size: 0.7rem; width: 100%; display: block;">
                                 반품
                             </button>
-                            <button type="button" class="btn btn-outline-secondary btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">
+                            <button type="button" class="btn btn-secondary btn-sm" style="font-size: 0.7rem; width: 100%; display: block;">
                                 교환
                             </button>
                         </div>
@@ -150,10 +150,10 @@ request.setCharacterEncoding("UTF-8");
 
 	// 	for (var i = 0; i < optins.length; i++) {
 	// 		var optin = optins[i];
-	// 		optin.parentNode.setAttribute('class', 'btn btn-outline-secondary');
+	// 		optin.parentNode.setAttribute('class', 'btn btn-secondary');
 	// 		if (optin.value == filterV) {
 	// 			optin.parentNode.setAttribute('class',
-	// 					'btn btn-outline-secondary active');
+	// 					'btn btn-secondary active');
 	// 			optin.checked = true;
 	// 		}
 	// 	}

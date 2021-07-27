@@ -93,7 +93,7 @@ request.setCharacterEncoding("UTF-8");
 								</li>
 								<li class="nav-item mr-3">
 									<button id="btn_logout" type="button"
-										class="btn btn-outline-danger btn-sm mt-1">로그아웃</button>
+										class="btn btn-danger btn-sm mt-1">로그아웃</button>
 								</li>
 							</c:when>
 						</c:choose>
@@ -105,7 +105,7 @@ request.setCharacterEncoding("UTF-8");
 					<form class="form-inline border rounded">
 						<input class="form-control border-0" type="text" placeholder="검색"
 							aria-label="Search">
-						<button class="btn btn-outline-success border-0 btn_search"
+						<button class="btn btn-success border-0 btn_search"
 							type="submit"></button>
 					</form>
 				</div>

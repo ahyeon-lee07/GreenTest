@@ -128,12 +128,12 @@ request.setCharacterEncoding("UTF-8");
                             <div class="bd-highlight d-flex flex-row">
                                 <div class="p-1 bd-highlight">
                                 	<a href="${contextPath }/orderList.do">
-                                    <button type="button" class="btn btn-outline-danger">삭제하기</button></a>
+                                    <button type="button" class="btn btn-danger">삭제하기</button></a>
                                 </div>
                             </div>
                             <div class="bd-highlight d-flex flex-row">
                                 <div class="p-1 bd-highright">
-                                    <button type="button" class="btn btn-outline-secondary">이전 페이지</button>
+                                    <button type="button" class="btn btn-secondary">이전 페이지</button>
                                 </div>
                             </div>
                         </div>
@@ -365,7 +365,7 @@ request.setCharacterEncoding("UTF-8");
                             <div class="row py-2 bg-light border-bottom">
                                 <div class="col">
                                     총 주문 금액
-                                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                                    <button type="button" class="btn btn-secondary btn-sm"
                                         style="font-size: .6rem">내역 보기</button>
                                 </div>
                             </div>
@@ -407,7 +407,7 @@ request.setCharacterEncoding("UTF-8");
                     <div class="row border border-top-0" style="font-size: .9rem">
                         <div class="col-2 bg-light py-2 border-right font-weight-bold">추가 할인 금액</div>
                         <div class="col-10 py-2">0원
-                            <button type="button" class="btn btn-outline-secondary btn-sm ml-4"
+                            <button type="button" class="btn btn-secondary btn-sm ml-4"
                                 style="font-size: .6rem">내역 보기</button>
                         </div>
                     </div>
@@ -464,7 +464,7 @@ request.setCharacterEncoding("UTF-8");
                             </div>
                             <div class="row mt-3 mb-3">
                                 <div class="col">
-                                    <button type="button" class="btn btn-outline-success btn-block">결제하기</button>
+                                    <button type="button" class="btn btn-success btn-block">결제하기</button>
                                 </div>
                             </div>
                         </div>

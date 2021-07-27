@@ -105,10 +105,10 @@ request.setCharacterEncoding("UTF-8");
 								<!-- Product actions-->
 								<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 									<div class="text-center">
-										<a class="btn btn-sm btn-outline-success"
+										<a class="btn btn-sm btn-success"
 											href="${contextPath}/orderList.do" role="button">바로구매</a> <a
 											href="${contextPath}/wist_list.do"
-											class="btn btn-sm btn-outline-success">관심상품</a>
+											class="btn btn-sm btn-success">관심상품</a>
 									</div>
 								</div>
 							</div>

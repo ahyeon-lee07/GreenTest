@@ -97,7 +97,7 @@ request.setCharacterEncoding("UTF-8");
 							
 							str += '<td class="text-center align-middle px-2">';
 							str += '<div class="bd-highlight">';
-							str += '<a href="#"><button type="button" class="btn btn-outline-secondary btn-sm" style="font-size: 0.7rem; width: 100%;" onclick="choiceProduct(\'' + result[i]["productId"] +'\',\'' + result[i]["productName"] +'\')">선택</button></a>';
+							str += '<a href="#"><button type="button" class="btn btn-secondary btn-sm" style="font-size: 0.7rem; width: 100%;" onclick="choiceProduct(\'' + result[i]["productId"] +'\',\'' + result[i]["productName"] +'\')">선택</button></a>';
 							str += '</div></td></tr>';
 							
 						}

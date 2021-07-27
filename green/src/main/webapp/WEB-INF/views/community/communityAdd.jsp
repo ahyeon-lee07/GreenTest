@@ -38,7 +38,7 @@ request.setCharacterEncoding("UTF-8");
 								<option value="nomal" selected>기타문의</option>
 								<option value="product" >상품관련</option>
 							</select>
-							<button id="btn_product" type="button" class="btn btn-outline-secondary mx-2" onclick="productSearch()" style="display: none">상품검색</button>
+							<button id="btn_product" type="button" class="btn btn-secondary mx-2" onclick="productSearch()" style="display: none">상품검색</button>
 							<input id="product_Input_name"  type="text" class="form-control" value="" style="display: none; width: 72%;" readonly>
 							<input id="product_Input_id" type="text" class="form-control" name="productId" value="" style="display: none;">
 						</div>
@@ -52,7 +52,7 @@ request.setCharacterEncoding("UTF-8");
 								<option value="nomal" selected>-- 선택 --</option>
 								<option value="product" >상품 검색</option>
 							</select>
-							<button id="btn_product" type="button" class="btn btn-outline-secondary mx-2" onclick="productSearch()" style="display: none">상품 검색</button>
+							<button id="btn_product" type="button" class="btn btn-secondary mx-2" onclick="productSearch()" style="display: none">상품 검색</button>
 							<input id="product_Input_name"  type="text" class="form-control" value="" style="display: none; width: 72%;" readonly>
 							<input id="product_Input_id" type="text" class="form-control" name="productId" value="" style="display: none;">
 						</div>
@@ -101,12 +101,12 @@ request.setCharacterEncoding("UTF-8");
 		<div class="row justify-content-between mb-5">
 			<div class="">
 				<a class="" href="${contextPath }/community.do?communityType=${communityType}">
-					<button type="button" class="btn btn-outline-secondary">목록</button>
+					<button type="button" class="btn btn-secondary">목록</button>
 				</a>
 			</div>
 			<div class="">
 				<div class="text-center">
-					<button type="submit" class="btn btn-outline-success" onclick="return check_add()">등록</button>
+					<button type="submit" class="btn btn-success" onclick="return check_add()">등록</button>
 				</div>
 			</div>
 		</div>
