@@ -75,7 +75,7 @@ request.setCharacterEncoding("UTF-8");
                 </form>
             </div>
         </div>
- 			<div class="">
+ 			<div class="row justify-content-between mb-5">
             	<a class="" href="${contextPath}/eventList.do">
             		<button type="button" class="btn btn-outline-secondary btn-sm">목록</button>
             	</a>
@@ -92,7 +92,6 @@ request.setCharacterEncoding("UTF-8");
 					</c:if>
             		</div>
         	</div>
-			</div>
 			</div>
 	</div>
 </main>
