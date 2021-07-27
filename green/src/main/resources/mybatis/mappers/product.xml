@@ -269,7 +269,7 @@
 	<!-- 관리자 상품 삭제 -->
 	<delete id="deleteProduct" parameterType="String">
 		<![CDATA[
-		CALL ptoductDelete(#{productId});
+		CALL productDelete(#{productId});
 		]]>
 	</delete>
 	

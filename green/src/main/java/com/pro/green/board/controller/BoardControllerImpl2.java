@@ -256,7 +256,7 @@ public class BoardControllerImpl2 implements BoardController2 {
 		ArticleVO2 community = new ArticleVO2();
 		Map<String, Object> selectOption = new HashMap<String, Object>();
 		selectOption.put("type", communityType);
-		List<Map<String, Object>> commentList = new ArrayList<Map<String,Object>>();
+		List<Map<String, Object>> commentList = new ArrayList<Map<String, Object>>();
 
 		if (communityType.equals("qna")) {
 			selectOption.put("communityNum", "questionNum='" + communityNum + "'");
@@ -265,19 +265,19 @@ public class BoardControllerImpl2 implements BoardController2 {
 					"questionNum AS num, id AS id, productId AS productId, questionTitle AS title, questionContent AS content, questionHits AS hits, questionPw AS questionPw, pwYN AS pwYN");
 
 			community = boardService.selectCommunity(selectOption);
-			
+
 			Map<String, Object> paramMap = new HashMap<String, Object>();
-			
+
 			if (community.getPwYN().equals("Y")) {
 				mav.setViewName(
 						"redirect:/communityChk.do?communityNum=" + communityNum + "&communityType=" + communityType);
 
 			} else {
 				mav.addObject("pageTitle", "QnA");
-				
+
 				paramMap.put("qnANum", communityNum);
 				commentList = boardService.selectComment(paramMap);
-				
+
 				mav.setViewName("communityDerail");
 			}
 
@@ -417,6 +417,7 @@ public class BoardControllerImpl2 implements BoardController2 {
 		if (communityType.equals("qna")) {
 
 			selectOption.put("communityNum", "questionNum='" + communityNum + "'");
+			selectOption.put("QnANum", communityNum);
 
 		} else if (communityType.equals("notice")) {
 
@@ -468,21 +469,21 @@ public class BoardControllerImpl2 implements BoardController2 {
 
 		selectOption.put("hitsChk", "hitsChk");
 		community = boardService.selectCommunity(selectOption);
-		
+
 		String communitypw = community.getQuestionPw();
-		List<Map<String, Object>> commentList = new ArrayList<Map<String,Object>>();
+		List<Map<String, Object>> commentList = new ArrayList<Map<String, Object>>();
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		
-		if(communitypw.equals(pw)) {
+
+		if (communitypw.equals(pw)) {
 			mav.addObject("community", community);
 			mav.setViewName("communityDerail");
-			
+
 			mav.addObject("pageTitle", "QnA");
 			mav.setViewName("communityDerail");
-			
+
 			paramMap.put("qnANum", communityNum);
 			commentList = boardService.selectComment(paramMap);
-			
+
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
 			mav.addObject("pageMaker", pageMaker);
@@ -491,21 +492,20 @@ public class BoardControllerImpl2 implements BoardController2 {
 			mav.addObject("community", community);
 			mav.addObject("member", member);
 			mav.addObject("commentList", commentList);
-			
-			
-		}else {
+
+		} else {
 			mav.addObject("joinMas", "비밀번호가 틀렸습니다.");
-			mav.setViewName("redirect:/community.do?communityType="+communityType);
+			mav.setViewName("redirect:/community.do?communityType=" + communityType);
 		}
 
-		
 		return mav;
 	}
 
-	//댓글 추가
+	// 댓글 추가
 	@RequestMapping(value = "/communityDerail/commentAdd.do", method = RequestMethod.POST)
 	public ResponseEntity commentAdd(@RequestParam(value = "id") String id,
-			@RequestParam(value = "qnANum") String qnANum, @RequestParam(value = "commentContent") String commentContent, HttpServletRequest request,
+			@RequestParam(value = "qnANum") String qnANum,
+			@RequestParam(value = "commentContent") String commentContent, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
 		ResponseEntity resEntity = null;
@@ -516,11 +516,32 @@ public class BoardControllerImpl2 implements BoardController2 {
 		paramMap.put("id", id);
 		paramMap.put("qnANum", qnANum);
 		paramMap.put("commentContent", commentContent);
-		
-		List<Map<String, Object>> commentList = new ArrayList<Map<String,Object>>();
-	
+
+		List<Map<String, Object>> commentList = new ArrayList<Map<String, Object>>();
+
 		commentList = boardService.commentList(paramMap);
-		
+
+		resEntity = new ResponseEntity(commentList, HttpStatus.OK);
+		return resEntity;
+	}
+
+	// 댓글 삭제
+	@RequestMapping(value = "/communityDerail/commentDelete.do", method = RequestMethod.POST)
+	public ResponseEntity commentDelete(@RequestParam(value = "num") String num,
+			@RequestParam(value = "qnANum") String qnANum,
+			HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		ResponseEntity resEntity = null;
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("num", num);
+		paramMap.put("qnANum", qnANum);
+
+		List<Map<String, Object>> commentList = new ArrayList<Map<String, Object>>();
+
+		commentList = boardService.DelectComment(paramMap);
+
 		resEntity = new ResponseEntity(commentList, HttpStatus.OK);
 		return resEntity;
 	}

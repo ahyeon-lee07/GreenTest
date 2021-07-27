@@ -158,8 +158,52 @@
 		WHERE
 			QnANum = ${qnANum}
 		ORDER BY 
-			commentDate DESC;
+			commentDate;
     ]]>
 	</select>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="DelectComment" parameterType="hashmap">
+    <![CDATA[
+		DELETE FROM
+			comment
+		WHERE
+			QnANum = ${qnANum} AND commentNum = #{num};
+    ]]>
+	</delete>
+	
+	<!-- 댓글 모두 삭제 -->
+	<delete id="DelectAllComment" parameterType="hashmap">
+    <![CDATA[
+		DELETE FROM
+			comment
+		WHERE
+			QnANum = ${QnANum};
+    ]]>
+	</delete>
+	
+	<!-- 댓글수 증가  -->
+	<update id="increaseCommentCount" parameterType="hashmap">
+    <![CDATA[
+		UPDATE 
+			qna
+		SET 
+			commentCount = commentCount+1
+		WHERE 
+			questionNum = ${qnANum};
+    ]]>
+	</update>
+	
+	<!-- 댓글수 감소  -->
+	<update id="decreaseCommentCount" parameterType="hashmap">
+    <![CDATA[
+		UPDATE 
+			qna
+		SET 
+			commentCount = commentCount-1
+		WHERE 
+			questionNum = ${qnANum};
+    ]]>
+	</update>
 
 </mapper>

@@ -31,5 +31,8 @@ public interface BoardService2 {
 	//¥Ò±€ ¡∂»∏
 	public List<Map<String, Object>> selectComment(Map<String, Object> paramMap) throws Exception;
 
+	//¥Ò±€ ªË¡¶
+	public List<Map<String, Object>> DelectComment(Map<String, Object> paramMap) throws Exception;
+
 	
 }

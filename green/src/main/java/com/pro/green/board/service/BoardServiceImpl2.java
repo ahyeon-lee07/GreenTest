@@ -57,4 +57,9 @@ public class BoardServiceImpl2 implements BoardService2 {
 		return boardDAO.selectComment(paramMap);
 	}
 
+	// ¥Ò±€ ªË¡¶
+	public List<Map<String, Object>> DelectComment(Map<String, Object> paramMap) throws Exception {
+		return boardDAO.DelectComment(paramMap);
+	}
+
 }

@@ -83,6 +83,11 @@ public class BoardDAOImpl2 implements BoardDAO2 {
 
 	// 글 삭제
 	public int deleteArticle(Map<String, Object> selectOption) throws DataAccessException {
+		
+		if (selectOption.get("type").toString().equals("qna")) {
+			int delect = sqlSession.delete("mapper.board2.DelectAllComment", selectOption);
+		}
+		
 		int result = sqlSession.delete("mapper.board2.deleteArticle", selectOption);
 		return result;
 	}
@@ -91,6 +96,7 @@ public class BoardDAOImpl2 implements BoardDAO2 {
 	public List<Map<String, Object>> commentList(Map<String, Object> paramMap) throws DataAccessException {
 
 		int insert = sqlSession.insert("mapper.board2.insertComment", paramMap);
+		int update = sqlSession.update("mapper.board2.increaseCommentCount", paramMap);
 
 		List<Map<String, Object>> result = sqlSession.selectList("mapper.board2.selectComment", paramMap);
 		return result;
@@ -99,6 +105,16 @@ public class BoardDAOImpl2 implements BoardDAO2 {
 	// 댓글 조회
 	public List<Map<String, Object>> selectComment(Map<String, Object> paramMap) throws DataAccessException {
 		List<Map<String, Object>> result = sqlSession.selectList("mapper.board2.selectComment", paramMap);
+		return result;
+	}
+
+	// 댓글 삭제
+	public List<Map<String, Object>> DelectComment(Map<String, Object> paramMap) throws DataAccessException {
+		int delect = sqlSession.delete("mapper.board2.DelectComment", paramMap);
+		int update = sqlSession.update("mapper.board2.decreaseCommentCount", paramMap);
+		
+		List<Map<String, Object>> result = sqlSession.selectList("mapper.board2.selectComment", paramMap);
+		
 		return result;
 	}
 

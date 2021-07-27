@@ -41,6 +41,11 @@ request.setCharacterEncoding("UTF-8");
 						</c:when>
 					</c:choose>
 					<th class="text-center border-bottom-0 border-top-0 px-2" style="width: auto">제목</th>
+					<c:choose>
+						<c:when test="${pageTitle == 'QnA' }">
+							<th class="text-center border-bottom-0 border-top-0 px-1" style="width: 40px">댓글</th>
+						</c:when>
+					</c:choose>
 					<th class="text-center border-bottom-0 border-top-0 px-2" style="width: 120px">작성자</th>
 					<th class="text-center border-bottom-0 border-top-0 px-2" style="width: 120px">작성일</th>
 					<th class="text-center border-bottom-0 border-top-0 px-2" style="width: 80px">조회수</th>
@@ -87,6 +92,12 @@ request.setCharacterEncoding("UTF-8");
 						<td class="text-left align-middle px-2 font-weight-bold">
 							${list.title }
 						</td>
+						<c:if test="${pageTitle == 'QnA'}">
+							<td class="text-center align-middle px-2">
+								${list.commentCount }
+							</td>
+						</c:if>
+						
 						<td class="text-center align-middle px-2">
 							${list.id }
 						</td>

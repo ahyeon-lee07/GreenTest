@@ -144,20 +144,31 @@ request.setCharacterEncoding("UTF-8");
 						<div class="d-flex bd-highlight">
 							<label for="commentId" class="bd-highlight col-form-label pl-2" style="width: 100px;">작성자</label>
 							<div class="d-flex flex-row bd-highlight pr-2">
-								<input type="text" class="form-control inputBoxReadonly" id="commentId" name="commentId" value="${commentList.id }" style="width: 160px;" readonly> <span class="pt-2" style="font-size: .8rem">${commentList.commentDate }</span>
+								<input type="text" class="form-control inputBoxReadonly" id="" name="commentId" value="${commentList.id }" style="width: 160px;" readonly> <span class="pt-2" style="font-size: .8rem">${commentList.commentDate }</span>
 							</div>
 						</div>
 						<div class="d-flex bd-highlight">
 							<c:if test="${commentList.id == member.id}">
-								<button type="button" class="btn btn-outline-danger ml-3" onclick="commentAdd('${commentList.commentNum}')">삭제</button>
+								<button type="button" class="btn btn-outline-danger ml-3" onclick="return commentDelete('${commentList.commentNum}')">삭제</button>
 							</c:if>
 						</div>
 					</div>
 					<div class="border-bottom border-top d-flex bd-highlight py-2">
 						<label for="commentContent" class="bd-highlight col-form-label pl-2" style="width: 100px;">내용</label>
-						<div class="flex-grow-1 bd-highlight pr-2">
-							<textarea class="form-control ${inputBoxReadonly }" id="commentContent" name="commentContent" rows="2" ${readonly }>${commentList.commentContent}</textarea>
-						</div>
+
+						<c:choose>
+							<c:when test="${commentList.id == member.id }">
+								<div class="flex-grow-1 bd-highlight pr-2">
+									<textarea class="form-control" id="" name="commentContent" rows="2">${commentList.commentContent}</textarea>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="flex-grow-1 bd-highlight pr-2">
+									<textarea class="form-control inputBoxReadonly" id="" name="commentContent" rows="2" readonly>${commentList.commentContent}</textarea>
+								</div>
+							</c:otherwise>
+						</c:choose>
+						
 					</div>
 				</c:forEach>
 
@@ -186,7 +197,6 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 		</div>
 	</div>
-	
 </main>
 
 
@@ -211,7 +221,7 @@ request.setCharacterEncoding("UTF-8");
              plusUl.id = "newComment";
              plusUl.setAttribute('class', 'd-flex flex-column bd-highlight border-top border-dark mt-3');
 
-
+								 
 			str += '<div class="d-flex justify-content-between border-bottom py-2">';
 			str += '<div class="d-flex bd-highlight">';
 			str += '<label for="commentId" class="bd-highlight col-form-label pl-2" style="width: 100px;">작성자</label>';
@@ -225,7 +235,7 @@ request.setCharacterEncoding("UTF-8");
 			str += '<div class="border-bottom d-flex bd-highlight py-2">';
 			str += '<label for="commentContent" class="bd-highlight col-form-label pl-2" style="width: 100px;">내용</label>';
 			str += '<div class="flex-grow-1 bd-highlight pr-2">';
-			str += '<textarea class="form-control ${inputBoxReadonly }" id="commentContent" name="commentContent" rows="2" ${readonly }></textarea>';
+			str += '<textarea class="form-control" id="commentContent" name="commentContent" rows="2" ></textarea>';
 			str += '</div></div>';
 
 			plusUl.innerHTML = str;
@@ -259,44 +269,9 @@ request.setCharacterEncoding("UTF-8");
 			},
 			success : function(commentList) {
 
-				
-				var str = '';
 				var memberId = '${member.id}';
 			
-				for(var i=0; i<commentList.length; i ++){
-
-
-				var timestamp = commentList[i]["commentDate"];
-				var date = new Date(timestamp);
-				var dateTime = (date.getFullYear()+ "-"+(date.getMonth()+1)+  "-"+date.getDate()+  " "+date.getHours()+ ":"+date.getMinutes()+  ":"+date.getSeconds());
-
-
-					str += '<div class="d-flex justify-content-between border-top border-dark py-2 mt-3">';
-					str += '<div class="d-flex bd-highlight">';
-					str += '<label for="commentId" class="bd-highlight col-form-label pl-2" style="width: 100px;">작성자</label>';
-					str += '<div class="d-flex flex-row bd-highlight pr-2">';
-					str += '<input type="text" class="form-control inputBoxReadonly" id="commentId" name="commentId" style="width: 160px;" value="'+commentList[i]["id"]+'" readonly><span class="pt-2" style="font-size: .8rem">'+dateTime+'</span>';
-					str += '</div></div>';
-					str += '<div class="d-flex bd-highlight">';
-
-					if(commentList[i]["id"] == memberId){
-						str += '<button type="button" class="btn btn-outline-danger ml-3" onclick="commentAdd(\''+commentList[i]["commentNum"]+'\')">삭제</button>';
-					}
-					str += '</div></div>';
-					str += '<div class="border-bottom border-top d-flex bd-highlight py-2">';
-					str += '<label for="commentContent" class="bd-highlight col-form-label pl-2" style="width: 100px;">내용</label>';
-					str += '<div class="flex-grow-1 bd-highlight pr-2">';
-
-					if(commentList[i]["id"] == memberId){
-						str += '<textarea class="form-control ${inputBoxReadonly }" id="commentContent" name="commentContent" rows="2" ${readonly }>'+commentList[i]["commentContent"]+'</textarea>';
-					}else{
-						str += '<textarea class="form-control ${inputBoxReadonly } inputBoxReadonly" id="commentContent" name="commentContent" rows="2" ${readonly } readonly>'+commentList[i]["commentContent"]+'</textarea>';
-					}
-					
-					str += '</div></div>';
-				}
-
-				document.getElementById("commentBox").innerHTML = str;
+				commentListBox(commentList, memberId);
 			},
 			error : function(data, textStatus) {
 
@@ -307,6 +282,84 @@ request.setCharacterEncoding("UTF-8");
 		});
 
 	};
+
+	
+
+	//댓글 삭제
+	function commentDelete(num){
+		if(confirm("정말 삭제 하시겠습니까?") == true){
+
+			var qnANum = "'"+${community.num}+"'";
+
+			$.ajax({
+				type : "POST",
+				async : true,
+				url : "${contextPath}/communityDerail/commentDelete.do",
+				dataType : "json",
+				data : {
+					qnANum : qnANum,
+					num: num
+				},
+				success : function(commentList) {
+
+					var memberId = '${member.id}';
+
+					commentListBox(commentList, memberId);
+				},
+				error : function(data, textStatus) {
+
+				},
+				complete : function(data, textStatus) {
+
+				}
+			});
+
+
+
+
+			}else {
+				return false;
+			}
+
+	};
+
+	//댓글 폼
+	function commentListBox(commentList, memberId){
+		var str = '';
+		for(var i=0; i<commentList.length; i ++){
+
+
+		var timestamp = commentList[i]["commentDate"];
+		var date = new Date(timestamp);
+		var dateTime = (date.getFullYear()+ "-"+(date.getMonth()+1)+  "-"+date.getDate()+  " "+date.getHours()+ ":"+date.getMinutes()+  ":"+date.getSeconds());
+								
+			str += '<div class="d-flex flex-column bd-highlight border-top border-dark mt-3">';
+			str += '<div class="d-flex justify-content-between border-dark py-2">';
+			str += '<div class="d-flex bd-highlight">';
+			str += '<label for="commentId" class="bd-highlight col-form-label pl-2" style="width: 100px;">작성자</label>';
+			str += '<div class="d-flex flex-row bd-highlight pr-2">';
+			str += '<input type="text" class="form-control inputBoxReadonly" id="commentId" name="commentId" style="width: 160px;" value="'+commentList[i]["id"]+'" readonly><span class="pt-2" style="font-size: .8rem">'+dateTime+'</span>';
+			str += '</div></div>';
+			str += '<div class="d-flex bd-highlight">';
+
+			if(commentList[i]["id"] == memberId){
+				str += '<button type="button" class="btn btn-outline-danger ml-3" onclick="commentDelete(\''+commentList[i]["commentNum"]+'\')">삭제</button>';
+			}
+			str += '</div></div>';
+			str += '<div class="border-bottom border-top d-flex bd-highlight py-2">';
+			str += '<label for="commentContent" class="bd-highlight col-form-label pl-2" style="width: 100px;">내용</label>';
+			str += '<div class="flex-grow-1 bd-highlight pr-2">';
+
+			if(commentList[i]["id"] == memberId){
+				str += '<textarea class="form-control" id="" name="commentContent" rows="2">'+commentList[i]["commentContent"]+'</textarea>';
+			}else{
+				str += '<textarea class="form-control ${inputBoxReadonly } inputBoxReadonly" id="" name="commentContent" rows="2" ${readonly } readonly>'+commentList[i]["commentContent"]+'</textarea>';
+			}
+			
+			str += '</div></div></div>';
+		}
+		document.getElementById("commentBox").innerHTML = str;
+	}
 
 	<c:if test="${communityType == 'qna' }">
 		//Qna 구분
