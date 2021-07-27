@@ -103,6 +103,91 @@ public class BoardControllerImpl2 implements BoardController2 {
 		return mav;
 	}
 
+	// 커뮤니티 검색
+	@RequestMapping(value = "/community/search.do", method = RequestMethod.GET)
+	public ModelAndView productList(@RequestParam(value = "searchKeyWordOption") String searchKeyWordOption,
+									@RequestParam(value = "keyWord") String keyWord,
+									@RequestParam(value = "communityType") String communityType, 
+									HttpServletRequest request, Criteria cri) throws Exception {
+		
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("member");
+
+		PageMaker pageMaker = new PageMaker();
+
+		Map<String, Object> selectOption = new HashMap<String, Object>();
+		selectOption.put("type", communityType);
+		selectOption.put("keyWord", keyWord);
+		List<ArticleVO2> list = new ArrayList<ArticleVO2>();
+
+		int pageTotal = 0;
+
+		if (communityType.equals("qna")) {
+			mav.addObject("pageTitle", "QnA");
+			
+			if(searchKeyWordOption.equals("title")) {
+				selectOption.put("keyWordOption", "questionTitle");
+			}else if (searchKeyWordOption.equals("content")) {
+				selectOption.put("keyWordOption", "questionContent");
+			}
+			
+			selectOption.put("selectOption",
+					"questionNum AS num, id AS id,productId AS productId,questionTitle AS title,questionContent AS content,questionHits AS hits,commentCount AS commentCount,questionPw AS questionPw,pwYN AS pwYN,questionDate AS createDate");
+
+		} else if (communityType.equals("notice")) {
+			mav.addObject("pageTitle", "공지사항");
+			
+			if(searchKeyWordOption.equals("title")) {
+				selectOption.put("keyWordOption", "noticeTitle");
+			}else if (searchKeyWordOption.equals("content")) {
+				selectOption.put("keyWordOption", "noticeContent");
+			}
+			
+			selectOption.put("selectOption",
+					"noticeNum AS num, id AS id,noticeTitle AS title,noticeContent AS content,noticeHits AS hits, noticeDate AS createDate");
+
+		} else if (communityType.equals("event")) {
+			mav.addObject("pageTitle", "이벤트");
+			
+			if(searchKeyWordOption.equals("title")) {
+				selectOption.put("keyWordOption", "eventTitle");
+			}else if (searchKeyWordOption.equals("content")) {
+				selectOption.put("keyWordOption", "eventContent");
+			}
+			
+			selectOption.put("selectOption",
+					"eventNum AS num, id AS id,eventTitle AS title,eventContent AS content,eventHits AS hits, eventDate AS createDate");
+
+		} else if (communityType.equals("review")) {
+			mav.addObject("pageTitle", "리뷰");
+			
+			if(searchKeyWordOption.equals("title")) {
+				selectOption.put("keyWordOption", "reviewTitle");
+			}else if (searchKeyWordOption.equals("content")) {
+				selectOption.put("keyWordOption", "reviewContent");
+			}
+			
+			selectOption.put("selectOption",
+					"reviewNum AS num, id AS id,productId AS productId,reviewTitle AS title,reviewContent AS content,reviewHits AS hits,reviewDate AS createDate");
+
+		}
+
+		list = boardService.searchList(selectOption);
+
+		pageMaker.setCri(cri);
+
+		pageMaker.setTotalCount(list.size());
+
+		mav.addObject("member", member);
+		mav.addObject("list", list);
+		mav.addObject("pageMaker", pageMaker);
+		mav.addObject("communityType", communityType);
+		mav.setViewName("communityList");
+
+		return mav;
+	}
+
 	// 커뮤니티 등록화면
 	@RequestMapping(value = "/community/communityAdd.do", method = RequestMethod.GET)
 	public ModelAndView communityAddForm(@RequestParam String communityType, HttpServletRequest request,
@@ -528,9 +613,8 @@ public class BoardControllerImpl2 implements BoardController2 {
 	// 댓글 삭제
 	@RequestMapping(value = "/communityDerail/commentDelete.do", method = RequestMethod.POST)
 	public ResponseEntity commentDelete(@RequestParam(value = "num") String num,
-			@RequestParam(value = "qnANum") String qnANum,
-			HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+			@RequestParam(value = "qnANum") String qnANum, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 
 		ResponseEntity resEntity = null;
 

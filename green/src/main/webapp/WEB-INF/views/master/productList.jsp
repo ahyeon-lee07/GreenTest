@@ -164,17 +164,13 @@ request.setCharacterEncoding("UTF-8");
 						name="searchBox">
 						<div class="form-row">
 							<div class="form-group d-flex justify-content-start ">
-								<select id="inputState" class="form-control form-control-sm"
-									name="searchKeyWordOption" style="width: 90px;">
+								<select id="inputState" class="form-control form-control-sm" name="searchKeyWordOption" style="width: 90px;">
 									<option value="productName" selected>상품명</option>
-								</select> <input class="form-control form-control-sm mx-2" type="text"
-									placeholder="" name="keyWord">
-								<button type="submit" class="btn btn-secondary btn-sm col-2"
-									onclick="return search()">검색</button>
+								</select> <input class="form-control form-control-sm mx-2" type="text" placeholder="" name="keyWord">
+								<button type="submit" class="btn btn-secondary btn-sm col-2" onclick="return search()">검색</button>
 							</div>
 						</div>
-						<input type="text" name="searchOptions" value="${options }"
-							style="display: none">
+						<input type="text" name="searchOptions" value="${options }" style="display: none">
 					</form>
 				</div>
 			</div>

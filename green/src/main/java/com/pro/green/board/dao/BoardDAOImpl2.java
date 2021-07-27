@@ -41,6 +41,31 @@ public class BoardDAOImpl2 implements BoardDAO2 {
 		return result;
 	}
 
+	// 검색
+	public List<ArticleVO2> searchList(Map<String, Object> selectOption) throws DataAccessException {
+		List<ArticleVO2> result = sqlSession.selectList("mapper.board2.searchList", selectOption);
+
+		List<Map<String, Object>> images = new ArrayList<Map<String, Object>>();
+
+		// 리뷰과 Qna 시에만 실행
+		if (selectOption.get("type").equals("qna") || selectOption.get("type").equals("review")) {
+			for (int i = 0; i < result.size(); i++) {
+				String productId = result.get(i).getProductId();
+
+				if (productId != null) {
+					images = sqlSession.selectList("mapper.board2.selectImge", productId);
+
+					String imgURL = (String) images.get(0).get("imgURL");
+					String p_group = (String) images.get(0).get("p_group");
+
+					result.get(i).setImgURL(imgURL);
+					result.get(i).setP_group(p_group);
+				}
+			}
+		}
+		return result;
+	}
+
 	// 상품검색
 	public List<Map<String, Object>> productSearch(String keyWord) throws DataAccessException {
 		List<Map<String, Object>> result = sqlSession.selectList("mapper.board2.productSearch", keyWord);
@@ -83,11 +108,11 @@ public class BoardDAOImpl2 implements BoardDAO2 {
 
 	// 글 삭제
 	public int deleteArticle(Map<String, Object> selectOption) throws DataAccessException {
-		
+
 		if (selectOption.get("type").toString().equals("qna")) {
 			int delect = sqlSession.delete("mapper.board2.DelectAllComment", selectOption);
 		}
-		
+
 		int result = sqlSession.delete("mapper.board2.deleteArticle", selectOption);
 		return result;
 	}
@@ -112,9 +137,9 @@ public class BoardDAOImpl2 implements BoardDAO2 {
 	public List<Map<String, Object>> DelectComment(Map<String, Object> paramMap) throws DataAccessException {
 		int delect = sqlSession.delete("mapper.board2.DelectComment", paramMap);
 		int update = sqlSession.update("mapper.board2.decreaseCommentCount", paramMap);
-		
+
 		List<Map<String, Object>> result = sqlSession.selectList("mapper.board2.selectComment", paramMap);
-		
+
 		return result;
 	}
 

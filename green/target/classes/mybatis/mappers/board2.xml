@@ -34,6 +34,20 @@
     ]]>
 	</select>
 	
+	<!-- 게시물 검색 -->
+	<select id="searchList" resultType="articleVO2" parameterType="hashmap">
+    <![CDATA[
+		SELECT
+			${selectOption}
+		FROM
+			${type}
+		WHERE
+			${keyWordOption} LIKE CONCAT('%', #{keyWord}, '%')
+		ORDER BY 
+			createDate DESC;
+    ]]>
+	</select>
+	
 	<!-- 게시물 목록 조회 -->
 	<select id="selectImge" resultType="hashmap" parameterType="String">
     <![CDATA[

@@ -117,18 +117,18 @@ request.setCharacterEncoding("UTF-8");
 		<div class="row justify-content-between px-4 mt-3">
 			<div class="">
 				<div class="btn-group">
-					<form action="#">
+					<form action="${contextPath }/community/search.do" method="GET" name="searchBox">
 						<div class="form-row">
 							<div class="form-group d-flex justify-content-start ">
-								<select id="inputState" class="form-control form-control-sm"
-									style="width: 90px;">
-									<option selected>제목</option>
-									<option selected>내용</option>
-								</select> <input class="form-control form-control-sm mx-2" type="text"
-									placeholder="">
-								<button type="submit" class="btn btn-secondary btn-sm col-2">검색</button>
+								<select id="inputState" class="form-control form-control-sm" name="searchKeyWordOption" style="width: 90px;">
+									<option value="title" selected>제목</option>
+									<option value="content" >내용</option>
+								</select> 
+								<input class="form-control form-control-sm mx-2" type="text" placeholder=""  name="keyWord">
+								<button type="submit" class="btn btn-secondary btn-sm col-2" onclick="return search()">검색</button>
 							</div>
 						</div>
+						<input type="text" name="communityType" value="${communityType }" style="display: none">
 					</form>
 				</div>
 			</div>
@@ -194,29 +194,16 @@ request.setCharacterEncoding("UTF-8");
 </main>
 
 <script>
-	/*
-	function btn_community(id){
-		var communityType = "${communityType}";
 
-		$.ajax({
-			type: "POST",
-			async: true,
-			url: "${contextPath}/communityDerail/chk.do",
-			dataType: "text",
-			data: {
-				id: id,
-				page: communityType
-			},
-			success: function (data, textStatus) {
+	//검색
+	function search() {
+		var form = document.searchBox;
 
-			},
-			error: function (data, textStatus) {
-
-			},
-			complete: function (data, textStatus) {
-
-			}
-		});
+		if (form.keyWord.value == "") {
+			alert("키워드를 입력해주세요.");
+			return false;
+		} else {
+			form.submit();
+		}
 	}
-	*/
 </script>

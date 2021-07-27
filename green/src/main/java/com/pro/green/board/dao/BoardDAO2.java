@@ -37,5 +37,8 @@ public interface BoardDAO2 {
 	// 댓글 삭제
 	public List<Map<String, Object>> DelectComment(Map<String, Object> paramMap) throws DataAccessException;
 
+	// 검색
+	public List<ArticleVO2> searchList(Map<String, Object> selectOption) throws DataAccessException;
+
 	
 }
