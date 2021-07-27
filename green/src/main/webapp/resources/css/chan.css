@@ -116,6 +116,12 @@ a:hover {
 label {
 	font-weight: bold;
 }
+.noticeOver{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%
+    }
 /*--------------------------------------------------------------------*/
 
 @media screen and (min-width: 1200px) {

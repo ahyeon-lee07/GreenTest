@@ -37,5 +37,9 @@ public interface BoardService2 {
 	//검색
 	public List<ArticleVO2> searchList(Map<String, Object> selectOption) throws Exception;
 
+	//메인화면 공지사항 조회
+	public List<ArticleVO2> mainSeletNotice(Map<String, Object> selectOption) throws Exception;
+
+
 	
 }

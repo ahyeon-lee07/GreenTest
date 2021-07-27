@@ -67,4 +67,9 @@ public class BoardServiceImpl2 implements BoardService2 {
 		return boardDAO.searchList(selectOption);
 	}
 
+	// 메인화면 공지사항 조회
+	public List<ArticleVO2> mainSeletNotice(Map<String, Object> selectOption) throws Exception{
+		return boardDAO.mainSeletNotice(selectOption);
+	}
+
 }

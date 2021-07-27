@@ -34,6 +34,18 @@
     ]]>
 	</select>
 	
+	<!-- 메인화면 공지사항 조회 -->
+	<select id="mainSeletNotice" resultType="articleVO2" parameterType="hashmap">
+    <![CDATA[
+		SELECT
+			${selectOption}
+		FROM
+			notice
+		ORDER BY
+			noticeDate DESC
+    ]]>
+	</select>
+	
 	<!-- 게시물 검색 -->
 	<select id="searchList" resultType="articleVO2" parameterType="hashmap">
     <![CDATA[

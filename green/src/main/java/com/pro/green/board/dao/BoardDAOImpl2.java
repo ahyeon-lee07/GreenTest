@@ -143,4 +143,10 @@ public class BoardDAOImpl2 implements BoardDAO2 {
 		return result;
 	}
 
+	// 메인화면 공지사항 조회
+	public List<ArticleVO2> mainSeletNotice(Map<String, Object> selectOption) throws DataAccessException {
+		List<ArticleVO2> result = sqlSession.selectList("mapper.board2.mainSeletNotice", selectOption);
+		return result;
+	}
+
 }

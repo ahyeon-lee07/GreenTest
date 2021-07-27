@@ -45,40 +45,33 @@ request.setCharacterEncoding("UTF-8");
 	<div class="container">
 		<!-- 팝업 라인 -->
 		<div class="d-flex justify-content-between my-5">
-			<div class="bd-highlight flex-fill border mx-2 popupBox">
-				<img src="${contextPath}/resources/img/popup1.jpg" class="d-block w-100"
-					alt="...">
+			<div class="bd-highlight d-flex border mx-2 popupBox">
+				<img src="${contextPath}/resources/img/popup1.jpg" class="d-block w-100" alt="...">
 			</div>
-			<div class="bd-highlight flex-fill border mx-2 popupBox">
-				<img src="${contextPath}/resources/img/popup2.jpg" class="d-block w-100"
-					alt="...">
+			<div class="bd-highlight d-flex border mx-2 popupBox">
+				<img src="${contextPath}/resources/img/popup2.jpg" class="d-block w-100" alt="...">
 			</div>
-			<div class="bd-highlight flex-fill border mx-2 popupBox">
-				<img src="${contextPath}/resources/img/popup3.jpg" class="d-block w-100"
-					alt="...">
+			<div class="bd-highlight d-flex border mx-2 popupBox">
+				<img src="${contextPath}/resources/img/popup3.jpg" class="d-block w-100" alt="...">
 			</div>
 			<!-- 공지사항 -->
-			<div class="bd-highlight mx-2 flex-fill flex-column">
-				<div
-					class="bd-highlight d-flex justify-content-between pb-2 border-bottom">
+			<div class="bd-highlight mx-2 flex-fill flex-column" style="width: 48%;">
+				<div class="bd-highlight d-flex justify-content-between pb-2 mb-2 border-bottom">
 					<div class="bd-highlight font-weight-bold">공지사항</div>
 					<div class="bd-highlight">
-						<a href=""> <img src="${contextPath }/resources/img/plus.svg" alt="">
+						<a href="${contextPath }/community.do?communityType=notice"> <img src="${contextPath }/resources/img/plus.svg" alt="">
 						</a>
 					</div>
 				</div>
 				<div class="p-0 bd-highlight">
 					<ul class="list-group">
-						<li
-							class="list-group-item list-group-item-action p-0 pb-1 border-0">공지사항1</li>
-						<li
-							class="list-group-item list-group-item-action p-0 pb-1 border-0">공지사항2</li>
-						<li
-							class="list-group-item list-group-item-action p-0 pb-1 border-0">공지사항3</li>
-						<li
-							class="list-group-item list-group-item-action p-0 pb-1 border-0">공지사항4</li>
-						<li
-							class="list-group-item list-group-item-action p-0 pb-1 border-0">공지사항5</li>
+						<c:forEach items="${noticeList}" var="noticeList">
+							<a href="${contextPath}/communityDerail/derailPage.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&communityNum=${noticeList.num }&communityType=${communityType }"> 
+								<li class="list-group-item list-group-item-action p-0 pb-1 border-0 noticeOver">
+									${noticeList.title } 
+								</li>
+							</a>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>
