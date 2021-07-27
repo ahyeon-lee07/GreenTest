@@ -77,17 +77,17 @@ request.setCharacterEncoding("UTF-8");
         </div>
  			<div class="row justify-content-between mb-5">
             	<a class="" href="${contextPath}/eventList.do">
-            		<button type="button" class="btn btn-secondary btn-sm">목록</button>
+            		<button type="button" class="btn btn-outline-secondary btn-sm">목록</button>
             	</a>
             <div id="tr_btn_modify" style='float: right;'>
-            	<input type=button class="btn btn-sm btn-success" value="수정" onClick="fn_modify_article(frmArticle)">
-            	<input type=button class="btn btn-sm btn-danger" value="취소" onClick="backToList(frmArticle)">
+            	<input type=button class="btn btn-sm btn-outline-success" value="수정" onClick="fn_modify_article(frmArticle)">
+            	<input type=button class="btn btn-sm btn-outline-danger" value="취소" onClick="backToList(frmArticle)">
             </div>
             <div id="tr_btn" style='float: right;'>
 					<div class="">
 					<c:if test="${member.id == article.id}">
-					<button type="button" class="btn btn-sm btn-success" onClick="fn_enable(this.form)">수정</button>
-					<button type="button" class="btn btn-sm btn-danger"
+					<button type="button" class="btn btn-sm btn-outline-success" onClick="fn_enable(this.form)">수정</button>
+					<button type="button" class="btn btn-sm btn-outline-danger"
 					onClick="fn_remove_event('${contextPath}/removeEvent.do', ${article.eventNum})">삭제</button>
 					</c:if>
             		</div>

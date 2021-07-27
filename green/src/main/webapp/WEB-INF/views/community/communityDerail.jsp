@@ -149,7 +149,7 @@ request.setCharacterEncoding("UTF-8");
 						</div>
 						<div class="d-flex bd-highlight">
 							<c:if test="${commentList.id == member.id}">
-								<button type="button" class="btn btn-danger ml-3" onclick="return commentDelete('${commentList.commentNum}')">삭제</button>
+								<button type="button" class="btn btn-outline-danger ml-3" onclick="return commentDelete('${commentList.commentNum}')">삭제</button>
 							</c:if>
 						</div>
 					</div>
@@ -343,7 +343,7 @@ request.setCharacterEncoding("UTF-8");
 			str += '<div class="d-flex bd-highlight">';
 
 			if(commentList[i]["id"] == memberId){
-				str += '<button type="button" class="btn btn-danger ml-3" onclick="commentDelete(\''+commentList[i]["commentNum"]+'\')">삭제</button>';
+				str += '<button type="button" class="btn btn-outline-danger ml-3" onclick="commentDelete(\''+commentList[i]["commentNum"]+'\')">삭제</button>';
 			}
 			str += '</div></div>';
 			str += '<div class="border-bottom border-top d-flex bd-highlight py-2">';

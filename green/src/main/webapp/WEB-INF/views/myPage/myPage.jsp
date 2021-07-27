@@ -34,7 +34,7 @@ request.setCharacterEncoding("UTF-8");
 				</div>
 			</div>
 			<div class="bd-highlight">
-				<a href="${contextPath }/memberEditChk.do" class="btn btn-success btn-sm">회원정보 수정</a>
+				<a href="${contextPath }/memberEditChk.do" class="btn btn-outline-success btn-sm">회원정보 수정</a>
 			</div>
 		</div>
 		<div class="d-flex bd-highlight bg-light" style="font-size: 1.1rem;">
@@ -49,7 +49,7 @@ request.setCharacterEncoding("UTF-8");
 						<span>${memberInf.mileage }</span>원
 					</div>
 					<div class="bd-highlight ml-2">
-						<a href="#" class="btn btn-success btn-sm">조회</a>
+						<a href="#" class="btn btn-outline-success btn-sm">조회</a>
 					</div>
 				</div>
 			</div>

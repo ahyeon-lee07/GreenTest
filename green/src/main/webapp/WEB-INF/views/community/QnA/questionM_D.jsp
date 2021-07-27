@@ -114,12 +114,12 @@ request.setCharacterEncoding("UTF-8");
         <div class="row justify-content-between mb-5">
             <div class="">
             	<a class="" href="${contextPath }/product.do">
-            		<button type="button" class="btn btn-secondary btn-sm">목록</button>
+            		<button type="button" class="btn btn-outline-secondary btn-sm">목록</button>
             	</a>	
             </div>
             <div class="">
             	<!-- Button trigger modal -->
-				<button type="button" class="btn btn-success btn-sm"
+				<button type="button" class="btn btn-outline-success btn-sm"
 					data-toggle="modal" data-target="#complete">수정</button>
 
 				<!-- Modal -->
@@ -140,8 +140,8 @@ request.setCharacterEncoding("UTF-8");
 								확인을 누르면 수정이 완료됩니다.<br> 글을 다시 작성하려면 취소를 눌러주세요.
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-success btn-sm">확인</button>
-								<button type="button" class="btn btn-danger btn-sm"
+								<button type="button" class="btn btn-outline-success btn-sm">확인</button>
+								<button type="button" class="btn btn-outline-danger btn-sm"
 									data-dismiss="modal">취소</button>
 							</div>
 						</div>
@@ -149,7 +149,7 @@ request.setCharacterEncoding("UTF-8");
 				</div>
 							
                 <!-- Button trigger modal -->
-				<button type="button" class="btn btn-danger btn-sm"
+				<button type="button" class="btn btn-outline-danger btn-sm"
 					data-toggle="modal" data-target="#cancel">삭제</button>
 
 				<!-- Modal -->
@@ -170,14 +170,14 @@ request.setCharacterEncoding("UTF-8");
 								확인을 누르면 게시글이 삭제됩니다.<br> 되돌아가려면 취소를 눌러주세요.
 							</div>
 							<div class="modal-footer">
-								<a href="${contextPath }/product.do"><button type="button" class="btn btn-success btn-sm">확인</button></a>
-								<button type="button" class="btn btn-danger btn-sm"
+								<a href="${contextPath }/product.do"><button type="button" class="btn btn-outline-success btn-sm">확인</button></a>
+								<button type="button" class="btn btn-outline-danger btn-sm"
 									data-dismiss="modal">취소</button>
 							</div>
 							</div>
 							</div>
         </div>
-		<a href="${contextPath }/product_in.do"><button type="button" class="btn btn-danger btn-sm">취소</button></a>
+		<a href="${contextPath }/product_in.do"><button type="button" class="btn btn-outline-danger btn-sm">취소</button></a>
 	</div>
 </main>
 

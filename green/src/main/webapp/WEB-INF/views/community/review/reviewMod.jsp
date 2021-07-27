@@ -68,12 +68,12 @@ request.setCharacterEncoding("UTF-8");
 		<div class="row justify-content-between mb-5">
 		<div class="">
 			<a class="" href="${contextPath }/listReview.do">
-				<button type="button" class="btn btn-secondary btn-sm">목록</button>
+				<button type="button" class="btn btn-outline-secondary btn-sm">목록</button>
 			</a>
 		</div>
 		<div class="">
 				<div class="text-center">
-					<button type="submit" class="btn btn-success btn-sm"
+					<button type="submit" class="btn btn-outline-success btn-sm"
 						onclick="return check_add()">등록</button>
 				</div>
 			</div>

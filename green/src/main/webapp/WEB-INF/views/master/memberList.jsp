@@ -96,7 +96,7 @@ request.setCharacterEncoding("UTF-8");
 							<div class="bd-highlight">
 								<a
 									href="${contextPath }/memberList/memberEdit.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${list.id }&options=${options }">
-									<button type="button" class="btn btn-secondary btn-sm"
+									<button type="button" class="btn btn-outline-secondary btn-sm"
 										style="font-size: 0.7rem; width: 100%; display: block;">상세정보</button>
 								</a>
 							</div>
