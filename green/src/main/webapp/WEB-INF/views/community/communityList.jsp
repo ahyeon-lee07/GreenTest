@@ -78,7 +78,7 @@ request.setCharacterEncoding("UTF-8");
 								<c:choose>
 									<c:when test="${list.pwYN == 'Y' }">
 										<td class="text-center align-middle px-0">
-											<img src="${contextPath}/resources/img/lock.svg"alt="#">`
+											<img src="${contextPath}/resources/img/lock.svg"alt="#">
 										</td>
 									</c:when>
 									<c:otherwise>
