@@ -436,7 +436,7 @@ public class BoardControllerImpl2 implements BoardController2 {
 			if (!productId.equals("") && pwYN.equals("Y")) {
 				selectOption.put("value", "id='" + articleVO.getId() + "',productId='" + articleVO.getProductId()
 						+ "',questionTitle='" + articleVO.getTitle() + "',questionContent='" + articleVO.getContent()
-						+ "',questionPw=''" + articleVO.getQuestionPw() + "',pwYN='" + articleVO.getPwYN() + "'");
+						+ "',questionPw='" + articleVO.getQuestionPw() + "',pwYN='" + articleVO.getPwYN() + "'");
 
 			} else if (!productId.equals("") && pwYN.equals("N")) {
 				selectOption.put("value",
