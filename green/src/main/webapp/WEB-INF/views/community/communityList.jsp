@@ -125,7 +125,7 @@ request.setCharacterEncoding("UTF-8");
 									<option value="content" >내용</option>
 								</select> 
 								<input class="form-control form-control-sm mx-2" type="text" placeholder=""  name="keyWord">
-								<button type="submit" class="btn btn-outline-secondary btn-sm col-2" onclick="return search()">검색</button>
+								<button type="submit" class="btn btn-secondary btn-sm col-2" onclick="return search()">검색</button>
 							</div>
 						</div>
 						<input type="text" name="communityType" value="${communityType }" style="display: none">
@@ -152,7 +152,7 @@ request.setCharacterEncoding("UTF-8");
 						<c:when test="${communityType == 'event' && member.masterYN == 'M' }">
 							<div class="">
 								<a class="" href="${contextPath }/community/communityAdd.do?communityType=${communityType }">
-									<button type="button" class="btn btn-outline-success btn-sm">글쓰기</button>
+									<button type="button" class="btn btn-success">글쓰기</button>
 								</a>
 							</div>
 						</c:when>
