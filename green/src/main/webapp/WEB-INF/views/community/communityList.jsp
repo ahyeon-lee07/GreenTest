@@ -138,21 +138,21 @@ request.setCharacterEncoding("UTF-8");
 						<c:when test="${communityType == 'qna' }">
 							<div class="">
 								<a class="" href="${contextPath }/community/communityAdd.do?communityType=${communityType }">
-									<button type="button" class="btn btn-outline-success btn-sm">글쓰기</button>
+									<button type="button" class="btn btn-success btn-sm">글쓰기</button>
 								</a>
 							</div>
 						</c:when>
 						<c:when test="${communityType == 'notice' && member.masterYN == 'M' }">
 							<div class="">
 								<a class="" href="${contextPath }/community/communityAdd.do?communityType=${communityType }">
-									<button type="button" class="btn btn-outline-success btn-sm">글쓰기</button>
+									<button type="button" class="btn btn-success btn-sm">글쓰기</button>
 								</a>
 							</div>
 						</c:when>
 						<c:when test="${communityType == 'event' && member.masterYN == 'M' }">
 							<div class="">
 								<a class="" href="${contextPath }/community/communityAdd.do?communityType=${communityType }">
-									<button type="button" class="btn btn-success">글쓰기</button>
+									<button type="button" class="btn btn-success btn-sm">글쓰기</button>
 								</a>
 							</div>
 						</c:when>
