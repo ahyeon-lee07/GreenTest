@@ -30,5 +30,14 @@ public interface ProductDAO {
 	//상품정렬
 	public List<ProductVO2> prodArray(Map<String, Object> prodArray) throws DataAccessException;
 
+	// 메인화면 신상품 10개
+	public List<ProductVO2> newProductList() throws DataAccessException;
+
+	// 메인화면 베스트상품 10개
+	public List<ProductVO2> bestProductList() throws DataAccessException;
+
+	// 할인상품 10개
+	public List<ProductVO2> discountProductList() throws DataAccessException;
+
 
 }
