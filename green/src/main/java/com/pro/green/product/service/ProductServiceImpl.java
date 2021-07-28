@@ -57,4 +57,20 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductVO2> prodArray(Map<String, Object> prodArray) throws DataAccessException {
 		return productDAO.prodArray(prodArray);
 	}
+
+	// 메인화면 신상품 10개
+	public List<ProductVO2> newProductList() throws DataAccessException {
+		return productDAO.newProductList();
+	}
+
+	// 메인화면 베스트상품 10개
+	public List<ProductVO2> bestProductList() throws DataAccessException {
+		return productDAO.bestProductList();
+	}
+
+	// 할인상품 10개
+	public List<ProductVO2> discountProductList() throws DataAccessException {
+		return productDAO.discountProductList();
+	}
+
 }

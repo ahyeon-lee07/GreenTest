@@ -88,67 +88,62 @@ request.setCharacterEncoding("UTF-8");
 							<h3 class="font-weight-bold text-center">신상품</h3>
 						</div>
 					</div>
-					<div class="d-flex justify-content-around  mb-5">
-						<div
-							class="bd-highlight flex-fill flex-column bg-white border rounded mx-2">
-							<img src="${contextPath }/resources/img/img.webp" class="card-img-top itemImg" alt="...">
-							<div class="p-2 bd-highlight d-flex justify-content-between mt-2">
-								<div class="bd-highlight d-flex flex-column">
-									<div class="bd-highlight font-weight-bold mb-1">타이틀</div>
-									<div class="bd-highlight">
-										2000<span>원</span>
+					<div class="d-flex flex-wrap bd-highlight justify-content-center mb-4">
+						<c:forEach items="${newProduct}" var="product" >
+							<div class="bd-highlight prodList">
+								<div class="d-flex flex-column mx-3 my-2 p-3 text-center prodbox">
+									<a href="${contextPath}/prodList/prodDetail.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${product.productId}">
+										<div class="bd-highlight productImgBox">
+											<!-- Product image-->
+											<img class="card-img-top" src="${contextPath }/resources/img/${product.p_group}/${product.imgURL}" alt="${product.productName}"
+												style="object-fit: cover; height:180px;">
+										</div>
+										<div class="bd-highlight font-weight-bold text-secondary text-left productListTitle mt-2">
+											<p class="ell">${product.productName}</p>
+										</div>
+										<div class="d-flex bd-highlight flex-column text-left my-3" style="height: 46px;">
+											<c:choose>
+												<c:when test="${product.discountYN == 'Y'}">
+													<div class="bd-highlight text-black-50 discountBox" style="font-size:.9rem; width: 50%;">
+														<fmt:formatNumber value="${product.price}" pattern="##,###" /><span>원</span>		
+													</div>
+													<div class="bd-highlight text-danger font-weight-bold">
+														<fmt:formatNumber value="${product.discount}" pattern="##,###" /><span>원</span>		
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div class="bd-highlight text-danger font-weight-bold">
+														<fmt:formatNumber value="${product.price}" pattern="##,###" /><span>원</span>		
+													</div>
+												</c:otherwise>
+											</c:choose>
+										</div>
+									</a>
+									<div class="d-flex justify-content-center mt-2">
+										<div class="bd-highlight flex-grow-1 btn btn-sm btn-outline-secondary mr-1 btn_product" href="${contextPath}/wist_list.do">바로구매</div>
+										
+										<c:choose>
+											<c:when test="${newProductwishList != 'N' }">
+												<c:choose>
+													<c:when test="${product.cartType == 'wish'}">
+														<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN('${product.productId}')" style="width: 40px;">
+															<img class="icon_wish" data-value="Y" src="${contextPath }/resources/img/heart-fill.svg" alt="">
+														</div>
+													</c:when>
+													<c:otherwise>
+														<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN('${product.productId}')" style="width: 40px;">
+															<img class="icon_wish" data-value="N" src="${contextPath }/resources/img/heart.svg" alt="">
+														</div>
+													</c:otherwise>
+												</c:choose>
+											</c:when>
+										</c:choose>
+										
 									</div>
-								</div>
-								<div class="bd-highlight">
-									<img src="${contextPath }/resources/img/heart.svg" alt="">
-								</div>
+								</div>	
 							</div>
-						</div>
-						<div
-							class="bd-highlight flex-fill flex-column bg-white border rounded mx-2">
-							<img src="${contextPath }/resources/img/img.webp" class="card-img-top itemImg" alt="...">
-							<div class="p-2 bd-highlight d-flex justify-content-between mt-2">
-								<div class="bd-highlight d-flex flex-column">
-									<div class="bd-highlight font-weight-bold mb-1">타이틀</div>
-									<div class="bd-highlight">
-										2000<span>원</span>
-									</div>
-								</div>
-								<div class="bd-highlight">
-									<img src="${contextPath }/resources/img/heart.svg" alt="">
-								</div>
-							</div>
-						</div>
-						<div
-							class="bd-highlight flex-fill flex-column bg-white border rounded mx-2">
-							<img src="${contextPath }/resources/img/img.webp" class="card-img-top itemImg" alt="...">
-							<div class="p-2 bd-highlight d-flex justify-content-between mt-2">
-								<div class="bd-highlight d-flex flex-column">
-									<div class="bd-highlight font-weight-bold mb-1">타이틀</div>
-									<div class="bd-highlight">
-										2000<span>원</span>
-									</div>
-								</div>
-								<div class="bd-highlight">
-									<img src="${contextPath }/resources/img/heart.svg" alt="">
-								</div>
-							</div>
-						</div>
-						<div
-							class="bd-highlight flex-fill flex-column bg-white border rounded mx-2">
-							<img src="${contextPath }/resources/img/img.webp" class="card-img-top itemImg" alt="...">
-							<div class="p-2 bd-highlight d-flex justify-content-between mt-2">
-								<div class="bd-highlight d-flex flex-column">
-									<div class="bd-highlight font-weight-bold mb-1">타이틀</div>
-									<div class="bd-highlight">
-										2000<span>원</span>
-									</div>
-								</div>
-								<div class="bd-highlight">
-									<img src="${contextPath }/resources/img/heart.svg" alt="">
-								</div>
-							</div>
-						</div>
+									
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -165,67 +160,62 @@ request.setCharacterEncoding("UTF-8");
 							<h3 class="font-weight-bold text-center">베스트상품</h3>
 						</div>
 					</div>
-					<div class="d-flex justify-content-around  mb-5">
-						<div
-							class="bd-highlight flex-fill flex-column bg-white border rounded mx-2">
-							<img src="${contextPath }/resources/img/img.webp" class="card-img-top itemImg" alt="...">
-							<div class="p-2 bd-highlight d-flex justify-content-between mt-2">
-								<div class="bd-highlight d-flex flex-column">
-									<div class="bd-highlight font-weight-bold mb-1">타이틀</div>
-									<div class="bd-highlight">
-										2000<span>원</span>
+					<div class="d-flex flex-wrap bd-highlight justify-content-center mb-4">
+						<c:forEach items="${bestProduct}" var="product" >
+							<div class="bd-highlight prodList">
+								<div class="d-flex flex-column mx-3 my-2 p-3 text-center prodbox">
+									<a href="${contextPath}/prodList/prodDetail.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${product.productId}">
+										<div class="bd-highlight productImgBox">
+											<!-- Product image-->
+											<img class="card-img-top" src="${contextPath }/resources/img/${product.p_group}/${product.imgURL}" alt="${product.productName}"
+												style="object-fit: cover; height:180px;">
+										</div>
+										<div class="bd-highlight font-weight-bold text-secondary text-left productListTitle mt-2">
+											<p class="ell">${product.productName}</p>
+										</div>
+										<div class="d-flex bd-highlight flex-column text-left my-3" style="height: 46px;">
+											<c:choose>
+												<c:when test="${product.discountYN == 'Y'}">
+													<div class="bd-highlight text-black-50 discountBox" style="font-size:.9rem; width: 50%;">
+														<fmt:formatNumber value="${product.price}" pattern="##,###" /><span>원</span>		
+													</div>
+													<div class="bd-highlight text-danger font-weight-bold">
+														<fmt:formatNumber value="${product.discount}" pattern="##,###" /><span>원</span>		
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div class="bd-highlight text-danger font-weight-bold">
+														<fmt:formatNumber value="${product.price}" pattern="##,###" /><span>원</span>		
+													</div>
+												</c:otherwise>
+											</c:choose>
+										</div>
+									</a>
+									<div class="d-flex justify-content-center mt-2">
+										<div class="bd-highlight flex-grow-1 btn btn-sm btn-outline-secondary mr-1 btn_product" href="${contextPath}/wist_list.do">바로구매</div>
+										
+										<c:choose>
+											<c:when test="${bestProductwishList != 'N' }">
+												<c:choose>
+													<c:when test="${product.cartType == 'wish'}">
+														<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN('${product.productId}')" style="width: 40px;">
+															<img class="icon_wish" data-value="Y" src="${contextPath }/resources/img/heart-fill.svg" alt="">
+														</div>
+													</c:when>
+													<c:otherwise>
+														<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN('${product.productId}')" style="width: 40px;">
+															<img class="icon_wish" data-value="N" src="${contextPath }/resources/img/heart.svg" alt="">
+														</div>
+													</c:otherwise>
+												</c:choose>
+											</c:when>
+										</c:choose>
+										
 									</div>
-								</div>
-								<div class="bd-highlight">
-									<img src="${contextPath }/resources/img/heart.svg" alt="">
-								</div>
+								</div>	
 							</div>
-						</div>
-						<div
-							class="bd-highlight flex-fill flex-column bg-white border rounded mx-2">
-							<img src="${contextPath }/resources/img/img.webp" class="card-img-top itemImg" alt="...">
-							<div class="p-2 bd-highlight d-flex justify-content-between mt-2">
-								<div class="bd-highlight d-flex flex-column">
-									<div class="bd-highlight font-weight-bold mb-1">타이틀</div>
-									<div class="bd-highlight">
-										2000<span>원</span>
-									</div>
-								</div>
-								<div class="bd-highlight">
-									<img src="${contextPath }/resources/img/heart.svg" alt="">
-								</div>
-							</div>
-						</div>
-						<div
-							class="bd-highlight flex-fill flex-column bg-white border rounded mx-2">
-							<img src="${contextPath }/resources/img/img.webp" class="card-img-top itemImg" alt="...">
-							<div class="p-2 bd-highlight d-flex justify-content-between mt-2">
-								<div class="bd-highlight d-flex flex-column">
-									<div class="bd-highlight font-weight-bold mb-1">타이틀</div>
-									<div class="bd-highlight">
-										2000<span>원</span>
-									</div>
-								</div>
-								<div class="bd-highlight">
-									<img src="${contextPath }/resources/img/heart.svg" alt="">
-								</div>
-							</div>
-						</div>
-						<div
-							class="bd-highlight flex-fill flex-column bg-white border rounded mx-2">
-							<img src="${contextPath }/resources/img/img.webp" class="card-img-top itemImg" alt="...">
-							<div class="p-2 bd-highlight d-flex justify-content-between mt-2">
-								<div class="bd-highlight d-flex flex-column">
-									<div class="bd-highlight font-weight-bold mb-1">타이틀</div>
-									<div class="bd-highlight">
-										2000<span>원</span>
-									</div>
-								</div>
-								<div class="bd-highlight">
-									<img src="${contextPath }/resources/img/heart.svg" alt="">
-								</div>
-							</div>
-						</div>
+									
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -242,67 +232,62 @@ request.setCharacterEncoding("UTF-8");
 							<h3 class="font-weight-bold text-center">세일상품</h3>
 						</div>
 					</div>
-					<div class="d-flex justify-content-around  mb-5">
-						<div
-							class="bd-highlight flex-fill flex-column bg-white border rounded mx-2">
-							<img src="${contextPath }/resources/img/img.webp" class="card-img-top itemImg" alt="...">
-							<div class="p-2 bd-highlight d-flex justify-content-between mt-2">
-								<div class="bd-highlight d-flex flex-column">
-									<div class="bd-highlight font-weight-bold mb-1">타이틀</div>
-									<div class="bd-highlight">
-										2000<span>원</span>
+					<div class="d-flex flex-wrap bd-highlight justify-content-center mb-4">
+						<c:forEach items="${discountProduct}" var="product" >
+							<div class="bd-highlight prodList">
+								<div class="d-flex flex-column mx-3 my-2 p-3 text-center prodbox">
+									<a href="${contextPath}/prodList/prodDetail.do${pageMaker.makeQueryPage(bList.IDX, pageMaker.cri.page) }&productId=${product.productId}">
+										<div class="bd-highlight productImgBox">
+											<!-- Product image-->
+											<img class="card-img-top" src="${contextPath }/resources/img/${product.p_group}/${product.imgURL}" alt="${product.productName}"
+												style="object-fit: cover; height:180px;">
+										</div>
+										<div class="bd-highlight font-weight-bold text-secondary text-left productListTitle mt-2">
+											<p class="ell">${product.productName}</p>
+										</div>
+										<div class="d-flex bd-highlight flex-column text-left my-3" style="height: 46px;">
+											<c:choose>
+												<c:when test="${product.discountYN == 'Y'}">
+													<div class="bd-highlight text-black-50 discountBox" style="font-size:.9rem; width: 50%;">
+														<fmt:formatNumber value="${product.price}" pattern="##,###" /><span>원</span>		
+													</div>
+													<div class="bd-highlight text-danger font-weight-bold">
+														<fmt:formatNumber value="${product.discount}" pattern="##,###" /><span>원</span>		
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div class="bd-highlight text-danger font-weight-bold">
+														<fmt:formatNumber value="${product.price}" pattern="##,###" /><span>원</span>		
+													</div>
+												</c:otherwise>
+											</c:choose>
+										</div>
+									</a>
+									<div class="d-flex justify-content-center mt-2">
+										<div class="bd-highlight flex-grow-1 btn btn-sm btn-outline-secondary mr-1 btn_product" href="${contextPath}/wist_list.do">바로구매</div>
+										
+										<c:choose>
+											<c:when test="${discountProductwishList != 'N' }">
+												<c:choose>
+													<c:when test="${product.cartType == 'wish'}">
+														<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN('${product.productId}')" style="width: 40px;">
+															<img class="icon_wish" data-value="Y" src="${contextPath }/resources/img/heart-fill.svg" alt="">
+														</div>
+													</c:when>
+													<c:otherwise>
+														<div class="bd-highlight btn btn-sm btn-outline-success ml-1 btn_product btn_wish" onclick="btn_wishYN('${product.productId}')" style="width: 40px;">
+															<img class="icon_wish" data-value="N" src="${contextPath }/resources/img/heart.svg" alt="">
+														</div>
+													</c:otherwise>
+												</c:choose>
+											</c:when>
+										</c:choose>
+										
 									</div>
-								</div>
-								<div class="bd-highlight">
-									<img src="${contextPath }/resources/img/heart.svg" alt="">
-								</div>
+								</div>	
 							</div>
-						</div>
-						<div
-							class="bd-highlight flex-fill flex-column bg-white border rounded mx-2">
-							<img src="${contextPath }/resources/img/img.webp" class="card-img-top itemImg" alt="...">
-							<div class="p-2 bd-highlight d-flex justify-content-between mt-2">
-								<div class="bd-highlight d-flex flex-column">
-									<div class="bd-highlight font-weight-bold mb-1">타이틀</div>
-									<div class="bd-highlight">
-										2000<span>원</span>
-									</div>
-								</div>
-								<div class="bd-highlight">
-									<img src="${contextPath }/resources/img/heart.svg" alt="">
-								</div>
-							</div>
-						</div>
-						<div
-							class="bd-highlight flex-fill flex-column bg-white border rounded mx-2">
-							<img src="${contextPath }/resources/img/img.webp" class="card-img-top itemImg" alt="...">
-							<div class="p-2 bd-highlight d-flex justify-content-between mt-2">
-								<div class="bd-highlight d-flex flex-column">
-									<div class="bd-highlight font-weight-bold mb-1">타이틀</div>
-									<div class="bd-highlight">
-										2000<span>원</span>
-									</div>
-								</div>
-								<div class="bd-highlight">
-									<img src="${contextPath }/resources/img/heart.svg" alt="">
-								</div>
-							</div>
-						</div>
-						<div
-							class="bd-highlight flex-fill flex-column bg-white border rounded mx-2">
-							<img src="${contextPath }/resources/img/img.webp" class="card-img-top itemImg" alt="...">
-							<div class="p-2 bd-highlight d-flex justify-content-between mt-2">
-								<div class="bd-highlight d-flex flex-column">
-									<div class="bd-highlight font-weight-bold mb-1">타이틀</div>
-									<div class="bd-highlight">
-										2000<span>원</span>
-									</div>
-								</div>
-								<div class="bd-highlight">
-									<img src="${contextPath }/resources/img/heart.svg" alt="">
-								</div>
-							</div>
-						</div>
+									
+						</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -311,3 +296,38 @@ request.setCharacterEncoding("UTF-8");
 
 
 </main>
+<script>
+	//관심 상품 등록
+	function btn_wishYN(productId){
+	
+	var tarGetImg = event.currentTarget.firstElementChild;
+	var tarGet_V = tarGetImg.dataset['value'];
+	
+	$.ajax({
+		type: "POST",
+		async: true,
+		url: "${contextPath}/wish_list/wishAdd.do",
+		dataType: "text",
+		data: { productId: productId },
+		success: function (result) {						
+			if(result == 0){
+				alert("죄송합니다. 잠시후 다시 시도해 주세요.");
+			}else if(result == 1){
+				if(tarGet_V == 'Y'){
+					tarGetImg.dataset.value = 'N';
+					tarGetImg.src = "${contextPath }/resources/img/heart.svg";
+				}else {
+					tarGetImg.dataset.value  = 'Y';
+					tarGetImg.src = "${contextPath }/resources/img/heart-fill.svg";
+				}
+			}
+		},
+		error: function (data, textStatus) {
+
+		},
+		complete: function (data, textStatus) {
+
+		}
+	});
+}
+</script>
